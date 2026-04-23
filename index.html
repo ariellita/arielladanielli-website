@@ -1,480 +1,532 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="הרצאות לארגונים ולכנסים על חדשנות ובינה מלאכותית — אריאלה דניאלי | DDIT">
-  <title>DDIT — הרצאות חדשנות ובינה מלאכותית | אריאלה דניאלי</title>
-  <link rel="icon" type="image/png" href="./images/favicon.png">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" href="./css/header.css">
-  <link rel="stylesheet" href="./css/forms.css">
-  <link rel="stylesheet" href="./css/home.css">
-  <link rel="stylesheet" href="./css/responsive.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אריאלה דניאלי — Ariella Danielli</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1H2924HK4W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1H2924HK4W');
+</script>
+<meta name="description" content="אריאלה דניאלי — מרצה ויועצת לחדשנות ובינה מלאכותית. הרצאות וסדנאות בנושא חדשנות ו-AI לארגונים וכנסים. ליווי והטמעה של חווית לקוח מבוססת בינה מלאכותית.">
+<meta name="keywords" content="אריאלה דניאלי, מרצה חדשנות, מרצה בינה מלאכותית, הרצאות AI, סדנאות חדשנות, חווית לקוח, בינה מלאכותית לארגונים">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="ariella.png">
+<link rel="apple-touch-icon" href="ariella.png">
+<!-- OG / Social sharing -->
+<meta property="og:title" content="אריאלה דניאלי — יועצת ומרצה לחדשנות ובינה מלאכותית">
+<meta property="og:description" content="הרצאות וסדנאות חוויתיות | פיתוח חווית לקוח מבוססת בינה מלאכותית">
+<meta property="og:image" content="https://arielladanielli.com/ariella.png">
+<meta property="og:url" content="https://arielladanielli.com">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arielladanielli.com/ariella.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080810;--bg-card:#0d0d1a;--bg-card2:#111128;
+  --red:#E8001A;--yellow:#FF2D9B;--orange:#FF6B00;--green:#25D366;
+  --white:#ffffff;--white60:rgba(255,255,255,1);--white08:rgba(255,255,255,0.08);--white15:rgba(255,255,255,0.15);
+  --font:'Assistant',sans-serif;
+  --nav-h:72px;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--white);direction:rtl;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ============ GRADIENT TEXT ============ */
+.grad{background:linear-gradient(135deg,#FF2D9B,#FF8C00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad-num{color:var(--yellow)}
+
+/* ============ SCROLL REVEAL ============ */
+.reveal{opacity:0;transform:translateY(60px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1 !important;transform:translateY(0) !important}
+
+/* ============ NAVBAR ============ */
+.nav{position:fixed;top:0;right:0;left:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);transition:background .4s,backdrop-filter .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(8,8,16,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 2px 30px rgba(0,0,0,.4)}
+.nav-logo{font-weight:900;font-size:1.6rem;letter-spacing:2px;color:var(--yellow)}
+.nav-links{display:flex;gap:clamp(16px,2.5vw,36px);list-style:none}
+.nav-links a{font-size:.95rem;font-weight:400;color:var(--white60);transition:color .3s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{background:var(--red);color:var(--white);padding:10px 26px;border-radius:6px;font-weight:700;font-size:.9rem;transition:transform .3s,box-shadow .3s;white-space:nowrap}
+.nav-cta:hover{transform:scale(1.06);box-shadow:0 4px 24px rgba(255,130,67,.4)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.burger span{width:26px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{position:fixed;inset:0;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999;opacity:0;pointer-events:none;transition:opacity .4s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-size:1.4rem;font-weight:700;color:var(--white)}
+@media(max-width:768px){
+  .nav-links,.nav-cta-wrap{display:none}
+  .burger{display:flex}
+}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:calc(var(--nav-h) + 40px) clamp(20px,6vw,80px) 60px}
+.hero-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px;animation:gridFloat 20s linear infinite}
+@keyframes gridFloat{0%{background-position:0 0}100%{background-position:32px 32px}}
+.hero-content{max-width:640px;width:100%;z-index:2;text-align:center;margin:0 auto}
+.hero-title{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.15;margin-bottom:20px}
+.hero-sub{font-size:clamp(1rem,1.8vw,1.25rem);color:var(--white60);font-weight:300;margin-bottom:36px}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.btn-wa{background:var(--green);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer}
+.btn-wa:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(6,148,148,.35)}
+.btn-outline{border:2px solid var(--white);color:var(--white);padding:12px 32px;border-radius:8px;font-weight:700;font-size:1rem;transition:background .3s,transform .3s}
+.btn-outline:hover{background:rgba(255,255,255,.1);transform:scale(1.06)}
+.btn-red{background:var(--red);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer}
+.btn-red:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(255,130,67,.35)}
+
+/* Hero image with cinematic splash effect */
+.hero-image{position:absolute;left:clamp(-80px,-2vw,0px);top:50%;transform:translateY(-50%);width:clamp(260px,36vw,460px);display:flex;align-items:center;justify-content:center;z-index:1}
+.hero-image img{width:100%;height:auto;border-radius:16px;object-fit:cover;position:relative;z-index:2;
+  animation:imgReveal 2s cubic-bezier(.22,1,.36,1) .3s both}
+@keyframes imgReveal{
+  0%{opacity:0;transform:scale(1.15);filter:blur(15px) brightness(1.8)}
+  40%{opacity:1;filter:blur(4px) brightness(1.3)}
+  100%{transform:scale(1);filter:blur(0) brightness(1)}
+}
+/* fire glow behind image */
+.hero-fire{position:absolute;inset:-35px;z-index:1;border-radius:24px;
+  background:
+    radial-gradient(ellipse at 50% 85%,rgba(255,130,67,.7) 0%,transparent 50%),
+    radial-gradient(ellipse at 25% 70%,rgba(255,192,203,.55) 0%,transparent 45%),
+    radial-gradient(ellipse at 75% 75%,rgba(252,232,131,.45) 0%,transparent 40%),
+    radial-gradient(ellipse at 50% 30%,rgba(255,130,67,.25) 0%,transparent 50%);
+  filter:blur(22px);
+  animation:fireGlow 3s ease-in-out infinite alternate, fireReveal 2.5s cubic-bezier(.22,1,.36,1) .1s both}
+@keyframes fireGlow{
+  0%{opacity:.7;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.05)}
+  100%{opacity:.85;transform:scale(1.02)}
+}
+@keyframes fireReveal{
+  0%{opacity:0;transform:scale(.6);filter:blur(50px)}
+  100%{opacity:1;transform:scale(1);filter:blur(22px)}
+}
+/* sweeping light pass */
+.hero-image::after{content:'';position:absolute;top:0;right:-100%;width:60%;height:100%;
+  background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.15) 50%,transparent 70%);
+  z-index:4;border-radius:16px;animation:lightSweep 2s cubic-bezier(.22,1,.36,1) .8s both;pointer-events:none}
+@keyframes lightSweep{
+  0%{right:-100%;opacity:1}
+  100%{right:150%;opacity:0}
+}
+/* sparks / particles */
+.hero-sparks{position:absolute;inset:-50px;z-index:3;pointer-events:none;overflow:visible}
+.spark{position:absolute;border-radius:50%;animation:sparkFloat linear infinite}
+.spark:nth-child(1){width:5px;height:5px;background:var(--yellow);bottom:20%;right:10%;animation-duration:2.5s;animation-delay:.5s}
+.spark:nth-child(2){width:4px;height:4px;background:var(--red);bottom:30%;right:80%;animation-duration:3s;animation-delay:1s}
+.spark:nth-child(3){width:6px;height:6px;background:var(--orange);bottom:15%;right:50%;animation-duration:2s;animation-delay:1.5s}
+.spark:nth-child(4){width:3px;height:3px;background:var(--yellow);bottom:25%;right:30%;animation-duration:3.5s;animation-delay:.8s}
+.spark:nth-child(5){width:5px;height:5px;background:var(--red);bottom:10%;right:65%;animation-duration:2.8s;animation-delay:1.3s}
+.spark:nth-child(6){width:4px;height:4px;background:var(--orange);bottom:35%;right:20%;animation-duration:2.2s;animation-delay:1.8s}
+.spark:nth-child(7){width:6px;height:6px;background:var(--yellow);bottom:5%;right:45%;animation-duration:3.2s;animation-delay:.3s}
+.spark:nth-child(8){width:3px;height:3px;background:var(--red);bottom:40%;right:85%;animation-duration:2.6s;animation-delay:2s}
+.spark:nth-child(9){width:5px;height:5px;background:var(--yellow);bottom:0%;right:25%;animation-duration:2.1s;animation-delay:.6s}
+.spark:nth-child(10){width:4px;height:4px;background:var(--orange);bottom:45%;right:55%;animation-duration:3.3s;animation-delay:1.1s}
+.spark:nth-child(11){width:7px;height:7px;background:var(--red);bottom:8%;right:75%;animation-duration:2.4s;animation-delay:1.6s}
+.spark:nth-child(12){width:3px;height:3px;background:var(--yellow);bottom:50%;right:40%;animation-duration:2.9s;animation-delay:.2s}
+@keyframes sparkFloat{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:0}
+  15%{opacity:1}
+  100%{transform:translateY(-160px) translateX(20px) scale(0);opacity:0}
+}
+.hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,130,67,.12),transparent 70%);top:20%;left:-5%;filter:blur(80px);pointer-events:none}
+
+/* hero splash video */
+.hero-splash-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:5;border-radius:16px;pointer-events:none}
+
+/* staggered hero animation */
+.stagger{opacity:0;transform:translateY(40px);animation:staggerIn .9s cubic-bezier(.22,1,.36,1) forwards}
+.stagger:nth-child(1){animation-delay:.2s}
+.stagger:nth-child(2){animation-delay:.45s}
+.stagger:nth-child(3){animation-delay:.7s}
+@keyframes staggerIn{to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:768px){
+  .hero{flex-direction:column;text-align:center;padding-top:calc(var(--nav-h) + 20px)}
+  .hero-image{position:relative;left:auto;top:auto;transform:none;width:clamp(220px,75vw,300px);margin-bottom:30px}
+  .hero-ctas{justify-content:center}
+  .hero-content{margin:0 auto;max-width:100%}
+}
+
+/* ============ SECTION COMMON ============ */
+.section{padding:clamp(60px,10vw,120px) clamp(20px,6vw,80px)}
+.section-label{font-size:.85rem;letter-spacing:4px;color:var(--white60);text-transform:uppercase;margin-bottom:12px;font-weight:400;text-align:center}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;margin-bottom:16px;text-align:center}
+.section-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--white60);max-width:680px;margin-bottom:48px;text-align:center;margin-right:auto;margin-left:auto}
+.container{max-width:1200px;margin:0 auto}
+
+/* ============ PROOF STRIP — LOGOS ============ */
+.proof{padding:48px 0;overflow:hidden;border-top:1px solid var(--white08);border-bottom:1px solid var(--white08)}
+.proof-label{text-align:center;font-size:.8rem;letter-spacing:4px;color:var(--white60);text-transform:uppercase;margin-bottom:28px;font-weight:400}
+.logo-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px 24px;padding:0 20px;max-width:1000px;margin:0 auto}
+.logo-item{height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.92);border-radius:10px;padding:8px 20px;transition:transform .3s}
+.logo-item:hover{transform:scale(1.06)}
+.logo-item img{height:30px;width:auto;object-fit:contain}
+.logo-item.text-logo{font-size:.95rem;font-weight:700;color:#222;letter-spacing:1px;white-space:nowrap}
+.proof-conferences{text-align:center;margin-top:20px;font-size:.85rem;color:var(--white60);font-weight:300;padding:0 20px}
+
+/* ============ QUOTES ============ */
+.quotes{padding:clamp(50px,8vw,80px) clamp(20px,6vw,80px);overflow:hidden}
+.quotes-inner{display:flex;gap:28px;justify-content:center;flex-wrap:wrap}
+.quote-card{background:var(--bg-card);border:1px solid var(--white08);border-radius:14px;padding:32px;max-width:360px;flex:1;min-width:280px;position:relative}
+.quote-card::before{content:'"';position:absolute;top:12px;right:20px;font-size:4rem;line-height:1;color:var(--yellow);opacity:.3;font-family:serif}
+.quote-text{color:var(--white);font-size:1rem;font-weight:300;line-height:1.8;font-style:italic;margin-bottom:16px}
+.quote-author{color:var(--yellow);font-size:.9rem;font-weight:700}
+.quote-role{color:var(--white60);font-size:.8rem}
+
+/* ============ STATS ============ */
+.stats{display:flex;justify-content:center;gap:clamp(30px,6vw,100px);padding:clamp(50px,8vw,100px) 20px;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:clamp(2.8rem,6vw,4.5rem);font-weight:900;line-height:1;color:var(--yellow)}
+.stat-label{font-size:1.1rem;font-weight:700;margin-top:8px}
+.stat-sub{font-size:.9rem;color:var(--white60);font-weight:300;margin-top:4px}
+
+/* ============ CARDS GRID ============ */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:28px}
+.card{background:var(--bg-card);border:1px solid var(--white08);border-radius:14px;padding:36px;transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .4s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:4px;background:var(--yellow);opacity:0;transition:opacity .4s}
+.card:hover{transform:translateY(-8px);border-color:var(--yellow);box-shadow:0 20px 50px rgba(255,45,155,.15)}
+.card:hover::before{opacity:1}
+.card-icon{width:56px;height:56px;margin-bottom:18px;margin-left:auto;margin-right:auto}
+.card-icon svg{width:100%;height:100%}
+.card-img{width:100%;height:220px;object-fit:cover;object-position:center 30%;border-radius:10px;margin-bottom:18px}
+@media(max-width:768px){.card-img{height:200px;object-position:center 30%}.cards-grid{grid-template-columns:1fr}}
+.card-title{font-size:1.25rem;font-weight:700;margin-bottom:12px;text-align:center}
+.card-desc{color:var(--white60);font-size:.95rem;margin-bottom:8px;font-weight:300;line-height:1.7;text-align:center;flex:1}
+.card-for{color:var(--yellow);font-size:.85rem;font-weight:400;margin-bottom:16px;text-align:center}
+.card{text-align:center}
+.card-btn{display:inline-block;padding:10px 24px;border:2px solid var(--yellow);border-radius:8px;font-size:.9rem;color:var(--yellow);font-weight:700;transition:all .3s}
+.card-btn:hover{background:var(--yellow);color:#080810;box-shadow:0 0 18px rgba(255,45,155,.5);transform:scale(1.05)}
+.section-cta{text-align:center;margin-top:48px}
+
+/* ============ PHOTO GALLERY ============ */
+.photo-strip{padding:clamp(40px,6vw,80px) 20px}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1100px;margin:0 auto}
+.photo-grid img{width:100%;height:240px;border-radius:12px;object-fit:cover;transition:transform .4s;filter:brightness(.9)}
+.photo-grid img:hover{transform:scale(1.04);filter:brightness(1)}
+
+/* ============ CONSULTING ============ */
+.consult-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:28px}
+
+/* ============ ABOUT ============ */
+.about-wrap{display:flex;gap:clamp(30px,5vw,80px);align-items:center;flex-wrap:wrap}
+.about-img{flex:0 0 300px;border-radius:16px;overflow:hidden;position:relative}
+.about-img img{width:100%;height:auto;object-fit:contain;border-radius:16px}
+.about-text{flex:1;min-width:280px}
+.about-text p{color:var(--white60);font-size:1.05rem;line-height:1.8;margin-bottom:16px;font-weight:300;text-align:justify}
+
+/* ============ CONTACT ============ */
+.contact-wrap{text-align:center;max-width:600px;margin:0 auto}
+.contact-wrap p{color:var(--white60);font-size:1.05rem;margin-bottom:28px;font-weight:300}
+.contact-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:24px}
+.contact-link{display:flex;align-items:center;gap:8px;color:var(--white60);font-size:.95rem;transition:color .3s}
+.contact-link:hover{color:var(--white)}
+.contact-link svg{width:20px;height:20px;flex-shrink:0}
+
+/* ============ FOOTER ============ */
+footer{border-top:1px solid var(--white08);padding:40px clamp(20px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer p{color:var(--white60);font-size:.85rem}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:var(--white60);transition:color .3s}
+.footer-social a:hover{color:var(--white)}
+.footer-social svg{width:22px;height:22px}
+.back-top{width:44px;height:44px;border-radius:50%;border:1px solid var(--white08);display:flex;align-items:center;justify-content:center;color:var(--white60);transition:border-color .3s,color .3s;cursor:pointer}
+.back-top:hover{border-color:var(--yellow);color:var(--white)}
+</style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="header" id="header">
-    <div class="header-inner">
-      <a href="index.html" class="logo" aria-label="DDIT - בית">
-        <img src="./images/logo.png" alt="DDIT Innovationista" class="logo-img">
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <ul class="nav-links">
+    <li><a href="#lectures">הרצאות</a></li>
+    <li><a href="#workshops">סדנאות</a></li>
+    <li><a href="#consulting">ייעוץ</a></li>
+    <li><a href="#about">אודות</a></li>
+    <li><a href="#contact">צור קשר</a></li>
+  </ul>
+  <!-- cta removed -->
+  <a href="#hero" style="margin-right:auto;margin-left:0"><img src="ariella logo transparant.png" alt="Ariella Danielli" style="height:120px;width:auto;object-fit:contain"></a>
+  <div class="burger" id="burger" aria-label="תפריט"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#lectures" onclick="closeMobile()">הרצאות</a>
+  <a href="#workshops" onclick="closeMobile()">סדנאות</a>
+  <a href="#consulting" onclick="closeMobile()">ייעוץ</a>
+  <a href="#about" onclick="closeMobile()">אודות</a>
+  <a href="#contact" onclick="closeMobile()">צור קשר</a>
+  <!-- cta removed -->
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <h1 class="hero-title grad stagger">הרצאות שמעוררות השראה, מציתות חשיבה ומובילות לשינוי</h1>
+    <p class="hero-sub stagger">אריאלה דניאלי — מרצה ויועצת לחדשנות ובינה מלאכותית</p>
+    <div class="hero-ctas stagger">
+      <a href="https://wa.me/972523124326" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+        שלחו WhatsApp
       </a>
-      <nav class="nav" id="nav" aria-label="תפריט ראשי">
-        <a href="#lectures"    class="nav-link">הרצאות</a>
-        <a href="#workshops"   class="nav-link">סדנאות</a>
-        <a href="#about"   class="nav-link">אודות</a>
-        <a href="#contact" class="nav-link">יצירת קשר</a>
-      </nav>
-      <button class="btn btn-primary btn-header cta-button" data-action="book-lecture">להזמנת הרצאה</button>
-      <button class="menu-toggle" id="menuToggle" aria-label="פתח/סגור תפריט">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- ===================== HERO ===================== -->
-  <section class="hb-hero" id="home">
-    <!-- Floating geometric shapes -->
-    <div class="hb-hero__shape hb-hero__shape--1" data-parallax="0.15"></div>
-    <div class="hb-hero__shape hb-hero__shape--2" data-parallax="0.08"></div>
-    <div class="hb-hero__shape hb-hero__shape--3" data-parallax="0.12"></div>
-
-    <div class="container hb-hero__inner">
-      <div class="hb-hero__text">
-        <div class="hb-hero__badge">
-          <span class="hb-hero__badge-dot"></span>
-          Innovation Speaker &amp; Consultant
-        </div>
-        <h1 class="hb-hero__title">
-          <span class="hb-hero__line hb-hero__line--1">הרצאות לארגונים</span>
-          <span class="hb-hero__line hb-hero__line--2">ולכנסים על <em>חדשנות</em></span>
-          <span class="hb-hero__line hb-hero__line--3">ובינה מלאכותית</span>
-        </h1>
-        <p class="hb-hero__sub">שמחברות בין השראה, יצירתיות וחשיבה שיווקית — לבין פרקטיקה עסקית.</p>
-        <div class="hb-hero__actions">
-          <button class="hb-btn hb-btn--fire cta-button" data-action="book-lecture">להזמנת הרצאה</button>
-          <a href="#lectures" class="hb-btn hb-btn--ghost">לצפייה בהרצאות</a>
-        </div>
-      </div>
-      <div class="hb-hero__visual" data-parallax="0.06">
-        <div class="hb-hero__img-frame">
-          <img src="./images/profile.jpg" alt="אריאלה דניאלי" class="hb-hero__img">
-          <div class="hb-hero__img-border"></div>
-        </div>
-        <!-- Floating stats -->
-        <div class="hb-hero__chip hb-hero__chip--1" data-parallax="0.18">
-          <span class="hb-hero__chip-num">200+</span>
-          <span class="hb-hero__chip-label">הרצאות<br>וסדנאות</span>
-        </div>
-        <div class="hb-hero__chip hb-hero__chip--2" data-parallax="0.22">
-          <span class="hb-hero__chip-num">15+</span>
-          <span class="hb-hero__chip-label">שנות<br>ניסיון</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Diagonal section divider -->
-    <div class="hb-divider hb-divider--hero"></div>
-  </section>
-
-  <!-- ===================== TICKER ===================== -->
-  <div class="hb-ticker" aria-hidden="true">
-    <div class="hb-ticker__track">
-      <span class="hb-ticker__item">AI, Yai, Yai</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">The Wow Effect</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Longevity &amp; Legacy</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Trends 2026</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Personal Branding</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">חווית לקוח מנצחת</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">AI, Yai, Yai</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">The Wow Effect</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Longevity &amp; Legacy</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Trends 2026</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">Personal Branding</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
-      <span class="hb-ticker__item">חווית לקוח מנצחת</span>
-      <span class="hb-ticker__dot">&#x2726;</span>
+      <a href="#lecture-video" class="btn-outline">צפו בהרצאה</a>
     </div>
   </div>
-
-  <!-- ===================== AUDIENCES ===================== -->
-  <section class="hb-audiences">
-    <div class="container">
-      <div class="hb-split fade-up">
-        <div class="hb-split__text">
-          <span class="hb-tag">למי זה מתאים</span>
-          <h2 class="hb-heading hb-heading--lg">ארגונים, הנהלות,<br><em>כנסים מקצועיים</em></h2>
-        </div>
-        <div class="hb-split__chips">
-          <span class="hb-chip">HR</span>
-          <span class="hb-chip">שיווק</span>
-          <span class="hb-chip">הדרכה</span>
-          <span class="hb-chip">הנהלה בכירה</span>
-          <span class="hb-chip">כנסים</span>
-          <span class="hb-chip">ארגונים</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== LOGOS ===================== -->
-  <section class="hb-logos" id="logos">
-    <div class="container">
-      <p class="hb-logos__label fade-up">בין הארגונים והכנסים שהזמינו אותי</p>
-      <div class="hb-logos__grid fade-up">
-        <img src="./images/logo-bank-hapoalim.png"  alt="בנק הפועלים" loading="lazy">
-        <img src="./images/logo-playtika.png"        alt="פלייטיקה" loading="lazy">
-        <img src="./images/logo-electric.png"        alt="חברת החשמל" loading="lazy">
-        <img src="./images/logo-telaviv.png"         alt="עיריית תל אביב" loading="lazy">
-        <img src="./images/logo-justice.png"         alt="משרד המשפטים" loading="lazy">
-        <img src="./images/logo-meuhedet.png"        alt="קופת חולים מאוחדת" loading="lazy">
-        <img src="./images/logo-disney.png"          alt="דיסני" loading="lazy">
-        <img src="./images/logo-ey.png"              alt="EY" loading="lazy">
-        <img src="./images/logo-kimberly.svg"        alt="קימברלי קלארק" loading="lazy">
-        <img src="./images/logo-nature.svg"          alt="רשות הטבע והגנים" loading="lazy">
-      </div>
-      <p class="hb-logos__sub fade-up">בין הכנסים: ועידת גלובס לעסקים &middot; כנס TheMarker &middot; ועידת הקניונים</p>
-    </div>
-  </section>
-
-  <!-- ===================== LECTURES ===================== -->
-  <section class="hb-lectures" id="lectures">
-    <!-- Decorative shapes -->
-    <div class="hb-bg-shape hb-bg-shape--1" data-parallax="0.05"></div>
-    <div class="hb-bg-shape hb-bg-shape--2" data-parallax="0.08"></div>
-
-    <div class="container">
-      <div class="hb-section-head fade-up">
-        <span class="hb-tag hb-tag--light">הרצאות</span>
-        <h2 class="hb-heading hb-heading--xl hb-heading--white">
-          איך אפשר<br>לעבוד <em>יחד</em>
-        </h2>
-        <p class="hb-sub hb-sub--light">הרצאות לארגונים ולכנסים — שמחברות בין השראה, יצירתיות וחשיבה שיווקית לבין פרקטיקה עסקית.</p>
-      </div>
-
-      <!-- Asymmetric lecture cards -->
-      <div class="hb-lectures__grid">
-
-        <div class="hb-lec-card hb-lec-card--feature fade-up" data-scroll-rotate="-1">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><rect x="8" y="14" width="48" height="36" rx="6" stroke="#F5C800" stroke-width="3"/><circle cx="32" cy="32" r="10" fill="#E8233A"/><path d="M28 28l8 4-8 4z" fill="#fff"/><circle cx="16" cy="8" r="4" fill="#F5C800"/><circle cx="48" cy="8" r="3" fill="#E8233A"/></svg>
-          </div>
-          <h3>AI, Yai, Yai</h3>
-          <p>מהפכת הבינה המלאכותית והשפעתה על העולם — השימושים שכבר משנים את הדרך שאנחנו עובדים.</p>
-          <button class="hb-btn hb-btn--outline-light cta-button" data-action="book-lecture">לפרטים נוספים</button>
-        </div>
-
-        <div class="hb-lec-card fade-up" data-scroll-rotate="1.5">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><path d="M32 4l6 18h18l-14 11 5 18-15-11-15 11 5-18L8 22h18z" fill="#F5C800" stroke="#0A0A0A" stroke-width="2"/><circle cx="54" cy="10" r="4" fill="#E8233A"/><circle cx="8" cy="48" r="3" fill="#E8233A"/></svg>
-          </div>
-          <h3>The Wow Effect</h3>
-          <p>יצירת חווית לקוח יוצאת דופן — רעיונות, תבניות ודוגמאות מעולמות השירות והחדשנות.</p>
-          <button class="hb-btn hb-btn--outline-light cta-button" data-action="book-lecture">לפרטים נוספים</button>
-        </div>
-
-        <div class="hb-lec-card fade-up" data-scroll-rotate="-0.8">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><path d="M16 8h32v6L36 32l12 18v6H16v-6l12-18L16 14z" stroke="#F5C800" stroke-width="3" stroke-linejoin="round"/><path d="M20 14l12 16 12-16" fill="#E8233A" opacity="0.7"/><rect x="14" y="6" width="36" height="6" rx="3" fill="#0A0A0A"/><rect x="14" y="52" width="36" height="6" rx="3" fill="#0A0A0A"/></svg>
-          </div>
-          <h3>Longevity</h3>
-          <p>מהפכת אריכות הימים והשפעותיה — מהמודל העסקי של מחר ועד למסלול החיים האישי.</p>
-          <button class="hb-btn hb-btn--outline-light cta-button" data-action="book-lecture">לפרטים נוספים</button>
-        </div>
-
-        <div class="hb-lec-card fade-up" data-scroll-rotate="1">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#F5C800" stroke-width="3"/><circle cx="32" cy="32" r="12" fill="#E8233A"/><circle cx="32" cy="32" r="5" fill="#0A0A0A"/><circle cx="34" cy="30" r="2" fill="#fff"/><line x1="32" y1="2" x2="32" y2="8" stroke="#F5C800" stroke-width="2.5" stroke-linecap="round"/><line x1="32" y1="56" x2="32" y2="62" stroke="#F5C800" stroke-width="2.5" stroke-linecap="round"/><line x1="2" y1="32" x2="8" y2="32" stroke="#F5C800" stroke-width="2.5" stroke-linecap="round"/><line x1="56" y1="32" x2="62" y2="32" stroke="#F5C800" stroke-width="2.5" stroke-linecap="round"/></svg>
-          </div>
-          <h3>מגמות 2026</h3>
-          <p>מגמות וטרנדים עולמיים שישפיעו על ארגונים, שיווק, צרכנים וחווית לקוח.</p>
-          <button class="hb-btn hb-btn--outline-light cta-button" data-action="book-lecture">לפרטים נוספים</button>
-        </div>
-
-        <div class="hb-lec-card fade-up" data-scroll-rotate="-1.2">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="22" r="14" fill="#F5C800" stroke="#0A0A0A" stroke-width="2.5"/><path d="M18 36c0 0 4 18 14 18s14-18 14-18" fill="none" stroke="#F5C800" stroke-width="2.5"/><circle cx="32" cy="22" r="7" fill="#E8233A"/><path d="M30 20l4 2-4 2z" fill="#fff"/><circle cx="14" cy="12" r="3" fill="#E8233A"/><circle cx="50" cy="44" r="3" fill="#E8233A"/></svg>
-          </div>
-          <h3>מיתוג אישי</h3>
-          <p>בניית נוכחות מקצועית עם AI — כלים פרקטיים, פלטפורמות דיגיטליות ושימוש חכם.</p>
-          <button class="hb-btn hb-btn--outline-light cta-button" data-action="book-lecture">לפרטים נוספים</button>
-        </div>
-
-        <div class="hb-lec-card hb-lec-card--custom fade-up">
-          <div class="hb-lec-card__icon">
-            <svg viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="24" stroke="#E8233A" stroke-width="3" stroke-dasharray="6 5"/><line x1="32" y1="18" x2="32" y2="46" stroke="#E8233A" stroke-width="4" stroke-linecap="round"/><line x1="18" y1="32" x2="46" y2="32" stroke="#E8233A" stroke-width="4" stroke-linecap="round"/></svg>
-          </div>
-          <h3>הרצאה מותאמת</h3>
-          <p>צריכים הרצאה מדויקת לקהל, לנושא או למטרות האירוע? נבנה ביחד.</p>
-          <button class="hb-btn hb-btn--fire cta-button" data-action="book-lecture">להזמנת הרצאה מותאמת</button>
-        </div>
-
-      </div>
-
-      <!-- Photos -->
-      <div class="hb-photo-row fade-up">
-        <img src="./images/workshop-1.jpg" alt="הרצאה בכנס" loading="lazy">
-        <img src="./images/workshop-2.jpg" alt="סדנת חדשנות" loading="lazy">
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===================== SECTION DIVIDER ===================== -->
-  <div class="hb-stroke-divider">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0 40 Q360 0 720 40 Q1080 80 1440 40" stroke="#E8233A" stroke-width="3" fill="none"/></svg>
+  <div class="hero-image">
+    <img src="ariella.png" alt="אריאלה דניאלי" style="width:100%;height:auto;border-radius:16px;display:block">
   </div>
+</section>
 
-  <!-- ===================== WORKSHOPS ===================== -->
-  <section class="hb-workshops" id="workshops">
-    <div class="container">
-      <div class="hb-section-head fade-up">
-        <span class="hb-tag">סדנאות</span>
-        <h2 class="hb-heading hb-heading--xl">
-          סדנאות שמחברות<br>בין <em>השראה</em> לפעולה
-        </h2>
-        <p class="hb-sub">כלים מעשיים, התנסות והתאמה לקהל, לאתגר ולמטרות הארגון.</p>
+<!-- PROOF STRIP — LOGOS -->
+<div class="proof">
+  <p class="proof-label">בין הארגונים והכנסים שהזמינו אותי</p>
+  <div class="logo-grid">
+    <div class="logo-item"><img src="לוגואים חברות/לוגו דיסני.png" alt="Disney+"></div>
+    <div class="logo-item"><img src="לוגואים חברות/Super_Pharm_Logo.svg.png" alt="סופר פארם"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו בנק הפועלים.png" alt="בנק הפועלים"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו ey.png" alt="EY"></div>
+    <div class="logo-item"><img src="לוגואים חברות/BankLeumiLogo.svg" alt="בנק לאומי"></div>
+    <div class="logo-item"><img src="לוגואים חברות/DHL-Logo.wine.png" alt="DHL"></div>
+    <div class="logo-item"><img src="לוגואים חברות/StraussNewLogo.svg" alt="שטראוס" style="height:38px"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו קופת חולים מאוחדת.png" alt="מאוחדת"></div>
+    <div class="logo-item"><img src="לוגואים חברות/Tnuva_New_Logo.svg" alt="תנובה"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו משרד המשפטים.png" alt="משרד המשפטים"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו עיריית תל אביב.png" alt="עיריית תל אביב"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו קימברלי קלארק.svg" alt="קימברלי קלארק"></div>
+    <div class="logo-item"><img src="לוגואים חברות/Siemens_AG_logo.svg.png" alt="סימנס"></div>
+    <div class="logo-item"><img src="לוגואים חברות/ZIM_Logo.svg" alt="צים"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו רשות הטבע והגנים.svg" alt="רשות הטבע והגנים"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו חברת חשמל.png" alt="חברת חשמל"></div>
+    <div class="logo-item"><img src="לוגואים חברות/לוגו פלייטיקה.png" alt="פלייטיקה"></div>
+    <div class="logo-item"><img src="לוגואים חברות/Unilever.png" alt="יוניליוור"></div>
+  </div>
+  <p class="proof-conferences">בין הכנסים: ועידת גלובס לעסקים · כנס TheMarker · ועידת הקניונים · לילה לבן תל אביב</p>
+</div>
+
+<!-- LECTURES -->
+<section class="section" id="lectures">
+  <div class="container">
+    <h2 class="section-title grad reveal">הרצאות</h2>
+    <p class="section-sub reveal">כל הרצאה מותאמת לקהל, לאירוע ולמטרות שלכם</p>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-1.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">AI YAI YAI — מהפכת הבינה המלאכותית</h3>
+        <p class="card-desc">כל מה שצריך לדעת על בינה מלאכותית — על הטכנולוגיה וכיצד היא משפיעה על מגוון סקטורים בעולם</p>
+        <a href="lecture-ai-yai-yai.html" class="card-btn">למידע נוסף</a>
       </div>
-
-      <div class="hb-ws__grid">
-
-        <div class="hb-ws-card fade-up" data-scroll-rotate="0.8">
-          <div class="hb-ws-card__number">01</div>
-          <h3>סדנת חדשנות</h3>
-          <p>פיתוח רעיונות יצירתיים בארגון — זריקת מרץ ביצירתיות וכלים מעשיים לעבודה על אתגרים אמיתיים.</p>
-          <button class="hb-btn hb-btn--outline cta-button" data-action="book-workshop">להזמנת סדנה</button>
-        </div>
-
-        <div class="hb-ws-card hb-ws-card--offset fade-up" data-scroll-rotate="-0.6">
-          <div class="hb-ws-card__number">02</div>
-          <h3>סדנת AI</h3>
-          <p>שימוש פרקטי בכלי AI — בכתיבה, בתמונות, בניתוח מידע ובהכנת מצגות. למתחילים ומשתמשים.</p>
-          <button class="hb-btn hb-btn--outline cta-button" data-action="book-workshop">להזמנת סדנה</button>
-        </div>
-
-        <div class="hb-ws-card fade-up" data-scroll-rotate="1.2">
-          <div class="hb-ws-card__number">03</div>
-          <h3>Ideation Workshop</h3>
-          <p>פיתוח מוצרים ושירותים עם AI — הגדרת בעיה, העלאת רעיונות, קונספטים ופרזנטציה לצוות.</p>
-          <button class="hb-btn hb-btn--outline cta-button" data-action="book-workshop">להזמנת סדנה</button>
-        </div>
-
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-2.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">בינה מלאכותית — שלום, במה אוכל לעזור?</h3>
+        <p class="card-desc">חווית לקוח מבוססת בינה מלאכותית — כיצד AI משדרג כל נקודת מגע עם הלקוח</p>
+        <a href="lecture-ai-cx.html" class="card-btn">למידע נוסף</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== TESTIMONIALS ===================== -->
-  <section class="hb-testimonials" id="testimonials">
-    <div class="container">
-      <div class="hb-section-head fade-up">
-        <span class="hb-tag hb-tag--light">המלצות</span>
-        <h2 class="hb-heading hb-heading--xl hb-heading--white">
-          מה אומרים<br><em>עליי</em>
-        </h2>
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-3.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">2026 — אפשר בלי כל הדרמה?</h3>
+        <p class="card-desc">מגמות וטרנדים שישפיעו על חיינו בשנת 2026</p>
+        <a href="lecture-trends-2026.html" class="card-btn">למידע נוסף</a>
       </div>
-
-      <div class="hb-testimonials__grid">
-        <div class="hb-testi fade-up">
-          <div class="hb-testi__mark">&ldquo;</div>
-          <p class="hb-testi__text">כל ארגון חייב להיות מעודכן כל הזמן לכל מה שקורה ויקרה ולדעת לאמץ אליו את הדברים הבאים כדי להיות רלוונטי. ההרצאות והליווי של אריאלה דניאלי מוכיחים את עצמם הלכה למעשה ביישום בתוכניות עבודה, בהקניית כלי חדשנות בארגון ובתוצאות העסקיות. ההרצאות מעניינות, חכמות, מלאות אנרגיה ופותחות את הראש. <strong>אתם חייבים את זה לארגון שלכם.</strong></p>
-          <div class="hb-testi__author">
-            <div class="hb-testi__avatar">ד"ש</div>
-            <div>
-              <strong>דנה שרון</strong>
-              <span>מנכ"לית גומא — מותגי איכות למטבח</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hb-testi fade-up">
-          <div class="hb-testi__mark">&ldquo;</div>
-          <p class="hb-testi__text">אריאלה הביאה לאירוע קודם כל אנרגיה ורהיטות — מעוררת הקשבה, לא דבר מובן מאליו. גולת הכותרת הייתה הנכונות, הגמישות, היצירתיות ובעיקר ההקשבה ללקוח, מה שהביא לבניית מצגת חדשה לגמרי. שמחתי שבאמצע ההרצאה המנהלת הבכירה כתבה לי <strong>"היא פשוט בול למטרה ולקהל היעד"</strong> — ואין מחמאה גדולה מזו כמפיקה!</p>
-          <div class="hb-testi__author">
-            <div class="hb-testi__avatar">מ"ש</div>
-            <div>
-              <strong>מירי שטורפר</strong>
-              <span>MSM Business Events Marketing</span>
-            </div>
-          </div>
-        </div>
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-5.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">Longevity — חוקי המשחק החדשים</h3>
+        <p class="card-desc">כיצד כלכלת אריכות הימים תשפיע על עסקים ועל החיים האישיים שלנו</p>
+        <a href="lecture-longevity.html" class="card-btn">למידע נוסף</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== ABOUT ===================== -->
-  <section class="hb-about" id="about">
-    <div class="container">
-      <div class="hb-about__inner">
-        <div class="hb-about__visual fade-up" data-parallax="0.04">
-          <div class="hb-about__img-container">
-            <img src="./images/profile.jpg" alt="אריאלה דניאלי" class="hb-about__img" loading="lazy">
-            <div class="hb-about__accent-block"></div>
-          </div>
-        </div>
-        <div class="hb-about__content fade-up">
-          <span class="hb-tag">אודות</span>
-          <h2 class="hb-heading hb-heading--lg">אני <em>אריאלה דניאלי</em></h2>
-          <p>מרצה, יועצת ומובילת תהליכים בתחומי חדשנות, בינה מלאכותית, שיווק וחווית לקוח.</p>
-          <p>אני משלבת בין ניסיון עסקי ושיווקי רחב, חשיבה יצירתית ותוכן עדכני — כדי לייצר הרצאות, סדנאות וליווי שמחברים בין השראה, רעיונות ויישום.</p>
-          <a href="#contact" class="hb-btn hb-btn--outline">יצירת קשר</a>
-        </div>
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture 9.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">THE WOW EFFECT</h3>
+        <p class="card-desc">מקרי בוחן של מותגים שמייצרים חווית לקוח יוצאת דופן</p>
+        <a href="lecture-wow-effect.html" class="card-btn">למידע נוסף</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== CX ===================== -->
-  <section class="hb-cx" id="cx">
-    <div class="hb-cx__bg-text" aria-hidden="true">CX</div>
-    <div class="container">
-      <div class="hb-cx__inner fade-up">
-        <div class="hb-cx__text">
-          <span class="hb-tag hb-tag--light">ייעוץ</span>
-          <h2 class="hb-heading hb-heading--lg hb-heading--white">חווית <em>לקוח</em></h2>
-          <p>ליווי לארגונים שרוצים לדייק, לבדל ולשפר את חווית הלקוח — משלב החשיבה ועד הוצאה לפועל של רעיונות.</p>
-          <button class="hb-btn hb-btn--fire cta-button" data-action="get-quote">להצעת מחיר</button>
-        </div>
-        <div class="hb-cx__tags">
-          <span class="hb-cx-tag">מיפוי מסע לקוח</span>
-          <span class="hb-cx-tag">בידול ופיתוח שירות</span>
-          <span class="hb-cx-tag">חדשנות בחוויה</span>
-          <span class="hb-cx-tag">ליווי צוות</span>
-          <span class="hb-cx-tag">הוצאה לפועל</span>
-        </div>
+      <div class="card reveal">
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture10.jpg" alt="אריאלה מרצה" loading="lazy">
+        <h3 class="card-title">מתחילים בארגון ומגבירים החוצה</h3>
+        <p class="card-desc">כיצד לבנות את המיתוג האישי שלך בתוך הארגון ומחוצה לו</p>
+        <a href="lecture-personal-branding.html" class="card-btn">למידע נוסף</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ===================== CTA FORM ===================== -->
-  <section class="hb-cta" id="contact">
-    <div class="hb-cta__ghost" aria-hidden="true">?</div>
-    <div class="container">
-      <div class="hb-cta__inner">
-        <div class="hb-cta__text fade-up">
-          <h2 class="hb-heading hb-heading--xl hb-heading--white">רוצים<br>להזמין<em>?</em></h2>
-          <p class="hb-sub hb-sub--light">אפשר להשאיר פרטים ואחזור אליכם כדי להתאים יחד את ההרצאה הנכונה לקהל, לנושא ולמטרות האירוע.</p>
-        </div>
-        <form class="hb-form fade-up" id="homeForm" novalidate>
-          <div class="hb-form__row">
-            <div class="hb-form__group">
-              <input type="text" name="fullName" placeholder="שם מלא *" required>
-            </div>
-            <div class="hb-form__group">
-              <input type="text" name="organization" placeholder="ארגון / חברה *" required>
-            </div>
-          </div>
-          <div class="hb-form__row">
-            <div class="hb-form__group">
-              <input type="tel" name="phone" placeholder="טלפון *" required>
-            </div>
-            <div class="hb-form__group">
-              <input type="email" name="email" placeholder="מייל *" required>
-            </div>
-          </div>
-          <div class="hb-form__group">
-            <select name="subject" required>
-              <option value="">נושא הפנייה</option>
-              <option value="lecture">הזמנת הרצאה</option>
-              <option value="workshop">הזמנת סדנה</option>
-              <option value="experience">חווית לקוח</option>
-              <option value="collaboration">שיתוף פעולה</option>
-              <option value="other">אחר</option>
-            </select>
-          </div>
-          <button type="submit" class="hb-btn hb-btn--dark hb-btn--full">שליחת פנייה</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer" id="footer">
-    <div class="footer-grid container">
-      <div class="footer-brand">
-        <img src="./images/logo.png" alt="DDIT Innovationista" class="f-logo">
-        <p class="f-tagline">הרצאות חדשנות ובינה מלאכותית</p>
-      </div>
-      <div class="footer-col">
-        <h5>ניווט מהיר</h5>
-        <ul class="f-links">
-          <li><a href="#lectures">הרצאות</a></li>
-          <li><a href="#workshops">סדנאות</a></li>
-          <li><a href="#about">אודות</a></li>
-          <li><a href="#contact">יצירת קשר</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>שירותים</h5>
-        <ul class="f-links">
-          <li><a href="#lectures">הרצאות</a></li>
-          <li><a href="#workshops">סדנאות</a></li>
-          <li><a href="#cx">חווית לקוח</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h5>פרטי קשר</h5>
-        <div class="f-contact">
-          <a href="mailto:hello@ddit.co.il">hello@ddit.co.il</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 DDIT Innovationista — אריאלה דניאלי. כל הזכויות שמורות.</p>
-    </div>
-  </footer>
-
-  <!-- MODAL -->
-  <div class="modal" id="formModal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
-    <div class="modal-content">
-      <button class="modal-close" id="closeModal" aria-label="סגור">&times;</button>
-      <form class="contact-form" id="contactForm" novalidate>
-        <h2 id="formTitle">יצירת קשר</h2>
-        <div class="form-group">
-          <label for="fullName">שם מלא</label>
-          <input type="text" id="fullName" name="fullName" placeholder="שם מלא" required>
-        </div>
-        <div class="form-group">
-          <label for="organization">ארגון / חברה</label>
-          <input type="text" id="organization" name="organization" placeholder="שם הארגון" required>
-        </div>
-        <div class="form-group">
-          <label for="phone">טלפון</label>
-          <input type="tel" id="phone" name="phone" placeholder="050-000-0000" required>
-        </div>
-        <div class="form-group">
-          <label for="email">מייל</label>
-          <input type="email" id="email" name="email" placeholder="you@company.com" required>
-        </div>
-        <div class="form-group">
-          <label for="subject">נושא הפנייה</label>
-          <select id="subject" name="subject" required>
-            <option value="">בחר נושא</option>
-            <option value="lecture">הזמנת הרצאה</option>
-            <option value="workshop">הזמנת סדנה</option>
-            <option value="experience">חווית לקוח</option>
-            <option value="collaboration">שיתוף פעולה</option>
-            <option value="other">אחר</option>
-          </select>
-        </div>
-        <button type="submit" class="btn btn-primary btn-full">שליחת פנייה</button>
-      </form>
     </div>
   </div>
+</section>
 
-  <script src="./js/main.js"></script>
-  <script src="./js/forms.js"></script>
+<!-- WORKSHOPS -->
+<section class="section" id="workshops" style="background:rgba(255,255,255,.02)">
+  <div class="container">
+    <h2 class="section-title grad reveal">סדנאות</h2>
+    <p class="section-sub reveal">סדנאות שמשלבות פרקטיקה עם חוויה כיפית וקלילה</p>
+    <div class="cards-grid">
+      <div class="card reveal">
+        <img class="card-img" src="sadna 4.jpeg" alt="סדנת בינה מלאכותית" loading="lazy">
+        <h3 class="card-title">סדנאות בינה מלאכותית</h3>
+        <p class="card-desc">מגוון סדנאות בינה מלאכותית בהתאמה לצרכי הלקוח</p>
+        <a href="workshop-ai-intro.html" class="card-btn">למידע נוסף</a>
+      </div>
+      <div class="card reveal">
+        <img class="card-img" src="sadna 2.jpeg" alt="סדנת AI IDEATION" loading="lazy">
+        <h3 class="card-title">סדנת AI IDEATION</h3>
+        <p class="card-desc">מפתחים רעיונות למוצרים ושירותים — מהבעיה ועד הפתרון היישומי — באמצעות כלי בינה מלאכותית</p>
+        <a href="workshop-ideation.html" class="card-btn">למידע נוסף</a>
+      </div>
+      <div class="card reveal">
+        <img class="card-img" src="sadna 3.jpeg" alt="סדנת חדשנות מואצת" loading="lazy">
+        <h3 class="card-title">סדנת חדשנות מואצת</h3>
+        <p class="card-desc">כמה שעות שנותנות פתרונות ורעיונות למוצרים ושירותים חדשים וכלים לחשיבה יצירתית לטווח ארוך</p>
+        <a href="workshop-innovation.html" class="card-btn">למידע נוסף</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONSULTING -->
+<section class="section" id="consulting">
+  <div class="container">
+    <h2 class="section-title grad reveal" style="max-width:100%;text-align:center">רוצים לדעת מה אפשר לעשות עם בינה מלאכותית<br>לשדרוג חווית הלקוח שלכם?</h2>
+    <div class="consult-grid" style="margin-top:40px">
+      <div class="card reveal">
+        <h3 class="card-title">AI Radar Report</h3>
+        <p class="card-desc">דוח חדשנות ממוקד שממפה עבורכם את כל הטכנולוגיות, המוצרים והשירותים הבולטים המבוססים בינה מלאכותית בקטגוריה שלכם</p>
+        <a href="ai-radar.html" class="card-btn">למידע נוסף</a>
+      </div>
+      <div class="card reveal">
+        <h3 class="card-title">ייעוץ אסטרטגי לחווית לקוח מבוססת בינה מלאכותית</h3>
+        <p class="card-desc">ייעוץ והטמעה של חווית לקוח מבוססת בינה מלאכותית</p>
+        <a href="ai-cx-consulting.html" class="card-btn">לפרטים נוספים</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LECTURE VIDEO -->
+<section class="section" id="lecture-video">
+  <div class="container" style="text-align:center">
+    <p class="section-label reveal">רוצים לראות הרצאה שלי?</p>
+    <h2 class="section-title grad reveal">כנס איגוד השיווק</h2>
+    <div class="video-wrap reveal">
+      <video controls playsinline preload="metadata" style="width:100%;max-width:900px;border-radius:16px;border:1px solid rgba(255,255,255,.08)">
+        <source src="igud ha shivuk.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+
+<!-- QUOTES -->
+<section class="quotes reveal">
+  <div class="quotes-inner">
+    <div class="quote-card">
+      <p class="quote-text">ההרצאות מעניינות, חכמות, מלאות אנרגיה ופותחות את הראש. ההרצאות והליווי של אריאלה מוכיחים את עצמם הלכה למעשה ביישום בתוכניות עבודה, בהקניית כלי חדשנות ובתוצאות העסקיות. אתם חייבים את זה לארגון שלכם.</p>
+      <p class="quote-author">דנה שרון</p>
+      <p class="quote-role">מנכ״לית גומא — מותגי איכות למטבח</p>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">אריאלה לא מלמדת — היא גורמת לאנשים להבין. שילוב נדיר של עומק מקצועי, יסודיות אמיתית, וחדות הומוריסטית שמחזיקה את הקהל ערני מהרגע הראשון עד האחרון. ווירטואוזיות של ממש. ממליצה ללא היסוס.</p>
+      <p class="quote-author">אלינור טרבלוסי</p>
+      <p class="quote-role">מנהלת פעילות מרחבית ארגונית, נעמ״ת</p>
+    </div>
+    <div class="quote-card">
+      <p class="quote-text">אריאלה הביאה קודם כל אנרגיה ורהיטות מעוררת הקשבה. באמצע ההרצאה המנהלת הבכירה כתבה לי ״היא פשוט בול למטרה ולקהל היעד״ — וכמפיקה אין מחמאה גדולה מזו! ההרצאה היתה תפורה ״בול״ למידותיו של הלקוח.</p>
+      <p class="quote-author">מירי שטורפר</p>
+      <p class="quote-role">בעלים של MSM Business Events Marketing</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="background:rgba(255,255,255,.02)">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-text" style="max-width:800px;margin:0 auto;text-align:center">
+        <h2 class="section-title grad reveal">מי אני</h2>
+        <p class="reveal">אריאלה דניאלי, מומחית לחדשנות ובינה מלאכותית עם למעלה מ-20 שנות ניסיון בשיווק, אסטרטגיה וניהול מותגים מובילים.</p>
+        <p class="reveal">יועצת ומרצה לחדשנות, עם למעלה מ-25 שנות ניסיון באסטרטגיה, שיווק וניהול דיגיטל בחברות מובילות כגון תנובה, שטראוס, יונליוור, עזריאלי ובזק בינלאומי. מרצה בתחום החדשנות, בינה מלאכותית ומיתוג אישי בארגונים, אוניברסיטאות וכנסים.</p>
+        <p class="reveal">ההרצאות שלי משלבות תוכן עדכני, אנרגיה גבוהה וכלים מעשיים. מאות ארגונים כבר בחרו ללמוד, להתרגש ולצאת לדרך עם תובנות חדשות.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="contact-wrap">
+    <h2 class="section-title grad reveal">בואו נדבר</h2>
+    <p class="reveal">רוצים לשמוע עוד? להזמין הרצאה? סדנה? דוח חדשנות? אשמח לשמוע מכם.</p>
+    <a href="https://wa.me/972523124326" class="btn-wa reveal" style="margin-bottom:20px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+      שלחו הודעה בוואטסאפ
+    </a>
+    <div class="contact-links reveal">
+      <a href="mailto:ariellita@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M22 7l-10 7L2 7"/></svg>
+        ariellita@gmail.com
+      </a>
+      <a href="https://www.instagram.com/ariellita/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        Instagram
+      </a>
+      <a href="https://www.linkedin.com/in/ariellita/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://www.facebook.com/arielladanielli" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 אריאלה דניאלי. כל הזכויות שמורות.</p>
+  <!-- footer social removed -->
+  <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/972523124326" target="_blank" aria-label="WhatsApp" style="position:fixed;bottom:28px;left:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,.7)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.5)'">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+</a>
+
+<script>
+// Navbar scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+
+// Mobile menu
+const burger=document.getElementById('burger'),mobileMenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':''});
+function closeMobile(){burger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+
+// Scroll reveal
+const reveals=document.querySelectorAll('.reveal');
+// Immediately show above-fold elements
+reveals.forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight+100)el.classList.add('visible')});
+const revealObs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');revealObs.unobserve(el.target)}})},{threshold:.05,rootMargin:'0px 0px 50px 0px'});
+reveals.forEach(el=>{if(!el.classList.contains('visible'))revealObs.observe(el)});
+// Safety: reveal all after 3s
+setTimeout(()=>{reveals.forEach(el=>el.classList.add('visible'))},3000);
+
+// CountUp
+const statNums=document.querySelectorAll('.stat-num');
+const fmt=n=>n>=1000?n.toLocaleString('en-US'):String(n);
+const countObs=new IntersectionObserver(e=>{e.forEach(el=>{if(!el.isIntersecting)return;const t=el.target,target=parseInt(t.dataset.count),prefix=t.dataset.prefix||'';let c=0;const step=Math.max(1,Math.ceil(target/50)),iv=setInterval(()=>{c+=step;if(c>=target){c=target;clearInterval(iv)}t.textContent=prefix+fmt(c)},30);countObs.unobserve(t)})},{threshold:.15});
+statNums.forEach(el=>countObs.observe(el));
+</script>
 </body>
 </html>
