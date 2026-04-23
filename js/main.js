@@ -213,10 +213,10 @@ function setupScrollAnimations() {
   const elements = document.querySelectorAll('.fade-up');
   if (!elements.length) return;
 
-  // Immediately show above-fold elements
+  // Immediately show ALL above-fold elements + a safety timeout
   elements.forEach(el => {
     const rect = el.getBoundingClientRect();
-    if (rect.top < window.innerHeight) {
+    if (rect.top < window.innerHeight + 100) {
       el.classList.add('visible');
     }
   });
@@ -230,7 +230,7 @@ function setupScrollAnimations() {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
+    { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }
   );
 
   elements.forEach(el => {
@@ -238,6 +238,11 @@ function setupScrollAnimations() {
       observer.observe(el);
     }
   });
+
+  // Safety: reveal all after 3 seconds in case observer fails
+  setTimeout(() => {
+    elements.forEach(el => el.classList.add('visible'));
+  }, 3000);
 }
 
 /* ========================================
