@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>סדנאות | אריאלה דניאלי — מרצה לבינה מלאכותית וחדשנות</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WF8EV8KE0R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WF8EV8KE0R');
+</script>
+<meta name="description" content="סדנאות של אריאלה דניאלי — בינה מלאכותית, AI Ideation וחדשנות מואצת. סדנאות שמשלבות פרקטיקה עם חוויה כיפית וקלילה, מותאמות לצרכי הארגון.">
+<link rel="icon" type="image/png" href="ariella.png">
+<link rel="apple-touch-icon" href="ariella.png">
+<meta property="og:title" content="סדנאות | אריאלה דניאלי">
+<meta property="og:description" content="סדנאות AI וחדשנות — פרקטיקה עם חוויה כיפית וקלילה">
+<meta property="og:image" content="https://arielladanielli.com/ariella.png">
+<meta property="og:url" content="https://arielladanielli.com/workshops">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arielladanielli.com/ariella.png">
+<link rel="canonical" href="https://arielladanielli.com/workshops">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080810;--bg-card:#0d0d1a;--bg-card2:#111128;
+  --red:#E8001A;--yellow:#FF2D9B;--orange:#FF6B00;--green:#25D366;
+  --white:#ffffff;--white60:rgba(255,255,255,1);--white08:rgba(255,255,255,0.08);--white15:rgba(255,255,255,0.15);
+  --font:'Assistant',sans-serif;
+  --nav-h:72px;
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--white);direction:rtl;line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.grad{background:linear-gradient(135deg,#FF2D9B,#FF8C00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.reveal{opacity:0;transform:translateY(60px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1 !important;transform:translateY(0) !important}
+.nav{position:fixed;top:0;right:0;left:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);transition:background .4s,backdrop-filter .4s,box-shadow .4s}
+.nav.scrolled{background:rgba(8,8,16,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 2px 30px rgba(0,0,0,.4)}
+.nav-links{display:flex;gap:clamp(16px,2.5vw,36px);list-style:none}
+.nav-links a{font-size:.95rem;font-weight:400;color:var(--white60);transition:color .3s}
+.nav-links a:hover,.nav-links a.active{color:var(--white)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
+.burger span{width:26px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
+.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+.mobile-menu{position:fixed;inset:0;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999;opacity:0;pointer-events:none;transition:opacity .4s}
+.mobile-menu.open{opacity:1;pointer-events:all}
+.mobile-menu a{font-size:1.4rem;font-weight:700;color:var(--white)}
+@media(max-width:768px){.nav-links{display:none}.burger{display:flex}}
+.section{padding:clamp(60px,10vw,120px) clamp(20px,6vw,80px)}
+.container{max-width:1200px;margin:0 auto}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:28px}
+.card{background:var(--bg-card);border:1px solid var(--white08);border-radius:14px;padding:36px;transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .4s;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:4px;background:var(--yellow);opacity:0;transition:opacity .4s}
+.card:hover{transform:translateY(-8px);border-color:var(--yellow);box-shadow:0 20px 50px rgba(255,45,155,.15)}
+.card:hover::before{opacity:1}
+.card-img{width:100%;height:220px;object-fit:cover;object-position:center 30%;border-radius:10px;margin-bottom:18px}
+@media(max-width:768px){.card-img{height:200px}.cards-grid{grid-template-columns:1fr}}
+.card-title{font-size:1.25rem;font-weight:700;margin-bottom:12px;text-align:center}
+.card-desc{color:var(--white60);font-size:.95rem;margin-bottom:8px;font-weight:300;line-height:1.7;text-align:center;flex:1}
+.card{text-align:center}
+.card-btn{display:inline-block;padding:10px 24px;border:2px solid var(--yellow);border-radius:8px;font-size:.9rem;color:var(--yellow);font-weight:700;transition:all .3s}
+.card-btn:hover{background:var(--yellow);color:#080810;box-shadow:0 0 18px rgba(255,45,155,.5);transform:scale(1.05)}
+.page-header{padding:calc(var(--nav-h) + 70px) clamp(20px,6vw,80px) 0;text-align:center}
+.page-header h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:900;line-height:1.15}
+.page-header p{color:var(--white60);font-size:clamp(1rem,1.5vw,1.2rem);margin-top:14px}
+footer{border-top:1px solid var(--white08);padding:40px clamp(20px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+footer p{color:var(--white60);font-size:.85rem}
+.back-top{width:44px;height:44px;border-radius:50%;border:1px solid var(--white08);display:flex;align-items:center;justify-content:center;color:var(--white60);transition:border-color .3s,color .3s;cursor:pointer}
+.back-top:hover{border-color:var(--yellow);color:var(--white)}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <ul class="nav-links">
+    <li><a href="/lectures">הרצאות</a></li>
+    <li><a href="/workshops" class="active">סדנאות</a></li>
+    <li><a href="/consulting">ייעוץ</a></li>
+    <li><a href="/about">אודות</a></li>
+    <li><a href="/contact">צור קשר</a></li>
+  </ul>
+  <div class="burger" id="burger" aria-label="תפריט"><span></span><span></span><span></span></div>
+  <a href="/" style="margin-right:auto;margin-left:0"><img src="ariella logo transparant.png" alt="Ariella Danielli" style="height:120px;width:auto;object-fit:contain"></a>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/lectures" onclick="closeMobile()">הרצאות</a>
+  <a href="/workshops" onclick="closeMobile()">סדנאות</a>
+  <a href="/consulting" onclick="closeMobile()">ייעוץ</a>
+  <a href="/about" onclick="closeMobile()">אודות</a>
+  <a href="/contact" onclick="closeMobile()">צור קשר</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1 class="grad">סדנאות</h1>
+  <p>סדנאות שמשלבות פרקטיקה עם חוויה כיפית וקלילה</p>
+</div>
+
+<!-- WORKSHOPS -->
+<section class="section">
+  <div class="container">
+    <div class="cards-grid">
+      <div class="card reveal">
+        <img class="card-img" src="sadna 4.jpeg" alt="סדנת בינה מלאכותית" loading="lazy">
+        <h2 class="card-title">סדנאות בינה מלאכותית</h2>
+        <p class="card-desc">מגוון סדנאות בינה מלאכותית בהתאמה לצרכי הלקוח</p>
+        <a href="workshop-ai-intro.html" class="card-btn">למידע נוסף</a>
+      </div>
+      <div class="card reveal">
+        <img class="card-img" src="sadna 2.jpeg" alt="סדנת AI IDEATION" loading="lazy">
+        <h2 class="card-title">סדנת AI IDEATION</h2>
+        <p class="card-desc">מפתחים רעיונות למוצרים ושירותים — מהבעיה ועד הפתרון היישומי — באמצעות כלי בינה מלאכותית</p>
+        <a href="workshop-ideation.html" class="card-btn">למידע נוסף</a>
+      </div>
+      <div class="card reveal">
+        <img class="card-img" src="sadna 3.jpeg" alt="סדנת חדשנות מואצת" loading="lazy">
+        <h2 class="card-title">סדנת חדשנות מואצת</h2>
+        <p class="card-desc">כמה שעות שנותנות פתרונות ורעיונות למוצרים ושירותים חדשים וכלים לחשיבה יצירתית לטווח ארוך</p>
+        <a href="workshop-innovation.html" class="card-btn">למידע נוסף</a>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:56px">
+      <a href="https://wa.me/972523124326" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;font-size:1rem;transition:transform .3s" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+        להזמנת סדנה — שלחו WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>&copy; 2026 אריאלה דניאלי. כל הזכויות שמורות.</p>
+  <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </div>
+</footer>
+
+<!-- WhatsApp Floating Button -->
+<a href="https://wa.me/972523124326" target="_blank" aria-label="WhatsApp" style="position:fixed;bottom:28px;left:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,.7)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.5)'">
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+</a>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
+const burger=document.getElementById('burger'),mobileMenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{burger.classList.toggle('open');mobileMenu.classList.toggle('open');document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':''});
+function closeMobile(){burger.classList.remove('open');mobileMenu.classList.remove('open');document.body.style.overflow=''}
+const reveals=document.querySelectorAll('.reveal');
+reveals.forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight+100)el.classList.add('visible')});
+const revealObs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');revealObs.unobserve(el.target)}})},{threshold:.05,rootMargin:'0px 0px 50px 0px'});
+reveals.forEach(el=>{if(!el.classList.contains('visible'))revealObs.observe(el)});
+setTimeout(()=>{reveals.forEach(el=>el.classList.add('visible'))},3000);
+</script>
+</body>
+</html>
