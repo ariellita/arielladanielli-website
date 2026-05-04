@@ -666,12 +666,49 @@ footer p{color:var(--white60);font-size:.85rem}
   </div>
 </footer>
 
+<!-- Accessibility Widget -->
+<div id="a11y-widget" style="position:fixed;left:28px;bottom:100px;z-index:1000">
+  <button id="a11y-toggle" aria-label="פתח תפריט נגישות" aria-expanded="false" aria-controls="a11y-panel" style="width:48px;height:48px;border-radius:50%;background:#1a1a2e;border:2px solid rgba(255,255,255,.25);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .3s;box-shadow:0 2px 12px rgba(0,0,0,.5)">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+  </button>
+  <div id="a11y-panel" role="region" aria-label="אפשרויות נגישות" style="display:none;position:absolute;bottom:56px;left:0;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,.6)">
+    <p style="color:rgba(255,255,255,.5);font-size:.7rem;margin-bottom:10px;font-family:'Assistant',sans-serif">נגישות</p>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <button onclick="a11yFontUp()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א+</span> הגדל טקסט</button>
+      <button onclick="a11yFontDown()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א-</span> הקטן טקסט</button>
+      <button onclick="a11yContrast()" id="btn-contrast" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>◑</span> ניגודיות גבוהה</button>
+      <button onclick="a11yReset()" style="background:rgba(255,45,155,.15);border:1px solid rgba(255,45,155,.3);color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem">איפוס</button>
+    </div>
+    <a href="/accessibility" style="display:block;margin-top:10px;color:rgba(255,255,255,.35);font-size:.7rem;font-family:'Assistant',sans-serif;text-decoration:underline">הצהרת נגישות</a>
+  </div>
+</div>
+
 <!-- WhatsApp Floating Button -->
-<a href="https://wa.me/972523124326" target="_blank" aria-label="WhatsApp" style="position:fixed;bottom:28px;left:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,.7)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.5)'">
+<a href="https://wa.me/972523124326" target="_blank" aria-label="פתח שיחת WhatsApp" style="position:fixed;bottom:28px;left:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s,box-shadow .3s" onmouseover="this.style.transform='scale(1.1)';this.style.boxShadow='0 6px 28px rgba(37,211,102,.7)'" onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 4px 20px rgba(37,211,102,.5)'">
   <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
 </a>
 
 <script>
+// Accessibility widget
+(function(){
+  const toggle=document.getElementById('a11y-toggle'),panel=document.getElementById('a11y-panel');
+  let fontSize=100,highContrast=false;
+  toggle.addEventListener('click',()=>{
+    const open=panel.style.display==='none';
+    panel.style.display=open?'block':'none';
+    toggle.setAttribute('aria-expanded',open);
+  });
+  document.addEventListener('click',e=>{if(!document.getElementById('a11y-widget').contains(e.target)){panel.style.display='none';toggle.setAttribute('aria-expanded','false')}});
+  window.a11yFontUp=()=>{if(fontSize<150){fontSize+=10;document.documentElement.style.fontSize=fontSize+'%'}};
+  window.a11yFontDown=()=>{if(fontSize>80){fontSize-=10;document.documentElement.style.fontSize=fontSize+'%'}};
+  window.a11yContrast=()=>{
+    highContrast=!highContrast;
+    document.body.style.filter=highContrast?'contrast(1.5)':'';
+    document.getElementById('btn-contrast').style.background=highContrast?'rgba(255,45,155,.3)':'rgba(255,255,255,.07)';
+  };
+  window.a11yReset=()=>{fontSize=100;highContrast=false;document.documentElement.style.fontSize='';document.body.style.filter='';document.getElementById('btn-contrast').style.background='rgba(255,255,255,.07)';panel.style.display='none';toggle.setAttribute('aria-expanded','false')};
+})();
+
 // Navbar scroll
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>60)},{passive:true});
