@@ -1,0 +1,12 @@
+# Redirect old Wix/ddit URLs to homepage
+/blog /  301
+/blog/* /  301
+/post/* /  301
+/הרצאות /lectures.html  301
+/סדנאות /workshops.html  301
+/אודות /about.html  301
+/צור-קשר /contact.html  301
+/ייעוץ /consulting.html  301
+
+# Catch-all: any unknown URL → homepage (only fires when no file exists)
+/* /  301
