@@ -8,5 +8,4 @@
 /צור-קשר /contact.html  301
 /ייעוץ /consulting.html  301
 
-# Catch-all: any unknown URL → homepage (only fires when no file exists)
-/* /  301
+# Catch-all removed — גרם ל-redirect loop
