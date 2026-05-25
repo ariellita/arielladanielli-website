@@ -130,26 +130,25 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;900&family=Heebo:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;900&family=Heebo:wght@300;400;700;800&display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap"></noscript>
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#FFF8FA;--bg-card:#F7F0FF;--bg-card2:#FFF0F7;
-  --orange:#FF5A1F;--blue:#1E3CFF;--pink:#FFC1D9;--lavender:#B89CFF;--mint:#00D68F;
-  --red:#FF5A1F;--yellow:#FF5A1F;--green:#25D366;
-  --white:#1a1028;--white60:rgba(26,16,40,0.65);--white08:rgba(26,16,40,0.1);--white15:rgba(26,16,40,0.15);
-  --font-head:'Rubik',sans-serif;--font-body:'Heebo',sans-serif;
+  --bg:#080810;--bg-card:#0d0d1a;--bg-card2:#111128;
+  --red:#E8001A;--yellow:#FF2D9B;--orange:#FF6B00;--green:#25D366;
+  --white:#ffffff;--white60:rgba(255,255,255,1);--white08:rgba(255,255,255,0.08);--white15:rgba(255,255,255,0.15);
+  --font:'Assistant',sans-serif;
   --nav-h:72px;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--font-body);background:var(--bg);color:var(--white);direction:rtl;line-height:1.7;overflow-x:hidden}
+body{font-family:var(--font);background:var(--bg);color:var(--white);direction:rtl;line-height:1.7;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
-*:focus-visible{outline:3px solid #FF5A1F;outline-offset:3px;border-radius:3px}
+*:focus-visible{outline:3px solid #FF2D9B;outline-offset:3px;border-radius:3px}
 
 /* ============ GRADIENT TEXT ============ */
-.grad{background:linear-gradient(135deg,#FF5A1F,#1E3CFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.grad{background:linear-gradient(135deg,#FF2D9B,#FF8C00);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .grad-num{color:var(--yellow)}
 
 /* ============ SCROLL REVEAL ============ */
@@ -158,19 +157,19 @@ img{max-width:100%;display:block}
 
 /* ============ NAVBAR ============ */
 .nav{position:fixed;top:0;right:0;left:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);transition:background .4s,backdrop-filter .4s,box-shadow .4s}
-.nav.scrolled{background:rgba(255,248,250,.95);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 2px 20px rgba(26,16,40,.12)}
-.nav-logo{font-family:var(--font-head);font-weight:900;font-size:1.6rem;letter-spacing:2px;color:var(--orange)}
+.nav.scrolled{background:rgba(8,8,16,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 2px 30px rgba(0,0,0,.4)}
+.nav-logo{font-weight:900;font-size:1.6rem;letter-spacing:2px;color:var(--yellow)}
 .nav-links{display:flex;gap:clamp(16px,2.5vw,36px);list-style:none}
 .nav-links a{font-size:.95rem;font-weight:400;color:var(--white60);transition:color .3s}
 .nav-links a:hover{color:var(--white)}
 .nav-cta{background:var(--red);color:var(--white);padding:10px 26px;border-radius:6px;font-weight:700;font-size:.9rem;transition:transform .3s,box-shadow .3s;white-space:nowrap}
 .nav-cta:hover{transform:scale(1.06);box-shadow:0 4px 24px rgba(255,130,67,.4)}
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
-.burger span{width:26px;height:2px;background:var(--orange);transition:transform .3s,opacity .3s}
+.burger span{width:26px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
 .burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
 .burger.open span:nth-child(2){opacity:0}
 .burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{position:fixed;inset:0;background:rgba(255,248,250,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999;opacity:0;pointer-events:none;transition:opacity .4s}
+.mobile-menu{position:fixed;inset:0;background:rgba(8,8,16,.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999;opacity:0;pointer-events:none;transition:opacity .4s}
 .mobile-menu.open{opacity:1;pointer-events:all}
 .mobile-menu a{font-size:1.4rem;font-weight:700;color:var(--white)}
 @media(max-width:768px){
@@ -180,16 +179,16 @@ img{max-width:100%;display:block}
 
 /* ============ HERO ============ */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:calc(var(--nav-h) + 40px) clamp(20px,6vw,80px) 60px}
-.hero-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(26,16,40,.07) 1px,transparent 1px);background-size:32px 32px;animation:gridFloat 20s linear infinite}
+.hero-grid{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:32px 32px;animation:gridFloat 20s linear infinite}
 @keyframes gridFloat{0%{background-position:0 0}100%{background-position:32px 32px}}
 .hero-content{max-width:640px;width:100%;z-index:2;text-align:center;margin:0 auto}
-.hero-title{font-family:var(--font-head);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.15;margin-bottom:20px}
-.hero-sub{font-family:var(--font-body);font-size:clamp(1rem,1.8vw,1.25rem);color:var(--white60);font-weight:300;margin-bottom:36px}
+.hero-title{font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;line-height:1.15;margin-bottom:20px}
+.hero-sub{font-size:clamp(1rem,1.8vw,1.25rem);color:var(--white60);font-weight:300;margin-bottom:36px}
 .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .btn-wa{background:var(--green);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer}
 .btn-wa:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(6,148,148,.35)}
 .btn-outline{border:2px solid var(--white);color:var(--white);padding:12px 32px;border-radius:8px;font-weight:700;font-size:1rem;transition:background .3s,transform .3s}
-.btn-outline:hover{background:rgba(26,16,40,.08);transform:scale(1.06)}
+.btn-outline:hover{background:rgba(255,255,255,.1);transform:scale(1.06)}
 .btn-red{background:var(--red);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer}
 .btn-red:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(255,130,67,.35)}
 
@@ -248,7 +247,7 @@ img{max-width:100%;display:block}
   15%{opacity:1}
   100%{transform:translateY(-160px) translateX(20px) scale(0);opacity:0}
 }
-.hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,90,31,.18),transparent 70%);top:10%;left:-10%;filter:blur(90px);pointer-events:none}
+.hero-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(255,130,67,.12),transparent 70%);top:20%;left:-5%;filter:blur(80px);pointer-events:none}
 
 /* hero splash video */
 .hero-splash-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:5;border-radius:16px;pointer-events:none}
@@ -270,7 +269,7 @@ img{max-width:100%;display:block}
 /* ============ SECTION COMMON ============ */
 .section{padding:clamp(60px,10vw,120px) clamp(20px,6vw,80px)}
 .section-label{font-size:.85rem;letter-spacing:4px;color:var(--white60);text-transform:uppercase;margin-bottom:12px;font-weight:400;text-align:center}
-.section-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;margin-bottom:16px;text-align:center}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);font-weight:900;margin-bottom:16px;text-align:center}
 .section-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--white60);max-width:680px;margin-bottom:48px;text-align:center;margin-right:auto;margin-left:auto}
 .container{max-width:1200px;margin:0 auto}
 
@@ -310,12 +309,12 @@ img{max-width:100%;display:block}
 .card-icon svg{width:100%;height:100%}
 .card-img{width:100%;height:220px;object-fit:cover;object-position:center 30%;border-radius:10px;margin-bottom:18px}
 @media(max-width:768px){.card-img{height:200px;object-position:center 30%}.cards-grid{grid-template-columns:1fr}}
-.card-title{font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:12px;text-align:center}
+.card-title{font-size:1.25rem;font-weight:700;margin-bottom:12px;text-align:center}
 .card-desc{color:var(--white60);font-size:.95rem;margin-bottom:8px;font-weight:300;line-height:1.7;text-align:center;flex:1}
 .card-for{color:var(--yellow);font-size:.85rem;font-weight:400;margin-bottom:16px;text-align:center}
 .card{text-align:center}
 .card-btn{display:inline-block;padding:10px 24px;border:2px solid var(--yellow);border-radius:8px;font-size:.9rem;color:var(--yellow);font-weight:700;transition:all .3s}
-.card-btn:hover{background:var(--yellow);color:#ffffff;box-shadow:0 0 18px rgba(255,90,31,.4);transform:scale(1.05)}
+.card-btn:hover{background:var(--yellow);color:#080810;box-shadow:0 0 18px rgba(255,45,155,.5);transform:scale(1.05)}
 .section-cta{text-align:center;margin-top:48px}
 
 /* ============ PHOTO GALLERY ============ */
@@ -350,29 +349,7 @@ footer p{color:var(--white60);font-size:.85rem}
 .footer-social a:hover{color:var(--white)}
 .footer-social svg{width:22px;height:22px}
 .back-top{width:44px;height:44px;border-radius:50%;border:1px solid var(--white08);display:flex;align-items:center;justify-content:center;color:var(--white60);transition:border-color .3s,color .3s;cursor:pointer}
-.back-top:hover{border-color:var(--orange);color:var(--white)}
-
-/* ============ DIGITAL CIRCLES (futuristic decor) ============ */
-.deco-circles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
-.deco-circles svg{position:absolute;opacity:.35}
-.deco-circles .c1{top:-80px;right:-80px;width:520px;height:520px;animation:rotateSlow 60s linear infinite}
-.deco-circles .c2{bottom:-120px;left:-60px;width:400px;height:400px;animation:rotateSlow 45s linear infinite reverse}
-.deco-circles .c3{top:30%;left:20%;width:220px;height:220px;animation:rotateSlow 30s linear infinite;opacity:.2}
-@keyframes rotateSlow{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
-
-/* ============ STAT ICONS ============ */
-.stat-icon{display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;border:1.5px solid rgba(255,90,31,.3);background:rgba(255,90,31,.07);margin:0 auto 14px}
-.stat:nth-child(2) .stat-icon{border-color:rgba(30,60,255,.35);background:rgba(30,60,255,.07)}
-.stat:nth-child(3) .stat-icon{border-color:rgba(0,214,143,.35);background:rgba(0,214,143,.07)}
-.stat-icon svg{width:24px;height:24px}
-.stat:nth-child(1) .stat-icon svg{stroke:var(--orange)}
-.stat:nth-child(2) .stat-icon svg{stroke:var(--blue)}
-.stat:nth-child(3) .stat-icon svg{stroke:var(--mint)}
-
-/* ============ SECTION ICON LABEL ============ */
-.section-label-wrap{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:12px}
-.section-label-wrap .section-label{margin-bottom:0}
-.section-label-icon{width:18px;height:18px;opacity:.6}
+.back-top:hover{border-color:var(--yellow);color:var(--white)}
 </style>
 </head>
 <body>
@@ -403,35 +380,6 @@ footer p{color:var(--white60);font-size:.85rem}
 <section class="hero" id="hero">
   <div class="hero-grid"></div>
   <div class="hero-glow"></div>
-  <!-- Futuristic digital circles -->
-  <div class="deco-circles" aria-hidden="true">
-    <svg class="c1" viewBox="0 0 480 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="240" cy="240" r="238" stroke="#FF5A1F" stroke-width="1" stroke-dasharray="6 10"/>
-      <circle cx="240" cy="240" r="180" stroke="#1E3CFF" stroke-width="0.8" stroke-dasharray="3 14"/>
-      <circle cx="240" cy="240" r="120" stroke="#FF5A1F" stroke-width="0.6" stroke-dasharray="2 8"/>
-      <circle cx="240" cy="240" r="60"  stroke="#00D68F" stroke-width="0.6"/>
-      <circle cx="240" cy="2"   r="4" fill="#FF5A1F"/>
-      <circle cx="478" cy="240" r="3" fill="#1E3CFF"/>
-      <circle cx="240" cy="478" r="4" fill="#FF5A1F"/>
-      <circle cx="2"   cy="240" r="3" fill="#00D68F"/>
-      <circle cx="409" cy="71"  r="2.5" fill="#FFC1D9"/>
-      <circle cx="71"  cy="409" r="2.5" fill="#B89CFF"/>
-    </svg>
-    <svg class="c2" viewBox="0 0 360 360" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="180" cy="180" r="178" stroke="#1E3CFF" stroke-width="0.8" stroke-dasharray="4 12"/>
-      <circle cx="180" cy="180" r="130" stroke="#FF5A1F" stroke-width="0.6" stroke-dasharray="2 10"/>
-      <circle cx="180" cy="180" r="80"  stroke="#B89CFF" stroke-width="0.5" stroke-dasharray="1 6"/>
-      <circle cx="180" cy="2"   r="3.5" fill="#1E3CFF"/>
-      <circle cx="358" cy="180" r="2.5" fill="#FF5A1F"/>
-      <circle cx="180" cy="358" r="3.5" fill="#00D68F"/>
-    </svg>
-    <svg class="c3" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="100" cy="100" r="98" stroke="#FFC1D9" stroke-width="0.7" stroke-dasharray="3 8"/>
-      <circle cx="100" cy="100" r="60"  stroke="#B89CFF" stroke-width="0.5" stroke-dasharray="2 6"/>
-      <circle cx="100" cy="2"   r="3" fill="#FFC1D9"/>
-      <circle cx="198" cy="100" r="2" fill="#B89CFF"/>
-    </svg>
-  </div>
   <div class="hero-content">
     <h1 class="hero-title grad stagger">אריאלה דניאלי<br>מרצה מובילה ל<span style="white-space:nowrap">בינה מלאכותית</span> וחדשנות בישראל</h1>
     <p class="hero-sub stagger">הרצאות שמעוררות השראה, מציתות חשיבה ומובילות לשינוי</p>
@@ -477,10 +425,6 @@ footer p{color:var(--white60);font-size:.85rem}
 <!-- LECTURES -->
 <section class="section" id="lectures">
   <div class="container">
-    <div class="section-label-wrap reveal">
-      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round"><path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8"/></svg>
-      <p class="section-label">הרצאות</p>
-    </div>
     <h2 class="section-title grad reveal">הרצאות</h2>
     <p class="section-sub reveal">כל הרצאה מותאמת לקהל, לאירוע ולמטרות שלכם</p>
     <div class="cards-grid">
@@ -527,10 +471,6 @@ footer p{color:var(--white60);font-size:.85rem}
 <!-- WORKSHOPS -->
 <section class="section" id="workshops" style="background:rgba(255,255,255,.02)">
   <div class="container">
-    <div class="section-label-wrap reveal">
-      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round"><path d="M12 2a7 7 0 0 1 7 7c0 4-3 6-3 9H8c0-3-3-5-3-9a7 7 0 0 1 7-7z"/><path d="M9 21h6M10 17h4"/></svg>
-      <p class="section-label">סדנאות</p>
-    </div>
     <h2 class="section-title grad reveal">סדנאות</h2>
     <p class="section-sub reveal">סדנאות שמשלבות פרקטיקה עם חוויה כיפית וקלילה</p>
     <div class="cards-grid">
@@ -597,10 +537,6 @@ footer p{color:var(--white60);font-size:.85rem}
   <div class="container">
     <div class="about-wrap">
       <div class="about-text" style="max-width:800px;margin:0 auto;text-align:center">
-        <div class="section-label-wrap reveal">
-          <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <p class="section-label">אודות</p>
-        </div>
         <h2 class="section-title grad reveal">מי אני</h2>
         <p class="reveal">נעים מאוד, אני אריאלה דניאלי, ואני כאן כדי לעזור לך להבין איך הטכנולוגיה של מחר משנה את העסקים של היום.</p>
         <p class="reveal">עם ניסיון של מעל שני עשורים בהובלת אסטרטגיה ושיווק במותגי ענק כמו תנובה, שטראוס, יוניליוור ועזריאלי, אני מביאה למגוון ארגונים שילוב ייחודי של ידע מעשי בחדשנות ובינה מלאכותית, לצד הבנה עמוקה של צרכים עסקיים ושיווקיים. המומחיות שלי היא להפוך חדשנות מכותרת גדולה לכלי עבודה פרקטי שמייצר תוצאות בשטח.</p>
@@ -614,10 +550,7 @@ footer p{color:var(--white60);font-size:.85rem}
 <!-- FAQ -->
 <section class="section" id="faq">
   <div class="container" style="max-width:800px">
-    <div class="section-label-wrap reveal">
-      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-      <p class="section-label">שאלות נפוצות</p>
-    </div>
+    <p class="section-label reveal">שאלות נפוצות</p>
     <h2 class="section-title grad reveal">כל מה שרציתם לדעת</h2>
     <div class="reveal" style="margin-top:40px;display:flex;flex-direction:column;gap:20px">
 
@@ -676,10 +609,6 @@ footer p{color:var(--white60);font-size:.85rem}
 <!-- CONTACT -->
 <section class="section" id="contact">
   <div class="contact-wrap">
-    <div class="section-label-wrap reveal">
-      <svg class="section-label-icon" viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <p class="section-label">יצירת קשר</p>
-    </div>
     <h2 class="section-title grad reveal">בואו נדבר</h2>
     <p class="reveal">רוצים לשמוע עוד? להזמין הרצאה? סדנה? דוח חדשנות? אשמח לשמוע מכם.</p>
     <a href="https://wa.me/972523124326" class="btn-wa reveal" style="margin-bottom:20px">
@@ -711,8 +640,8 @@ footer p{color:var(--white60);font-size:.85rem}
 <footer>
   <p>&copy; 2026 אריאלה דניאלי. כל הזכויות שמורות.</p>
   <div style="display:flex;gap:20px">
-    <a href="/privacy" style="color:rgba(26,16,40,.4);font-size:.8rem;text-decoration:underline;transition:color .3s" onmouseover="this.style.color='rgba(26,16,40,.75)'" onmouseout="this.style.color='rgba(26,16,40,.4)'">מדיניות פרטיות</a>
-    <a href="/accessibility" style="color:rgba(26,16,40,.4);font-size:.8rem;text-decoration:underline;transition:color .3s" onmouseover="this.style.color='rgba(26,16,40,.75)'" onmouseout="this.style.color='rgba(26,16,40,.4)'">הצהרת נגישות</a>
+    <a href="/privacy" style="color:rgba(255,255,255,.4);font-size:.8rem;text-decoration:underline;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">מדיניות פרטיות</a>
+    <a href="/accessibility" style="color:rgba(255,255,255,.4);font-size:.8rem;text-decoration:underline;transition:color .3s" onmouseover="this.style.color='rgba(255,255,255,.7)'" onmouseout="this.style.color='rgba(255,255,255,.4)'">הצהרת נגישות</a>
   </div>
   <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="חזרה למעלה">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
@@ -725,14 +654,14 @@ footer p{color:var(--white60);font-size:.85rem}
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
   </button>
   <div id="a11y-panel" role="region" aria-label="אפשרויות נגישות" style="display:none;position:absolute;bottom:56px;left:0;background:#1a1a2e;border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:12px;min-width:180px;box-shadow:0 8px 32px rgba(0,0,0,.6)">
-    <p style="color:rgba(255,255,255,.5);font-size:.7rem;margin-bottom:10px;font-family:'Heebo',sans-serif">נגישות</p>
+    <p style="color:rgba(255,255,255,.5);font-size:.7rem;margin-bottom:10px;font-family:'Assistant',sans-serif">נגישות</p>
     <div style="display:flex;flex-direction:column;gap:6px">
-      <button onclick="a11yFontUp()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Heebo',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א+</span> הגדל טקסט</button>
-      <button onclick="a11yFontDown()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Heebo',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א-</span> הקטן טקסט</button>
-      <button onclick="a11yContrast()" id="btn-contrast" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Heebo',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>◑</span> ניגודיות גבוהה</button>
-      <button onclick="a11yReset()" style="background:rgba(255,90,31,.15);border:1px solid rgba(255,90,31,.3);color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Heebo',sans-serif;font-size:.85rem">איפוס</button>
+      <button onclick="a11yFontUp()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א+</span> הגדל טקסט</button>
+      <button onclick="a11yFontDown()" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>א-</span> הקטן טקסט</button>
+      <button onclick="a11yContrast()" id="btn-contrast" style="background:rgba(255,255,255,.07);border:none;color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem;display:flex;align-items:center;gap:8px"><span>◑</span> ניגודיות גבוהה</button>
+      <button onclick="a11yReset()" style="background:rgba(255,45,155,.15);border:1px solid rgba(255,45,155,.3);color:white;padding:8px 12px;border-radius:8px;cursor:pointer;text-align:right;font-family:'Assistant',sans-serif;font-size:.85rem">איפוס</button>
     </div>
-    <a href="/accessibility" style="display:block;margin-top:10px;color:rgba(255,255,255,.35);font-size:.7rem;font-family:'Heebo',sans-serif;text-decoration:underline">הצהרת נגישות</a>
+    <a href="/accessibility" style="display:block;margin-top:10px;color:rgba(255,255,255,.35);font-size:.7rem;font-family:'Assistant',sans-serif;text-decoration:underline">הצהרת נגישות</a>
   </div>
 </div>
 
