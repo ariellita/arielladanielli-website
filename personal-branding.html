@@ -614,6 +614,7 @@
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 3rem;
+      direction: ltr;
     }
     .cd-item { display: flex; flex-direction: column; align-items: center; }
     .cd-num {
@@ -1472,7 +1473,7 @@
             </svg>
           </div>
           <h3>שאלון לאבחון מהיר למיתוג אישי</h3>
-          <p>שאלון שיעזור לך להבין איפה אתה/את עומד/ת עם המיתוג האישי שלך ומה השלב הבא.</p>
+          <p>שאלון שיעזור לך לעשות אבחון מהיר למיתוג האישי שלכם כדי שתוכלו לצאת לדרך ולהיות מדויקים ואפקטיביים.</p>
         </div>
 
       </div>
@@ -1524,7 +1525,7 @@
 
     function updateCountdown() {
       // 22 June 2026, 10:00 Israel time (UTC+3)
-      const event = new Date('2026-06-11T08:00:00Z');
+      const event = new Date('2026-06-22T07:00:00Z');
       const diff  = event - Date.now();
       if (diff <= 0) {
         ['days','hours','minutes','seconds'].forEach(id =>
