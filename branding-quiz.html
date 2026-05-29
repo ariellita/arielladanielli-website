@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>שאלון מיתוג אישי | אריאלה דניאלי + שרון מס</title>
+  <meta property="og:title" content="שאלון מיתוג אישי | אריאלה דניאלי">
+  <meta property="og:description" content="גלה/י את הבסיס למיתוג האישי שלך ויצא/י לדרך בצורה נכונה ומדויקת">
+  <meta property="og:image" content="https://arielladanielli.com/og-image.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Rubik:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    :root {
+      --bg:     #080810;
+      --grad:   linear-gradient(135deg, #FF2D9B, #FF8C00);
+      --pink:   #FF2D9B;
+      --orange: #FF8C00;
+      --text:   #ffffff;
+      --muted:  rgba(255,255,255,0.58);
+      --card:   rgba(255,255,255,0.055);
+      --border: rgba(255,255,255,0.13);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      font-family: 'Heebo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      direction: rtl;
+      overflow: hidden;
+    }
+
+    /* ── Progress bar ── */
+    #prog-wrap {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.08);
+      z-index: 200;
+    }
+    #prog-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--grad);
+      transition: width 0.5s ease;
+    }
+
+    /* ── Screen system ── */
+    .screen {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3.5rem 1.5rem 2rem;
+      opacity: 0;
+      transform: translateX(-55px);
+      pointer-events: none;
+      transition: opacity 0.38s ease, transform 0.38s ease;
+      overflow-y: auto;
+    }
+    .screen.active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: all;
+      z-index: 10;
+    }
+    .screen.exit {
+      opacity: 0;
+      transform: translateX(55px);
+      pointer-events: none;
+    }
+
+    /* ── Typography ── */
+    .g {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h1 {
+      font-family: 'Rubik', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+    }
+    h2 {
+      font-family: 'Rubik', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+    }
+    .sub {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.75;
+      max-width: 520px;
+      margin-top: 0.75rem;
+      text-align: center;
+    }
+    .screen-inner {
+      text-align: center;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      margin-top: 2rem;
+      padding: 0.85rem 2.5rem;
+      background: var(--grad);
+      color: #fff;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      flex-shrink: 0;
+    }
+    .btn:hover:not(:disabled) { opacity: 0.88; transform: scale(1.03); }
+    .btn:disabled { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.3); cursor: not-allowed; transform: none; }
+
+    /* ── Chips ── */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+      max-width: 680px;
+      margin-top: 1.4rem;
+    }
+    .chip {
+      padding: 0.5rem 1.2rem;
+      border: 2px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .chip:hover:not(.chip-off) { border-color: rgba(255,255,255,0.42); }
+    .chip.chip-on {
+      border: 2px solid transparent;
+      background: var(--grad);
+      color: #fff;
+    }
+    .chip.chip-off { opacity: 0.28; cursor: not-allowed; pointer-events: none; }
+
+    /* ── Option cards ── */
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 1.4rem;
+    }
+    .opt {
+      padding: 0.8rem 1.3rem;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      text-align: right;
+      background: transparent;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      transition: border-color 0.18s, background 0.18s;
+      width: 100%;
+    }
+    .opt:hover { border-color: rgba(255,255,255,0.42); }
+    .opt.opt-on {
+      border: 2px solid transparent;
+      background: var(--grad);
+    }
+
+    /* ── Textarea ── */
+    textarea {
+      width: 100%;
+      max-width: 540px;
+      min-height: 140px;
+      margin-top: 1.4rem;
+      padding: 1rem 1.2rem;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      color: var(--text);
+      font-family: 'Heebo', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      resize: vertical;
+      direction: rtl;
+      transition: border-color 0.2s;
+    }
+    textarea:focus { outline: none; border-color: var(--pink); }
+    textarea::placeholder { color: var(--muted); }
+
+    /* ── Color swatches ── */
+    .color-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.4rem 0.9rem;
+      justify-content: center;
+      max-width: 580px;
+      margin-top: 1.6rem;
+      padding-bottom: 1rem;
+    }
+    .swatch-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .swatch {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .swatch:hover { transform: scale(1.1); }
+    .swatch.swatch-on {
+      border-color: #fff;
+      transform: scale(1.18);
+      box-shadow: 0 0 0 3px var(--pink);
+    }
+    .swatch-label { font-size: 0.65rem; color: var(--muted); }
+
+    /* ── Summary ── */
+    .sum-wrap {
+      width: 100%;
+      max-width: 700px;
+      max-height: calc(100vh - 80px);
+      overflow-y: auto;
+      padding: 0.5rem 0.5rem 2rem;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.15) transparent;
+    }
+    .sum-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 1.2rem;
+    }
+    .s-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.2rem 1.6rem;
+      margin-bottom: 0.8rem;
+      text-align: right;
+    }
+    .s-card h3 {
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .s-card p { color: rgba(255,255,255,0.82); font-size: 0.92rem; line-height: 1.7; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag {
+      padding: 0.22rem 0.75rem;
+      border: 1px solid var(--pink);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      color: var(--pink);
+    }
+    .tag-o { border-color: var(--orange); color: var(--orange); }
+    .col-dot {
+      display: inline-block;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.2);
+      margin-left: 2px;
+      vertical-align: middle;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.75rem; }
+      h2 { font-size: 1.3rem; }
+      .chip { font-size: 0.82rem; padding: 0.42rem 0.9rem; }
+      .btn { font-size: 0.9rem; padding: 0.75rem 2rem; }
+      .swatch { width: 42px; height: 42px; }
+      .color-grid { gap: 1rem 0.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="prog-wrap"><div id="prog-fill"></div></div>
+
+<!-- ══ Screen 0: Intro ══════════════════════════════════════════════════════ -->
+<div class="screen active" id="s0">
+  <div class="screen-inner" style="max-width:600px;">
+    <h1><span class="g">זה הזמן למיתוג האישי שלך</span></h1>
+    <p class="sub">
+      שאלון זה יעזור לך לקבל את הבסיס למיתוג האישי שלך —<br>
+      ואיתו תוכל/י לצאת לדרך בצורה נכונה ומדויקת
+    </p>
+    <button class="btn" onclick="Q.next()">בואו נתחיל ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 1: Values ══════════════════════════════════════════════════════ -->
+<div class="screen" id="s1">
+  <div class="screen-inner" style="max-width:720px;">
+    <h2><span class="g">בחר/י את הערך שלך</span></h2>
+    <p class="sub">
+      הערך הוא אופן התקשורת שלך — הסגנון שלך ואיך תפנה לקהל שלך.<br>
+      ניתן לבחור עד 5 ערכים.
+    </p>
+    <div class="chips" id="values-grid"></div>
+    <button class="btn" id="btn-v" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 2: Story ═══════════════════════════════════════════════════════ -->
+<div class="screen" id="s2">
+  <div class="screen-inner" style="max-width:580px;">
+    <h2><span class="g">מה הסיפור שלך?</span></h2>
+    <p class="sub">
+      שתף/י בכמה מילים מה הסיפור שלך —<br>
+      תחביב, התנדבות, כל דבר שיכול לסייע בהוספת תוכן ייחודי
+    </p>
+    <textarea id="ta-story"
+      placeholder="למשל: אני מתנדב/ת ב... אני ספורטאי/ת ש... יש לי תחביב של..."
+      oninput="Q.onText(this,'story','btn-s',10)"></textarea>
+    <button class="btn" id="btn-s" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 3: Sharon Q1 — What's missing ══════════════════════════════════ -->
+<div class="screen" id="s3">
+  <div class="screen-inner" style="max-width:580px;">
+    <h2><span class="g">מה עוד לא קיבל ביטוי?</span></h2>
+    <p class="sub">
+      מה את/ה מרגיש/ה שחסר במדיה שלך כרגע?<br>
+      איזה חלק בך עוד לא קיבל ביטוי?
+    </p>
+    <textarea id="ta-miss"
+      placeholder="למשל: הצד האישי שלי לא מופיע... הידע שלי לא מוצג... אני לא מספיק אותנטי/ת..."
+      oninput="Q.onText(this,'missing','btn-miss',10)"></textarea>
+    <button class="btn" id="btn-miss" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 4: Sharon Q2 — What people feel ════════════════════════════════ -->
+<div class="screen" id="s4">
+  <div class="screen-inner" style="max-width:600px;">
+    <h2><span class="g">מה אנשים ירגישו בעולם שלך?</span></h2>
+    <p class="sub">מה היית רוצה שאנשים ירגישו כשהם נכנסים לעולם שלך?</p>
+    <div class="chips" id="feelings-grid"></div>
+    <button class="btn" id="btn-feel" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 5: Sharon Q3 — Self understanding ══════════════════════════════ -->
+<div class="screen" id="s5">
+  <div class="screen-inner" style="max-width:580px;">
+    <h2><span class="g">מה את/ה מגלה/ת על עצמך?</span></h2>
+    <p class="sub">
+      כשאני מסתכל/ת על כל מה שאני אוהב/ת, שומר/ת, מצלמ/ת, משתפ/ת ועוקב/ת אחריו —<br>
+      מה אני מבינ/ה על מי שאני הופכ/ת להיות?
+    </p>
+    <textarea id="ta-self"
+      placeholder="למשל: אני מבין/ה שאני נמשכ/ת לסיפורים של אנשים... שאני אוהב/ת שילוב של..."
+      oninput="Q.onText(this,'selfUnderstanding','btn-self',10)"></textarea>
+    <button class="btn" id="btn-self" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 6: Sharon Q4 — Colors ══════════════════════════════════════════ -->
+<div class="screen" id="s6">
+  <div class="screen-inner" style="max-width:600px;">
+    <h2><span class="g">אילו צבעים חוזרים?</span></h2>
+    <p class="sub">אילו צבעים חוזרים בהשראות שלך? בחר/י עד 3 צבעים.</p>
+    <div class="color-grid" id="color-grid"></div>
+    <button class="btn" id="btn-col" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 7: Sharon Q5 — World type ══════════════════════════════════════ -->
+<div class="screen" id="s7">
+  <div class="screen-inner" style="max-width:640px;">
+    <h2><span class="g">מה העולם שלך?</span></h2>
+    <p class="sub">האם העולם שלך יותר... (ניתן לבחור יותר מאחד)</p>
+    <div class="chips" id="world-grid"></div>
+    <button class="btn" id="btn-world" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 8: Sharon Q6 — Aesthetics words ════════════════════════════════ -->
+<div class="screen" id="s8">
+  <div class="screen-inner" style="max-width:640px;">
+    <h2><span class="g">האסתטיקה שלך</span></h2>
+    <p class="sub">אילו מילים מתארות את האסתטיקה שאת/ה נמשכ/ת אליה? (ניתן לבחור יותר מאחד)</p>
+    <div class="chips" id="aesth-grid"></div>
+    <button class="btn" id="btn-aesth" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 9: Sharon Q7 — Place ═══════════════════════════════════════════ -->
+<div class="screen" id="s9">
+  <div class="screen-inner" style="max-width:520px;">
+    <h2><span class="g">המותג שלך כמקום</span></h2>
+    <p class="sub">אם המותג שלך היה מקום — איפה הוא היה?</p>
+    <div class="opts" id="place-opts"></div>
+    <button class="btn" id="btn-place" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 10: Sharon Q8 — Material ═══════════════════════════════════════ -->
+<div class="screen" id="s10">
+  <div class="screen-inner" style="max-width:520px;">
+    <h2><span class="g">המותג שלך כחומר</span></h2>
+    <p class="sub">אם המותג שלך היה חומר — איזה חומר הוא היה?</p>
+    <div class="opts" id="material-opts"></div>
+    <button class="btn" id="btn-mat" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 11: Sharon Q9 — Body sensation ════════════════════════════════ -->
+<div class="screen" id="s11">
+  <div class="screen-inner" style="max-width:520px;">
+    <h2><span class="g">המותג שלך כתחושה</span></h2>
+    <p class="sub">אם המותג שלך היה תחושה בגוף — איזו תחושה?</p>
+    <div class="opts" id="sens-opts"></div>
+    <button class="btn" id="btn-sens" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
+<!-- ══ Screen 12: Summary ═════════════════════════════════════════════════════ -->
+<div class="screen" id="s12">
+  <div class="sum-wrap">
+    <div class="sum-title"><span class="g">הפרופיל שלך מוכן ✨</span></div>
+
+    <div id="sum-content">
+      <div class="s-card">
+        <h3>הערכים שלך</h3>
+        <div class="tag-row" id="sum-values"></div>
+      </div>
+      <div class="s-card">
+        <h3>הסיפור שלך</h3>
+        <p id="sum-story"></p>
+      </div>
+      <div class="s-card">
+        <h3>סוגי תכנים מומלצים</h3>
+        <div class="tag-row" id="sum-ctypes"></div>
+      </div>
+      <div class="s-card">
+        <h3>השפה התקשורתית שלך</h3>
+        <p id="sum-lang"></p>
+      </div>
+      <div class="s-card">
+        <h3>פלטת הזהות שלך</h3>
+        <div class="tag-row" id="sum-aesth-tags" style="margin-bottom:0.5rem;"></div>
+        <div id="sum-colors-row" style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;"></div>
+      </div>
+      <div class="s-card">
+        <h3>העולם החושי שלך</h3>
+        <p id="sum-world"></p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:1.5rem;">
+      <button class="btn" id="btn-dl" onclick="Q.downloadPDF()">הורד/הורידי את המפה שלך ↓</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* ═══════════════════════════════════════════════
+   DATA
+═══════════════════════════════════════════════ */
+
+const VALUES = [
+  'אמינות','יצירתיות','חדשנות','אמפתיה','מנהיגות',
+  'הומור','מקצועיות','השראה','פשטות','אותנטיות',
+  'תשוקה','קהילה','ספורט','חינוך','אמנות',
+  'יזמות','טכנולוגיה','בריאות','משפחה','טבע'
+];
+// ⚠️ Replace with Ariella's final values list
+
+const CONTENT_MAP = {
+  'אמינות':    ['שיתוף מאחורי הקלעים','case studies','עדויות לקוחות'],
+  'יצירתיות':  ['אתגרים','תוכן חזותי ייחודי','ניסויים וטעיות'],
+  'חדשנות':    ['כלים חדשים','סקירות טרנדים','ניסוי טכנולוגיות'],
+  'אמפתיה':    ['סיפורי לקוחות','שאלות לקהל','תכנים מעודדים'],
+  'מנהיגות':   ['דעות ועמדות','החלטות קשות','מנטורינג'],
+  'הומור':     ['מימים','סרטונים מצחיקים','relatable moments'],
+  'מקצועיות':  ['מדריכים','how-to','טיפים מקצועיים'],
+  'השראה':     ['ציטוטים','סיפורי הצלחה','journey posts'],
+  'פשטות':     ['one-tip posts','אינפוגרפיקות','threads מסודרים'],
+  'אותנטיות':  ['יום בחיים','כישלונות ולקחים','behind the scenes'],
+  'תשוקה':     ['why I do this','passion projects','שיתוף תהליכים'],
+  'קהילה':     ['שאלות לקהל','polls','שיתוף תכנים של עוקבים'],
+  'ספורט':     ['אתגרי כושר','שגרת אימונים','תוצאות'],
+  'חינוך':     ['שיעורים קצרים','facts','טיפ יומי'],
+  'אמנות':     ['תהליך יצירה','before & after','השראה אסתטית'],
+  'יזמות':     ['לקחים מהשטח','failures','business tips'],
+  'טכנולוגיה': ['reviews','הסברים','AI tips'],
+  'בריאות':    ['שגרת בוקר','wellness tips','מתכונים'],
+  'משפחה':     ['moments','ערכים מהבית','גידול ילדים'],
+  'טבע':       ['טיולים','sustainability','nature moments'],
+};
+
+const FEELINGS = [
+  'השראה ורצון לפעול','אמון ובטיחות','שמחה ואנרגיה',
+  'כוח וביטחון עצמי','שייכות וחיבור','סקרנות ועניין',
+  'שלווה וריכוז','הנאה ותענוג'
+];
+
+const WORLD_TYPES = [
+  'טבעי','אורבני','מינימליסטי','צבעוני','רוחני',
+  'טכנולוגי','חם','מדויק','פראי'
+];
+
+const AESTHETICS = [
+  'נקי','עמוק','קל','דרמטי','רך','חזק','מינימל','מקסימל',
+  'עדין','נועז','פיוטי','מסתורי','שמח','שקט','אנרגטי','ספונטני'
+];
+
+const PLACES = [
+  'קפה בוטיק עם אור טבעי רך',
+  'יער שקט לפני הגשם',
+  'מגדל עיר עם נוף פנורמי',
+  'חוף ים עם גלים',
+  'סטודיו יצירתי ועמוס',
+  'ספריה עתיקה ושקטה',
+  'גלריה מודרנית ומינימלית',
+];
+
+const MATERIALS = [
+  'עץ טבעי וחם',
+  'ברזל גולמי וחזק',
+  'בד רך ועוטף',
+  'זכוכית שקופה ונקייה',
+  'אבן גסה ומחוספסת',
+  'עור משופשף ועמיד',
+  'קרמיקה עדינה',
+];
+
+const SENSATIONS = [
+  'חום ונינוחות',
+  'אדרנלין ועוצמה',
+  'רוגע ושלווה עמוקה',
+  'קלילות ושמחה',
+  'ביטחון שקט ועמוק',
+  'סקרנות ומסתורין',
+];
+
+const COLORS = [
+  { name:'שחור',    hex:'#1a1a1a' },
+  { name:'לבן',     hex:'#f0ede8' },
+  { name:'אפור',    hex:'#9e9e9e' },
+  { name:"בז'",     hex:'#d4b896' },
+  { name:'חום',     hex:'#795548' },
+  { name:'אדום',    hex:'#e53935' },
+  { name:'בורדו',   hex:'#880e4f' },
+  { name:'ורוד',    hex:'#e91e8c' },
+  { name:'כתום',    hex:'#ff6f00' },
+  { name:'צהוב',    hex:'#fbc02d' },
+  { name:'ירוק',    hex:'#388e3c' },
+  { name:'זית',     hex:'#827717' },
+  { name:'טורקיז',  hex:'#00838f' },
+  { name:'כחול',    hex:'#1565c0' },
+  { name:'נייבי',   hex:'#1a237e' },
+  { name:'סגול',    hex:'#6a1b9a' },
+];
+
+const WORLD_TONE = {
+  'טבעי':       'חמה ואנושית',
+  'רוחני':      'עמוקה ומחשבתית',
+  'חם':         'אישית וקרובה',
+  'אורבני':     'עירונית ועכשווית',
+  'טכנולוגי':   'ישירה ומדויקת',
+  'מדויק':      'תמציתית ומסודרת',
+  'מינימליסטי': 'נקייה — כל מילה במקומה',
+  'צבעוני':     'עשירה ומלאת אנרגיה',
+  'פראי':       'אותנטית ובלתי מסוננת',
+};
+
+/* ═══════════════════════════════════════════════
+   QUIZ ENGINE
+═══════════════════════════════════════════════ */
+
+const Q = {
+  current: 0,
+  answers: {
+    values: [],
+    story: '',
+    missing: '',
+    peopleFeeling: [],
+    selfUnderstanding: '',
+    colors: [],
+    world: [],
+    aesthetics: [],
+    place: '',
+    material: '',
+    bodySensation: '',
+  },
+
+  init() {
+    this.screens = document.querySelectorAll('.screen');
+    this.total   = this.screens.length;
+
+    // Render dynamic components
+    this._renderValues();
+    this._renderChips('feelings-grid', FEELINGS,    'peopleFeeling', 'btn-feel');
+    this._renderChips('world-grid',    WORLD_TYPES, 'world',         'btn-world');
+    this._renderChips('aesth-grid',    AESTHETICS,  'aesthetics',    'btn-aesth');
+    this._renderColors();
+    this._renderOpts('place-opts',    PLACES,     'place',         'btn-place');
+    this._renderOpts('material-opts', MATERIALS,  'material',      'btn-mat');
+    this._renderOpts('sens-opts',     SENSATIONS, 'bodySensation', 'btn-sens');
+
+    this._updateBar();
+  },
+
+  // ── Navigation ─────────────────────────────────────────────────────────────
+
+  next() {
+    if (this.current >= this.total - 1) return;
+    const prev = this.screens[this.current];
+    prev.classList.remove('active');
+    prev.classList.add('exit');
+    setTimeout(() => prev.classList.remove('exit'), 420);
+    this.current++;
+    this.screens[this.current].classList.add('active');
+    this._updateBar();
+    if (this.current === this.total - 1) this._renderSummary();
+  },
+
+  _updateBar() {
+    const pct = this.total > 1 ? (this.current / (this.total - 1)) * 100 : 0;
+    document.getElementById('prog-fill').style.width = pct + '%';
+  },
+
+  // ── Renderers ──────────────────────────────────────────────────────────────
+
+  _renderValues() {
+    document.getElementById('values-grid').innerHTML = VALUES.map(v =>
+      `<button class="chip" data-v="${v}" onclick="Q._toggleValue(this)">${v}</button>`
+    ).join('');
+  },
+
+  _renderChips(gridId, items, key, btnId) {
+    document.getElementById(gridId).innerHTML = items.map(item =>
+      `<button class="chip" data-v="${item}" data-key="${key}" data-btn="${btnId}"
+        onclick="Q._toggleChip(this)">${item}</button>`
+    ).join('');
+  },
+
+  _renderColors() {
+    document.getElementById('color-grid').innerHTML = COLORS.map(c =>
+      `<div class="swatch-wrap">
+        <div class="swatch" data-name="${c.name}" data-hex="${c.hex}"
+          style="background:${c.hex}" onclick="Q._toggleColor(this)"></div>
+        <span class="swatch-label">${c.name}</span>
+      </div>`
+    ).join('');
+  },
+
+  _renderOpts(containerId, items, key, btnId) {
+    document.getElementById(containerId).innerHTML = items.map(item =>
+      `<button class="opt" data-v="${item}"
+        onclick="Q._pickOpt(this,'${key}','${btnId}')">${item}</button>`
+    ).join('');
+  },
+
+  // ── Interaction handlers ───────────────────────────────────────────────────
+
+  _toggleValue(chip) {
+    const v = chip.dataset.v;
+    if (chip.classList.contains('chip-on')) {
+      chip.classList.remove('chip-on');
+      this.answers.values = this.answers.values.filter(x => x !== v);
+    } else if (this.answers.values.length < 5) {
+      chip.classList.add('chip-on');
+      this.answers.values.push(v);
+    }
+    const max = this.answers.values.length >= 5;
+    document.querySelectorAll('#values-grid .chip:not(.chip-on)').forEach(c =>
+      c.classList.toggle('chip-off', max)
+    );
+    document.getElementById('btn-v').disabled = this.answers.values.length === 0;
+  },
+
+  _toggleChip(chip) {
+    const key   = chip.dataset.key;
+    const v     = chip.dataset.v;
+    const btnId = chip.dataset.btn;
+
+    if (chip.classList.contains('chip-on')) {
+      chip.classList.remove('chip-on');
+      this.answers[key] = this.answers[key].filter(x => x !== v);
+    } else {
+      chip.classList.add('chip-on');
+      if (!Array.isArray(this.answers[key])) this.answers[key] = [];
+      this.answers[key].push(v);
+    }
+    document.getElementById(btnId).disabled = this.answers[key].length === 0;
+  },
+
+  _toggleColor(swatch) {
+    const hex  = swatch.dataset.hex;
+    const name = swatch.dataset.name;
+    if (swatch.classList.contains('swatch-on')) {
+      swatch.classList.remove('swatch-on');
+      this.answers.colors = this.answers.colors.filter(c => c.hex !== hex);
+    } else if (this.answers.colors.length < 3) {
+      swatch.classList.add('swatch-on');
+      this.answers.colors.push({ name, hex });
+    }
+    document.getElementById('btn-col').disabled = this.answers.colors.length === 0;
+  },
+
+  _pickOpt(btn, key, btnId) {
+    btn.closest('.opts').querySelectorAll('.opt').forEach(o => o.classList.remove('opt-on'));
+    btn.classList.add('opt-on');
+    this.answers[key] = btn.dataset.v;
+    document.getElementById(btnId).disabled = false;
+  },
+
+  onText(textarea, key, btnId, minLen) {
+    const val = textarea.value.trim();
+    this.answers[key] = val;
+    document.getElementById(btnId).disabled = val.length < minLen;
+  },
+
+  // ── Summary ────────────────────────────────────────────────────────────────
+
+  _renderSummary() {
+    const a = this.answers;
+
+    // Values
+    document.getElementById('sum-values').innerHTML =
+      a.values.map(v => `<span class="tag">${v}</span>`).join('');
+
+    // Story
+    document.getElementById('sum-story').textContent = a.story || '—';
+
+    // Content types
+    const types = new Set();
+    a.values.forEach(v => (CONTENT_MAP[v] || []).forEach(t => types.add(t)));
+    document.getElementById('sum-ctypes').innerHTML =
+      [...types].slice(0, 5).map(t => `<span class="tag">${t}</span>`).join('');
+
+    // Language
+    document.getElementById('sum-lang').textContent = this._buildLanguage();
+
+    // Aesthetics + colors
+    document.getElementById('sum-aesth-tags').innerHTML = [
+      ...a.aesthetics.map(x => `<span class="tag">${x}</span>`),
+      ...a.world.map(x => `<span class="tag tag-o">${x}</span>`),
+    ].join('');
+
+    document.getElementById('sum-colors-row').innerHTML =
+      a.colors.map(c =>
+        `<span class="col-dot" style="background:${c.hex}" title="${c.name}"></span>
+         <span style="font-size:0.78rem;color:var(--muted);margin-left:6px;">${c.name}</span>`
+      ).join('');
+
+    // Sensory world
+    const worldParts = [];
+    if (a.place)         worldParts.push(`מקום: ${a.place}`);
+    if (a.material)      worldParts.push(`חומר: ${a.material}`);
+    if (a.bodySensation) worldParts.push(`תחושה: ${a.bodySensation}`);
+    document.getElementById('sum-world').textContent = worldParts.join('  ·  ') || '—';
+  },
+
+  _buildLanguage() {
+    const a = this.answers;
+    const parts = [];
+
+    const tones = a.world.map(w => WORLD_TONE[w]).filter(Boolean);
+    if (tones.length > 0) parts.push(`שפה ${tones.slice(0, 2).join(' ו')}`);
+
+    if (a.peopleFeeling.length > 0)
+      parts.push(`הקהל שלך ירגיש ${a.peopleFeeling[0]}`);
+
+    if (a.bodySensation)
+      parts.push(`כמו תחושת ${a.bodySensation}`);
+
+    if (a.aesthetics.length > 0)
+      parts.push(`עם אסתטיקה ${a.aesthetics.slice(0, 2).join(' ו')}`);
+
+    return parts.length > 0
+      ? parts.join('. ') + '.'
+      : 'שפה אישית ומיוחדת — נגדיר יחד בסדנה!';
+  },
+
+  // ── PDF ────────────────────────────────────────────────────────────────────
+
+  async downloadPDF() {
+    const btn = document.getElementById('btn-dl');
+    btn.textContent = 'מייצר מסמך...';
+    btn.disabled = true;
+    try {
+      const { jsPDF } = window.jspdf;
+      const el = document.getElementById('sum-content');
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        backgroundColor: '#080810',
+        useCORS: true,
+      });
+      const imgData = canvas.toDataURL('image/png');
+      const pdf  = new jsPDF('p', 'mm', 'a4');
+      const pw   = pdf.internal.pageSize.getWidth();
+      const ph   = pdf.internal.pageSize.getHeight();
+      const imgH = (canvas.height * pw) / canvas.width;
+
+      // Dark background
+      pdf.setFillColor(8, 8, 16);
+      pdf.rect(0, 0, pw, ph, 'F');
+
+      // Header
+      pdf.setFontSize(8);
+      pdf.setTextColor(160, 160, 160);
+      pdf.text('arielladanielli.com', pw / 2, 8, { align: 'center' });
+
+      // Content image
+      pdf.addImage(imgData, 'PNG', 0, 12, pw, Math.min(imgH, ph - 22));
+
+      // Footer
+      pdf.setFontSize(7);
+      pdf.setTextColor(100, 100, 100);
+      pdf.text('המפה השיווקית שלך | אריאלה דניאלי + שרון מס', pw / 2, ph - 5, { align: 'center' });
+
+      pdf.save('מפה-שיווקית-אישית.pdf');
+    } catch (e) {
+      console.error(e);
+      alert('שגיאה ביצירת ה-PDF. נסה/י שוב.');
+    } finally {
+      btn.textContent = 'הורד/הורידי את המפה שלך ↓';
+      btn.disabled = false;
+    }
+  },
+};
+
+document.addEventListener('DOMContentLoaded', () => Q.init());
+</script>
+</body>
+</html>
