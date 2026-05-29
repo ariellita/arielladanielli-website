@@ -167,6 +167,65 @@
       background: #e5481a;
       box-shadow: 0 8px 28px rgba(255,90,31,0.42);
     }
+    .program-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+      margin-bottom: 2rem;
+    }
+    .program-logo-badge {
+      width: 42px; height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #FF2D9B, #FF8C00);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; color: #fff;
+      flex-shrink: 0;
+    }
+    .program-logo-text {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: var(--ink);
+      text-align: right;
+    }
+    .program-logo-text span {
+      background: linear-gradient(135deg, #FF2D9B, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .success-section {
+      text-align: center;
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .success-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #FF2D9B, #FF8C00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .success-sub {
+      font-size: 0.92rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .success-photo {
+      width: 100%;
+      max-width: 360px;
+      border-radius: 20px;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+    }
 
     /* ─── Chips ───────────────────────────────────────────────── */
     .chips {
@@ -374,6 +433,19 @@
       color: var(--orange);
     }
     .s-card p { color: var(--ink); font-size: 0.92rem; line-height: 1.7; }
+    .sum-advice { margin-top: 0.6rem; font-size: 0.87rem; line-height: 1.75; color: var(--ink); }
+    .sum-section-label { margin-top: 0.8rem; margin-bottom: 0.2rem; font-size: 0.78rem; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: 0.04em; }
+    .sum-val-item { margin-bottom: 0.9rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); }
+    .sum-val-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .sum-val-name { font-weight: 700; font-size: 0.88rem; color: var(--blue); margin-bottom: 0.25rem; }
+    .sum-val-tip { font-size: 0.86rem; line-height: 1.72; color: var(--ink); }
+    .angle-item { margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+    .angle-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .angle-title { font-weight: 700; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.3rem; }
+    .angle-title::before { content: '→ '; color: var(--orange); }
+    .angle-text { font-size: 0.86rem; line-height: 1.72; color: var(--ink); }
+    .ctypes-ex-item { margin-top: 0.7rem; font-size: 0.86rem; line-height: 1.7; color: var(--ink); }
+    .ctypes-ex-type { font-weight: 700; color: var(--blue); }
     .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
     .tag {
       padding: 0.22rem 0.75rem;
@@ -411,6 +483,10 @@
 <!-- ══ Screen 0: Intro ══════════════════════════════════════════════════════ -->
 <div class="screen active" id="s0">
   <div class="screen-inner" style="max-width:600px;">
+    <div class="program-logo">
+      <div class="program-logo-badge">✦</div>
+      <div class="program-logo-text">מיתוג אישי<br><span>בעידן ה-AI</span></div>
+    </div>
     <h1><span class="g">זה הזמן למיתוג האישי שלך</span></h1>
     <p class="sub">
       שאלון זה יעזור לך לקבל את הבסיס למיתוג האישי שלך —<br>
@@ -478,6 +554,15 @@
     <h2>מה אנשים ירגישו בעולם שלך?</h2>
     <p class="sub">מה היית רוצה שאנשים ירגישו כשהם נכנסים לעולם שלך?</p>
     <div class="chips" id="feelings-grid"></div>
+    <div style="margin-top:0.6rem; display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+      <button class="chip" id="chip-feel-other" onclick="Q._toggleOtherFeel(this)">אחר</button>
+      <input type="text" id="input-feel-other"
+        placeholder="רשום/י תחושה אחרת..."
+        style="display:none; border:1.5px solid var(--border); border-radius:30px; padding:0.45rem 1rem;
+               font-family:'Heebo',sans-serif; font-size:0.9rem; background:var(--card); color:var(--ink);
+               outline:none; min-width:200px;"
+        oninput="Q._updateOtherFeel(this)">
+    </div>
     <button class="btn" id="btn-feel" onclick="Q.next()" disabled>הבא ←</button>
   </div>
 </div>
@@ -486,13 +571,13 @@
 <div class="screen" id="s5">
   <div class="screen-inner" style="max-width:580px;">
     <div class="q-num">שאלה 5 מתוך 11</div>
-    <h2>מה את/ה מגלה/ת על עצמך?</h2>
+    <h2>מי ההשראה שלך?</h2>
     <p class="sub">
-      כשאני מסתכל/ת על כל מה שאני אוהב/ת, שומר/ת, מצלמ/ת, משתפ/ת ועוקב/ת אחריו —<br>
-      מה אני מבינ/ה על מי שאני הופכ/ת להיות?
+      על איזה פרופיל את/ה מסתכל/ת שהוא השראה עבורך?<br>
+      מה בו/בה מושך אותך?
     </p>
     <textarea id="ta-self"
-      placeholder="למשל: אני מבין/ה שאני נמשכ/ת לסיפורים של אנשים... שאני אוהב/ת שילוב של..."
+      placeholder="למשל: אני מסתכל/ת על X כי הוא/היא מדבר/ת בצורה ישירה ואמיתית, משלב/ת הומור עם תוכן עמוק..."
       oninput="Q.onText(this,'selfUnderstanding','btn-self',10)"></textarea>
     <button class="btn" id="btn-self" onclick="Q.next()" disabled>הבא ←</button>
   </div>
@@ -573,14 +658,17 @@
       <div class="s-card">
         <h3>הערכים שלך</h3>
         <div class="tag-row" id="sum-values"></div>
+        <p class="sum-section-label">הנה כמה דברים שאפשר לעשות עם הערכים שלך בתקשורת השיווקית:</p>
+        <div id="sum-values-advice" class="sum-advice"></div>
       </div>
       <div class="s-card">
         <h3>הסיפור שלך</h3>
-        <p id="sum-story"></p>
+        <div id="sum-story-angles"></div>
       </div>
       <div class="s-card">
-        <h3>סוגי תכנים מומלצים</h3>
+        <h3>סוגי תכנים</h3>
         <div class="tag-row" id="sum-ctypes"></div>
+        <div id="sum-ctypes-examples" class="sum-ctypes-ex-list"></div>
       </div>
       <div class="s-card">
         <h3>השפה התקשורתית שלך</h3>
@@ -599,6 +687,15 @@
 
     <div style="text-align:center; margin-top:1.5rem;">
       <button class="btn" id="btn-dl" onclick="Q.downloadPDF()">הורד/הורידי את המפה שלך ↓</button>
+    </div>
+
+    <div class="success-section">
+      <div class="success-title">בהצלחה! 🎉</div>
+      <p class="success-sub">
+        אנחנו כאן בשבילך בכל שלב בדרך.<br>
+        — אריאלה &amp; שרון
+      </p>
+      <img src="ariella-sharon.png" alt="אריאלה ושרון" class="success-photo">
     </div>
   </div>
 </div>
@@ -648,6 +745,75 @@ const CONTENT_MAP = {
   'חופש':          ['lifestyle content', 'working remotely', 'בחירות חיים'],
   'שמחה':          ['positive moments', 'celebrations', 'gratitude posts'],
   'ייחודיות':      ['quirks', 'unpopular opinions', 'מה שמייחד אותי'],
+};
+
+const CONTENT_EXAMPLES = {
+  'שיתוף מאחורי הקלעים': 'למשל: סרטון "הנה איך נראה יום עבודה שלי" או פוסט עם תמונה לפני העריכה',
+  'case studies':          'למשל: "לקוח בא עם X, יצאנו עם Y — הנה מה שעשינו בדרך"',
+  'עדויות לקוחות':        'למשל: ציטוט אמיתי של לקוח עם הסיפור שמאחוריו',
+  'יום בחיים':             'למשל: reels של שגרת בוקר, פוסט עם תמונות מהיום',
+  'כישלונות ולקחים':      'למשל: "הטעות הכי גדולה שעשיתי ב-2024 — וזה מה שלמדתי"',
+  'behind the scenes':     'למשל: story אינסטגרם מקלאוד, תמונה לפני העריכה',
+  'סיפורי לקוחות':        'למשל: "הלקוח הזה שינה את ההבנה שלי לגמרי..."',
+  'שאלות לקהל':           'למשל: פוסט עם שאלה אחת שמזמין תגובות',
+  'תכנים מעודדים':        'למשל: ציטוט השראתי עם הסיפור שלך מאחוריו',
+  'מימים':                 'למשל: meme רלוונטי לתחום שלך עם twist אישי',
+  'סרטונים מצחיקים':      'למשל: reels קצר על situation מוכר בתחום',
+  'relatable moments':     'למשל: "כשאת/ה..." פוסט שגורם לאנשים לחייך ולתייג חברים',
+  'סיפורי התגברות':       'למשל: "כשהכל הלך לא כשורה — הנה מה שעצר אותי מלוותר"',
+  'אתגרים':               'למשל: challenge שאת/ה שם לעצמך ומדווח/ת עליו פומבית',
+  'לקחים מהדרך':          'למשל: "5 דברים שלמדתי אחרי X שנים ב..."',
+  'דעות ועמדות':          'למשל: "הדעה שלי על [נושא שנוי במחלוקת] — ולמה"',
+  'החלטות קשות':          'למשל: "למה בחרתי לוותר על X למרות ש..."',
+  'מנטורינג':             'למשל: tip אחד שהיית נותן לעצמך לפני 5 שנים',
+  'לקחים מהשטח':          'למשל: "מה שלמדתי השבוע — ישירות מהשטח"',
+  'failures':              'למשל: "הפרויקט שלא עבד — ולמה זה הטוב שקרה לי"',
+  'business tips':         'למשל: tip מעשי קצר שעוזר לעסקים להתקדם',
+  'מדריכים':              'למשל: "איך לעשות X ב-3 שלבים פשוטים"',
+  'how-to':                'למשל: רשימת שלבים, אינפוגרפיקה, סרטון הסבר',
+  'טיפים מקצועיים':       'למשל: "הטיפ שאף אחד לא מדבר עליו ב..."',
+  'שקיפות':               'למשל: "הנה מה שעלה לי החודש — ולמה שווה לדעת"',
+  'accountability posts':  'למשל: עדכון על goal שהצהרת עליו — הצלחת או לא',
+  'ערכים בפעולה':         'למשל: "כשוויתרתי על לקוח כי לא התאים לערכים שלי"',
+  'collaborations':        'למשל: live משותף, פוסט חתימה כפולה, שיתוף תוכן',
+  'שיתופי פעולה':         'למשל: פרויקט משותף עם מישהו מהתחום',
+  'ראיונות':              'למשל: ראיון קצר עם מישהו שמעניין את הקהל שלך',
+  'תוכן חזותי ייחודי':   'למשל: גרפיקה מיוחדת, עריכה שמייחדת את הפיד',
+  'ניסויים וטעיות':       'למשל: "ניסיתי X לחודש — הנה מה קרה"',
+  'כלים חדשים':           'למשל: "הכלי שחסך לי 3 שעות השבוע"',
+  'סקירות טרנדים':        'למשל: "הטרנד הכי גדול שאני רואה עכשיו ב..."',
+  'ניסוי טכנולוגיות':     'למשל: "ניסיתי את ה-AI החדש — הנה מה שחשבתי"',
+  'reviews':               'למשל: ביקורת כנה על כלי, ספר, קורס שניסית',
+  'הסברים':               'למשל: thread שמסביר מושג מורכב בצורה פשוטה',
+  'AI tips':               'למשל: "הפרומפט שעוזר לי ב..."',
+  'תהליך יצירה':          'למשל: time-lapse של עבודה, "מהרעיון לתוצר"',
+  'before & after':        'למשל: לפני/אחרי של פרויקט, עיצוב, תהליך',
+  'one-tip posts':         'למשל: פוסט עם tip אחד בלבד — פשוט, ממוקד, מדויק',
+  'אינפוגרפיקות':         'למשל: "5 דברים על X" כקרוסלה ויזואלית',
+  'threads מסודרים':      'למשל: thread ב-X/LinkedIn שמסביר נושא בהרחבה',
+  'ציטוטים':              'למשל: ציטוט שהשפיע עליך + הסיפור שמאחוריו',
+  'סיפורי הצלחה':         'למשל: case study של לקוח עם תוצאות ממשיות',
+  'journey posts':         'למשל: "לפני שנה הייתי ב... היום אני ב..."',
+  'שיעורים קצרים':        'למשל: פוסט שמלמד משהו בפחות מ-100 מילים',
+  'facts':                 'למשל: "עובדה מדהימה על X שרוב האנשים לא יודעים"',
+  'טיפ יומי':             'למשל: story קצרה עם tip שמישי לאותו יום',
+  'progress posts':        'למשל: "חודש 3 של הפרויקט — הנה איפה אנחנו"',
+  'goals':                 'למשל: "3 המטרות שלי לרבעון — ואיך אני מתכנן/ת להגיע"',
+  'insights':              'למשל: "ההבנה שהחליפה לי את כל הדרך שבה אני עובד/ת"',
+  'ניתוחים':              'למשל: ניתוח של trend, קמפיין, אירוע בתעשייה',
+  'lessons learned':       'למשל: "10 דברים שלמדתי אחרי 100 פוסטים"',
+  'שאלות פרובוקטיביות':  'למשל: "מה היית עושה אחרת אם ידעת ש..."',
+  'polls':                 'למשל: סקר שמזמין דעה — ואז שיתוף בתוצאות',
+  'שיתוף תכנים של עוקבים': 'למשל: שיתוף תוכן של עוקב עם הוקרה אמיתית',
+  'why I do this':         'למשל: "הסיבה שקמתי לזה — הסיפור שלא סיפרתי"',
+  'passion projects':      'למשל: פרויקט צד שאת/ה עושה מאהבה, לא לכסף',
+  'lifestyle content':     'למשל: הצצה לאורח חיים, workspace, שגרה',
+  'בחירות חיים':          'למשל: "למה בחרתי ב-X למרות שכולם אמרו Y"',
+  'celebrations':          'למשל: ציון אבן דרך — אמיתית, לא מנופחת',
+  'gratitude posts':       'למשל: "3 דברים שאני מכיר/ה בהם תודה השבוע"',
+  'quirks':                'למשל: "הרגל הכי מוזר שיש לי — ולמה הוא עובד"',
+  'unpopular opinions':    'למשל: "דעה שאני חושש/ת לומר — אבל חייב/ת"',
+  'מה שמייחד אותי':       'למשל: "הדבר שעושה אותי שונה מכל האחרים ב..."',
 };
 
 const FEELINGS = [
@@ -713,6 +879,99 @@ const COLORS = [
   { name:'כחול',   hex:'#1565c0' },
   { name:'נייבי',  hex:'#1a237e' },
   { name:'סגול',   hex:'#6a1b9a' },
+];
+
+const VALUES_COMM = {
+  'אמינות':       'שתף/י מידע שמתחרים שלך לא ישתפו — מחירים, טעויות, מה לא עבד. "עשינו X, קיבלנו Y, הנה מה שהבנו" — זה מה שבונה אמון, לא testimonials.',
+  'אותנטיות':     'בחר/י פוסט אחד בשבוע שמספר על כישלון, ספק או החלטה שחרטת עליה. לא "כן עשיתי טעות" — אלא "ב[תאריך], [מה קרה], וזה הרגיש כמו...". ספציפיות = אמינות.',
+  'אמפתיה':       'לפני שאת/ה מייעץ/ת — שאל/י. כתוב/כתבי פוסט שמתחיל ב"מה הכי קשה לך ב..." ועשה/עשי עם התשובות תוכן שמדבר ישירות לאנשים שענו. ככה הקהל מרגיש שמדברים אליו, לא עליו.',
+  'הומור':        'כתוב/כתבי פוסט שמתחיל ברגע מביך אמיתי מהעבודה שלך — לא בדיחה מוכנה, אלא משהו שבאמת קרה. הומור שעובד נולד מאמת. "ניסיתי X, יצא Y" — ותן/תני לסיטואציה לצחוק על עצמה.',
+  'חוסן':         'כתוב/כתבי על כישלון ספציפי: מה קרה בדיוק, מה הרגשת, ומה עשית בפועל אחר כך. "התאוששתי" זו סיסמה. "עשיתי X וY" זה סיפור שמלמד — ומה שהקהל שלך באמת צריך לשמוע.',
+  'מנהיגות':      'קח/קחי עמדה על נושא שנוי במחלוקת בתחום. לא "מצד אחד... מצד שני" — דעה ברורה: "אני חושב/ת ש... כי..." קהל עוקב אחרי מי שיש לו עמדה, לא אחרי מי שמסביר את כל הצדדים.',
+  'יזמות':        'שתף/י מספרים אמיתיים — כמה עלה לבנות X, כמה לקח, מה הלך לא כשורה ומה תעשה/תעשי אחרת. שקיפות עסקית בונה אמינות שאי אפשר לקנות בפרסום.',
+  'מקצועיות':     'קח/קחי מושג מורכב מהתחום שלך ותמצת/תמצתי אותו לפוסט שאפשר לקרוא ב-60 שניות. אם לא תצליח/י להסביר פשוט — זה סימן שכדאי ללמוד את זה טוב יותר. פשטות = שליטה אמיתית.',
+  'אחריות':       'חזור/חזרי על הבטחה פומבית שנתת לפני חודש — עדכן/עדכני מה קרה. גם אם לא השגת — דווח/דווחי מה עצר אותך. עדכון כנה על כישלון בונה יותר אמון מאשר הצלחה שמצלמים.',
+  'שיתוף פעולה':  'הזמן/הזמיני מישהו מהתחום לשיחה פומבית על שאלה שאין לה תשובה ברורה — לא ראיון, אלא ויכוח. שיתוף פעולה שנראה אמיתי הוא תמיד מעניין יותר ממה שמדברים עליו.',
+  'יצירתיות':     'פרסם/פרסמי ניסוי שנכשל עם כל הנתונים — "ניסיתי X לחודש, יצא Y, למדתי Z". אנשים לומדים יותר מניסויים שלא עבדו מאשר מהצלחות שמוצגות.',
+  'חדשנות':       'תן/תני דעה ספציפית על כלי, שיטה או טכנולוגיה שכולם מדברים עליה. לא "מעניין" — אלא "זה יעשה X לענף, ולכן...". עמדה על עתיד היא מה שמבדל מוביל דעה.',
+  'טכנולוגיה':    'הראה/הראי תהליך עבודה שלם — אילו כלים, למה בחרת בהם, מה החלופות ומה החסרונות. "מאחורי הקלעים" של מי שעובד עם טכנולוגיה תמיד מושך.',
+  'אמנות':        'שתף/י יצירה לא גמורה עם ההסבר למה היא לא גמורה — מה עוצר אותך, מה מרגיש לא נכון. תהליך יצירה שנחשף בזמן אמת מרתק יותר מתוצאה מושלמת.',
+  'פשטות':        'קח/קחי תוכן ארוך שכתבת בעבר ותמצת/תמצתי אותו למשפט אחד. פרסם/פרסמי את שניהם ושאל/שאלי: "מה הסביר יותר?" — תוכן שמדגים פשטות חייב בעצמו להיות פשוט.',
+  'השראה':        'כתוב/כתבי על אדם ספציפי שהשפיע עליך — לא "מנטור גדול" אלא "פגשתי את [שם] ב[מצב], הוא/היא אמר/ה [ציטוט מדויק], וזה שינה את הדרך שבה אני רואה את..."',
+  'חינוך':        'תפוס/תפסי שאלה שלקוח שאל אותך השבוע ועשה/עשי ממנה פוסט שעונה על השאלה הרחבה שמאחוריה. טיפ שנולד מהשטח האמיתי תמיד יותר חד מטיפ שמדקלמים.',
+  'צמיחה':        'פרסם/פרסמי מטרה עם deadline — לא "אשתפר" אלא "עד [תאריך] אעשה X". ואז עדכן/עדכני בדיוק מה קרה. צמיחה שנמדדת נראית; צמיחה שמרגישה — לא.',
+  'חכמה':         'קח/קחי עמדה של המיעוט על נושא שהרוב מסכים עליו. "הדעה הרווחת היא X, אני חושב/ת Y, הנה למה." דעה שמאתגרת מה שנראה מובן מאליו — זה מה שמגדיר מוביל דעה.',
+  'סקרנות':       'שתף/י שאלה שאין לך עליה תשובה — ובקש/בקשי ממי שקורא לענות. "אני לא יודע/ת" שנאמר בגלוי בונה יותר אמינות מ"הנה התשובה הנכונה".',
+  'קהילה':        'ארגן/ארגני שיחה סביב נושא שמטריד את הקהל שלך — לא תוכן שלך, אלא שאלה שהם מתמודדים איתה. קהילה גדלה כשמישהו שם תנאים ואז מפנה את הבמה.',
+  'תשוקה':        'כתוב/כתבי על הדבר בתחום שלך שהכי מתסכל אותך — לא כלפי לקוחות, אלא כלפי הענף. מי שיש לו תשוקה אמיתית גם מתעצבן. זה אמין.',
+  'חופש':         'שתף/י החלטה כלכלית שקיבלת שנראית "לא הגיונית" מבחוץ ועבדה לך. "ויתרתי על X כי Y" — ספציפי, לא "בחרתי לחיות אחרת".',
+  'שמחה':         'חגוג/חגגי ניצחון קטן שרוב האנשים לא היו מפרסמים כי "לא מספיק גדול": 100 עוקבים, לקוח ראשון, שיחה שהלכה טוב. כשאת/ה מוצא/ת ערך בקטן, הקהל לומד לעשות את אותו הדבר.',
+  'ייחודיות':     'כתוב/כתבי על דרך שבה את/ה עושה דברים הפוך ממה שהענף אומר — ולמה זה עובד לך. "כולם אומרים X, אני עושה Y, הנה מה קרה." שוני שיש לו תוצאות הוא מיתוג.',
+};
+
+const STORY_CATEGORY_LABELS = {
+  volunteering: 'ההתנדבות',
+  sports:       'הספורט',
+  arts:         'האמנות',
+  parenting:    'ההורות',
+  business:     'היזמות',
+  health:       'הבריאות',
+  tech:         'הטכנולוגיה',
+  education:    'החינוך',
+};
+
+const STORY_CATEGORY_KEYWORDS = [
+  { key: 'volunteering', words: ['התנדב','עמותה','גמ"ח','סיוע לאחר','פגיעים'] },
+  { key: 'sports',       words: ['ספורט','ריצה','אימון','כושר','כדורגל','שחייה','טריאתלון','מרתון','גלישה','אופניים'] },
+  { key: 'arts',         words: ['אמנות','ציור','צילום','עיצוב','מוזיקה','כתיבה','תיאטרון','ריקוד','פיסול'] },
+  { key: 'parenting',    words: ['ילד','הורות','אמא','אבא','ילדים','גידול','משפחה'] },
+  { key: 'business',     words: ['יזם','עסק','סטארטאפ','חברה','יזמות','הקמת'] },
+  { key: 'health',       words: ['בריאות','תזונה','רפואה','ריפוי','מדיטציה','יוגה','נפש'] },
+  { key: 'tech',         words: ['טכנולוגיה','AI','בינה מלאכותית','קוד','הייטק','תוכנה'] },
+  { key: 'education',    words: ['מורה','מלמד','חינוך','הוראה','כיתה','תלמיד'] },
+];
+
+const STORY_CONTENT_EXAMPLES = {
+  volunteering: {
+    'יום בחיים':       'יום של התנדבות — לא "כמה מרגש", אלא: "הגעתי, הדבר הראשון שראיתי היה..., ומה שלא ציפיתי לו היה..."',
+    'case studies':    'ספר/ספרי על נוער ספציפי (ללא שם) שעבר שינוי — מה היה המצב, מה עשית בדיוק, ומה השתנה בפועל.',
+    'relatable moments':'הרגע שבו ניסית להסביר למישהו מה זה להיות מתנדב — ושמעת את עצמך אומר/ת משהו שלא ציפית.',
+    'כישלונות ולקחים': 'ספר/ספרי על מקרה שרצית לעזור ולא הצלחת — ומה הבנת מזה שלא ידעת קודם.',
+    'שאלות לקהל':      'שאל/שאלי: "מה לדעתך הדבר הכי קשה בלהיות מתנדב עם נוער?" — ואז ענה/ענה על מה שאנשים לא מצפים לשמוע.',
+  },
+  sports: {
+    'יום בחיים':       'תאר/תארי יום אימון קשה במיוחד — לא את הספורט, אלא מה קרה בראש בדרך לשם ובחזרה.',
+    'כישלונות ולקחים': '"הגעתי לתחרות ואיבדתי" — ספר/ספרי בדיוק מה הרגשת, לא מה שאמורים להגיד.',
+    'relatable moments':'הרגע שבו אמרת לעצמך "מספיק" — ואז כמה שניות אחר כך המשכת. מה קרה שם.',
+    'שאלות לקהל':      '"מה מניע אותך כשממש קשה?" — ובתשובה שתף/שתפי מה מניע אותך, לא מה "נכון" להגיד.',
+    'לקחים מהדרך':     'דבר/דברי על דבר קטן אחד שעשית אחרת ושינה תוצאה. לא "ניסיתי יותר קשה" — אלא "שיניתי X ביום Y וזה עשה את ההבדל".',
+  },
+  arts: {
+    'תהליך יצירה':     'שתף/שתפי שלב ביניים של יצירה שלא מוצגת — עם ההסבר למה היא לא גמורה ומה מעצור אותך.',
+    'כישלונות ולקחים': 'פרויקט שנכשל לחלוטין — מה ציפית, מה יצא, ומה זה לימד אותך על עצמך.',
+    'before & after':  'לפני ואחרי של יצירה — עם הדגש על מה השתנה בינתיים ב"תוך".',
+    'relatable moments':'הרגע שבו הסתכלת על יצירה שלך ולא יכולת להחליט אם אוהב/ת אותה או לא — ומה עשית עם זה.',
+    'שאלות לקהל':      '"מה גורם לך לדעת שיצירה גמורה?" — שאלה שאין לה תשובה נכונה, ולכן מעניינת.',
+  },
+};
+
+const STORY_ADVICE = [
+  { keys: ['התנדב','עמותה','גמ"ח','צדקה','סיוע לאחר','עזרה לאחרים','מתנדב'],
+    tip: 'ספר/י על מקרים אמיתיים שהיו לך, שתף/י נקודות מבט על מה שאת/ה רואה בשטח, הבא/י סיפורים אישיים ממפגשים עם האנשים שאת/ה עוזר/ת להם — ותובנות שנצברות בדרך. אנשים מתחברים לאנושיות, לא לסטטיסטיקות.' },
+  { keys: ['ספורט','ריצה','אימון','כושר','כדורגל','שחייה','טריאתלון','מרתון','גלישה','טיפוס','אופניים'],
+    tip: 'דבר/י על אתגרים וקשיים, שתף/י אנקדוטות על איך היה קשה ובכל זאת הצלחת, כתב/י על מוטיבציה ועל הדברים הקטנים שעושים את ההבדל. ספורט הוא מטאפורה לחיים — הקהל שלך ימצא בזה הרבה מעבר לאימון.' },
+  { keys: ['אמנות','ציור','צילום','עיצוב','מוזיקה','כתיבה','תיאטרון','ריקוד','פיסול'],
+    tip: 'הראה/י את התהליך היצירתי — before & after, ההתלבטויות, הרגעים שבהם משהו "קפץ". שתף/י מה מקשה עליך ומה משמח אותך. יצירה היא שיחה, לא מוצר.' },
+  { keys: ['ילד','הורות','אמא','אבא','משפחה','גידול ילדים','חינוך ילדים'],
+    tip: 'שתף/י רגעים אמיתיים — הכאוס, הצחוקים, הדילמות. הורות היא חוויה שכולם מרגישים בה לבד; כשמישהו מדבר בכנות, זה מחבר. אל תחשוש/י מלשתף גם את הקשה.' },
+  { keys: ['יזם','עסק','סטארטאפ','חברה','יזמות','הקמת','השקה'],
+    tip: 'שתף/י את מסע הבנייה — הרעיון הראשון, הניסיונות שלא עבדו, ה-pivots, הלמידה. יזמות אמיתית היא גם כישלונות מפוארים שמלמדים יותר מהצלחות.' },
+  { keys: ['בריאות','תזונה','רפואה','ריפוי','נפש','טיפול','מדיטציה','יוגה','רווחה'],
+    tip: 'שתף/י תובנות מהדרך האישית שלך — לא רק מה "נכון" אלא מה עבד לך ומה לא. אנשים מחפשים לא רק מידע, אלא מישהו שעבר את זה ומבין.' },
+  { keys: ['טכנולוגיה','AI','בינה מלאכותית','קוד','תוכנה','הייטק','דיגיטל'],
+    tip: 'הפוך/י את המורכב לנגיש — הסבר/י כלים בשפה אנושית, שתף/י ניסויים שעשית, דבר/י על איך טכנולוגיה משפיעה על החיים האמיתיים.' },
+  { keys: ['מורה','מלמד','חינוך','הוראה','פדגוגי','כיתה','תלמיד'],
+    tip: 'שתף/י רגעים מהשטח — שאלה שהפתיעה אותך, שיעור שלא הלך ואז הפך לטוב. הוראה היא אומנות שכולם רוצים להבין מקרוב.' },
 ];
 
 const WORLD_TONE = {
@@ -830,6 +1089,36 @@ const Q = {
     document.getElementById('btn-v').disabled = this.answers.values.length === 0;
   },
 
+  _otherFeelVal: '',
+
+  _toggleOtherFeel(chip) {
+    const input = document.getElementById('input-feel-other');
+    if (chip.classList.contains('chip-on')) {
+      chip.classList.remove('chip-on');
+      input.style.display = 'none';
+      if (this._otherFeelVal) {
+        this.answers.peopleFeeling = this.answers.peopleFeeling.filter(x => x !== this._otherFeelVal);
+        this._otherFeelVal = '';
+        input.value = '';
+      }
+    } else {
+      chip.classList.add('chip-on');
+      input.style.display = 'inline-block';
+      setTimeout(() => input.focus(), 50);
+    }
+    document.getElementById('btn-feel').disabled = this.answers.peopleFeeling.length === 0;
+  },
+
+  _updateOtherFeel(input) {
+    const val = input.value.trim();
+    if (this._otherFeelVal) {
+      this.answers.peopleFeeling = this.answers.peopleFeeling.filter(x => x !== this._otherFeelVal);
+    }
+    this._otherFeelVal = val;
+    if (val) this.answers.peopleFeeling.push(val);
+    document.getElementById('btn-feel').disabled = this.answers.peopleFeeling.length === 0;
+  },
+
   addCustomValue() {
     const input = document.getElementById('custom-val-input');
     const val = input.value.trim();
@@ -901,13 +1190,20 @@ const Q = {
 
     document.getElementById('sum-values').innerHTML =
       a.values.map(v => `<span class="tag">${v}</span>`).join('');
+    document.getElementById('sum-values-advice').innerHTML = this._buildValuesAdvice(a.values);
 
-    document.getElementById('sum-story').textContent = a.story || '—';
+    document.getElementById('sum-story-angles').innerHTML = this._buildStoryAngles(a.story, a.values);
 
     const types = new Set();
     a.values.forEach(v => (CONTENT_MAP[v] || []).forEach(t => types.add(t)));
+    const typesList = [...types].slice(0, 5);
+    const catKey = this._detectStoryCategoryKey(a.story);
     document.getElementById('sum-ctypes').innerHTML =
-      [...types].slice(0, 5).map(t => `<span class="tag">${t}</span>`).join('');
+      typesList.map(t => `<span class="tag">${t}</span>`).join('');
+    document.getElementById('sum-ctypes-examples').innerHTML = typesList.map(t => {
+      const ex = this._personalizedContentExample(t, catKey, a.values);
+      return ex ? `<div class="ctypes-ex-item"><span class="ctypes-ex-type">${t}:</span> ${ex}</div>` : '';
+    }).filter(Boolean).join('');
 
     document.getElementById('sum-lang').textContent = this._buildLanguage();
 
@@ -927,6 +1223,67 @@ const Q = {
     if (a.material)      worldParts.push(`חומר: ${a.material}`);
     if (a.bodySensation) worldParts.push(`תחושה: ${a.bodySensation}`);
     document.getElementById('sum-world').textContent = worldParts.join('  ·  ') || '—';
+  },
+
+  _buildValuesAdvice(values) {
+    if (!values.length) return '';
+    return values.map(v => {
+      const tip = VALUES_COMM[v];
+      if (!tip) return '';
+      return `<div class="sum-val-item"><div class="sum-val-name">${v}</div><div class="sum-val-tip">${tip}</div></div>`;
+    }).filter(Boolean).join('');
+  },
+
+  _detectStoryCategoryKey(story) {
+    if (!story) return null;
+    for (const cat of STORY_CATEGORY_KEYWORDS) {
+      if (cat.words.some(w => story.includes(w))) return cat.key;
+    }
+    return null;
+  },
+
+  _buildStoryAngles(story, values) {
+    const catKey  = this._detectStoryCategoryKey(story);
+    const catLabel = catKey ? STORY_CATEGORY_LABELS[catKey] : 'הנושא שלך';
+    const v0 = values[0] || 'הערכים שלך';
+    const v1 = values[1] || v0;
+    const vList = values.slice(0, 3).join(', ');
+
+    const angles = [
+      {
+        title: 'ממקרה ספציפי לעיקרון כללי',
+        text:  `בחר/י רגע ספציפי אחד מ${catLabel} שלך — לא "פעם אחת" אלא "ב[יום מסוים], [מה שקרה], וזה לימד אותי ש...". כשאת/ה מדבר/ת על ${v0} דרך סיפור קונקרטי, זה נוגע יותר מכל עיקרון כללי.`,
+      },
+      {
+        title: 'מה שמבחוץ לא רואים',
+        text:  `מה בעולם של ${catLabel} שמפתיע אנשים מבחוץ? כתוב/כתבי פוסט שמתחיל ב"מה שאנשים לא יודעים על [הנושא שלך] הוא..." — ותן/תני תשובה אמיתית, לא מה שנכון להגיד. זה בונה ${v1}.`,
+      },
+      {
+        title: 'השאלה שתמיד שואלים',
+        text:  `מה השאלה שאנשים שואלים אותך הכי הרבה לגבי ${catLabel}? ענה/ענה עליה בפוסט — אבל הוסף/הוסיפי גם את מה שאנשים לא מצפים לשמוע. האמת שמאחורי התשובה הרגילה.`,
+      },
+      {
+        title: 'הרגע שחישב הכל מחדש',
+        text:  `מתי בתחום שלך שינית את דעתך בצורה משמעותית? "פעם חשבתי ש... עד שהבנתי ש..." — פוסטים כאלה בונים אמינות כי הם מראים שאת/ה חושב/ת ומתפתח/ת, לא רק מבצע/ת.`,
+      },
+      {
+        title: `${catLabel} ו${vList} — החיבור שמגדיר אותך`,
+        text:  `חבר/חברי מפורשות בין הסיפור שלך לערכים שבחרת. "הסיבה שאני עוסק/ת ב${catLabel} קשורה ישירות ל${v0} — הנה איך." פוסט שמסביר את ה'למה' שלך בשורה אחת הוא פוסט שאנשים שומרים ומשתפים.`,
+      },
+    ];
+
+    return angles.map(a =>
+      `<div class="angle-item">
+        <div class="angle-title">${a.title}</div>
+        <div class="angle-text">${a.text}</div>
+      </div>`
+    ).join('');
+  },
+
+  _personalizedContentExample(contentType, catKey, values) {
+    const cat = catKey && STORY_CONTENT_EXAMPLES[catKey];
+    if (cat && cat[contentType]) return cat[contentType];
+    return CONTENT_EXAMPLES[contentType] || '';
   },
 
   _buildLanguage() {
