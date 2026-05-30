@@ -686,14 +686,14 @@
     </div>
 
     <div style="text-align:center; margin-top:1.5rem;">
-      <button class="btn" id="btn-dl" onclick="Q.downloadPDF()">הורד/הורידי את המפה שלך ↓</button>
+      <button class="btn" id="btn-dl" onclick="Q.downloadPDF()">להוריד את המפה שלך ↓</button>
     </div>
 
     <div class="success-section">
       <div class="success-title">בהצלחה! 🎉</div>
       <p class="success-sub">
         אנחנו כאן בשבילך בכל שלב בדרך.<br>
-        — אריאלה &amp; שרון
+        אריאלה ושרון
       </p>
       <img src="ariella-sharon.png" alt="אריאלה ושרון" class="success-photo">
     </div>
@@ -1383,7 +1383,7 @@ const Q = {
       console.error(e);
       alert('שגיאה ביצירת ה-PDF. נסה/י שוב.');
     } finally {
-      btn.textContent = 'הורד/הורידי את המפה שלך ↓';
+      btn.textContent = 'להוריד את המפה שלך ↓';
       btn.disabled = false;
     }
   },
