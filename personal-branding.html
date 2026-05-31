@@ -903,6 +903,31 @@
     }
     .pink-cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(255,193,217,.35); }
 
+    /* Terms checkbox */
+    .terms-label {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      font-size: .86rem;
+      color: rgba(255,255,255,.65);
+      cursor: pointer;
+      text-align: right;
+      line-height: 1.5;
+    }
+    .terms-checkbox {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      margin-top: 2px;
+      accent-color: var(--blue);
+      cursor: pointer;
+    }
+    .terms-link {
+      color: var(--green);
+      text-decoration: underline;
+    }
+    .terms-link:hover { color: #fff; }
+
     .footer { background: var(--ink); padding: 2.8rem 2rem; text-align: center; }
     .footer-logo { font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 1.15rem; color: #fff; margin-bottom: .6rem; }
     .footer-logo em { color: var(--orange); font-style: normal; }
@@ -1225,7 +1250,7 @@
             <span class="mini-course-label">קורס המשך עם אריאלה</span>
             <p class="mini-course-name">Branding AI</p><p style="font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:.5rem; margin-top:-.3rem;">בניית מיתוג אישי ואסטרטגיית סושיאל עם כלי בינה מלאכותית</p>
             
-            <a class="mini-course-btn" href="https://wa.me/972523124326?text=היי%20אריאלה%2C%20אני%20מעוניינת%20לשמוע%20עוד%20על%20קורס%20Branding%20AI" target="_blank">אני רוצה לדעת עוד ←</a>
+            <a class="mini-course-btn" href="https://wa.me/972523124326?text=היי%20אריאלה%2C%20אני%20מעוניין%2Fת%20לשמוע%20עוד%20על%20קורס%20Branding%20AI" target="_blank">אני רוצה לדעת עוד ←</a>
           </div>
         </div>
         <div class="inst-card fade-up d2">
@@ -1376,7 +1401,7 @@
             <span>מה אם אני עדיין לא יודעת מה המיתוג האישי שלי?</span>
             <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <div class="faq-a">בדיוק בשביל זה הווובינר. החלק של שרון יעזור לך לזהות את הקול הייחודי שלך ולהבין איך לתרגם אותו למיתוג, לא משנה באיזה שלב את.</div>
+          <div class="faq-a">בדיוק בשביל זה הווובינר. החלק של שרון יעזור לך לזהות את הקול הייחודי שלך ולהבין איך לתרגם אותו למיתוג, לא משנה באיזה שלב אתם.</div>
         </div>
 
         <div class="faq-item fade-up d3">
@@ -1430,7 +1455,7 @@
   <section class="cta-section" id="register">
     <div class="cta-box fade-up">
       <span class="section-tag">הרשמה לסדנה</span>
-      <h2 class="cta-title">הצטרפי עכשיו</h2>
+      <h2 class="cta-title">הצטרפו עכשיו</h2>
       <div class="price-row">
         <span class="price-amount">129 ₪ + מע"מ</span>
         <span class="price-currency">₪</span>
@@ -1440,6 +1465,10 @@
         <input type="text"  class="form-input" placeholder="שם מלא *" required>
         <input type="email" class="form-input" placeholder="כתובת אימייל *" required dir="ltr">
         <input type="tel"   class="form-input" placeholder="מספר טלפון (אופציונלי)" dir="ltr">
+        <label class="terms-label">
+          <input type="checkbox" class="terms-checkbox" required>
+          <span>קראתי ואני מסכים/ה ל<a href="terms.html" target="_blank" class="terms-link">תקנון ותנאי השירות</a></span>
+        </label>
         <button type="submit" class="btn-submit" id="submit-btn">
           אני רוצה להצטרף לסדנה ←
         </button>
@@ -1492,6 +1521,7 @@
   <footer class="footer">
     <div class="footer-logo">מיתוג אישי <em>בעידן ה-AI</em></div>
     <p>© 2026 אריאלה דניאלי + שרון מס &nbsp;·&nbsp; כל הזכויות שמורות</p>
+    <p style="margin-top:.5rem;">פורצי הדרך 57, הרצליה &nbsp;·&nbsp; <a href="tel:+972523124326" style="color:rgba(255,255,255,.35);">052-312-4326</a> &nbsp;·&nbsp; <a href="terms.html" style="color:rgba(255,255,255,.35);">תקנון ותנאי שירות</a></p>
   </footer>
 
 
