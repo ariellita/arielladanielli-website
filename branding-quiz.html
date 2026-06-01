@@ -370,30 +370,62 @@
     textarea::placeholder { color: var(--muted); }
 
     /* ─── Color swatches ──────────────────────────────────────── */
-    .color-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem 1rem;
-      justify-content: center;
-      max-width: 560px;
-      margin-top: 1.5rem;
-      padding-bottom: 0.5rem;
+    .selected-colors-bar {
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+      min-height: 1.5rem; margin-bottom: 0.8rem; justify-content: center;
     }
-    .swatch-wrap { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+    .sel-chip {
+      display: flex; align-items: center; gap: 0.35rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 0.22rem 0.55rem 0.22rem 0.35rem;
+      font-size: 0.78rem; color: var(--ink);
+    }
+    .sel-chip-dot { width:16px; height:16px; border-radius:50%; flex-shrink:0; }
+    .sel-chip-x { cursor:pointer; color:var(--muted); font-size:0.85rem; margin-right:2px; }
+
+    .color-grid {
+      display: flex; flex-wrap: wrap; gap: 0.65rem 0.55rem;
+      justify-content: center; max-width: 560px;
+      margin-top: 1rem; padding-bottom: 0.3rem;
+    }
+    .swatch-wrap { display: flex; flex-direction: column; align-items: center; }
     .swatch {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      cursor: pointer;
+      width: 44px; height: 44px; border-radius: 50%; cursor: pointer;
       border: 3px solid transparent;
       transition: transform 0.15s, box-shadow 0.15s;
       box-shadow: 0 2px 8px rgba(23,32,68,0.18);
     }
     .swatch:hover { transform: scale(1.12); }
-    .swatch.swatch-on {
-      border-color: var(--ink);
-      transform: scale(1.18);
-      box-shadow: 0 0 0 3px var(--orange), 0 4px 12px rgba(23,32,68,0.22);
+    .swatch.swatch-on { border-color: var(--ink); transform: scale(1.18); box-shadow: 0 0 0 3px var(--orange); }
+
+    .tone-panel {
+      background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+      padding: 1rem 1rem 0.8rem; margin-top: 0.8rem; width: 100%; max-width: 560px;
+      box-sizing: border-box;
     }
+    .tone-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 0.8rem; direction: rtl;
+    }
+    .tone-base-preview { display: flex; align-items: center; gap: 0.5rem; }
+    .tone-base-swatch { width:30px; height:30px; border-radius:8px; flex-shrink:0; }
+    .tone-base-name { font-weight:700; font-size:0.88rem; }
+    .tone-base-hex { font-size:0.72rem; color:var(--muted); }
+    .tone-close-btn {
+      cursor:pointer; width:26px; height:26px; border-radius:50%;
+      border:1.5px solid var(--border); background:none; font-size:0.9rem;
+      color:var(--muted); display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    }
+    .tone-row { display:flex; gap:0.4rem; justify-content:center; flex-wrap:wrap; }
+    .tone-item { display:flex; flex-direction:column; align-items:center; gap:0.2rem; cursor:pointer; }
+    .tone-circle {
+      width:42px; height:42px; border-radius:50%; border:3px solid transparent;
+      transition:transform 0.15s, box-shadow 0.15s; box-shadow:0 2px 6px rgba(0,0,0,0.15);
+    }
+    .tone-circle:hover { transform:scale(1.1); }
+    .tone-circle.tone-on { border-color:var(--ink); box-shadow:0 0 0 3px var(--orange); transform:scale(1.1); }
+    .tone-name { font-size:0.58rem; color:var(--muted); text-align:center; max-width:50px; line-height:1.2; }
+    .tone-hex { font-size:0.52rem; color:var(--muted); opacity:0.65; }
     .swatch-label { font-size: 0.65rem; color: var(--muted); font-weight: 500; }
 
     /* ─── Summary ─────────────────────────────────────────────── */
@@ -588,8 +620,10 @@
   <div class="screen-inner" style="max-width:600px;">
     <div class="q-num">שאלה 6 מתוך 10</div>
     <h2>אילו צבעים חוזרים?</h2>
-    <p class="sub">אילו צבעים חוזרים בהשראות שלך? עד 3 צבעים.</p>
+    <p class="sub">בחרי צבע בסיס — ותקבלי את כל הגוונים שלו. עד 5 צבעים.</p>
+    <div id="selected-colors-bar" class="selected-colors-bar"></div>
     <div class="color-grid" id="color-grid"></div>
+    <div id="tone-panel" class="tone-panel" style="display:none;"></div>
     <button class="btn" id="btn-col" onclick="Q.next()" disabled>הבא ←</button>
   </div>
 </div>
@@ -861,23 +895,33 @@ const SENSATIONS = [
   'סקרנות ומסתורין',
 ];
 
-const COLORS = [
-  { name:'שחור',   hex:'#1a1a1a' },
-  { name:'לבן',    hex:'#f0ede8' },
-  { name:'אפור',   hex:'#9e9e9e' },
-  { name:"בז'",    hex:'#d4b896' },
-  { name:'חום',    hex:'#795548' },
-  { name:'אדום',   hex:'#e53935' },
-  { name:'בורדו',  hex:'#880e4f' },
-  { name:'ורוד',   hex:'#e91e8c' },
-  { name:'כתום',   hex:'#ff6f00' },
-  { name:'צהוב',   hex:'#fbc02d' },
-  { name:'ירוק',   hex:'#388e3c' },
-  { name:'זית',    hex:'#827717' },
-  { name:'טורקיז', hex:'#00838f' },
-  { name:'כחול',   hex:'#1565c0' },
-  { name:'נייבי',  hex:'#1a237e' },
-  { name:'סגול',   hex:'#6a1b9a' },
+const BASE_COLORS = [
+  // Row 1 — cool/bright
+  { name:'טורקיז',      hex:'#00BCD4' },
+  { name:'ירוק-ים',     hex:'#009688' },
+  { name:'ירוק',        hex:'#43A047' },
+  { name:'ירוק-ליים',   hex:'#8BC34A' },
+  { name:'ליים',        hex:'#CDDC39' },
+  { name:'צהוב',        hex:'#FDD835' },
+  { name:'ענבר',        hex:'#FFA000' },
+  { name:'כתום',        hex:'#FF6D00' },
+  { name:'אדום-כתום',   hex:'#DF5020' },
+  { name:'אדום',        hex:'#E53935' },
+  // Row 2 — dark/vivid
+  { name:'נייבי',       hex:'#1A237E' },
+  { name:'ורוד',        hex:'#E91E63' },
+  { name:'מגנטה',       hex:'#D500F9' },
+  { name:'סגול',        hex:'#7B1FA2' },
+  { name:'סגול כהה',    hex:'#4A148C' },
+  { name:'אינדיגו',     hex:'#3949AB' },
+  { name:'כחול',        hex:'#1565C0' },
+  { name:'כחול בהיר',   hex:'#039BE5' },
+  // Row 3 — neutrals
+  { name:"בז'",         hex:'#D4B896' },
+  { name:'חום',         hex:'#795548' },
+  { name:'אפור בהיר',   hex:'#BDBDBD' },
+  { name:'אפור',        hex:'#757575' },
+  { name:'אפור כהה',    hex:'#424242' },
 ];
 
 const VALUES_COMM = {
@@ -1032,6 +1076,7 @@ const Q = {
       if (a.missing)           { const el=document.getElementById('ta-miss');    if(el){ el.value=a.missing; this.onText(el,'missing','btn-miss',2); } }
       if (a.selfUnderstanding) { const el=document.getElementById('ta-self');    if(el){ el.value=a.selfUnderstanding; this.onText(el,'selfUnderstanding','btn-self',2); } }
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
+      if (a.colors && a.colors.length) { this._updateSelBar(); document.getElementById('btn-col').disabled = false; }
     } catch(e) {}
   },
 
@@ -1070,14 +1115,101 @@ const Q = {
     ).join('');
   },
 
+  _mixHex(h1, h2, r) {
+    const p = h => [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
+    const [r1,g1,b1]=p(h1), [r2,g2,b2]=p(h2);
+    const mix = (a,b) => Math.round(a*r + b*(1-r)).toString(16).padStart(2,'0');
+    return `#${mix(r1,r2)}${mix(g1,g2)}${mix(b1,b2)}`;
+  },
+
+  _getTones(baseHex) {
+    return [
+      { name:'כהה מאוד',    hex: this._mixHex(baseHex,'#000000',0.22) },
+      { name:'כהה',          hex: this._mixHex(baseHex,'#000000',0.44) },
+      { name:'כהה-בינוני',  hex: this._mixHex(baseHex,'#000000',0.68) },
+      { name:'בסיס',         hex: baseHex },
+      { name:'בהיר-בינוני', hex: this._mixHex(baseHex,'#FFFFFF',0.68) },
+      { name:'בהיר',         hex: this._mixHex(baseHex,'#FFFFFF',0.44) },
+      { name:'בהיר מאוד',   hex: this._mixHex(baseHex,'#FFFFFF',0.22) },
+    ];
+  },
+
   _renderColors() {
-    document.getElementById('color-grid').innerHTML = COLORS.map(c =>
+    document.getElementById('color-grid').innerHTML = BASE_COLORS.map(c =>
       `<div class="swatch-wrap">
         <div class="swatch" data-name="${c.name}" data-hex="${c.hex}"
-          style="background:${c.hex}" onclick="Q._toggleColor(this)"></div>
-        <span class="swatch-label">${c.name}</span>
+          style="background:${c.hex}" onclick="Q._openTonePanel(this)"></div>
       </div>`
     ).join('');
+    this._updateSelBar();
+  },
+
+  _openTonePanel(swatch) {
+    const name = swatch.dataset.name, hex = swatch.dataset.hex;
+    const tones = this._getTones(hex);
+    const panel = document.getElementById('tone-panel');
+    panel.style.display = 'block';
+    panel.innerHTML = `
+      <div class="tone-header">
+        <button class="tone-close-btn" onclick="Q._closeTonePanel()">✕</button>
+        <div class="tone-base-preview">
+          <div style="text-align:right">
+            <div class="tone-base-name">${name}</div>
+            <div class="tone-base-hex">${hex.toUpperCase()}</div>
+          </div>
+          <div class="tone-base-swatch" style="background:${hex}"></div>
+        </div>
+      </div>
+      <div class="tone-row">
+        ${tones.map(t => `
+          <div class="tone-item" onclick="Q._selectTone('${t.name}','${t.hex}',this)">
+            <div class="tone-circle${this.answers.colors.some(c=>c.hex===t.hex)?' tone-on':''}"
+                 data-hex="${t.hex}" style="background:${t.hex}"></div>
+            <div class="tone-name">${t.name}</div>
+            <div class="tone-hex">${t.hex.toUpperCase()}</div>
+          </div>`).join('')}
+      </div>`;
+    panel.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  },
+
+  _closeTonePanel() {
+    document.getElementById('tone-panel').style.display = 'none';
+  },
+
+  _selectTone(name, hex, item) {
+    const idx = this.answers.colors.findIndex(c => c.hex === hex);
+    if (idx >= 0) {
+      this.answers.colors.splice(idx, 1);
+      item.querySelector('.tone-circle').classList.remove('tone-on');
+    } else if (this.answers.colors.length < 5) {
+      this.answers.colors.push({ name, hex });
+      item.querySelector('.tone-circle').classList.add('tone-on');
+    }
+    this._updateSelBar();
+    document.getElementById('btn-col').disabled = this.answers.colors.length === 0;
+    this._saveToStorage();
+  },
+
+  _updateSelBar() {
+    const bar = document.getElementById('selected-colors-bar');
+    if (!bar) return;
+    bar.innerHTML = this.answers.colors.map(c =>
+      `<div class="sel-chip">
+        <div class="sel-chip-dot" style="background:${c.hex}"></div>
+        <span>${c.name}</span>
+        <span class="sel-chip-x" onclick="Q._removeColor('${c.hex}')">✕</span>
+      </div>`
+    ).join('');
+  },
+
+  _removeColor(hex) {
+    this.answers.colors = this.answers.colors.filter(c => c.hex !== hex);
+    this._updateSelBar();
+    document.getElementById('btn-col').disabled = this.answers.colors.length === 0;
+    const panel = document.getElementById('tone-panel');
+    if (panel && panel.style.display !== 'none')
+      panel.querySelectorAll(`.tone-circle`).forEach(el => { if(el.dataset.hex===hex) el.classList.remove('tone-on'); });
+    this._saveToStorage();
   },
 
   _renderOpts(containerId, items, key, btnId) {
@@ -1173,18 +1305,6 @@ const Q = {
     document.getElementById(btnId).disabled = this.answers[key].length === 0;
   },
 
-  _toggleColor(swatch) {
-    const hex  = swatch.dataset.hex;
-    const name = swatch.dataset.name;
-    if (swatch.classList.contains('swatch-on')) {
-      swatch.classList.remove('swatch-on');
-      this.answers.colors = this.answers.colors.filter(c => c.hex !== hex);
-    } else if (this.answers.colors.length < 3) {
-      swatch.classList.add('swatch-on');
-      this.answers.colors.push({ name, hex });
-    }
-    document.getElementById('btn-col').disabled = this.answers.colors.length === 0;
-  },
 
   _pickOpt(btn, key, btnId) {
     btn.closest('.opts').querySelectorAll('.opt').forEach(o => o.classList.remove('opt-on'));
