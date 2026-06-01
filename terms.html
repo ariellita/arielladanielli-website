@@ -93,6 +93,39 @@
     }
     footer a { color: rgba(255,255,255,.35); text-decoration: none; }
     footer a:hover { color: #fff; }
+
+    /* טבלת ציות */
+    .compliance-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 2.8rem;
+      font-size: .95rem;
+    }
+    .compliance-table th {
+      background: var(--blue);
+      color: #fff;
+      text-align: right;
+      padding: .75rem 1.2rem;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+    }
+    .compliance-table th.col-check {
+      width: 80px;
+      text-align: center;
+    }
+    .compliance-table td {
+      padding: .7rem 1.2rem;
+      border: 1px solid rgba(23,32,68,.12);
+      color: #2a3350;
+    }
+    .compliance-table td.col-check {
+      text-align: center;
+      font-size: 1.25rem;
+    }
+    .compliance-table tr:nth-child(even) td { background: #fff; }
+    .compliance-table tr:nth-child(odd)  td { background: rgba(255,249,242,.6); }
+    .check-yes { color: #1a8a4a; }
+    .check-no  { color: #d0021b; }
   </style>
 </head>
 <body>
@@ -172,6 +205,42 @@
       <h2>7. שינויים ועדכונים</h2>
       <p>המארגנות שומרות לעצמן את הזכות לעדכן תקנון זה בכל עת. גרסה מעודכנת תפורסם בדף זה.</p>
     </div>
+
+    <!-- טבלת ציות לתקנות -->
+    <table class="compliance-table">
+      <thead>
+        <tr>
+          <th>תקנון</th>
+          <th class="col-check"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>קיים תקנון באתר</td>
+          <td class="col-check"><span class="check-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td>הגבלת גיל בתקנון</td>
+          <td class="col-check"><span class="check-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td>ביטול עסקה</td>
+          <td class="col-check"><span class="check-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td>מדיניות אספקת מוצרים</td>
+          <td class="col-check"><span class="check-no">✘</span></td>
+        </tr>
+        <tr>
+          <td>אחריות המוצר</td>
+          <td class="col-check"><span class="check-yes">✔</span></td>
+        </tr>
+        <tr>
+          <td>פרטיות</td>
+          <td class="col-check"><span class="check-yes">✔</span></td>
+        </tr>
+      </tbody>
+    </table>
 
   </main>
 
