@@ -985,7 +985,7 @@
   <!-- ═══════════ NAVBAR ═══════════ -->
   <nav class="navbar" id="navbar">
     <a href="#top" class="nav-logo">מיתוג אישי<br><em>בעידן ה-AI</em></a>
-    <a href="#register" class="nav-cta">להרשמה ←</a>
+    <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="nav-cta">להרשמה ←</a>
   </nav>
 
   <!-- ═══════════ HERO ═══════════ -->
@@ -1513,7 +1513,7 @@
   <section class="pink-cta-strip">
     <div class="pink-cta-inner fade-up">
       <h2 class="pink-cta-title">המקום שלכם מחכה לכם.</h2>
-      <a href="#register" class="pink-cta-btn">הרשמה לווובינר ←</a>
+      <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="pink-cta-btn">הרשמה לווובינר ←</a>
     </div>
   </section>
 
@@ -1575,10 +1575,12 @@
     function handleSubmit(e) {
       e.preventDefault();
       const btn = document.getElementById('submit-btn');
-      btn.textContent = '✓ נרשמת בהצלחה! נתראה ב-8 ביוני';
+      btn.textContent = 'מעביר לדף התשלום...';
       btn.style.background = '#00D68F';
-      btn.style.boxShadow  = '0 6px 28px rgba(0,214,143,.4)';
       btn.disabled = true;
+      setTimeout(() => {
+        window.location.href = 'https://mrng.to/8wDgZNNu6x';
+      }, 600);
     }
   </script>
 
