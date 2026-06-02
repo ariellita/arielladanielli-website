@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ariella Danielli//Webinar//HE
+CALSCALE:GREGORIAN
+METHOD:REQUEST
+BEGIN:VEVENT
+DTSTART:20260622T070000Z
+DTEND:20260622T090000Z
+SUMMARY:וובינר מיתוג אישי עם בינה מלאכותית עם שרון מס ואריאלה דניאלי
+DESCRIPTION:סדנת מיתוג אישי בעידן ה-AI\nקישור זום יישלח אליכם לפני הסדנה.\nhttps://arielladanielli.com/personal-branding
+ORGANIZER;CN=אריאלה דניאלי:mailto:ariellita@gmail.com
+URL:https://arielladanielli.com/personal-branding
+STATUS:CONFIRMED
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR
