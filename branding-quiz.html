@@ -496,6 +496,21 @@
       vertical-align: middle;
     }
 
+    /* ─── Navigation row ─────────────────────────────────────── */
+    .nav-row { display:flex; gap:0.7rem; justify-content:center; margin-top:0.5rem; flex-wrap:wrap; }
+    .btn-prev {
+      font-family: 'Rubik', sans-serif;
+      font-size: 0.95rem; font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      border: 2px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-prev:hover { border-color: var(--orange); color: var(--orange); }
+
     /* ─── Mobile ──────────────────────────────────────────────── */
     @media (max-width: 600px) {
       h1 { font-size: 1.75rem; }
@@ -1059,6 +1074,28 @@ const Q = {
     this._renderOpts('sens-opts',     SENSATIONS, 'bodySensation', 'btn-sens');
     this._updateBar();
     this._restoreFromStorage();
+    this._addPrevButtons();
+  },
+
+  _addPrevButtons() {
+    document.querySelectorAll('.screen').forEach(screen => {
+      if (screen.id === 's0' || screen.id === 's12') return;
+      const inner = screen.querySelector('.screen-inner');
+      if (!inner) return;
+      const btns = inner.querySelectorAll('.btn');
+      const nextBtn = btns[btns.length - 1];
+      if (!nextBtn || nextBtn.id === 'btn-dl') return;
+      const navRow = document.createElement('div');
+      navRow.className = 'nav-row';
+      nextBtn.parentNode.replaceChild(navRow, nextBtn);
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'btn-prev';
+      prevBtn.textContent = '→ קודם';
+      prevBtn.type = 'button';
+      prevBtn.addEventListener('click', () => Q.prev());
+      navRow.appendChild(prevBtn);
+      navRow.appendChild(nextBtn);
+    });
   },
 
   _saveToStorage() {
@@ -1081,6 +1118,17 @@ const Q = {
   },
 
   // ── Navigation ────────────────────────────────────────────────────────────
+
+  prev() {
+    if (this.current <= 0) return;
+    const curr = this.screens[this.current];
+    curr.classList.remove('active');
+    curr.classList.add('exit');
+    setTimeout(() => curr.classList.remove('exit'), 420);
+    this.current--;
+    this.screens[this.current].classList.add('active');
+    this._updateBar();
+  },
 
   next() {
     if (this.current >= this.total - 1) return;
@@ -1438,78 +1486,166 @@ const Q = {
 
   // ── PDF ───────────────────────────────────────────────────────────────────
 
+  _pdfHeader() {
+    return `<div style="text-align:center;padding-bottom:14px;margin-bottom:16px;border-bottom:2px solid #FF2D9B;">
+      <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:6px;">
+        <div style="width:34px;height:34px;border-radius:9px;background:#FF2D9B;color:#fff;font-size:1rem;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">✦</div>
+        <div style="font-weight:800;font-size:0.95rem;line-height:1.3;text-align:right;">מיתוג אישי<br><span style="color:#FF8C00;">בעידן ה-AI</span></div>
+      </div>
+      <div style="font-size:1rem;font-weight:800;color:#FF2D9B;">זה הזמן שלך לבלוט</div>
+    </div>`;
+  },
+
+  _pdfCard(label, content) {
+    return `<div style="background:#fff;border-radius:10px;border:1px solid #e8e0d8;padding:12px 14px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:0.72rem;color:#FF8C00;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:7px;">${label}</div>
+      <div style="font-size:0.86rem;line-height:1.7;color:#1a1a2e;">${content}</div>
+    </div>`;
+  },
+
+  _pdfTags(arr) {
+    return arr.map(t =>
+      `<span style="display:inline-block;border:1.5px solid #ccc;border-radius:20px;padding:3px 11px;margin:2px;font-size:0.8rem;">${t}</span>`
+    ).join('');
+  },
+
+  _pdfPage1(a) {
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;top:-9999px;left:-9999px;direction:rtl;font-family:Heebo,sans-serif;background:#FFF9F2;padding:24px;width:660px;box-sizing:border-box;';
+
+    const colorsHtml = a.colors.length
+      ? a.colors.map(c =>
+          `<span style="display:inline-flex;align-items:center;gap:5px;margin:3px;">
+            <span style="width:20px;height:20px;border-radius:50%;background:${c.hex};display:inline-block;flex-shrink:0;border:1px solid rgba(0,0,0,0.1);"></span>
+            <span style="font-size:0.78rem;color:#555;">${c.name} · ${c.hex.toUpperCase()}</span>
+          </span>`).join('')
+      : '—';
+
+    const tagsHtml = this._pdfTags([...a.aesthetics, ...a.world]);
+    const langText = this._buildLanguage();
+
+    el.innerHTML = `
+      ${this._pdfHeader()}
+      <div style="font-size:1.1rem;font-weight:800;color:#1a1a2e;text-align:center;margin-bottom:14px;">הפרופיל שלך</div>
+      ${this._pdfCard('הערכים שלך', this._pdfTags(a.values))}
+      ${this._pdfCard('הסיפור שלי', a.story || '—')}
+      ${a.missing ? this._pdfCard('מה עוד לא קיבל ביטוי', a.missing) : ''}
+      ${this._pdfCard('השפה התקשורתית שלי', `${langText}<br><div style="margin-top:6px;">${tagsHtml}</div>`)}
+      ${a.colors.length ? this._pdfCard('פלטת הצבעים שלי', colorsHtml) : ''}
+      ${a.brandLanguage ? this._pdfCard('שפת מותג שמעוררת אותי', a.brandLanguage) : ''}
+      ${a.bodySensation ? this._pdfCard('התחושה שלי', a.bodySensation) : ''}
+      ${a.selfUnderstanding ? this._pdfCard('מי ההשראה שלי', a.selfUnderstanding) : ''}
+    `;
+    return el;
+  },
+
+  _pdfPage2(a) {
+    const el = document.createElement('div');
+    el.style.cssText = 'position:fixed;top:-9999px;left:-9999px;direction:rtl;font-family:Heebo,sans-serif;background:#FFF9F2;padding:24px;width:660px;box-sizing:border-box;';
+
+    const valuesAdviceHtml = (a.values || []).map(v => {
+      const tip = VALUES_COMM[v];
+      return tip ? `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #eee;">
+        <div style="font-weight:700;color:#1565C0;font-size:0.86rem;margin-bottom:4px;">${v}</div>
+        <div style="font-size:0.84rem;line-height:1.72;">${tip}</div>
+      </div>` : '';
+    }).filter(Boolean).join('');
+
+    const catKey = this._detectStoryCategoryKey(a.story);
+    const catLabel = catKey ? STORY_CATEGORY_LABELS[catKey] : 'הנושא שלך';
+    const v0 = a.values[0] || 'הערכים שלך';
+    const vList = a.values.slice(0,3).join(', ');
+    const angles = [
+      { title:'ממקרה ספציפי לעיקרון כללי', text:`בחר/י רגע ספציפי אחד מ${catLabel} שלך — לא "פעם אחת" אלא "ב[יום מסוים], [מה שקרה], וזה לימד אותי ש...". כשאת/ה מדבר/ת על ${v0} דרך סיפור קונקרטי, זה נוגע יותר מכל עיקרון כללי.` },
+      { title:'מה שמבחוץ לא רואים', text:`מה בעולם של ${catLabel} שמפתיע אנשים מבחוץ? כתוב/כתבי פוסט שמתחיל ב"מה שאנשים לא יודעים על [הנושא שלך] הוא..." — ותן/תני תשובה אמיתית, לא מה שנכון להגיד.` },
+      { title:'השאלה שתמיד שואלים', text:`מה השאלה שאנשים שואלים אותך הכי הרבה לגבי ${catLabel}? ענה/ענה עליה בפוסט — אבל הוסף/הוסיפי גם את מה שאנשים לא מצפים לשמוע.` },
+      { title:'הרגע שחישב הכל מחדש', text:`מתי בתחום שלך שינית את דעתך בצורה משמעותית? "פעם חשבתי ש... עד שהבנתי ש..." — פוסטים כאלה בונים אמינות.` },
+      { title:`${catLabel} ו${vList} — החיבור שמגדיר אותך`, text:`חבר/חברי מפורשות בין הסיפור שלך לערכים שבחרת. "הסיבה שאני עוסק/ת ב${catLabel} קשורה ישירות ל${v0} — הנה איך." פוסט שמסביר את ה'למה' שלך בשורה אחת הוא פוסט שאנשים שומרים ומשתפים.` },
+    ];
+    const anglesHtml = angles.map(ang =>
+      `<div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #eee;">
+        <div style="font-weight:700;font-size:0.86rem;color:#1a1a2e;margin-bottom:4px;">→ ${ang.title}</div>
+        <div style="font-size:0.83rem;line-height:1.7;color:#444;">${ang.text}</div>
+      </div>`
+    ).join('');
+
+    const types = new Set();
+    (a.values || []).forEach(v => (CONTENT_MAP[v] || []).forEach(t => types.add(t)));
+    const typesList = [...types].slice(0, 5);
+    const contentHtml = typesList.map(t => {
+      const ex = this._personalizedContentExample(t, catKey, a.values);
+      return ex ? `<div style="margin-bottom:8px;font-size:0.83rem;line-height:1.7;"><span style="font-weight:700;color:#1565C0;">${t}:</span> ${ex}</div>` : '';
+    }).filter(Boolean).join('');
+
+    el.innerHTML = `
+      ${this._pdfHeader()}
+      <div style="font-size:1.05rem;font-weight:800;color:#1a1a2e;text-align:center;margin-bottom:16px;">המלצות לתוכן למיתוג האישי החדש שלך</div>
+      <div style="background:#fff;border-radius:10px;border:1px solid #e8e0d8;padding:14px;margin-bottom:12px;">
+        <div style="font-weight:700;font-size:0.72rem;color:#FF8C00;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;">הנה כמה דברים שאפשר לעשות עם הערכים שלך בתקשורת השיווקית:</div>
+        ${valuesAdviceHtml}
+      </div>
+      <div style="background:#fff;border-radius:10px;border:1px solid #e8e0d8;padding:14px;margin-bottom:12px;">
+        <div style="font-weight:700;font-size:0.72rem;color:#FF8C00;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;">הסיפור שלך — 5 זוויות תוכן</div>
+        ${anglesHtml}
+      </div>
+      ${contentHtml ? `<div style="background:#fff;border-radius:10px;border:1px solid #e8e0d8;padding:14px;margin-bottom:12px;">
+        <div style="font-weight:700;font-size:0.72rem;color:#FF8C00;text-transform:uppercase;letter-spacing:0.04em;margin-bottom:10px;">סוגי תכנים</div>
+        ${contentHtml}
+      </div>` : ''}
+      <div style="text-align:center;margin-top:16px;padding-top:14px;border-top:1px solid #e8e0d8;">
+        <div style="font-weight:800;font-size:0.9rem;color:#333;">בהצלחה! — אריאלה ושרון 🎉</div>
+      </div>
+    `;
+    return el;
+  },
+
+  async _captureEl(el) {
+    document.body.appendChild(el);
+    await new Promise(r => setTimeout(r, 80));
+    const canvas = await html2canvas(el, {
+      scale: 2, backgroundColor: '#FFF9F2', useCORS: true,
+      letterRendering: true, width: 660, windowWidth: 660,
+    });
+    document.body.removeChild(el);
+    return canvas;
+  },
+
+  _addCanvasToPDF(pdf, canvas, firstPage) {
+    if (!firstPage) pdf.addPage();
+    const pw = pdf.internal.pageSize.getWidth();
+    const ph = pdf.internal.pageSize.getHeight();
+    const margin = 8, usableW = pw - margin*2, usableH = ph - margin*2;
+    const imgH = (canvas.height / canvas.width) * usableW;
+    let yPos = margin, remaining = imgH, first = true;
+    while (remaining > 0) {
+      if (!first) { pdf.addPage(); yPos = margin; }
+      const sliceH = Math.min(remaining, usableH);
+      const srcY = (imgH - remaining) / imgH * canvas.height;
+      const srcH = sliceH / imgH * canvas.height;
+      const slice = document.createElement('canvas');
+      slice.width = canvas.width; slice.height = Math.ceil(srcH);
+      slice.getContext('2d').drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
+      pdf.addImage(slice.toDataURL('image/png'), 'PNG', margin, yPos, usableW, sliceH);
+      remaining -= sliceH; first = false;
+    }
+  },
+
   async downloadPDF() {
     const btn = document.getElementById('btn-dl');
     btn.textContent = 'מייצר מסמך...';
     btn.disabled = true;
     try {
       const { jsPDF } = window.jspdf;
+      const a = this.answers;
 
-      // Build a temporary wrapper with header + content + footer
-      const wrapper = document.createElement('div');
-      wrapper.style.cssText = [
-        'position:fixed', 'top:-9999px', 'left:-9999px',
-        'width:640px', 'background:#FFF9F2',
-        'padding:28px 24px', 'box-sizing:border-box',
-        'direction:rtl', 'font-family:Heebo,sans-serif',
-        'z-index:-1',
-      ].join(';');
+      const [canvas1, canvas2] = await Promise.all([
+        this._captureEl(this._pdfPage1(a)),
+        this._captureEl(this._pdfPage2(a)),
+      ]);
 
-      wrapper.innerHTML = `
-        <div style="text-align:center;padding-bottom:20px;margin-bottom:20px;border-bottom:2px solid #FF2D9B;">
-          <div style="display:inline-flex;align-items:center;gap:10px;margin-bottom:10px;">
-            <div style="width:38px;height:38px;border-radius:10px;background:#FF2D9B;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem;flex-shrink:0;">✦</div>
-            <div style="font-family:Rubik,sans-serif;font-weight:800;font-size:1.05rem;line-height:1.3;text-align:right;color:#1a1a2e;">מיתוג אישי<br><span style="color:#FF8C00;">בעידן ה-AI</span></div>
-          </div>
-          <div style="font-family:Rubik,sans-serif;font-size:1.3rem;font-weight:800;color:#FF2D9B;">זה הזמן שלך לבלוט</div>
-        </div>
-      `;
-
-      // Clone the summary content
-      const content = document.getElementById('sum-content').cloneNode(true);
-      content.style.cssText = 'all:revert';
-      wrapper.appendChild(content);
-
-      // Footer
-      const footer = document.createElement('div');
-      footer.style.cssText = 'text-align:center;margin-top:28px;padding-top:20px;border-top:1px solid #e8e0d8;font-family:Rubik,sans-serif;';
-      footer.innerHTML = `<div style="font-weight:800;font-size:1rem;color:#333;">בהצלחה! — אריאלה ושרון 🎉</div>`;
-      wrapper.appendChild(footer);
-
-      document.body.appendChild(wrapper);
-      await new Promise(r => setTimeout(r, 80)); // let fonts settle
-
-      const canvas = await html2canvas(wrapper, {
-        scale: 2,
-        backgroundColor: '#FFF9F2',
-        useCORS: true,
-        letterRendering: true,
-        width: 640,
-        windowWidth: 640,
-      });
-      document.body.removeChild(wrapper);
-
-      const pdf    = new jsPDF('p', 'mm', 'a4');
-      const pw     = pdf.internal.pageSize.getWidth();
-      const ph     = pdf.internal.pageSize.getHeight();
-      const margin = 8;
-      const usableW = pw - margin * 2;
-      const usableH = ph - margin * 2;
-      const imgH   = (canvas.height / canvas.width) * usableW;
-
-      let yPos = margin, remaining = imgH;
-      while (remaining > 0) {
-        const sliceH = Math.min(remaining, usableH);
-        const srcY   = (imgH - remaining) / imgH * canvas.height;
-        const srcH   = sliceH / imgH * canvas.height;
-        const slice  = document.createElement('canvas');
-        slice.width  = canvas.width;
-        slice.height = Math.ceil(srcH);
-        slice.getContext('2d').drawImage(canvas, 0, srcY, canvas.width, srcH, 0, 0, canvas.width, srcH);
-        pdf.addImage(slice.toDataURL('image/png'), 'PNG', margin, yPos, usableW, sliceH);
-        remaining -= sliceH;
-        if (remaining > 0) { pdf.addPage(); yPos = margin; }
-      }
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      this._addCanvasToPDF(pdf, canvas1, true);
+      this._addCanvasToPDF(pdf, canvas2, false);
 
       pdf.save('מפה-שיווקית-אישית.pdf');
     } catch (e) {
