@@ -567,17 +567,17 @@
   </div>
 </div>
 
-<!-- ══ Screen 2: Story ═══════════════════════════════════════════════════════ -->
+<!-- ══ Screen 2: Essence ══════════════════════════════════════════════════════ -->
 <div class="screen" id="s2">
   <div class="screen-inner" style="max-width:580px;">
-    <div class="q-num">שאלה 2 מתוך 10</div>
-    <h2>מה הסיפור שלך?</h2>
+    <div class="q-num">שאלה 2 מתוך 11</div>
+    <h2>מה המהות שלך?</h2>
     <p class="sub">
-      שתף/י בכמה מילים מה הסיפור שלך —<br>
-      תחביב, התנדבות, כל דבר שיכול לסייע בהוספת תוכן ייחודי
+      רשום/י עד 4 תחומים שהם המהות שלך —<br>
+      לדוגמא: ספורט, חדשנות, הורות, יזמות
     </p>
     <textarea id="ta-story"
-      placeholder="למשל: אני מתנדב/ת ב... אני ספורטאי/ת ש... יש לי תחביב של..."
+      placeholder="למשל: ריצה, הורות, חינוך פיננסי, עיצוב..."
       oninput="Q.onText(this,'story','btn-s',2)"></textarea>
     <button class="btn" id="btn-s" onclick="Q.next()" disabled>הבא ←</button>
   </div>
@@ -586,14 +586,14 @@
 <!-- ══ Screen 3: Sharon Q1 ══════════════════════════════════════════════════ -->
 <div class="screen" id="s3">
   <div class="screen-inner" style="max-width:580px;">
-    <div class="q-num">שאלה 3 מתוך 10</div>
-    <h2>מה עוד לא קיבל ביטוי?</h2>
+    <div class="q-num">שאלה 3 מתוך 11</div>
+    <h2>מה עוד לא קיבל ביטוי במיתוג שלך?</h2>
     <p class="sub">
-      מה את/ה מרגיש/ה שחסר במדיה שלך כרגע?<br>
-      איזה חלק בך עוד לא קיבל ביטוי?
+      דרך חיים / תחביבים / אני מאמין/ה ש...<br>
+      איזה חלק בך עוד לא מוצג בחוץ?
     </p>
     <textarea id="ta-miss"
-      placeholder="למשל: הצד האישי שלי לא מופיע... הידע שלי לא מוצג... אני לא מספיק אותנטי/ת..."
+      placeholder="למשל: אני מאמין/ה ש... / יש לי תחביב של... / הצד האישי שלי שלא רואים..."
       oninput="Q.onText(this,'missing','btn-miss',2)"></textarea>
     <button class="btn" id="btn-miss" onclick="Q.next()" disabled>הבא ←</button>
   </div>
@@ -602,7 +602,7 @@
 <!-- ══ Screen 4: Sharon Q2 ══════════════════════════════════════════════════ -->
 <div class="screen" id="s4">
   <div class="screen-inner" style="max-width:600px;">
-    <div class="q-num">שאלה 4 מתוך 10</div>
+    <div class="q-num">שאלה 4 מתוך 11</div>
     <h2>מה אנשים ירגישו בעולם שלך?</h2>
     <p class="sub">מה היית רוצה שאנשים ירגישו כשהם נכנסים לעולם שלך?</p>
     <div class="chips" id="feelings-grid"></div>
@@ -622,14 +622,13 @@
 <!-- ══ Screen 5: Sharon Q3 ══════════════════════════════════════════════════ -->
 <div class="screen" id="s5">
   <div class="screen-inner" style="max-width:580px;">
-    <div class="q-num">שאלה 5 מתוך 10</div>
+    <div class="q-num">שאלה 5 מתוך 11</div>
     <h2>מי ההשראה שלך?</h2>
     <p class="sub">
-      על איזה פרופיל את/ה מסתכל/ת שהוא השראה עבורך?<br>
-      מה בו/בה מושך אותך?
+      רשום/י 3 אנשים שמעוררים בך השראה ולמה?
     </p>
     <textarea id="ta-self"
-      placeholder="למשל: אני מסתכל/ת על X כי הוא/היא מדבר/ת בצורה ישירה ואמיתית, משלב/ת הומור עם תוכן עמוק..."
+      placeholder="למשל: ברנה בראון — כי היא מדברת בצורה ישירה ואמיתית / אייל גולן — כי הוא מחבר בין אנשים / ..."
       oninput="Q.onText(this,'selfUnderstanding','btn-self',2)"></textarea>
     <button class="btn" id="btn-self" onclick="Q.next()" disabled>הבא ←</button>
   </div>
@@ -638,8 +637,8 @@
 <!-- ══ Screen 6: Sharon Q4 — Colors ══════════════════════════════════════════ -->
 <div class="screen" id="s6">
   <div class="screen-inner" style="max-width:600px;">
-    <div class="q-num">שאלה 6 מתוך 10</div>
-    <h2>אילו צבעים חוזרים?</h2>
+    <div class="q-num">שאלה 6 מתוך 11</div>
+    <h2>אילו צבעים חוזרים אצלך?</h2>
     <p class="sub">בחרי צבע בסיס — ותקבלי את כל הגוונים שלו. עד 5 צבעים.</p>
     <div id="selected-colors-bar" class="selected-colors-bar"></div>
     <div class="color-grid" id="color-grid"></div>
@@ -648,10 +647,26 @@
   </div>
 </div>
 
+<!-- ══ Screen 6b: Imagery ══════════════════════════════════════════════════ -->
+<div class="screen" id="s6b">
+  <div class="screen-inner" style="max-width:580px;">
+    <div class="q-num">שאלה 7 מתוך 11</div>
+    <h2>אילו דימויים חוזרים אצלך?</h2>
+    <p class="sub">
+      תמונות, מקומות, אנשים, רגעים — מה חוזר אצלך?<br>
+      מה מושך את העין שלך שוב ושוב?
+    </p>
+    <textarea id="ta-imagery"
+      placeholder="למשל: טבע פראי, ערים בלילה, תמונות שחור-לבן, ילדים צוחקים, ים בזריחה..."
+      oninput="Q.onText(this,'imagery','btn-imagery',2)"></textarea>
+    <button class="btn" id="btn-imagery" onclick="Q.next()" disabled>הבא ←</button>
+  </div>
+</div>
+
 <!-- ══ Screen 7: Sharon Q5 — World type ══════════════════════════════════════ -->
 <div class="screen" id="s7">
   <div class="screen-inner" style="max-width:640px;">
-    <div class="q-num">שאלה 7 מתוך 10</div>
+    <div class="q-num">שאלה 8 מתוך 11</div>
     <h2>מה העולם שלך?</h2>
     <p class="sub">האם העולם שלך יותר... (ניתן לבחור יותר מאחד)</p>
     <div class="chips" id="world-grid"></div>
@@ -662,7 +677,7 @@
 <!-- ══ Screen 8: Sharon Q6 — Aesthetics ══════════════════════════════════════ -->
 <div class="screen" id="s8">
   <div class="screen-inner" style="max-width:640px;">
-    <div class="q-num">שאלה 8 מתוך 10</div>
+    <div class="q-num">שאלה 9 מתוך 11</div>
     <h2>האסתטיקה שלך</h2>
     <p class="sub">אילו מילים מתארות את האסתטיקה שאת/ה נמשכ/ת אליה? (ניתן לבחור יותר מאחד)</p>
     <div class="chips" id="aesth-grid"></div>
@@ -673,7 +688,7 @@
 <!-- ══ Screen 9: Brand Language ════════════════════════════════════════════ -->
 <div class="screen" id="s9">
   <div class="screen-inner" style="max-width:580px;">
-    <div class="q-num">שאלה 9 מתוך 10</div>
+    <div class="q-num">שאלה 10 מתוך 11</div>
     <h2>שפת מותג שמעוררת אותך</h2>
     <p class="sub">
       אילו אנשים, מותגים או כותבים מעוררים אותך בשפה שלהם?<br>
@@ -689,7 +704,7 @@
 <!-- ══ Screen 11: Sharon Q9 — Sensation ══════════════════════════════════════ -->
 <div class="screen" id="s11">
   <div class="screen-inner" style="max-width:520px;">
-    <div class="q-num">שאלה 10 מתוך 10</div>
+    <div class="q-num">שאלה 11 מתוך 11</div>
     <h2>המותג שלך כתחושה</h2>
     <p class="sub">אם המותג שלך היה תחושה בגוף — איזו תחושה?</p>
     <div class="opts" id="sens-opts"></div>
@@ -726,6 +741,10 @@
         <h3>פלטת הזהות שלך</h3>
         <div class="tag-row" id="sum-aesth-tags" style="margin-bottom:0.6rem;"></div>
         <div id="sum-colors-row" style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;"></div>
+      </div>
+      <div class="s-card">
+        <h3>דימויים שחוזרים אצלך</h3>
+        <p id="sum-imagery"></p>
       </div>
       <div class="s-card">
         <h3>שפת מותג שמעוררת אותך</h3>
@@ -1065,6 +1084,7 @@ const Q = {
     peopleFeeling: [],
     selfUnderstanding: '',
     brandLanguage: '',
+    imagery: '',
     colors: [],
     world: [],
     aesthetics: [],
@@ -1126,6 +1146,7 @@ const Q = {
       if (a.missing)           { const el=document.getElementById('ta-miss');    if(el){ el.value=a.missing; this.onText(el,'missing','btn-miss',2); } }
       if (a.selfUnderstanding) { const el=document.getElementById('ta-self');    if(el){ el.value=a.selfUnderstanding; this.onText(el,'selfUnderstanding','btn-self',2); } }
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
+      if (a.imagery)           { const el=document.getElementById('ta-imagery'); if(el){ el.value=a.imagery; this.onText(el,'imagery','btn-imagery',2); } }
       if (a.colors && a.colors.length) { this._updateSelBar(); document.getElementById('btn-col').disabled = false; }
       // show restart link on welcome screen
       const rl = document.getElementById('restart-link');
@@ -1424,6 +1445,8 @@ const Q = {
 
     const brandEl = document.getElementById('sum-brand');
     if (brandEl) brandEl.textContent = a.brandLanguage || '—';
+    const imageryEl = document.getElementById('sum-imagery');
+    if (imageryEl) imageryEl.textContent = a.imagery || '—';
   },
 
   _buildValuesAdvice(values) {
@@ -1548,6 +1571,7 @@ const Q = {
       ${a.missing ? this._pdfCard('מה עוד לא קיבל ביטוי', a.missing) : ''}
       ${this._pdfCard('השפה התקשורתית שלי', `${langText}<br><div style="margin-top:6px;">${tagsHtml}</div>`)}
       ${a.colors.length ? this._pdfCard('פלטת הצבעים שלי', colorsHtml) : ''}
+      ${a.imagery ? this._pdfCard('דימויים שחוזרים אצלי', a.imagery) : ''}
       ${a.brandLanguage ? this._pdfCard('שפת מותג שמעוררת אותי', a.brandLanguage) : ''}
       ${a.bodySensation ? this._pdfCard('התחושה שלי', a.bodySensation) : ''}
       ${a.selfUnderstanding ? this._pdfCard('מי ההשראה שלי', a.selfUnderstanding) : ''}
