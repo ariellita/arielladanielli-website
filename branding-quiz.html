@@ -496,6 +496,19 @@
       vertical-align: middle;
     }
 
+    /* ─── Summary part title ─────────────────────────────────── */
+    .sum-part-title {
+      font-family: 'Rubik', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #FF2D9B, #FF8C00);
+      border-radius: 12px;
+      padding: 0.7rem 1.2rem;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+
     /* ─── Navigation row ─────────────────────────────────────── */
     .nav-row { display:flex; gap:0.7rem; justify-content:center; margin-top:1.8rem; flex-wrap:wrap; }
     .nav-row .btn { margin-top: 0; }
@@ -717,42 +730,66 @@
     <div class="sum-title"><span class="g">הפרופיל שלך מוכן ✨</span></div>
 
     <div id="sum-content">
+
+      <!-- ── חלק א: הפרופיל שלך ───────────────────────────────── -->
+      <div class="sum-part-title">הפרופיל שלך</div>
+
       <div class="s-card">
         <h3>הערכים שלך</h3>
         <div class="tag-row" id="sum-values"></div>
-        <p class="sum-section-label">הנה כמה דברים שאפשר לעשות עם הערכים שלך בתקשורת השיווקית:</p>
-        <div id="sum-values-advice" class="sum-advice"></div>
       </div>
       <div class="s-card">
-        <h3>הסיפור שלך</h3>
-        <div id="sum-story-angles"></div>
+        <h3>המהות שלך</h3>
+        <p id="sum-story-text"></p>
       </div>
-      <div class="s-card">
-        <h3>סוגי תכנים</h3>
-        <div class="tag-row" id="sum-ctypes"></div>
-        <div id="sum-ctypes-examples" class="sum-ctypes-ex-list"></div>
+      <div class="s-card" id="sum-missing-card">
+        <h3>מה עוד לא קיבל ביטוי</h3>
+        <p id="sum-missing-text"></p>
+      </div>
+      <div class="s-card" id="sum-inspo-card">
+        <h3>מי ההשראה שלך</h3>
+        <p id="sum-inspo-text"></p>
       </div>
       <div class="s-card">
         <h3>השפה התקשורתית שלך</h3>
         <p id="sum-lang"></p>
       </div>
       <div class="s-card">
-        <h3>פלטת הזהות שלך</h3>
+        <h3>פלטת הצבעים שלך</h3>
         <div class="tag-row" id="sum-aesth-tags" style="margin-bottom:0.6rem;"></div>
         <div id="sum-colors-row" style="display:flex;flex-wrap:wrap;align-items:center;gap:0.5rem;"></div>
       </div>
-      <div class="s-card">
+      <div class="s-card" id="sum-imagery-card">
         <h3>דימויים שחוזרים אצלך</h3>
         <p id="sum-imagery"></p>
       </div>
-      <div class="s-card">
+      <div class="s-card" id="sum-brand-card">
         <h3>שפת מותג שמעוררת אותך</h3>
         <p id="sum-brand"></p>
       </div>
-      <div class="s-card">
+      <div class="s-card" id="sum-sensation-card">
         <h3>התחושה שלך</h3>
         <p id="sum-world"></p>
       </div>
+
+      <!-- ── חלק ב: המלצות ─────────────────────────────────────── -->
+      <div class="sum-part-title" style="margin-top:1.5rem;">המלצות לתוכן למיתוג האישי החדש שלך</div>
+
+      <div class="s-card">
+        <h3>הערכים שלך בתקשורת השיווקית</h3>
+        <p class="sum-section-label">הנה כמה דברים שאפשר לעשות עם הערכים שלך:</p>
+        <div id="sum-values-advice" class="sum-advice"></div>
+      </div>
+      <div class="s-card">
+        <h3>הסיפור שלך — 5 זוויות תוכן</h3>
+        <div id="sum-story-angles"></div>
+      </div>
+      <div class="s-card">
+        <h3>סוגי תכנים מומלצים</h3>
+        <div class="tag-row" id="sum-ctypes"></div>
+        <div id="sum-ctypes-examples" class="sum-ctypes-ex-list"></div>
+      </div>
+
     </div>
 
     <div style="text-align:center; margin-top:1.5rem;">
@@ -1443,8 +1480,52 @@ const Q = {
   _renderSummary() {
     const a = this.answers;
 
+    // ── חלק א: הפרופיל שלך ──────────────────────────────────────
     document.getElementById('sum-values').innerHTML =
       a.values.map(v => `<span class="tag">${v}</span>`).join('');
+
+    const storyEl = document.getElementById('sum-story-text');
+    if (storyEl) storyEl.textContent = a.story || '—';
+
+    const missingEl = document.getElementById('sum-missing-text');
+    if (missingEl) missingEl.textContent = a.missing || '—';
+    const missingCard = document.getElementById('sum-missing-card');
+    if (missingCard) missingCard.style.display = a.missing ? '' : 'none';
+
+    const inspoEl = document.getElementById('sum-inspo-text');
+    if (inspoEl) inspoEl.textContent = a.selfUnderstanding || '—';
+    const inspoCard = document.getElementById('sum-inspo-card');
+    if (inspoCard) inspoCard.style.display = a.selfUnderstanding ? '' : 'none';
+
+    document.getElementById('sum-lang').textContent = this._buildLanguage();
+
+    document.getElementById('sum-aesth-tags').innerHTML = [
+      ...a.aesthetics.map(x => `<span class="tag">${x}</span>`),
+      ...a.world.map(x => `<span class="tag tag-o">${x}</span>`),
+    ].join('');
+
+    document.getElementById('sum-colors-row').innerHTML =
+      a.colors.map(c =>
+        `<span class="col-dot" style="background:${c.hex}" title="${c.name}"></span>
+         <span style="font-size:0.78rem;color:var(--muted);margin-left:4px;">${c.name} ${c.hex.toUpperCase()}</span>`
+      ).join('');
+
+    const imageryEl = document.getElementById('sum-imagery');
+    if (imageryEl) imageryEl.textContent = a.imagery || '—';
+    const imageryCard = document.getElementById('sum-imagery-card');
+    if (imageryCard) imageryCard.style.display = a.imagery ? '' : 'none';
+
+    const brandEl = document.getElementById('sum-brand');
+    if (brandEl) brandEl.textContent = a.brandLanguage || '—';
+    const brandCard = document.getElementById('sum-brand-card');
+    if (brandCard) brandCard.style.display = a.brandLanguage ? '' : 'none';
+
+    const sensEl = document.getElementById('sum-world');
+    if (sensEl) sensEl.textContent = a.bodySensation || '—';
+    const sensCard = document.getElementById('sum-sensation-card');
+    if (sensCard) sensCard.style.display = a.bodySensation ? '' : 'none';
+
+    // ── חלק ב: המלצות ───────────────────────────────────────────
     document.getElementById('sum-values-advice').innerHTML = this._buildValuesAdvice(a.values);
 
     document.getElementById('sum-story-angles').innerHTML = this._buildStoryAngles(a.story, a.values);
@@ -1459,27 +1540,6 @@ const Q = {
       const ex = this._personalizedContentExample(t, catKey, a.values);
       return ex ? `<div class="ctypes-ex-item"><span class="ctypes-ex-type">${t}:</span> ${ex}</div>` : '';
     }).filter(Boolean).join('');
-
-    document.getElementById('sum-lang').textContent = this._buildLanguage();
-
-    document.getElementById('sum-aesth-tags').innerHTML = [
-      ...a.aesthetics.map(x => `<span class="tag">${x}</span>`),
-      ...a.world.map(x => `<span class="tag tag-o">${x}</span>`),
-    ].join('');
-
-    document.getElementById('sum-colors-row').innerHTML =
-      a.colors.map(c =>
-        `<span class="col-dot" style="background:${c.hex}" title="${c.name}"></span>
-         <span style="font-size:0.78rem;color:var(--muted);margin-left:4px;">${c.name}</span>`
-      ).join('');
-
-    document.getElementById('sum-world').textContent =
-      a.bodySensation || '—';
-
-    const brandEl = document.getElementById('sum-brand');
-    if (brandEl) brandEl.textContent = a.brandLanguage || '—';
-    const imageryEl = document.getElementById('sum-imagery');
-    if (imageryEl) imageryEl.textContent = a.imagery || '—';
   },
 
   _buildValuesAdvice(values) {
@@ -1711,10 +1771,8 @@ const Q = {
       const { jsPDF } = window.jspdf;
       const a = this.answers;
 
-      const [canvas1, canvas2] = await Promise.all([
-        this._captureEl(this._pdfPage1(a)),
-        this._captureEl(this._pdfPage2(a)),
-      ]);
+      const canvas1 = await this._captureEl(this._pdfPage1(a));
+      const canvas2 = await this._captureEl(this._pdfPage2(a));
 
       const pdf = new jsPDF('p', 'mm', 'a4');
       this._addCanvasToPDF(pdf, canvas1, true);
