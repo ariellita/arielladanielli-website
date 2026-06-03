@@ -1148,6 +1148,40 @@ const Q = {
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
       if (a.imagery)           { const el=document.getElementById('ta-imagery'); if(el){ el.value=a.imagery; this.onText(el,'imagery','btn-imagery',2); } }
       if (a.colors && a.colors.length) { this._updateSelBar(); document.getElementById('btn-col').disabled = false; }
+
+      // restore visual chip states for values
+      if (a.values && a.values.length) {
+        document.querySelectorAll('#values-grid .chip').forEach(c => {
+          if (a.values.includes(c.dataset.v)) c.classList.add('chip-on');
+        });
+        if (a.values.length >= 5) {
+          document.querySelectorAll('#values-grid .chip:not(.chip-on)').forEach(c => c.classList.add('chip-off'));
+        }
+        document.getElementById('btn-v').disabled = false;
+      }
+
+      // restore visual chip states for feelings
+      if (a.peopleFeeling && a.peopleFeeling.length) {
+        document.querySelectorAll('#feelings-grid .chip').forEach(c => {
+          if (a.peopleFeeling.includes(c.dataset.v)) c.classList.add('chip-on');
+        });
+        document.getElementById('btn-feel').disabled = false;
+      }
+
+      // restore visual chip states for world & aesthetics
+      if (a.world && a.world.length) {
+        document.querySelectorAll('#world-grid .chip').forEach(c => {
+          if (a.world.includes(c.dataset.v)) c.classList.add('chip-on');
+        });
+        document.getElementById('btn-world').disabled = false;
+      }
+      if (a.aesthetics && a.aesthetics.length) {
+        document.querySelectorAll('#aesth-grid .chip').forEach(c => {
+          if (a.aesthetics.includes(c.dataset.v)) c.classList.add('chip-on');
+        });
+        document.getElementById('btn-aesth').disabled = false;
+      }
+
       // show restart link on welcome screen
       const rl = document.getElementById('restart-link');
       if (rl) rl.style.display = 'block';
