@@ -542,6 +542,9 @@
       ואיתו תוכל/י לצאת לדרך בצורה נכונה ומדויקת
     </p>
     <button class="btn btn-start" onclick="Q.next()">בואו נתחיל ←</button>
+    <div id="restart-link" style="display:none;margin-top:0.8rem;">
+      <button onclick="Q._reset()" style="background:none;border:none;color:var(--muted);font-size:0.85rem;cursor:pointer;text-decoration:underline;font-family:'Heebo',sans-serif;">התחל/י מחדש</button>
+    </div>
   </div>
 </div>
 
@@ -742,6 +745,9 @@
       <div class="success-title">בהצלחה! 🎉</div>
       <p class="success-sub">אריאלה ושרון</p>
       <img src="ariella-sharon.png" alt="אריאלה ושרון" class="success-photo">
+      <div style="margin-top:1.2rem;">
+        <button onclick="Q._reset()" style="background:none;border:1.5px solid var(--border);border-radius:30px;padding:0.5rem 1.4rem;color:var(--muted);font-size:0.85rem;cursor:pointer;font-family:'Heebo',sans-serif;">↺ מלא/י את השאלון שוב</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1100,6 +1106,11 @@ const Q = {
     });
   },
 
+  _reset() {
+    try { localStorage.removeItem('branding-quiz'); } catch(e) {}
+    location.reload();
+  },
+
   _saveToStorage() {
     try { localStorage.setItem('branding-quiz', JSON.stringify(this.answers)); } catch(e) {}
   },
@@ -1116,6 +1127,9 @@ const Q = {
       if (a.selfUnderstanding) { const el=document.getElementById('ta-self');    if(el){ el.value=a.selfUnderstanding; this.onText(el,'selfUnderstanding','btn-self',2); } }
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
       if (a.colors && a.colors.length) { this._updateSelBar(); document.getElementById('btn-col').disabled = false; }
+      // show restart link on welcome screen
+      const rl = document.getElementById('restart-link');
+      if (rl) rl.style.display = 'block';
     } catch(e) {}
   },
 
