@@ -994,7 +994,7 @@
   <!-- ═══════════ NAVBAR ═══════════ -->
   <nav class="navbar" id="navbar">
     <a href="#top" class="nav-logo">מיתוג אישי<br><em>בעידן ה-AI</em></a>
-    <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="nav-cta">להרשמה ←</a>
+    <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="nav-cta" onclick="gtag('event','click',{event_category:'button',event_label:'nav_cta'})">להרשמה ←</a>
   </nav>
 
   <!-- ═══════════ HERO ═══════════ --> <!-- v2 -->
@@ -1259,7 +1259,7 @@
             <span class="mini-course-label">קורס המשך עם אריאלה</span>
             <p class="mini-course-name">Branding AI</p><p style="font-size:.85rem; color:rgba(255,255,255,.6); margin-bottom:.5rem; margin-top:-.3rem;">בניית מיתוג אישי ואסטרטגיית סושיאל עם כלי בינה מלאכותית</p>
             
-            <a class="mini-course-btn" href="https://wa.me/972523124326?text=היי%20אריאלה%2C%20אני%20מעוניין%2Fת%20לשמוע%20עוד%20על%20קורס%20Branding%20AI" target="_blank">אני רוצה לדעת עוד ←</a>
+            <a class="mini-course-btn" href="https://wa.me/972523124326?text=היי%20אריאלה%2C%20אני%20מעוניין%2Fת%20לשמוע%20עוד%20על%20קורס%20Branding%20AI" target="_blank" onclick="gtag('event','click',{event_category:'button',event_label:'branding_ai_course'})">אני רוצה לדעת עוד ←</a>
           </div>
         </div>
         <div class="inst-card fade-up d2">
@@ -1272,7 +1272,7 @@
             <span class="mini-course-label">קורס המשך עם שרון</span>
             <p class="mini-course-name" style="font-weight:300; color:var(--green) !important; letter-spacing:.02em;">Seeds of Potential</p>
             <p class="mini-course-desc">ליצור שפה אישית וחזותית מחוברת למי שאת/ה, ולגזור ממנה נראות ותוצרים פרקטיים שעובדים.</p>
-            <a class="mini-course-btn" href="https://seedsofpotential.netlify.app/" target="_blank">אני רוצה לדעת עוד ←</a>
+            <a class="mini-course-btn" href="https://seedsofpotential.netlify.app/" target="_blank" onclick="gtag('event','click',{event_category:'button',event_label:'seeds_of_potential'})">אני רוצה לדעת עוד ←</a>
           </div>
         </div>
       </div>
@@ -1300,7 +1300,7 @@
         <div class="cd-label">שניות</div>
       </div>
     </div>
-    <a href="#register" class="btn-primary fade-up">תבחרו בעצמכם והרשמו כאן! ←</a>
+    <a href="#register" class="btn-primary fade-up" onclick="gtag('event','click',{event_category:'button',event_label:'countdown_cta'})">תבחרו בעצמכם והרשמו כאן! ←</a>
   </div>
 
   <!-- ═══════════ למי זה מתאים ═══════════ -->
@@ -1522,7 +1522,7 @@
   <section class="pink-cta-strip">
     <div class="pink-cta-inner fade-up">
       <h2 class="pink-cta-title">המקום שלכם מחכה לכם.</h2>
-      <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="pink-cta-btn">הרשמה לווובינר ←</a>
+      <a href="https://mrng.to/8wDgZNNu6x" target="_blank" class="pink-cta-btn" onclick="gtag('event','click',{event_category:'button',event_label:'pink_cta'})">הרשמה לווובינר ←</a>
     </div>
   </section>
 
@@ -1583,6 +1583,7 @@
     /* ═══ FORM SUBMIT ═══ */
     function handleSubmit(e) {
       e.preventDefault();
+      gtag('event', 'click', {event_category: 'button', event_label: 'form_submit'});
       const btn = document.getElementById('submit-btn');
       btn.textContent = 'מעביר לדף התשלום...';
       btn.style.background = '#00D68F';
@@ -1604,8 +1605,8 @@
       <h3>הרשמתם הושלמה!</h3>
       <p>רוצים להוסיף את הוובינר ליומן שלכם?<br><small>ממשיכים לתשלום בעוד כמה שניות...</small></p>
       <div class="cal-btns">
-        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%A2%D7%9D+%D7%91%D7%99%D7%A0%D7%94+%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA+%D7%A2%D7%9D+%D7%A9%D7%A8%D7%95%D7%9F+%D7%9E%D7%A1+%D7%95%D7%90%D7%A8%D7%99%D7%90%D7%9C%D7%94+%D7%93%D7%A0%D7%99%D7%90%D7%9C%D7%99&dates=20260622T070000Z%2F20260622T090000Z&details=%D7%A1%D7%93%D7%A0%D7%AA+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%91%D7%A2%D7%99%D7%93%D7%9F+%D7%94-AI&location=Zoom" target="_blank" class="cal-btn-google">📅 הוסף ל-Google Calendar</a>
-        <a href="webinar.ics" download class="cal-btn-ics">⬇️ הורד קובץ יומן (.ics)</a>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%A2%D7%9D+%D7%91%D7%99%D7%A0%D7%94+%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA+%D7%A2%D7%9D+%D7%A9%D7%A8%D7%95%D7%9F+%D7%9E%D7%A1+%D7%95%D7%90%D7%A8%D7%99%D7%90%D7%9C%D7%94+%D7%93%D7%A0%D7%99%D7%90%D7%9C%D7%99&dates=20260622T070000Z%2F20260622T090000Z&details=%D7%A1%D7%93%D7%A0%D7%AA+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%91%D7%A2%D7%99%D7%93%D7%9F+%D7%94-AI&location=Zoom" target="_blank" class="cal-btn-google" onclick="gtag('event','click',{event_category:'button',event_label:'add_google_calendar'})">📅 הוסף ל-Google Calendar</a>
+        <a href="webinar.ics" download class="cal-btn-ics" onclick="gtag('event','click',{event_category:'button',event_label:'download_ics'})">⬇️ הורד קובץ יומן (.ics)</a>
       </div>
       <div class="cal-skip" onclick="document.getElementById('calendar-popup').style.display='none'; window.location.href='https://mrng.to/8wDgZNNu6x';">דלג ועבור לתשלום ←</div>
     </div>
