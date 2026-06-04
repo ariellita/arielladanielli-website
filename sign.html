@@ -408,6 +408,9 @@
     </p>
 
     <!-- Resident cards will be injected here by JS -->
+    <div id="resident-mode-banner" style="display:none; background:#fff8e1; border:1px solid #e6c85a; border-radius:6px; padding:12px 16px; margin-bottom:20px; font-size:13px; color:#7a5700;">
+      📋 אנא מלא/י את פרטיך וחתום/י — לאחר האישור שלח/י אישור בוואטסאפ לאריאלה.
+    </div>
     <div id="residents-container"></div>
   </div>
 
@@ -469,7 +472,9 @@ const drawing  = {};
 const signatureData = {};
 const TODAY = new Date().toLocaleDateString('he-IL');
 const NUM_SIGNERS = 4;
-document.addEventListener('DOMContentLoaded', () => updateProgress());
+const urlParams  = new URLSearchParams(window.location.search);
+const aptParam   = urlParams.get('apt') ? parseInt(urlParams.get('apt')) : null;
+const isAdmin    = aptParam === null;
 
 // ── Build cards ──────────────────────────────────────────
 residents.forEach((r, i) => {
@@ -523,11 +528,30 @@ residents.forEach((r, i) => {
       <span class="status-indicator" id="status-${cid}">✅ נחתם</span>
     </div>`;
 
+  // hide card if resident mode and wrong apartment
+  if (!isAdmin && r.apt !== aptParam) card.style.display = 'none';
+
   container.appendChild(card);
   setTimeout(() => {
     for (let s = 0; s < NUM_SIGNERS; s++) initCanvas(`${cid}-${s}`);
   }, 50);
 });
+
+// resident mode: show banner, hide controls, scroll to card
+if (!isAdmin) {
+  document.getElementById('progress-bar-wrap').style.display = 'none';
+  document.getElementById('send-btn').style.display = 'none';
+  document.querySelector('.print-btn.secondary').style.display = 'none';
+  document.getElementById('resident-mode-banner').style.display = 'block';
+  // scroll to the relevant card after a short delay
+  setTimeout(() => {
+    const idx = residents.findIndex(r => r.apt === aptParam);
+    if (idx >= 0) document.getElementById(`card-r${idx}`).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 200);
+}
+
+// load saved signatures from localStorage, then update progress
+setTimeout(() => { loadFromStorage(); updateProgress(); }, 150);
 
 // ── Canvas init ──────────────────────────────────────────
 function initCanvas(sid) {
@@ -666,15 +690,10 @@ function confirmApt(cid, apt, aptName) {
   statusEl.textContent = `✅ נחתם (${count} חותם${count > 1 ? 'ים' : ''})`;
   statusEl.style.display = 'inline';
 
-  // add download + WA buttons once (first time only)
+  // persist to localStorage so admin/lawyer mode can collect all signatures
+  localStorage.setItem(`yelin8_${cid}`, JSON.stringify(signatureData[cid]));
+
   const controls = card.querySelector('.sig-controls');
-  if (!controls.querySelector('.btn-download-mine')) {
-    const dlBtn = document.createElement('button');
-    dlBtn.className = 'btn-download-mine';
-    dlBtn.innerHTML = '📥 הורד PDF';
-    dlBtn.onclick = () => printMine(cid);
-    controls.appendChild(dlBtn);
-  }
 
   // always refresh WhatsApp link with updated signer list
   let waBtn = controls.querySelector('.wa-confirm-btn');
@@ -691,6 +710,61 @@ function confirmApt(cid, apt, aptName) {
   waBtn.innerHTML = '📲 שלח אישור בוואטסאפ';
 
   updateProgress();
+}
+
+// ── localStorage load ─────────────────────────────────────
+function loadFromStorage() {
+  residents.forEach((r, i) => {
+    const cid = `r${i}`;
+    const raw = localStorage.getItem(`yelin8_${cid}`);
+    if (!raw) return;
+    try {
+      const data = JSON.parse(raw);
+      signatureData[cid] = data;
+      renderSavedCard(cid, data);
+    } catch(e) {}
+  });
+}
+
+function renderSavedCard(cid, data) {
+  data.signers.forEach(sg => {
+    const sid = `${cid}-${sg.slot}`;
+    const nameEl = document.getElementById(`name-${sid}`);
+    const tzEl   = document.getElementById(`tz-${sid}`);
+    if (!nameEl) return;
+    nameEl.value = sg.fullname; nameEl.readOnly = true; nameEl.style.background = '#f5f5f5';
+    tzEl.value   = sg.tz;       tzEl.readOnly   = true; tzEl.style.background   = '#f5f5f5';
+    // draw saved signature image onto canvas
+    const canvas = canvases[sid];
+    if (canvas && sg.sig) {
+      const img = new Image();
+      img.onload = () => { canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height); };
+      img.src = sg.sig;
+      canvas.classList.add('has-sig');
+    }
+    const ph = document.getElementById(`ph-${sid}`);
+    if (ph) ph.style.display = 'none';
+  });
+
+  const card = document.getElementById(`card-${cid}`);
+  card.classList.add('signed');
+  const statusEl = document.getElementById(`status-${cid}`);
+  const count = data.signers.length;
+  statusEl.textContent = `✅ נחתם (${count} חותם${count > 1 ? 'ים' : ''})`;
+  statusEl.style.display = 'inline';
+
+  // re-add WhatsApp button
+  const controls = card.querySelector('.sig-controls');
+  if (!controls.querySelector('.wa-confirm-btn')) {
+    const allNames = data.signers.map(sg => sg.fullname).join(', ');
+    const tzList   = data.signers.map(sg => sg.tz.slice(0,2)+'****'+sg.tz.slice(-3)).join(', ');
+    const msg = encodeURIComponent(`✅ חתמנו על הסדר הבנות – ממ"דים ילין 8\nדירה: ${data.apt}\nחותמים: ${allNames}\nת.ז.: ${tzList}`);
+    const waBtn = document.createElement('a');
+    waBtn.href = `https://wa.me/972523124326?text=${msg}`;
+    waBtn.target = '_blank'; waBtn.className = 'wa-confirm-btn';
+    waBtn.innerHTML = '📲 שלח אישור בוואטסאפ';
+    controls.appendChild(waBtn);
+  }
 }
 
 // ── Progress tracker ─────────────────────────────────────
