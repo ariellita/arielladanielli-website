@@ -126,7 +126,7 @@ img{max-width:100%;display:block}
   position:relative;z-index:5;
   max-width:780px;width:100%;
   text-align:center;
-  padding:calc(var(--nav-h) + 60px) clamp(20px,6vw,80px) 80px;
+  padding:calc(var(--nav-h) + 60px) clamp(20px,6vw,80px) 40px;padding-top:calc(var(--nav-h) + 28vh);
 }
 
 .hero-badge{
@@ -394,7 +394,7 @@ footer p{color:var(--white60);font-size:.85rem}
 </head>
 <body>
 
-<div class="sketch-badge">סקיצה בלבד</div>
+
 
 
 <!-- ══ NAV ══ -->
@@ -428,7 +428,7 @@ footer p{color:var(--white60);font-size:.85rem}
 
   <!-- Full-bleed video -->
   <video class="hero-video" autoplay muted loop playsinline
-    src="/Users/arielladanieli/Desktop/downloads/Woman_waving_in_studio_202606031833.mp4">
+    src="banner-video.mp4">
   </video>
 
   <!-- Blue tint overlay -->
@@ -484,8 +484,7 @@ footer p{color:var(--white60);font-size:.85rem}
 
 
 <!-- ══ PROOF STRIP ══ -->
-<div class="proof has-deco" style="position:relative">
-  <div class="deco-oval do-lavender" style="width:320px;height:160px;top:-80px;left:50%;transform:translateX(-50%);animation:drift4 12s ease-in-out infinite"></div>
+<div class="proof" style="position:relative">
   <p class="proof-label">בין לקוחותיי</p>
   <div class="logo-grid">
     <div class="logo-item"><img src="לוגואים חברות/לוגו דיסני.png" alt="Disney+"></div>
@@ -511,14 +510,8 @@ footer p{color:var(--white60);font-size:.85rem}
 </div>
 
 <!-- ══ LECTURES ══ -->
-<section class="section has-deco" id="lectures">
-  <div class="deco-oval do-white" style="width:280px;height:140px;top:-70px;left:30%;animation:drift3 11s ease-in-out infinite 2s"></div>
-  <div class="deco-oval do-lavender do-blur" style="width:190px;height:85px;top:-35px;right:-45px;animation:drift1 10s ease-in-out infinite 1s"></div>
-  <div class="deco-oval do-mint" style="width:85px;height:42px;bottom:-18px;left:-18px;animation:drift4 9s ease-in-out infinite 4s"></div>
+<section class="section" id="lectures">
 
-  <span class="sp" style="top:52px;left:60px;color:#FFC1D9;font-size:1.3rem">✦</span>
-  <span class="sp" style="top:88px;left:100px;color:#00D68F;font-size:.7rem;animation-delay:.9s">✦</span>
-  <span class="sp" style="bottom:64px;right:60px;color:#B89CFF;font-size:.9rem;animation-delay:1.8s">✦</span>
   
   <div class="container" style="position:relative;z-index:2">
     <h2 class="section-title grad reveal">הרצאות</h2>
@@ -566,13 +559,8 @@ footer p{color:var(--white60);font-size:.85rem}
 
 
 <!-- ══ WORKSHOPS ══ -->
-<section class="section section-alt has-deco" id="workshops">
-  <div class="deco-oval do-lavender" style="width:260px;height:130px;top:-65px;right:20%;animation:driftWave 10s ease-in-out infinite 3s"></div>
-  <div class="deco-oval do-orange do-blur" style="width:160px;height:75px;top:-28px;left:-38px;animation:drift2 12s ease-in-out infinite 2s"></div>
-  <div class="deco-oval do-white" style="width:70px;height:70px;bottom:-22px;right:-18px;animation:drift3 9s ease-in-out infinite 5s"></div>
+<section class="section section-alt" id="workshops">
 
-  <span class="sp" style="top:48px;right:60px;color:#00D68F;font-size:1.1rem;animation-delay:.6s">✦</span>
-  <span class="sp" style="bottom:56px;left:60px;color:#B89CFF;font-size:.8rem;animation-delay:2.1s">✦</span>
   
   <div class="container" style="position:relative;z-index:2">
     <h2 class="section-title grad reveal">סדנאות</h2>
@@ -603,10 +591,7 @@ footer p{color:var(--white60);font-size:.85rem}
 
 
 <!-- ══ CONSULTING — AI EXPERIENCE ══ -->
-<section class="section has-deco" id="consulting">
-  <div class="deco-oval do-lavender" style="width:200px;height:90px;bottom:-30px;right:-50px;animation:drift1 11s ease-in-out infinite 3s"></div>
-  <span class="sp" style="top:44px;right:60px;color:#00D68F;font-size:.9rem;animation-delay:1.1s">✦</span>
-  <span class="sp" style="bottom:60px;left:60px;color:#FFC1D9;font-size:1rem;animation-delay:.3s">✦</span>
+<section class="section" id="consulting">
   <div class="container">
     <h2 class="section-title grad reveal" style="max-width:100%">רוצים לדעת מה אפשר לעשות עם בינה מלאכותית<br>לשדרוג חווית הלקוחות והעובדים שלכם?</h2>
     <div class="ai-experience-wrap reveal" style="margin-top:50px;display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap">
@@ -624,7 +609,7 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ LECTURE VIDEO ══ -->
-<section class="section section-alt has-deco" id="lecture-video">
+<section class="section section-alt" id="lecture-video">
   <div class="container" style="text-align:center">
     <p class="section-label reveal">רוצים לראות הרצאה שלי?</p>
     <h2 class="section-title grad reveal">כנס איגוד השיווק</h2>
@@ -637,13 +622,8 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ QUOTES ══ -->
-<section class="quotes has-deco">
-  <div class="deco-oval do-mint" style="width:300px;height:150px;top:-75px;left:25%;animation:drift2 12s ease-in-out infinite 4s"></div>
-  <div class="deco-oval do-lavender do-blur" style="width:210px;height:95px;top:-32px;right:-55px;animation:drift2 13s ease-in-out infinite 5s"></div>
-  <div class="deco-oval do-pink" style="width:95px;height:48px;bottom:-20px;left:-25px;animation:driftWave 9s ease-in-out infinite 1s"></div>
+<section class="quotes">
 
-  <span class="sp" style="top:40px;left:60px;color:#B89CFF;font-size:1.2rem;animation-delay:.4s">✦</span>
-  <span class="sp" style="bottom:40px;right:60px;color:#00D68F;font-size:.8rem;animation-delay:1.6s">✦</span>
   
   <div class="quotes-inner">
     <div class="quote-card reveal">
@@ -665,9 +645,8 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ ABOUT ══ -->
-<section class="section has-deco" id="about"
+<section class="section" id="about"
   >
-  <div class="deco-oval do-mint do-blur" style="width:170px;height:80px;top:8%;right:-45px;animation:drift2 10s ease-in-out infinite 6s"></div>
   <div class="deco-oval do-pink" style="width:90px;height:45px;bottom:12%;left:-25px;animation:drift4 8s ease-in-out infinite 1s"></div><div class="deco-oval
  do-mint do-blur" style="width:170px;height:80px;top:8%;right:-45px;animation:drift2 10s ease-in-out infinite 6s"></div>
   <div class="deco-oval do-pink" style="width:90px;height:45px;bottom:12%;left:-25px;animation:drift4 8s ease-in-out infinite 1s"></div
@@ -683,7 +662,7 @@ footer p{color:var(--white60);font-size:.85rem}
                 <span style="position:absolute;top:20px;right:10px;color:var(--orange);font-size:.9rem;opacity:.5;animation:twinkle 2.5s ease-in-out infinite;z-index:5">✦</span>
         <span style="position:absolute;top:60px;left:5px;color:var(--pink);font-size:.6rem;opacity:.4;animation:twinkle 3s ease-in-out infinite 1s;z-index:5">✦</span>
         <img
-          src="/Users/arielladanieli/claude/רענון אתר עם מיתוג שרון/ariella.jpg"
+          src="ariella.jpg"
           alt="אריאלה דניאלי"
           style="width:100%;height:auto;object-fit:cover;border-radius:20px;position:relative;z-index:1;box-shadow:0 20px 50px rgba(0,0,0,.4)">
       </div>
@@ -700,8 +679,7 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ FAQ ══ -->
-<section class="section section-alt has-deco" id="faq">
-  <div class="deco-oval do-lavender do-blur" style="width:150px;height:68px;top:-22px;left:-38px;animation:driftWave 10s ease-in-out infinite 2s"></div>
+<section class="section section-alt" id="faq">
   <div class="container" style="max-width:800px">
     <p class="section-label reveal">שאלות נפוצות</p>
     <h2 class="section-title grad reveal">כל מה שרציתם לדעת</h2>
@@ -727,9 +705,7 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ CONTACT ══ -->
-<section class="section has-deco" id="contact">
-  <div class="deco-oval do-mint" style="width:180px;height:82px;bottom:-28px;right:-45px;animation:drift3 11s ease-in-out infinite 4s"></div>
-  <div class="deco-oval do-orange do-blur" style="width:80px;height:40px;top:-16px;left:-20px;animation:drift1 9s ease-in-out infinite 7s"></div>
+<section class="section" id="contact">
 
   <div class="contact-wrap">
     <h2 class="section-title grad reveal">בואו נדבר</h2>
