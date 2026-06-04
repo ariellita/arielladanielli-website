@@ -526,6 +526,7 @@ residents.forEach((r, i) => {
     <div class="sig-controls" style="margin-top:10px;">
       <button class="btn-confirm" onclick="confirmApt('${cid}', ${r.apt}, '${r.name.replace(/'/g,"\\'")}')">אשר חתימות</button>
       <span class="status-indicator" id="status-${cid}">✅ נחתם</span>
+      <button class="btn-clear" style="font-size:11px; margin-right:8px;" onclick="clearApt('${cid}')">🗑 נקה טופס</button>
     </div>`;
 
   // hide card if resident mode and wrong apartment
@@ -594,6 +595,12 @@ function initCanvas(sid) {
   canvas.addEventListener('touchstart', start, { passive: false });
   canvas.addEventListener('touchmove', move,  { passive: false });
   canvas.addEventListener('touchend', end);
+}
+
+function clearApt(cid) {
+  if (!confirm('למחוק את כל החתימות של הדירה ולהתחיל מחדש?')) return;
+  localStorage.removeItem(`yelin8_${cid}`);
+  location.reload();
 }
 
 function clearSigner(sid) {
