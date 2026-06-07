@@ -60,7 +60,14 @@ export async function onRequestPost(context) {
         price:       amount,
         vatType:     1
       }],
-      ...(orderId && { remarks: `מס' הזמנה: ${orderId}` }),
+      remarks: [
+        orderId ? `מס' הזמנה: ${orderId}` : '',
+        '',
+        '📅 להוספת הסדנה ליומן Google Calendar:',
+        'https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%A2%D7%9D+%D7%91%D7%99%D7%A0%D7%94+%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA&dates=20260622T070000Z%2F20260622T090000Z&details=%D7%A1%D7%93%D7%A0%D7%AA+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%91%D7%A2%D7%99%D7%93%D7%9F+%D7%94-AI&location=Zoom',
+        '',
+        'לסדנה: יום שני 22.6.2026 | 10:00-12:00 | Zoom'
+      ].filter(Boolean).join('\n'),
       signed:      true,
       sendByEmail: !!customerEmail
     };
