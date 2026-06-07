@@ -1611,16 +1611,10 @@
       e.preventDefault();
       gtag('event', 'click', {event_category: 'button', event_label: 'form_submit'});
       const btn = document.getElementById('submit-btn');
-      btn.textContent = 'מעביר לדף התשלום...';
+      btn.textContent = '✓ ממשיכים לתשלום...';
       btn.style.background = '#00D68F';
       btn.disabled = true;
-
-      // Show calendar popup before redirect
       document.getElementById('calendar-popup').style.display = 'flex';
-
-      setTimeout(() => {
-        window.location.href = 'https://mrng.to/8wDgZNNu6x';
-      }, 4000);
     }
   </script>
 
@@ -1629,12 +1623,12 @@
     <div class="cal-box">
       <div style="font-size:2.5rem; margin-bottom:.6rem;">🗓</div>
       <h3>הרשמתם הושלמה!</h3>
-      <p>רוצים להוסיף את הוובינר ליומן שלכם?<br><small>ממשיכים לתשלום בעוד כמה שניות...</small></p>
+      <p>לפני שממשיכים לתשלום — הוסיפו את הוובינר ליומן שלכם!</p>
       <div class="cal-btns">
         <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%A2%D7%9D+%D7%91%D7%99%D7%A0%D7%94+%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA+%D7%A2%D7%9D+%D7%A9%D7%A8%D7%95%D7%9F+%D7%9E%D7%A1+%D7%95%D7%90%D7%A8%D7%99%D7%90%D7%9C%D7%94+%D7%93%D7%A0%D7%99%D7%90%D7%9C%D7%99&dates=20260622T070000Z%2F20260622T090000Z&details=%D7%A1%D7%93%D7%A0%D7%AA+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%91%D7%A2%D7%99%D7%93%D7%9F+%D7%94-AI&location=Zoom" target="_blank" class="cal-btn-google" onclick="gtag('event','click',{event_category:'button',event_label:'add_google_calendar'})">📅 הוסף ל-Google Calendar</a>
         <a href="webinar.ics" download class="cal-btn-ics" onclick="gtag('event','click',{event_category:'button',event_label:'download_ics'})">⬇️ הורד קובץ יומן (.ics)</a>
       </div>
-      <div class="cal-skip" onclick="document.getElementById('calendar-popup').style.display='none'; window.location.href='https://mrng.to/8wDgZNNu6x';">דלג ועבור לתשלום ←</div>
+      <a href="https://mrng.to/8wDgZNNu6x" class="cal-btn-google" style="background:#172044; margin-top:.5rem;" onclick="gtag('event','click',{event_category:'button',event_label:'popup_to_payment'})">המשך לתשלום ←</a>
     </div>
   </div>
 
