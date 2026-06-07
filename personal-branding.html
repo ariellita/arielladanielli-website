@@ -1617,6 +1617,9 @@
       const popup = document.getElementById('calendar-popup');
       if (popup) {
         popup.style.display = 'flex';
+        // Auto-open Google Calendar
+        const gcalUrl = document.querySelector('.cal-btn-google').href;
+        window.open(gcalUrl, '_blank');
       } else {
         window.location.href = 'https://mrng.to/8wDgZNNu6x';
       }
