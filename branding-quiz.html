@@ -605,10 +605,6 @@
       ואיתו תוכל/י לצאת לדרך בצורה נכונה ומדויקת
     </p>
     <button class="btn btn-start" onclick="Q._startFresh()">בואו נתחיל ←</button>
-    <div id="resume-block" style="display:none;margin-top:1rem;">
-      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:0.5rem;">יש לך שאלון שמור</div>
-      <button onclick="Q._resume()" style="background:none;border:1.5px solid var(--orange);border-radius:30px;padding:0.45rem 1.2rem;color:var(--orange);font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'Rubik',sans-serif;">המשך מהמקום שעצרת ←</button>
-    </div>
   </div>
 </div>
 
@@ -1287,9 +1283,6 @@ const Q = {
       if (a.selfUnderstanding) { const el=document.getElementById('ta-self');    if(el){ el.value=a.selfUnderstanding; this.onText(el,'selfUnderstanding','btn-self',2); } }
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
       if (a.imagery)           { const el=document.getElementById('ta-imagery'); if(el){ el.value=a.imagery; this.onText(el,'imagery','btn-imagery',2); } }
-      // show resume button on welcome screen (don't restore chip visuals yet)
-      const rb = document.getElementById('resume-block');
-      if (rb) rb.style.display = 'block';
     } catch(e) {}
   },
 
