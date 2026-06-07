@@ -604,9 +604,10 @@
       שאלון זה יעזור לך לקבל את הבסיס למיתוג האישי שלך —<br>
       ואיתו תוכל/י לצאת לדרך בצורה נכונה ומדויקת
     </p>
-    <button class="btn btn-start" onclick="Q.next()">בואו נתחיל ←</button>
-    <div id="restart-link" style="display:none;margin-top:0.8rem;">
-      <button onclick="Q._reset()" style="background:none;border:none;color:var(--muted);font-size:0.85rem;cursor:pointer;text-decoration:underline;font-family:'Heebo',sans-serif;">התחל/י מחדש</button>
+    <button class="btn btn-start" onclick="Q._startFresh()">בואו נתחיל ←</button>
+    <div id="resume-block" style="display:none;margin-top:1rem;">
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:0.5rem;">יש לך שאלון שמור</div>
+      <button onclick="Q._resume()" style="background:none;border:1.5px solid var(--orange);border-radius:30px;padding:0.45rem 1.2rem;color:var(--orange);font-size:0.88rem;font-weight:600;cursor:pointer;font-family:'Rubik',sans-serif;">המשך מהמקום שעצרת ←</button>
     </div>
   </div>
 </div>
@@ -1229,6 +1230,47 @@ const Q = {
     location.reload();
   },
 
+  _startFresh() {
+    try { localStorage.removeItem('branding-quiz'); } catch(e) {}
+    // reset answers
+    this.answers = { values:[], story:'', missing:'', peopleFeeling:[], selfUnderstanding:'', brandLanguage:'', imagery:'', colors:[], world:[], aesthetics:[], bodySensation:'' };
+    // clear any chip visual state
+    document.querySelectorAll('.chip-on,.chip-off').forEach(c => c.classList.remove('chip-on','chip-off'));
+    document.querySelectorAll('textarea').forEach(t => t.value = '');
+    this._updateSelBar();
+    // disable next buttons
+    ['btn-v','btn-s','btn-miss','btn-feel','btn-self','btn-col','btn-world','btn-aesth','btn-brand','btn-imagery','btn-sens'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.disabled = true;
+    });
+    this.next();
+  },
+
+  _resume() {
+    // restore visual chip states now that user chose to resume
+    const a = this.answers;
+    if (a.values && a.values.length) {
+      document.querySelectorAll('#values-grid .chip').forEach(c => {
+        if (a.values.includes(c.dataset.v)) c.classList.add('chip-on');
+      });
+      if (a.values.length >= 5) document.querySelectorAll('#values-grid .chip:not(.chip-on)').forEach(c => c.classList.add('chip-off'));
+      const bv = document.getElementById('btn-v'); if (bv) bv.disabled = false;
+    }
+    if (a.peopleFeeling && a.peopleFeeling.length) {
+      document.querySelectorAll('#feelings-grid .chip').forEach(c => { if (a.peopleFeeling.includes(c.dataset.v)) c.classList.add('chip-on'); });
+      const bf = document.getElementById('btn-feel'); if (bf) bf.disabled = false;
+    }
+    if (a.world && a.world.length) {
+      document.querySelectorAll('#world-grid .chip').forEach(c => { if (a.world.includes(c.dataset.v)) c.classList.add('chip-on'); });
+      const bw = document.getElementById('btn-world'); if (bw) bw.disabled = false;
+    }
+    if (a.aesthetics && a.aesthetics.length) {
+      document.querySelectorAll('#aesth-grid .chip').forEach(c => { if (a.aesthetics.includes(c.dataset.v)) c.classList.add('chip-on'); });
+      const ba = document.getElementById('btn-aesth'); if (ba) ba.disabled = false;
+    }
+    if (a.colors && a.colors.length) { this._updateSelBar(); const bc = document.getElementById('btn-col'); if (bc) bc.disabled = false; }
+    this.next();
+  },
+
   _saveToStorage() {
     try { localStorage.setItem('branding-quiz', JSON.stringify(this.answers)); } catch(e) {}
   },
@@ -1245,44 +1287,9 @@ const Q = {
       if (a.selfUnderstanding) { const el=document.getElementById('ta-self');    if(el){ el.value=a.selfUnderstanding; this.onText(el,'selfUnderstanding','btn-self',2); } }
       if (a.brandLanguage)     { const el=document.getElementById('ta-brand');   if(el){ el.value=a.brandLanguage; this.onText(el,'brandLanguage','btn-brand',2); } }
       if (a.imagery)           { const el=document.getElementById('ta-imagery'); if(el){ el.value=a.imagery; this.onText(el,'imagery','btn-imagery',2); } }
-      if (a.colors && a.colors.length) { this._updateSelBar(); document.getElementById('btn-col').disabled = false; }
-
-      // restore visual chip states for values
-      if (a.values && a.values.length) {
-        document.querySelectorAll('#values-grid .chip').forEach(c => {
-          if (a.values.includes(c.dataset.v)) c.classList.add('chip-on');
-        });
-        if (a.values.length >= 5) {
-          document.querySelectorAll('#values-grid .chip:not(.chip-on)').forEach(c => c.classList.add('chip-off'));
-        }
-        document.getElementById('btn-v').disabled = false;
-      }
-
-      // restore visual chip states for feelings
-      if (a.peopleFeeling && a.peopleFeeling.length) {
-        document.querySelectorAll('#feelings-grid .chip').forEach(c => {
-          if (a.peopleFeeling.includes(c.dataset.v)) c.classList.add('chip-on');
-        });
-        document.getElementById('btn-feel').disabled = false;
-      }
-
-      // restore visual chip states for world & aesthetics
-      if (a.world && a.world.length) {
-        document.querySelectorAll('#world-grid .chip').forEach(c => {
-          if (a.world.includes(c.dataset.v)) c.classList.add('chip-on');
-        });
-        document.getElementById('btn-world').disabled = false;
-      }
-      if (a.aesthetics && a.aesthetics.length) {
-        document.querySelectorAll('#aesth-grid .chip').forEach(c => {
-          if (a.aesthetics.includes(c.dataset.v)) c.classList.add('chip-on');
-        });
-        document.getElementById('btn-aesth').disabled = false;
-      }
-
-      // show restart link on welcome screen
-      const rl = document.getElementById('restart-link');
-      if (rl) rl.style.display = 'block';
+      // show resume button on welcome screen (don't restore chip visuals yet)
+      const rb = document.getElementById('resume-block');
+      if (rb) rb.style.display = 'block';
     } catch(e) {}
   },
 
