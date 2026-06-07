@@ -987,6 +987,32 @@
         color: rgba(255,255,255,.88);
       }
     }
+
+    /* ═══ CALENDAR POPUP ═══ */
+    #calendar-popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+    .cal-box {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.4rem 2rem;
+      text-align: center;
+      max-width: 420px;
+      width: 90%;
+      direction: rtl;
+    }
+    .cal-box h3 { font-family: "Rubik", sans-serif; font-size: 1.3rem; color: #172044; margin-bottom: .5rem; }
+    .cal-box p  { font-size: .92rem; color: #555; margin-bottom: 1.5rem; }
+    .cal-btns { display: flex; flex-direction: column; gap: .7rem; }
+    .cal-btn-google { background: #1A2BFF; color: #fff; border: none; border-radius: 10px; padding: .85rem 1.2rem; font-size: 1rem; font-family: inherit; cursor: pointer; text-decoration: none; display: block; }
+    .cal-btn-ics    { background: #f0f0f0; color: #172044; border: none; border-radius: 10px; padding: .85rem 1.2rem; font-size: 1rem; font-family: inherit; cursor: pointer; text-decoration: none; display: block; }
+    .cal-skip { font-size: .82rem; color: #aaa; margin-top: 1rem; cursor: pointer; }
   </style>
 </head>
 <body>
