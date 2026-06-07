@@ -1609,12 +1609,17 @@
     /* ═══ FORM SUBMIT ═══ */
     function handleSubmit(e) {
       e.preventDefault();
-      gtag('event', 'click', {event_category: 'button', event_label: 'form_submit'});
+      try { gtag('event', 'click', {event_category: 'button', event_label: 'form_submit'}); } catch(err) {}
       const btn = document.getElementById('submit-btn');
       btn.textContent = '✓ ממשיכים לתשלום...';
       btn.style.background = '#00D68F';
       btn.disabled = true;
-      document.getElementById('calendar-popup').style.display = 'flex';
+      const popup = document.getElementById('calendar-popup');
+      if (popup) {
+        popup.style.display = 'flex';
+      } else {
+        window.location.href = 'https://mrng.to/8wDgZNNu6x';
+      }
     }
   </script>
 
