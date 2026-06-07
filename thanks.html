@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ההרשמה הושלמה! | מיתוג אישי בעידן ה-AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;900&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Heebo', sans-serif; background: #0a0a0c; color: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; direction: rtl; padding: 2rem; }
+    .box { max-width: 480px; }
+    .emoji { font-size: 4rem; margin-bottom: 1rem; }
+    h1 { font-family: 'Rubik', sans-serif; font-size: 2rem; color: #00D68F; margin-bottom: .8rem; }
+    p { color: rgba(255,255,255,.7); line-height: 1.7; margin-bottom: 2rem; }
+    .cal-btn { display: block; background: #1A2BFF; color: #fff; text-decoration: none; padding: 1rem 2rem; border-radius: 50px; font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; transition: opacity .2s; }
+    .cal-btn:hover { opacity: .85; }
+    .cal-btn-ics { background: rgba(255,255,255,.1); }
+    .back { color: rgba(255,255,255,.35); font-size: .85rem; margin-top: 1.5rem; display: block; text-decoration: none; }
+    .back:hover { color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="emoji">🎉</div>
+    <h1>ברוכים הבאים לסדנה!</h1>
+    <p>ההרשמה הושלמה בהצלחה.<br>הוסיפו את הסדנה ליומן שלכם כדי שלא תפספסו!</p>
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%D7%95%D7%95%D7%91%D7%99%D7%A0%D7%A8+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%A2%D7%9D+%D7%91%D7%99%D7%A0%D7%94+%D7%9E%D7%9C%D7%90%D7%9B%D7%95%D7%AA%D7%99%D7%AA+%D7%A2%D7%9D+%D7%A9%D7%A8%D7%95%D7%9F+%D7%9E%D7%A1+%D7%95%D7%90%D7%A8%D7%99%D7%90%D7%9C%D7%94+%D7%93%D7%A0%D7%99%D7%90%D7%9C%D7%99&dates=20260622T070000Z%2F20260622T090000Z&details=%D7%A1%D7%93%D7%A0%D7%AA+%D7%9E%D7%99%D7%AA%D7%95%D7%92+%D7%90%D7%99%D7%A9%D7%99+%D7%91%D7%A2%D7%99%D7%93%D7%9F+%D7%94-AI&location=Zoom" target="_blank" class="cal-btn" id="gcal">📅 הוסף ל-Google Calendar</a>
+    <a href="webinar.ics" download class="cal-btn cal-btn-ics">⬇️ הורד קובץ יומן (Apple / Outlook)</a>
+    <a href="personal-branding" class="back">← חזרה לדף הסדנה</a>
+  </div>
+  <script>
+    // Auto-open Google Calendar
+    setTimeout(() => {
+      document.getElementById('gcal').click();
+    }, 800);
+  </script>
+</body>
+</html>
