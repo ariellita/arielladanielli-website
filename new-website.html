@@ -175,23 +175,28 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
   .nav-links,.nav-cta-wrap{display:none}
   .burger{display:flex}
   .quotes-grid{grid-template-columns:1fr!important}
-  .section{padding:36px 20px}
-  .proof{padding:24px 0}
-  .proof-label{margin-bottom:16px;font-size:1.2rem}
-  .section-title{margin-bottom:16px}
-  .section-sub{margin-bottom:24px}
-  .hero{padding-bottom:40px}
+  .section,.section-alt,.quotes-section{padding:28px 16px!important}
+  .proof{padding:20px 0!important}
+  .proof-label{margin-bottom:12px!important;font-size:1.1rem}
+  .section-title{margin-bottom:12px!important;font-size:clamp(1.6rem,7vw,2.2rem)!important}
+  .section-sub{margin-bottom:18px!important}
+  .section-label{margin-bottom:10px!important}
+  .hero{
+    min-height:unset!important;
+    padding:28px 16px 36px!important;
+  }
+  .video-banner{max-height:55vw}
+  .video-banner video{max-height:55vw}
 }
 
 /* ════════════════════════════
    HERO
 ════════════════════════════ */
 .hero{
-  min-height:100vh;
   position:relative;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   background:var(--pink-bg);
-  padding:calc(var(--nav-h) + 40px) clamp(20px,6vw,80px) 80px;
+  padding:60px clamp(20px,6vw,80px) 80px;
 }
 
 /* Dots pattern */
@@ -547,7 +552,7 @@ footer p{color:var(--text40);font-size:.85rem}
 </section>
 
 <!-- ══ PROOF ══ -->
-<div class="proof" style="padding:44px 0;background:var(--pink-mid);border-top:1.5px solid rgba(232,160,190,.2);border-bottom:1.5px solid rgba(232,160,190,.2)">
+<div class="proof" style="background:var(--pink-mid);border-top:1.5px solid rgba(232,160,190,.2);border-bottom:1.5px solid rgba(232,160,190,.2)">
   <div class="dot-grid-tl"></div>
   <div class="dot-grid-br"></div>
   <span class="spark sp-blue"  style="top:15px;left:15%;font-size:.9rem;animation-delay:.3s">✦</span>
@@ -783,7 +788,7 @@ footer p{color:var(--text40);font-size:.85rem}
 </section>
 
 <!-- ══ ABOUT ══ -->
-<section class="section" id="about" style="background:transparent;position:relative;overflow:hidden;padding-top:40px">
+<section class="section" id="about" style="background:transparent;position:relative;overflow:hidden">
   <span class="spark sp-purple"style="top:30px;left:5%;font-size:1rem;animation-delay:.6s">✦</span>
   <span class="spark sp-orange"style="top:55px;left:10%;font-size:.6rem;animation-delay:1.5s">✦</span>
   <span class="spark sp-blue"  style="bottom:40px;right:5%;font-size:.8rem;animation-delay:1s">✦</span>
