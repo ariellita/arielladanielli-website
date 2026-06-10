@@ -2,630 +2,768 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1H2924HK4W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1H2924HK4W');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>סקיצה v2 | אריאלה דניאלי — Blue Brand</title>
+<title>אריאלה דניאלי | מרצה ויועצת לחדשנות ובינה מלאכותית</title>
+<meta name="description" content="אריאלה דניאלי — מרצה ויועצת לחדשנות ובינה מלאכותית. הרצאות שמעוררות השראה, סדנאות מעשיות וייעוץ אסטרטגי לארגונים.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800;900&family=Rubik:wght@700;800;900&family=Secular+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800;900&family=Rubik:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ══════════════════════════════════
-   DESIGN TOKENS — Brand Guidelines
-   Blue:#397EFF  Orange:#FF4D27
-   Pink:#FF7EB3  Green:#44D62C
-══════════════════════════════════ */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  /* NEW palette */
-  --blue:    #2B6BFF;
-  --blue2:   #2256E0;
-  --blue3:   #1840CC;
-  --navy:    #1232AA;
-  --orange:  #FF5A1F;
-  --pink:    #FFC1D9;
-  --pink2:   #FF7EB3;
-  --mint:    #00D68F;
-  --lavender:#B89CFF;
-  --yellow:  #FFD027;
-
-  /* kept from original for continuity */
-  --bg:      #2B6BFF;
-  --bg-card: rgba(255,255,255,.12);
-  --bg-card2:rgba(255,255,255,.08);
-  --green:   #25D366;   /* WhatsApp */
-  --white:   #ffffff;
-  --white60: rgba(255,255,255,.65);
-  --white08: rgba(255,255,255,.08);
-  --white15: rgba(255,255,255,.15);
-
+  --pink-bg:   #FEF0F5;
+  --pink-mid:  #FDDDE8;
+  --pink-deep: #F9C5D8;
+  --pink-card: rgba(255,255,255,.75);
+  --orange:    #FF5A1F;
+  --orange2:   #FF7A45;
+  --purple:    #9B8EC4;
+  --blue-soft: #A8C5DA;
+  --green-soft:#A8D5B8;
+  --text:      #1E3CFF;
+  --text60:    rgba(30,60,255,.6);
+  --text40:    rgba(30,60,255,.4);
+  --green-wa:  #25D366;
   --font:      'Assistant', sans-serif;
-  --font-head: 'Rubik', 'Secular One', sans-serif;
-  --nav-h:     72px;
+  --font-head: 'Rubik', sans-serif;
+  --nav-h:     80px;
 }
 html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:var(--font);background:var(--bg);color:var(--white);direction:rtl;line-height:1.7;overflow-x:hidden}
+body{font-family:var(--font);background:linear-gradient(160deg,#fff8fb 0%,#fde8f0 60%,#f8e0ee 100%);color:var(--text);direction:rtl;line-height:1.7;overflow-x:hidden;min-height:100vh}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 
 /* ── SKETCH BADGE ── */
-.sketch-badge{position:fixed;top:14px;left:14px;z-index:9999;background:rgba(255,77,39,.92);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:100px}
+.sketch-badge{position:fixed;top:14px;left:14px;z-index:9999;background:var(--orange);color:#fff;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 16px;border-radius:100px}
 
-/* ── TITLES — Pantone orange solid ── */
-.grad{color:var(--orange);-webkit-text-fill-color:var(--orange)}
-.grad-num{color:var(--orange)}
+
+
+/* ══ SLIDE-STYLE DECORATIVE ELEMENTS ══ */
+/* Wavy bottom layers */
+.slide-waves{
+  position:absolute;bottom:0;left:0;right:0;
+  pointer-events:none;z-index:0;line-height:0;
+}
+/* Corner dot grid */
+.dot-grid-br{
+  position:absolute;bottom:20px;right:20px;
+  width:90px;height:90px;
+  background-image:radial-gradient(rgba(155,142,196,.35) 2px, transparent 2px);
+  background-size:14px 14px;
+  pointer-events:none;z-index:1;
+}
+.dot-grid-tl{
+  position:absolute;top:20px;left:20px;
+  width:70px;height:70px;
+  background-image:radial-gradient(rgba(232,160,190,.35) 2px, transparent 2px);
+  background-size:12px 12px;
+  pointer-events:none;z-index:1;
+}
+/* Curve line */
+.curve-line{
+  position:absolute;top:0;right:0;
+  width:200px;height:180px;
+  pointer-events:none;z-index:1;overflow:hidden;
+}
+/* Small icons */
+.deco-icon{
+  position:absolute;pointer-events:none;z-index:2;
+  opacity:.18;
+}
+/* Floating sparkles */
+.spark{position:absolute;pointer-events:none;animation:twinkle 3s ease-in-out infinite;font-size:1rem}
+.sp-blue{color:#7BB8D4}.sp-pink{color:#E8A0BE}.sp-green{color:#7DC5A0}.sp-purple{color:#9B8EC4}.sp-orange{color:rgba(255,90,31,.6)}
+@keyframes twinkle{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.25)}}
+
+/* ── AI PATTERN ── */
+.ai-pattern{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;opacity:.055}
+.ai-pattern svg{position:absolute}
+
+/* ── VIDEO INTRO ── */
+.video-intro{position:fixed;inset:0;z-index:5000;background:rgba(255,240,245,.97);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;transition:opacity .8s ease}
+.video-intro.hidden{opacity:0;pointer-events:none}
+.video-box{width:min(680px,92vw);aspect-ratio:16/9;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(155,142,196,.3);background:#f0e0e8}
+.video-box video{width:100%;height:100%;object-fit:cover}
+.skip-btn{color:var(--text60);font-size:.88rem;cursor:pointer;border:1.5px solid rgba(155,142,196,.3);padding:8px 24px;border-radius:100px;background:transparent;transition:all .25s}
+.skip-btn:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ── LOGO MARQUEE ── */
+.logo-track-wrap{overflow:hidden;position:relative;padding:0}
+.logo-track-wrap::before,.logo-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;pointer-events:none}
+.logo-track-wrap::before{right:0;background:linear-gradient(to left,var(--pink-mid),transparent)}
+.logo-track-wrap::after{left:0;background:linear-gradient(to right,var(--pink-mid),transparent)}
+.logo-track{display:flex;gap:20px;animation:marquee 30s linear infinite;width:max-content;align-items:center}
+.logo-track:hover{animation-play-state:paused}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+
+/* Global dot pattern on all sections */
+.section::before,.quotes-section::before,.proof::before,.contact-section::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(155,142,196,.15) 1.5px, transparent 1.5px);
+  background-size:28px 28px;
+  pointer-events:none;z-index:0;
+}
+.section>*,.quotes-section>*,.contact-section>*{position:relative;z-index:1}
+
+
+/* ── GLOBAL CENTERING ── */
+.section-title,.section-sub,.section-label{text-align:center!important}
+.card-body{align-items:center;text-align:center}
+.card-title,.card-desc{text-align:center!important}
+.card-btn{align-self:center!important;margin:0 auto}
+.featured-body{text-align:center;align-items:center}
+.featured-body .btn-main{margin:0 auto}
+.featured-tag,.featured-title,.featured-desc{text-align:center}
+.about-text{text-align:center}
+.about-text p{text-align:center!important}
+.about-wrap{justify-content:flex-start}
+.contact-section{text-align:center}
+.contact-links{justify-content:center}
+.quote-text,.quote-author,.quote-role{text-align:center!important}
+.hero-ctas{justify-content:center}
+.section-sub.center,.section-sub{text-align:center!important;margin-right:auto;margin-left:auto}
+footer{text-align:center;justify-content:center;flex-direction:column;align-items:center;gap:16px}
 
 /* ── SCROLL REVEAL ── */
-.reveal{opacity:0;transform:translateY(60px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
-.reveal.visible{opacity:1 !important;transform:translateY(0) !important}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
 
-/* (video intro removed) */
+/* ── SPARKLES CSS ── */
+.spark{position:absolute;pointer-events:none;animation:twinkle 3s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+.sp-blue  {color:#7BB8D4}
+.sp-pink  {color:#E8A0BE}
+.sp-green {color:#7DC5A0}
+.sp-purple{color:#9B8EC4}
 
-/* ══════════════════════════════════
-   NAVBAR  (same structure as v5)
-══════════════════════════════════ */
-.nav{position:fixed;top:0;right:0;left:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(20px,4vw,60px);transition:background .4s,box-shadow .4s}
-.nav.scrolled{background:rgba(20,40,220,.95);backdrop-filter:blur(18px);box-shadow:0 2px 30px rgba(0,0,0,.3)}
-.nav-logo img{height:52px;width:auto;object-fit:contain}
-.nav-logo-fallback{font-family:var(--font-head);font-size:1.3rem;color:var(--white)}
-.nav-logo-fallback span{color:var(--orange)}
-.nav-links{display:flex;gap:clamp(16px,2.5vw,36px);list-style:none}
-.nav-links a{font-size:.95rem;font-weight:400;color:var(--white60);transition:color .3s}
-.nav-links a:hover{color:var(--mint)}
-.nav-cta{background:var(--orange);color:var(--white);padding:10px 26px;border-radius:8px;font-weight:700;font-size:.9rem;transition:transform .3s,box-shadow .3s;white-space:nowrap}
-.nav-cta:hover{transform:scale(1.06);box-shadow:0 4px 24px rgba(255,77,39,.5)}
-.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001}
-.burger span{width:26px;height:2px;background:var(--white);transition:transform .3s,opacity .3s}
-.burger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
-.burger.open span:nth-child(2){opacity:0}
-.burger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
-.mobile-menu{position:fixed;inset:0;background:rgba(20,40,220,.98);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;z-index:999;opacity:0;pointer-events:none;transition:opacity .4s}
-.mobile-menu.open{opacity:1;pointer-events:all}
-.mobile-menu a{font-size:1.4rem;font-weight:700;color:var(--white)}
-@media(max-width:768px){.nav-links,.nav-cta-wrap{display:none}.burger{display:flex}}
+/* ── WAVY BACKGROUND SVG ── */
+.wave-bg{position:absolute;bottom:0;left:0;right:0;pointer-events:none;z-index:0}
 
-/* ══════════════════════════════════
-   HERO — VIDEO BANNER + text overlay
-══════════════════════════════════ */
+/* ════════════════════════════
+   NAV
+════════════════════════════ */
+.nav{
+  position:fixed;top:0;right:0;left:0;z-index:1000;
+  height:var(--nav-h);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,5vw,72px);gap:16px;
+  background:rgba(255,240,245,.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(232,160,190,.2);
+  transition:box-shadow .3s;
+}
+.nav.scrolled{box-shadow:0 2px 20px rgba(155,142,196,.15)}
+.nav-links{display:flex;gap:clamp(10px,1.8vw,26px);list-style:none;flex-shrink:1}
+.nav-links a{font-size:clamp(.85rem,1.2vw,1.1rem);font-weight:700;color:var(--text60);transition:color .25s}
+.nav-links a:hover{color:var(--orange)}
+.nav-cta-wrap a{flex-shrink:0;
+  background:var(--orange);color:white;
+  padding:11px 28px;border-radius:50px;
+  font-weight:700;font-size:.95rem;
+  transition:transform .25s,box-shadow .25s;
+  display:inline-block;
+}
+.nav-cta-wrap a:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(255,90,31,.4)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.burger span{width:26px;height:2px;background:var(--text);transition:.3s}
+@media(max-width:768px){.nav-links,.nav-cta-wrap{display:none}.burger{display:flex}.quotes-grid{grid-template-columns:1fr!important}}
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
 .hero{
   min-height:100vh;
-  display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  padding:0;
-  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--pink-bg);
+  padding:calc(var(--nav-h) + 40px) clamp(20px,6vw,80px) 80px;
 }
 
-/* Full-bleed video */
-.hero-video{
+/* Dots pattern */
+.hero-dots{
   position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;
-  object-position:center 15%;
-  z-index:1;
-  opacity:1;
+  background-image:radial-gradient(rgba(155,142,196,.25) 1.5px, transparent 1.5px);
+  background-size:28px 28px;
+  pointer-events:none;z-index:0;
 }
 
-/* Blue overlay — עדין, לא מכסה את הוידאו */
-.hero-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(
-    160deg,
-    rgba(43,107,255,.3) 0%,
-    rgba(5,14,48,.45) 100%
-  );
-  z-index:2;
-}
-
-/* Dot grid over overlay */
-.hero-grid{position:absolute;inset:0;z-index:3;background-image:radial-gradient(rgba(255,255,255,.06) 1.5px,transparent 1.5px);background-size:30px 30px;pointer-events:none}
-
-/* Diagonal energy lines */
-.hero-lines{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
-.hero-lines svg{position:absolute}
-
-/* Text block — centered over video */
 .hero-content{
-  position:relative;z-index:5;
-  max-width:780px;width:100%;
+  position:relative;z-index:2;
+  max-width:820px;width:100%;
   text-align:center;
-  padding:calc(var(--nav-h) + 60px) clamp(20px,6vw,80px) 40px;padding-top:calc(var(--nav-h) + 28vh);
 }
 
 .hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--white08);border:1px solid var(--white15);
-  backdrop-filter:blur(10px);
-  padding:6px 18px;border-radius:100px;
-  font-size:.82rem;margin-bottom:24px;
+  display:inline-block;
+  background:rgba(255,90,31,.1);border:1px solid rgba(255,90,31,.2);
+  color:var(--orange);padding:6px 20px;border-radius:100px;
+  font-size:.88rem;font-weight:700;margin-bottom:22px;letter-spacing:.5px;
 }
-.badge-dot{width:8px;height:8px;border-radius:50%;background:var(--mint);animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
 
 .hero-title{
   font-family:var(--font-head);
-  font-size:clamp(1.9rem,3.8vw,3.2rem);
-  line-height:1.2;margin-bottom:18px;
-  text-shadow:0 2px 24px rgba(0,0,0,.4);
+  font-size:clamp(2.4rem,5.5vw,4.4rem);
+  font-weight:900;line-height:1.15;
+  color:var(--text);margin-bottom:22px;
 }
-.hero-sub{font-size:clamp(1rem,1.8vw,1.3rem);color:rgba(255,255,255,.85);font-weight:300;margin-bottom:38px;text-shadow:0 1px 8px rgba(0,0,0,.3)}
-.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.hero-title .hi{color:var(--orange)}
 
-.btn-wa{background:var(--green);color:var(--white);padding:14px 32px;border-radius:8px;font-weight:700;font-size:1rem;display:inline-flex;align-items:center;gap:8px;transition:transform .3s,box-shadow .3s;border:none;cursor:pointer}
-.btn-wa:hover{transform:scale(1.06);box-shadow:0 6px 28px rgba(37,211,102,.4)}
-.btn-outline{border:2px solid rgba(255,255,255,.5);color:var(--white);padding:12px 32px;border-radius:8px;font-weight:700;font-size:1rem;transition:background .3s,transform .3s;background:rgba(255,255,255,.08);backdrop-filter:blur(6px)}
-.btn-outline:hover{background:rgba(255,255,255,.18);transform:scale(1.06)}
-
-/* Scroll hint */
-.hero-scroll{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;
-  color:rgba(255,255,255,.45);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;
-  animation:scrollBounce 2s ease-in-out infinite;
-}
-.hero-scroll svg{width:20px;height:20px;opacity:.5}
-@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-
-/* stagger */
-.stagger{opacity:0;transform:translateY(40px);animation:staggerIn .9s cubic-bezier(.22,1,.36,1) forwards}
-.stagger:nth-child(1){animation-delay:.3s}
-.stagger:nth-child(2){animation-delay:.55s}
-.stagger:nth-child(3){animation-delay:.8s}
-.stagger:nth-child(4){animation-delay:1s}
-@keyframes staggerIn{to{opacity:1;transform:translateY(0)}}
-
-@media(max-width:768px){
-  .hero-title{font-size:clamp(1.7rem,7vw,2.4rem)}
-  .hero-sub{font-size:.95rem}
-  .hero-badge{font-size:.72rem;padding:5px 14px}
-  .hero-content{padding:calc(var(--nav-h) + 30px) 20px 60px}
-  .hero-ctas{flex-direction:column;align-items:center;gap:12px}
-  .btn-wa,.btn-outline{width:100%;max-width:280px;justify-content:center;text-align:center}
-  .hero-video{object-position:center top}
-  /* הצורות הפלואידיות — קטנות יותר במובייל */
-  .fluid{transform:scale(.6) !important;transform-origin:top left}
+.hero-sub{
+  font-size:clamp(1.1rem,2vw,1.35rem);
+  color:var(--text60);font-weight:400;
+  margin-bottom:40px;max-width:600px;margin-left:auto;margin-right:auto;
 }
 
-/* ══════════════════════════════════
-   PROOF STRIP — LOGOS
-   (same structure, new bg)
-══════════════════════════════════ */
-.proof{
-  padding:44px 0;
-  overflow:hidden;
-  background:rgba(0,0,0,.15);
-  border-top:2px solid rgba(0,214,143,.35);
-  border-bottom:2px solid rgba(0,214,143,.35);
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-wa-green{background:var(--green-wa)!important;color:white!important;border:none}
+.btn-wa-green:hover{box-shadow:0 6px 28px rgba(37,211,102,.45)!important}
+.btn-main{
+  background:var(--orange);color:white;
+  padding:15px 36px;border-radius:50px;
+  font-weight:800;font-size:1.05rem;
+  display:inline-flex;align-items:center;gap:8px;
+  transition:transform .25s,box-shadow .25s;border:none;cursor:pointer;
 }
-.proof-label{text-align:center;font-size:.8rem;letter-spacing:4px;color:var(--mint);text-transform:uppercase;margin-bottom:26px;font-weight:700}
-.logo-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px 18px;padding:0 20px;max-width:1060px;margin:0 auto}
-.logo-item{height:52px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(255,255,255,.9);border-radius:10px;padding:8px 20px;transition:transform .3s}
-.logo-item:hover{transform:scale(1.06)}
-.logo-item img{height:28px;width:auto;object-fit:contain}
-.logo-item.text-logo{font-size:.9rem;font-weight:700;color:#222;letter-spacing:.5px;white-space:nowrap}
-.proof-conferences{text-align:center;margin-top:18px;font-size:.82rem;color:var(--white60);font-weight:300;padding:0 20px}
+.btn-main:hover{transform:scale(1.05);box-shadow:0 6px 28px rgba(255,90,31,.45)}
+.btn-ghost{
+  border:2px solid rgba(37,211,102,.5);color:var(--green-wa);
+  padding:13px 30px;border-radius:50px;
+  font-weight:700;font-size:1rem;
+  background:rgba(255,255,255,.6);backdrop-filter:blur(6px);
+  transition:all .25s;
+}
+.btn-ghost:hover{border-color:var(--green-wa);background:rgba(37,211,102,.08)}
 
-/* ══════════════════════════════════
+/* Hero wave bottom */
+.hero-wave{position:absolute;bottom:0;left:0;right:0;z-index:1;line-height:0}
+
+/* ════════════════════════════
+   PROOF LOGOS
+════════════════════════════ */
+.proof{position:relative;
+  padding:44px 0;background:white;
+  border-top:1px solid rgba(232,160,190,.2);
+  border-bottom:1px solid rgba(232,160,190,.2);
+}
+.proof-label{text-align:center;font-size:1.4rem;letter-spacing:2px;color:var(--text);text-transform:none;margin-bottom:28px;font-weight:800}
+.logo-grid{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px 16px;padding:0 20px;max-width:1060px;margin:0 auto}
+.logo-item{height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:rgba(250,240,250,.8);border-radius:10px;padding:8px 18px;transition:transform .3s}
+.logo-item:hover{transform:scale(1.07)}
+.logo-item img{height:26px;width:auto;object-fit:contain}
+
+/* ════════════════════════════
    SECTION COMMON
-══════════════════════════════════ */
-.section{padding:clamp(60px,10vw,120px) clamp(20px,6vw,80px)}
-.section-label{font-size:.82rem;letter-spacing:4px;color:var(--mint);text-transform:uppercase;margin-bottom:12px;font-weight:700;text-align:center}
-.section-title{font-family:var(--font-head);font-size:clamp(2rem,4vw,3.2rem);margin-bottom:16px;text-align:center;letter-spacing:-.5px}
-.section-sub{font-size:clamp(1rem,1.5vw,1.15rem);color:var(--white60);max-width:680px;margin-bottom:48px;text-align:center;margin-right:auto;margin-left:auto;font-weight:300}
+════════════════════════════ */
+.section{padding:clamp(60px,9vw,110px) clamp(20px,6vw,80px);position:relative}
 .container{max-width:1200px;margin:0 auto}
+.section-label{
+  display:inline-block;
+  background:rgba(255,90,31,.1);border:1px solid rgba(255,90,31,.2);
+  color:var(--orange);font-size:1.1rem;font-weight:800;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:8px 22px;border-radius:100px;margin-bottom:14px;
+}
+.section-title{
+  font-family:var(--font-head);
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:900;color:var(--text);
+  margin-bottom:14px;
+}
+.section-sub{text-align:center;
+  font-size:clamp(1rem,1.6vw,1.2rem);
+  color:var(--text60);max-width:640px;margin-bottom:52px;
+  font-weight:400;line-height:1.7;
+}
+.section-sub.center{text-align:center;margin-right:auto;margin-left:auto}
 
-/* Alternating section bg */
-.section-alt{background:rgba(0,0,0,.1)}
-.section-blue-mid{background:rgba(0,0,0,.08)}
-
-/* ══════════════════════════════════
-   DECO — עיגולים ואובלים עדינים נעים
-══════════════════════════════════ */
-
-/* האלמנט הבסיסי */
-.deco-oval {
-  position:absolute;
-  pointer-events:none;
-  border-radius:50%;
-  z-index:1;
-  will-change:transform;
+/* ════════════════════════════
+   FEATURED CARD (הרצאה/סדנה מרכזית)
+════════════════════════════ */
+.featured-card{
+  background:white;
+  border-radius:24px;
+  box-shadow:0 8px 40px rgba(155,142,196,.2);
+  overflow:hidden;
+  display:flex;
+  gap:0;
+  margin-bottom:40px;
+  border:1.5px solid rgba(232,160,190,.3);
+  position:relative;
+}
+.featured-badge{
+  position:absolute;top:20px;right:20px;z-index:5;
+  background:var(--orange);color:white;
+  font-size:.85rem;font-weight:900;
+  padding:6px 18px;border-radius:100px;
+  box-shadow:0 3px 14px rgba(255,90,31,.4);
+}
+.featured-img{
+  flex:0 0 45%;
+  min-height:340px;
+  overflow:hidden;
+}
+.featured-img img{width:100%;height:100%;object-fit:cover}
+.featured-body{
+  flex:1;padding:40px 40px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.featured-tag{
+  font-size:.78rem;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:14px;
+}
+.featured-title{
+  font-family:var(--font-head);
+  font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:900;color:var(--text);
+  margin-bottom:14px;line-height:1.25;
+}
+.featured-desc{
+  font-size:1.12rem;color:var(--text60);
+  line-height:1.75;margin-bottom:28px;
+}
+.featured-card .btn-main{align-self:flex-start}
+@media(max-width:768px){
+  .featured-card{flex-direction:column}
+  .featured-img{flex:0 0 220px;min-height:220px}
+  .featured-body{padding:24px}
 }
 
-/* גוונים */
-.do-lavender{ background:rgba(184,156,255,.18); border:1px solid rgba(184,156,255,.25); }
-.do-mint    { background:rgba(0,214,143,.12);  border:1px solid rgba(0,214,143,.2); }
-.do-orange  { background:rgba(255,90,31,.1);   border:1px solid rgba(255,90,31,.18); }
-.do-white   { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); }
-.do-pink    { background:rgba(255,193,217,.1);  border:1px solid rgba(255,193,217,.2); }
-
-/* blur רך */
-.do-blur { filter:blur(2px); }
-
-/* אנימציות צף — כל אחת קצת שונה */
-@keyframes drift1{
-  0%,100%{ transform:translateY(0)    translateX(0)   rotate(-3deg) }
-  33%    { transform:translateY(-14px) translateX(7px)  rotate(2deg)  }
-  66%    { transform:translateY(-8px)  translateX(-5px) rotate(-5deg) }
-}
-@keyframes drift2{
-  0%,100%{ transform:translateY(0)   translateX(0)    rotate(5deg)  }
-  40%    { transform:translateY(-18px) translateX(-8px) rotate(1deg)  }
-  70%    { transform:translateY(-10px) translateX(6px)  rotate(8deg)  }
-}
-@keyframes drift3{
-  0%,100%{ transform:translateY(0)   translateX(0)   rotate(-6deg) }
-  25%    { transform:translateY(-12px) translateX(4px)  rotate(-2deg) }
-  75%    { transform:translateY(-20px) translateX(-6px) rotate(-9deg) }
-}
-@keyframes drift4{
-  0%,100%{ transform:translateY(0)   translateX(0)   scale(1)    }
-  50%    { transform:translateY(-10px) translateX(5px)  scale(1.04) }
-}
-@keyframes driftWave{
-  0%,100%{ transform:translateX(0)   translateY(0)   }
-  50%    { transform:translateX(-12px) translateY(-8px) }
-}
-.fsvg{
-  position:absolute;pointer-events:none;z-index:1;
-  overflow:visible;
-}
-/* אנימציית path morphing — אותו מספר נקודות */
-  50%{     d:path("M10,85 C50,20 155,0 250,60 C310,100 320,118 375,88 C418,65 458,50 490,85 C458,122 418,148 375,132 C320,102 310,65 250,120 C155,175 50,148 10,85 Z") }
-}
-  50%{     d:path("M10,75 C55,5 158,12 248,65 C305,100 318,110 368,82 C415,58 456,48 490,75 C456,110 415,142 368,128 C318,108 305,72 248,118 C158,168 55,145 10,75 Z") }
-}
-  50%{     d:path("M10,80 C52,18 162,8 252,62 C308,96 315,112 368,86 C416,64 455,50 490,80 C455,118 416,145 368,132 C315,112 308,68 252,115 C162,172 52,145 10,80 Z") }
-}
-@keyframes twinkle{
-  0%,100%{opacity:.45;transform:scale(1)}
-  50%{opacity:1;transform:scale(1.35)}
-}
-.sp{position:absolute;pointer-events:none;z-index:4;animation:twinkle 2.8s ease-in-out infinite;line-height:1;font-style:normal}
-.ci{position:absolute;border-radius:50%;pointer-events:none;z-index:1}
-.has-deco{position:relative;overflow:hidden}
-.wave-divider{line-height:0;position:relative;z-index:2}
-.wave-divider svg{display:block;width:100%}
-
-/* ══════════════════════════════════
-   CARDS — same structure as v5, new colors
-══════════════════════════════════ */
-.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,400px),1fr));gap:28px}
+/* ════════════════════════════
+   CARDS GRID
+════════════════════════════ */
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,340px),1fr));gap:24px}
 .card{
-  background:var(--bg-card);border:1px solid var(--white08);
-  border-radius:16px;padding:32px;
-  transition:transform .4s cubic-bezier(.22,1,.36,1),border-color .4s,box-shadow .4s;
-  position:relative;overflow:hidden;display:flex;flex-direction:column;
+  background:white;border-radius:18px;
+  border:1.5px solid rgba(232,160,190,.25);
+  overflow:hidden;
+  transition:transform .3s,box-shadow .3s;
+  display:flex;flex-direction:column;
+  position:relative;
 }
-/* Colored top accent bar */
-.card::before{content:'';position:absolute;top:0;right:0;left:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--mint),var(--lavender));opacity:0;transition:opacity .4s}
-.card:hover{transform:translateY(-8px);border-color:rgba(0,214,143,.3);box-shadow:0 20px 50px rgba(0,214,143,.12)}
-.card:hover::before{opacity:1}
-.card-img{width:100%;height:220px;object-fit:cover;object-position:center 30%;border-radius:10px;margin-bottom:18px}
-@media(max-width:768px){.card-img{height:200px}.cards-grid{grid-template-columns:1fr}}
-.card-title{font-family:var(--font-head);font-size:1.2rem;margin-bottom:10px;text-align:center;color:var(--white)}
-.card-desc{color:var(--white60);font-size:.93rem;margin-bottom:8px;font-weight:300;line-height:1.7;text-align:center;flex:1}
-.card-for{color:var(--blue);font-size:.85rem;font-weight:400;margin-bottom:16px;text-align:center}
-.card{text-align:center}
-.card-btn{display:inline-block;padding:10px 24px;background:var(--orange);border:none;border-radius:8px;font-size:.9rem;color:var(--white);font-weight:700;transition:all .3s}
-.card-btn:hover{background:#d94010;box-shadow:0 4px 20px rgba(242,85,32,.5);transform:scale(1.05)}
-.section-cta{text-align:center;margin-top:48px}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(155,142,196,.2)}
+.card-img{width:100%;height:200px;object-fit:cover;object-position:center 30%}
+.card-body{padding:22px 24px 24px;flex:1;display:flex;flex-direction:column}
+.card-title{
+  font-family:var(--font-head);font-size:1.3rem;
+  font-weight:800;color:var(--text);margin-bottom:10px;
+}
+.card-desc{font-size:1.05rem;color:var(--text60);line-height:1.65;flex:1;margin-bottom:18px}
+.card-btn{
+  display:inline-block;
+  background:var(--orange);color:white;
+  padding:10px 24px;border-radius:50px;
+  font-weight:700;font-size:.9rem;
+  text-align:center;
+  transition:transform .25s,box-shadow .25s;align-self:flex-start;
+}
+.card-btn:hover{transform:scale(1.05);box-shadow:0 4px 16px rgba(255,90,31,.4)}
+.card-new{
+  position:absolute;top:12px;right:12px;z-index:5;
+  background:var(--orange);color:white;
+  font-size:.85rem;font-weight:900;
+  padding:5px 14px;border-radius:100px;
+  box-shadow:0 3px 12px rgba(255,90,31,.45);
+}
 
-/* ══════════════════════════════════
-   QUOTES — same structure
-══════════════════════════════════ */
-.quotes{padding:clamp(50px,8vw,80px) clamp(20px,6vw,80px);overflow:hidden;background:var(--section-alt)}
-.quotes-inner{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;max-width:1200px;margin:0 auto}
-.quote-card{background:var(--bg-card);border:1px solid var(--white08);border-right:3px solid var(--mint);border-radius:16px;padding:32px;max-width:380px;flex:1;min-width:280px;position:relative;transition:transform .3s,border-color .3s}
-.quote-card:hover{transform:translateY(-4px);border-color:rgba(0,214,143,.4)}
-.quote-card::before{content:'"';position:absolute;top:10px;right:20px;font-size:4.5rem;line-height:1;color:var(--lavender);opacity:.5;font-family:serif}
-.quote-text{color:var(--white);font-size:.97rem;font-weight:300;line-height:1.8;font-style:italic;margin-bottom:16px}
-.quote-author{color:var(--mint);font-size:.9rem;font-weight:700}
-.quote-role{color:var(--white60);font-size:.8rem}
-
-/* ══════════════════════════════════
-   STATS
-══════════════════════════════════ */
-.stats{
-  display:flex;justify-content:center;gap:clamp(30px,6vw,100px);
-  padding:clamp(50px,8vw,100px) 20px;flex-wrap:wrap;
+/* ════════════════════════════
+   QUOTES
+════════════════════════════ */
+.quotes-section{
+  background:var(--pink-mid);
+  padding:clamp(60px,9vw,110px) clamp(20px,6vw,80px);
   position:relative;overflow:hidden;
 }
-.stats::before{
-  content:'';position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.1) 2px, transparent 2px);
-  background-size:28px 28px;pointer-events:none;
+.quotes-heading{
+  font-family:var(--font-head);
+  font-size:clamp(1.9rem,3.5vw,2.8rem);
+  font-weight:900;color:var(--text);
+  text-align:center!important;margin-bottom:12px;width:100%;
 }
-.stat{text-align:center;position:relative;z-index:2}
-.stat-num{font-family:var(--font-head);font-size:clamp(2.8rem,6vw,4.5rem);line-height:1;color:var(--blue)}
-.stat-num em{color:var(--pink);font-style:normal}
-.stat-label{font-size:1.1rem;font-weight:700;margin-top:8px}
-.stat-sub{font-size:.9rem;color:var(--white60);font-weight:300;margin-top:4px}
+.quotes-sub{text-align:center;color:var(--text60);font-size:1.1rem;margin-bottom:52px}
+.quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;align-items:stretch}
+.quote-card{
+  background:var(--pink-bg);
+  border:1.5px solid rgba(232,160,190,.3);
+  border-radius:18px;padding:30px 28px;
+  position:relative;transition:transform .3s;
+  display:flex;flex-direction:column;
+  height:100%;
+}
+.quote-card .quote-author{margin-top:auto!important;padding-top:14px!important;border-top:1px solid rgba(232,160,190,.3)!important}
+.quote-card:hover{transform:translateY(-4px)}
+.quote-card::before{
+  content:'"';position:absolute;top:12px;right:22px;
+  font-size:4.5rem;line-height:1;
+  color:var(--orange);opacity:.15;font-family:serif;
+}
+.quote-text{font-size:1.08rem;text-align:center;flex:1;margin-bottom:0!important;color:var(--text);line-height:1.8;font-style:italic;margin-bottom:18px;padding-top:18px}
+.quote-author{font-weight:800;color:var(--orange);font-size:1.15rem;margin-top:auto;padding-top:16px;border-top:1px solid rgba(232,160,190,.3)}
+.quote-role{color:var(--text40);font-size:1rem;margin-top:4px;font-weight:500}
 
+/* ════════════════════════════
+   ABOUT
+════════════════════════════ */
+.about-wrap{display:flex;gap:clamp(30px,5vw,72px);align-items:center;flex-wrap:wrap;justify-content:center}
+.about-photo{
+  flex:0 0 clamp(240px,30vw,360px);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 12px 48px rgba(155,142,196,.25);
+}
+.about-photo img{width:100%;height:auto;object-fit:cover}
+.about-text p{text-align:right;
+  color:var(--text60);font-size:1.05rem;line-height:1.85;
+  margin-bottom:16px;
+}
 
-/* ══════════════════════════════════
-   VIDEO (lecture video section)
-══════════════════════════════════ */
-.video-wrap{margin-top:32px}
-.video-wrap video{width:100%;max-width:900px;border-radius:16px;border:1px solid rgba(57,126,255,.2);display:block;margin:0 auto}
-
-/* ══════════════════════════════════
-   CONSULTING (AI EXPERIENCE) — same layout
-══════════════════════════════════ */
-.ai-experience-img img{width:100%;border-radius:16px;object-fit:cover}
-
-/* ══════════════════════════════════
-   FAQ — same structure, new colors
-══════════════════════════════════ */
-details{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-right:3px solid rgba(0,214,143,.4);border-radius:12px;padding:24px;cursor:pointer;transition:border-color .3s}
-details[open],details:hover{border-color:rgba(0,214,143,.4);border-right-color:var(--mint)}
-summary{font-size:1.05rem;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center}
-summary .faq-icon{color:var(--blue);font-size:1.4rem;font-weight:300;transition:transform .3s}
-details[open] summary .faq-icon{transform:rotate(45deg)}
-.faq-answer{margin-top:16px;color:var(--white60);line-height:1.8;font-weight:300}
-
-/* ══════════════════════════════════
-   PHOTO GALLERY
-══════════════════════════════════ */
-.photo-strip{padding:clamp(40px,6vw,80px) 20px}
-.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1100px;margin:0 auto}
-.photo-grid img{width:100%;height:240px;border-radius:12px;object-fit:cover;transition:transform .4s,filter .4s;filter:brightness(.85)}
-.photo-grid img:hover{transform:scale(1.04);filter:brightness(1)}
-@media(max-width:600px){.photo-grid{grid-template-columns:repeat(2,1fr)}}
-
-/* ══════════════════════════════════
+/* ════════════════════════════
    CONTACT
-══════════════════════════════════ */
-.contact-wrap{text-align:center;max-width:600px;margin:0 auto}
-.contact-wrap p{color:var(--white60);font-size:1.05rem;margin-bottom:28px;font-weight:300}
-.contact-links{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:24px}
-.contact-link{display:flex;align-items:center;gap:8px;color:var(--white60);font-size:.95rem;transition:color .3s}
-.contact-link:hover{color:var(--white)}
-.contact-link svg{width:20px;height:20px;flex-shrink:0}
+════════════════════════════ */
+.contact-section{
+  background:linear-gradient(135deg,var(--pink-mid),var(--pink-bg));
+  text-align:center;
+  padding:clamp(70px,10vw,120px) clamp(20px,6vw,80px);
+  position:relative;overflow:hidden;
+}
+.contact-section .section-title{color:var(--text)}
+.contact-section p{color:var(--text60);font-size:1.4rem;margin-bottom:36px;font-weight:400}
+.contact-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:24px}
+.contact-link{
+  display:flex;align-items:center;gap:10px;
+  color:var(--text60);font-size:1.2rem;font-weight:600;
+  transition:color .25s;
+}
+.contact-link:hover{color:var(--orange)}
+.contact-link svg{width:20px;height:20px}
 
-/* ══════════════════════════════════
+/* ════════════════════════════
    FOOTER
-══════════════════════════════════ */
-footer{border-top:1px solid rgba(255,255,255,.15);padding:40px clamp(20px,6vw,80px);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;background:rgba(0,0,0,.2)}
-footer p{color:var(--white60);font-size:.85rem}
-.footer-social{display:flex;gap:16px}
-.footer-social a{color:var(--white60);transition:color .3s}
-.footer-social a:hover{color:var(--white)}
-.footer-social svg{width:22px;height:22px}
-.back-top{width:44px;height:44px;border-radius:50%;border:1px solid var(--white08);display:flex;align-items:center;justify-content:center;color:var(--white60);transition:border-color .3s,color .3s;cursor:pointer}
-.back-top:hover{border-color:var(--mint);color:var(--mint)}
+════════════════════════════ */
+footer{
+  background:var(--pink-bg);
+  border-top:1px solid rgba(232,160,190,.2);
+  padding:32px clamp(20px,6vw,80px);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+footer p{color:var(--text40);font-size:.85rem}
+.back-top{
+  width:42px;height:42px;border-radius:50%;
+  border:1.5px solid rgba(232,160,190,.4);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:border-color .25s,color .25s;
+  color:var(--text40);
+}
+.back-top:hover{border-color:var(--orange);color:var(--orange)}
+
+/* alt section bg */
+.section-alt{background:var(--pink-mid)}
+
+/* stagger */
+.stagger{opacity:0;transform:translateY(36px);animation:staggerIn .85s cubic-bezier(.22,1,.36,1) forwards}
+.stagger:nth-child(1){animation-delay:.15s}.stagger:nth-child(2){animation-delay:.35s}.stagger:nth-child(3){animation-delay:.55s}.stagger:nth-child(4){animation-delay:.75s}
+@keyframes staggerIn{to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
 
 
+<!-- ══ VIDEO INTRO ══ -->
+<div class="video-intro" id="videoIntro">
+  <div class="video-box">
+    <video autoplay muted playsinline id="introVid">
+      <source src="banner-video.mp4" type="video/mp4">
+    </video>
+  </div>
+  <button class="skip-btn" onclick="skipIntro()">דלגי ← כניסה לאתר</button>
+</div>
 
 <!-- ══ NAV ══ -->
 <nav class="nav" id="nav">
   <ul class="nav-links">
     <li><a href="#lectures">הרצאות</a></li>
     <li><a href="#workshops">סדנאות</a></li>
-    <li><a href="#consulting">ייעוץ</a></li>
     <li><a href="#about">אודות</a></li>
     <li><a href="#contact">צור קשר</a></li>
   </ul>
-  <div class="burger" id="burger"><span></span><span></span><span></span></div>
-  <a href="#" style="margin-left:0;margin-right:auto;display:flex;align-items:center">
-    <img src="logo-white.png"
+  <div class="nav-cta-wrap">
+    <a href="https://wa.me/972523124326">בואו נדבר</a>
+  </div>
+  <div class="burger"><span></span><span></span><span></span></div>
+  <a href="#" style="margin-right:auto;margin-left:16px;flex-shrink:0">
+    <img src="logo-ariella.png"
       alt="Ariella Danielli"
-      style="width:180px;height:180px;display:inline-block;object-fit:contain;flex-shrink:0;max-width:none;margin-top:-54px;margin-bottom:-54px"
-      onerror="this.outerHTML='<span class=nav-logo-fallback>Ariella <span>Danielli</span></span>'">
+      style="height:70px;width:auto;object-fit:contain"
+      onerror="this.outerHTML='<span style=font-family:var(--font-head);font-size:1.3rem;font-weight:900;color:var(--orange)>Ariella Danielli</span>'">
   </a>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#lectures" onclick="closeMobile()">הרצאות</a>
-  <a href="#workshops" onclick="closeMobile()">סדנאות</a>
-  <a href="#consulting" onclick="closeMobile()">ייעוץ</a>
-  <a href="#about" onclick="closeMobile()">אודות</a>
-  <a href="#contact" onclick="closeMobile()">צור קשר</a>
-</div>
-
-<!-- ══ HERO — VIDEO BANNER ══ -->
+<!-- ══ HERO ══ -->
 <section class="hero" id="hero">
+  <div class="hero-dots"></div>
 
-  <!-- Full-bleed video -->
-  <video class="hero-video" autoplay muted loop playsinline
-    src="banner-video.mp4">
-  </video>
+  <!-- Sparkles -->
+  <span class="spark sp-blue"  style="top:18%;right:8%;font-size:1.4rem">✦</span>
+  <span class="spark sp-pink"  style="top:12%;right:15%;font-size:.8rem;animation-delay:.8s">✦</span>
+  <span class="spark sp-green" style="top:30%;left:6%;font-size:1rem;animation-delay:1.6s">✦</span>
+  <span class="spark sp-purple"style="top:22%;left:12%;font-size:.6rem;animation-delay:.4s">✦</span>
+  <span class="spark sp-pink"  style="top:60%;left:4%;font-size:1.2rem;animation-delay:2s">✦</span>
+  <span class="spark sp-blue"  style="top:55%;right:5%;font-size:.75rem;animation-delay:1.2s">✦</span>
 
-  <!-- Blue tint overlay -->
-  <div class="hero-overlay"></div>
-
-  <!-- Dot grid -->
-  <div class="hero-grid"></div>
-
-
-  <!-- Fluid shape — hero right large -->
-  <!-- Fluid shape — hero left small -->
-
-  <!-- Design language: diagonal lines -->
-
-  <div class="hero-lines">
-    <svg style="right:0;top:0;opacity:.08" width="500" height="600">
-      <line x1="500" y1="0" x2="220" y2="600" stroke="white" stroke-width="2"/>
-      <line x1="430" y1="0" x2="150" y2="600" stroke="white" stroke-width="1.2"/>
-      <line x1="360" y1="0" x2="80" y2="600" stroke="white" stroke-width=".6"/>
-    </svg>
-    <svg style="left:80px;bottom:120px;opacity:.18" width="70" height="70">
-      <polygon points="35,3 67,63 3,63" fill="none" stroke="#FF7EB3" stroke-width="2"/>
-    </svg>
-    <svg style="right:200px;top:160px;opacity:.15;animation:spin 20s linear infinite" width="40" height="40">
-      <rect x="4" y="4" width="32" height="32" fill="none" stroke="#FFD027" stroke-width="1.5" transform="rotate(15 20 20)"/>
-    </svg>
-  </div>
-
-  <!-- Title & CTAs over video -->
   <div class="hero-content">
-    <h1 class="hero-title grad stagger">
+    <div class="hero-badge stagger">מרצה ויועצת לחדשנות ובינה מלאכותית</div>
+    <h1 class="hero-title stagger">
       אריאלה דניאלי<br>
-      מרצה ויועצת לחדשנות<br>
+      <span class="hi">מרצה ויועצת לחדשנות</span><br>
       ובינה מלאכותית
     </h1>
     <p class="hero-sub stagger">הרצאות שמעוררות השראה, מציתות חשיבה ומובילות לשינוי</p>
     <div class="hero-ctas stagger">
-      <a href="https://wa.me/972523124326" class="btn-wa">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
+      <a href="https://wa.me/972523124326" class="btn-main btn-wa-green">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
         שלחו WhatsApp
       </a>
-      <a href="#lecture-video" class="btn-outline">צפו בהרצאה</a>
+      <a href="#lectures" class="btn-main" style="background:var(--orange)">צפו בהרצאה</a>
     </div>
   </div>
 
-  <!-- Scroll hint -->
-  <div class="hero-scroll">
-    <span>גללי</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  <!-- Wave -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%">
+      <path d="M0 40 C360 80 720 10 1080 55 C1260 72 1380 25 1440 45 L1440 80 L0 80 Z" fill="rgba(255,220,236,.55)"/>
+      <path d="M0 55 C400 85 800 30 1200 62 C1330 75 1400 50 1440 58 L1440 80 L0 80 Z" fill="rgba(168,213,184,.45)"/>
+      <path d="M0 65 C300 88 700 50 1100 70 C1290 80 1400 62 1440 68 L1440 80 L0 80 Z" fill="rgba(168,197,218,.4)"/>
+      <path d="M0 73 C250 85 620 63 1000 76 C1210 82 1380 70 1440 74 L1440 80 L0 80 Z" fill="rgba(185,156,255,.25)"/>
+    </svg>
   </div>
-
 </section>
 
-
-<!-- ══ PROOF STRIP ══ -->
-<div class="proof" style="position:relative">
+<!-- ══ PROOF ══ -->
+<div class="proof" style="padding:44px 0;background:var(--pink-mid);border-top:1.5px solid rgba(232,160,190,.2);border-bottom:1.5px solid rgba(232,160,190,.2)">
+  <div class="dot-grid-tl"></div>
+  <div class="dot-grid-br"></div>
+  <span class="spark sp-blue"  style="top:15px;left:15%;font-size:.9rem;animation-delay:.3s">✦</span>
+  <span class="spark sp-orange"style="top:15px;right:18%;font-size:.6rem;animation-delay:1.2s">✦</span>
+  <span class="spark sp-green" style="bottom:12px;left:30%;font-size:.75rem;animation-delay:1.8s">✦</span>
   <p class="proof-label">בין לקוחותיי</p>
-  <div class="logo-grid">
-    <div class="logo-item"><img src="לוגואים חברות/לוגו דיסני.png" alt="Disney+"></div>
-    <div class="logo-item"><img src="לוגואים חברות/Super_Pharm_Logo.svg.png" alt="סופר פארם"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו בנק הפועלים.png" alt="בנק הפועלים"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו ey.png" alt="EY"></div>
-    <div class="logo-item"><img src="לוגואים חברות/BankLeumiLogo.svg" alt="בנק לאומי"></div>
-    <div class="logo-item"><img src="לוגואים חברות/DHL-Logo.wine.png" alt="DHL"></div>
-    <div class="logo-item"><img src="לוגואים חברות/StraussNewLogo.svg" alt="שטראוס" style="height:34px"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו קופת חולים מאוחדת.png" alt="מאוחדת"></div>
-    <div class="logo-item"><img src="לוגואים חברות/Tnuva_New_Logo.svg" alt="תנובה"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו משרד המשפטים.png" alt="משרד המשפטים"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו עיריית תל אביב.png" alt="עיריית תל אביב"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו קימברלי קלארק.svg" alt="קימברלי קלארק"></div>
-    <div class="logo-item"><img src="לוגואים חברות/Siemens_AG_logo.svg.png" alt="סימנס"></div>
-    <div class="logo-item"><img src="לוגואים חברות/ZIM_Logo.svg" alt="צים"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו רשות הטבע והגנים.svg" alt="רשות הטבע והגנים"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו חברת חשמל.png" alt="חברת חשמל"></div>
-    <div class="logo-item"><img src="לוגואים חברות/לוגו פלייטיקה.png" alt="פלייטיקה"></div>
-    <div class="logo-item"><img src="לוגואים חברות/Unilever.png" alt="יוניליוור"></div>
+  <div class="logo-track-wrap">
+    <div class="logo-track">
+      <div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו דיסני.png" alt="Disney+" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו בנק הפועלים.png" alt="בנק הפועלים" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו ey.png" alt="EY" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/BankLeumiLogo.svg" alt="בנק לאומי" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Tnuva_New_Logo.svg" alt="תנובה" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/StraussNewLogo.svg" alt="שטראוס" style="height:28px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו קופת חולים מאוחדת.png" alt="מאוחדת" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו משרד המשפטים.png" alt="משרד המשפטים" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו עיריית תל אביב.png" alt="עיריית תל אביב" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו פלייטיקה.png" alt="פלייטיקה" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Unilever.png" alt="יוניליוור" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Siemens_AG_logo.svg.png" alt="סימנס" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/DHL-Logo.wine.png" alt="DHL" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו חברת חשמל.png" alt="חברת חשמל" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו דיסני.png" alt="Disney+" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו בנק הפועלים.png" alt="בנק הפועלים" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו ey.png" alt="EY" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/BankLeumiLogo.svg" alt="בנק לאומי" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Tnuva_New_Logo.svg" alt="תנובה" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/StraussNewLogo.svg" alt="שטראוס" style="height:28px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו קופת חולים מאוחדת.png" alt="מאוחדת" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו משרד המשפטים.png" alt="משרד המשפטים" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו עיריית תל אביב.png" alt="עיריית תל אביב" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו פלייטיקה.png" alt="פלייטיקה" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Unilever.png" alt="יוניליוור" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/Siemens_AG_logo.svg.png" alt="סימנס" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/DHL-Logo.wine.png" alt="DHL" style="height:34px;width:auto;object-fit:contain"></div><div class="logo-item" style="height:64px;padding:10px 24px;border-radius:12px;background:white;border:1.5px solid rgba(232,160,190,.2);display:flex;align-items:center;flex-shrink:0"><img src="לוגואים חברות/לוגו חברת חשמל.png" alt="חברת חשמל" style="height:34px;width:auto;object-fit:contain"></div>
+    </div>
   </div>
-  <p class="proof-conferences">בין הכנסים: ועידת גלובס לעסקים · כנס TheMarker · ועידת הקניונים · לילה לבן תל אביב</p>
 </div>
 
 <!-- ══ LECTURES ══ -->
-<section class="section" id="lectures">
+<section class="section" id="lectures" style="background:var(--pink-bg);position:relative">
+  <div class="ai-pattern">
+    <svg style="right:2%;top:5%;width:120px;height:120px" viewBox="0 0 100 100" stroke="#1E3CFF" stroke-width="1.5" fill="none">
+      <circle cx="50" cy="50" r="30"/><circle cx="50" cy="50" r="18"/><circle cx="50" cy="50" r="6"/>
+      <line x1="50" y1="20" x2="50" y2="5"/><line x1="50" y1="80" x2="50" y2="95"/>
+      <line x1="20" y1="50" x2="5" y2="50"/><line x1="80" y1="50" x2="95" y2="50"/>
+    </svg>
+    <svg style="left:3%;bottom:10%;width:80px;height:80px" viewBox="0 0 80 80" stroke="#1E3CFF" stroke-width="1.2" fill="none">
+      <rect x="15" y="15" width="50" height="50" rx="8"/>
+      <text x="40" y="47" text-anchor="middle" fill="#1E3CFF" font-size="14" font-family="Arial" opacity="1" stroke="none">AI</text>
+    </svg>
+    <svg style="left:50%;top:3%;width:60px;height:60px" viewBox="0 0 60 60" stroke="#E8A0BE" stroke-width="1.2" fill="none">
+      <polygon points="30,5 55,50 5,50"/></svg>
+  </div>
+  <div class="dot-grid-br"></div>
+  <span class="spark sp-purple"style="top:40px;left:4%;font-size:1.1rem;animation-delay:.5s">✦</span>
+  <span class="spark sp-pink"  style="top:70px;left:8%;font-size:.6rem;animation-delay:1.4s">✦</span>
+  <span class="spark sp-blue"  style="top:45px;right:3%;font-size:.8rem;animation-delay:.9s">✦</span>
+  <span class="spark sp-green" style="bottom:50px;right:6%;font-size:1rem;animation-delay:2.2s">✦</span>
+  <!-- lightbulb deco -->
+  <svg class="deco-icon" style="bottom:30px;left:20px;width:60px;height:60px" viewBox="0 0 60 60" fill="none" stroke="#9B8EC4" stroke-width="2">
+    <circle cx="30" cy="22" r="12"/><path d="M24,34 Q22,42 25,44 L35,44 Q38,42 36,34"/><line x1="27" y1="48" x2="33" y2="48"/><line x1="28" y1="52" x2="32" y2="52"/>
+  </svg>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px">
+      <span class="section-label reveal">הרצאות</span>
+      <h2 class="section-title reveal">כל הרצאה מותאמת<br>לקהל ולמטרות שלכם</h2>
+    </div>
 
-  
-  <div class="container" style="position:relative;z-index:2">
-    <h2 class="section-title grad reveal">הרצאות</h2>
-    <p class="section-sub reveal">כל הרצאה מותאמת לקהל, לאירוע ולמטרות שלכם</p>
+    <!-- הרצאה מרכזית: AI YAI YAI -->
+    <div class="featured-card reveal">
+      <div class="featured-badge">✨ הרצאת הדגל</div>
+      <div class="featured-img">
+        <img src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-1.jpg" alt="AI YAI YAI">
+      </div>
+      <div class="featured-body">
+        <div class="featured-tag">הרצאה מרכזית</div>
+        <h3 class="featured-title">AI YAI YAI<br>מהפכת הבינה המלאכותית</h3>
+        <p class="featured-desc">כל מה שצריך לדעת על בינה מלאכותית — על הטכנולוגיה וכיצד היא משפיעה על מגוון סקטורים בעולם. הרצאה שפותחת את הראש ומשנה תפיסה.</p>
+        <a href="lecture-ai-yai-yai.html" class="btn-main">למידע נוסף</a>
+      </div>
+    </div>
+
+    <!-- שאר ההרצאות -->
     <div class="cards-grid">
-      <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-1.jpg" alt="הרצאת AI" loading="lazy">
-        <h3 class="card-title">AI YAI YAI - מהפכת הבינה המלאכותית</h3>
-        <p class="card-desc">כל מה שצריך לדעת על בינה מלאכותית - על הטכנולוגיה וכיצד היא משפיעה על מגוון סקטורים בעולם</p>
-        <a href="lecture-ai-yai-yai.html" class="card-btn">למידע נוסף</a>
+      <div class="card reveal" style="position:relative">
+        <div class="card-new">✨ חדש</div>
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-5.jpg" alt="Longevity">
+        <div class="card-body">
+          <h3 class="card-title">Longevity - חוקי המשחק החדשים</h3>
+          <p class="card-desc">כיצד כלכלת אריכות הימים תשפיע על עסקים ועל החיים האישיים שלנו</p>
+          <a href="lecture-longevity.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-2.jpg" alt="הרצאת חווית לקוח" loading="lazy">
-        <h3 class="card-title">בינה מלאכותית - שלום, במה אוכל לעזור?</h3>
-        <p class="card-desc">חווית לקוח מבוססת בינה מלאכותית - כיצד AI משדרג כל נקודת מגע עם הלקוח</p>
-        <a href="lecture-ai-cx.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-2.jpg" alt="AI CX">
+        <div class="card-body">
+          <h3 class="card-title">בינה מלאכותית - שלום, במה אוכל לעזור?</h3>
+          <p class="card-desc">חווית לקוח מבוססת בינה מלאכותית — כיצד AI משדרג כל נקודת מגע עם הלקוח</p>
+          <a href="lecture-ai-cx.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-3.jpg" alt="הרצאת מגמות" loading="lazy">
-        <h3 class="card-title">2026 - אפשר בלי כל הדרמה?</h3>
-        <p class="card-desc">מגמות וטרנדים שישפיעו על חיינו בשנת 2026</p>
-        <a href="lecture-trends-2026.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-3.jpg" alt="מגמות">
+        <div class="card-body">
+          <h3 class="card-title">2026 - אפשר בלי כל הדרמה?</h3>
+          <p class="card-desc">מגמות וטרנדים שישפיעו על חיינו בשנת 2026</p>
+          <a href="lecture-trends-2026.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture-5.jpg" alt="הרצאת Longevity" loading="lazy">
-        <h3 class="card-title">Longevity - חוקי המשחק החדשים</h3>
-        <p class="card-desc">כיצד כלכלת אריכות הימים תשפיע על עסקים ועל החיים האישיים שלנו</p>
-        <a href="lecture-longevity.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture 9.jpg" alt="WOW">
+        <div class="card-body">
+          <h3 class="card-title">THE WOW EFFECT</h3>
+          <p class="card-desc">מקרי בוחן של מותגים שמייצרים חווית לקוח יוצאת דופן</p>
+          <a href="lecture-wow-effect.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture 9.jpg" alt="THE WOW EFFECT" loading="lazy">
-        <h3 class="card-title">THE WOW EFFECT</h3>
-        <p class="card-desc">מקרי בוחן של מותגים שמייצרים חווית לקוח יוצאת דופן</p>
-        <a href="lecture-wow-effect.html" class="card-btn">למידע נוסף</a>
-      </div>
-      <div class="card reveal">
-        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture10.jpg" alt="מיתוג אישי" loading="lazy">
-        <h3 class="card-title">מתחילים בארגון ומגבירים החוצה</h3>
-        <p class="card-desc">כיצד לבנות את המיתוג האישי שלך בתוך הארגון ומחוצה לו</p>
-        <a href="lecture-personal-branding.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="תמונות הרצאה/רוצים לראות אותי בלייב/lecture10.jpg" alt="מיתוג">
+        <div class="card-body">
+          <h3 class="card-title">מתחילים בארגון ומגבירים החוצה</h3>
+          <p class="card-desc">כיצד לבנות את המיתוג האישי שלך בתוך הארגון ומחוצה לו</p>
+          <a href="lecture-personal-branding.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- ══ WORKSHOPS ══ -->
-<section class="section section-alt" id="workshops">
+<section class="section section-alt" id="workshops" style="position:relative">
+  <div class="ai-pattern">
+    <svg style="right:2%;top:8%;width:100px;height:100px" viewBox="0 0 100 100" stroke="#E8A0BE" stroke-width="1.5" fill="none">
+      <ellipse cx="50" cy="50" rx="40" ry="25"/><ellipse cx="50" cy="50" rx="25" ry="40"/>
+      <circle cx="50" cy="50" r="5" fill="#E8A0BE" stroke="none"/>
+    </svg>
+    <svg style="left:2%;bottom:5%;width:70px;height:70px" viewBox="0 0 70 70" stroke="#7DC5A0" stroke-width="1.2" fill="none">
+      <path d="M10,35 Q35,10 60,35 Q35,60 10,35"/>
+    </svg>
+  </div>
+  <div class="dot-grid-tl"></div>
+  <span class="spark sp-orange"style="top:40px;right:5%;font-size:1.1rem;animation-delay:.7s">✦</span>
+  <span class="spark sp-purple"style="top:70px;right:9%;font-size:.6rem;animation-delay:1.6s">✦</span>
+  <span class="spark sp-pink"  style="bottom:60px;left:5%;font-size:.9rem;animation-delay:1.1s">✦</span>
+  <!-- AI brain icon -->
+  <svg class="deco-icon" style="top:25px;left:22px;width:55px;height:55px" viewBox="0 0 60 60" fill="none" stroke="#FF5A1F" stroke-width="1.8">
+    <ellipse cx="30" cy="28" rx="18" ry="14"/><path d="M20,28 Q15,22 18,16"/><path d="M40,28 Q45,22 42,16"/>
+    <line x1="30" y1="42" x2="30" y2="50"/><line x1="25" y1="48" x2="35" y2="48"/>
+    <circle cx="24" cy="26" r="2.5"/><circle cx="36" cy="26" r="2.5"/><circle cx="30" cy="24" r="2"/>
+  </svg>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:52px">
+      <span class="section-label reveal">סדנאות</span>
+      <h2 class="section-title reveal">סדנאות שמשלבות<br>פרקטיקה עם חוויה</h2>
+    </div>
 
-  
-  <div class="container" style="position:relative;z-index:2">
-    <h2 class="section-title grad reveal">סדנאות</h2>
-    <p class="section-sub reveal">סדנאות שמשלבות פרקטיקה עם חוויה כיפית וקלילה</p>
+    <!-- סדנה מרכזית: חשיבה יצירתית -->
+    <div class="featured-card reveal">
+      <div class="featured-badge">✨ חדש</div>
+      <div class="featured-img">
+        <img src="workshop-creative-card.jpg" alt="סדנת חשיבה יצירתית">
+      </div>
+      <div class="featured-body">
+        <div class="featured-tag">סדנה חדשה</div>
+        <h3 class="featured-title">סדנת חשיבה יצירתית<br>לתוכניות עבודה</h3>
+        <p class="featured-desc">כיצד לפצח אתגרים עסקיים באמצעות חשיבה יצירתית ולהפוך אותם לתוכנית פעולה לשנת 2027</p>
+        <a href="workshop-creative-thinking.html" class="btn-main">למידע נוסף</a>
+      </div>
+    </div>
+
     <div class="cards-grid">
       <div class="card reveal">
-        <img class="card-img" src="sadna 4.jpeg" alt="סדנת AI" loading="lazy">
-        <h3 class="card-title">סדנאות בינה מלאכותית</h3>
-        <p class="card-desc">מגוון סדנאות בינה מלאכותית בהתאמה לצרכי הלקוח</p>
-        <a href="workshop-ai-intro.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="sadna 4.jpeg" alt="סדנת AI">
+        <div class="card-body">
+          <h3 class="card-title">סדנאות בינה מלאכותית</h3>
+          <p class="card-desc">מגוון סדנאות בינה מלאכותית בהתאמה לצרכי הלקוח</p>
+          <a href="workshop-ai-intro.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="sadna 2.jpeg" alt="סדנת AI IDEATION" loading="lazy">
-        <h3 class="card-title">סדנת AI IDEATION</h3>
-        <p class="card-desc">מפתחים רעיונות למוצרים ושירותים - מהבעיה ועד הפתרון היישומי - באמצעות כלי בינה מלאכותית</p>
-        <a href="workshop-ideation.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="sadna 2.jpeg" alt="AI IDEATION">
+        <div class="card-body">
+          <h3 class="card-title">סדנת AI IDEATION</h3>
+          <p class="card-desc">מפתחים רעיונות למוצרים ושירותים מהבעיה ועד הפתרון — באמצעות כלי בינה מלאכותית</p>
+          <a href="workshop-ideation.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
       <div class="card reveal">
-        <img class="card-img" src="sadna 3.jpeg" alt="סדנת חדשנות" loading="lazy">
-        <h3 class="card-title">סדנת חדשנות מואצת</h3>
-        <p class="card-desc">כמה שעות שנותנות פתרונות ורעיונות למוצרים ושירותים חדשים וכלים לחשיבה יצירתית לטווח ארוך</p>
-        <a href="workshop-innovation.html" class="card-btn">למידע נוסף</a>
+        <img class="card-img" src="sadna 3.jpeg" alt="חדשנות">
+        <div class="card-body">
+          <h3 class="card-title">סדנת חדשנות מואצת</h3>
+          <p class="card-desc">כמה שעות שנותנות פתרונות ורעיונות למוצרים ושירותים חדשים וכלים לחשיבה יצירתית</p>
+          <a href="workshop-innovation.html" class="card-btn">למידע נוסף</a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-
-<!-- ══ CONSULTING — AI EXPERIENCE ══ -->
-<section class="section" id="consulting">
-  <div class="container">
-    <h2 class="section-title grad reveal" style="max-width:100%">רוצים לדעת מה אפשר לעשות עם בינה מלאכותית<br>לשדרוג חווית הלקוחות והעובדים שלכם?</h2>
-    <div class="ai-experience-wrap reveal" style="margin-top:50px;display:flex;gap:48px;align-items:flex-start;flex-wrap:wrap">
-      <div class="ai-experience-img" style="flex:0 0 340px;max-width:340px">
-        <img src="ai-experience-team.png" alt="ליאור קורנבלום ואריאלה דניאלי" style="width:100%;border-radius:16px;object-fit:cover">
-      </div>
-      <div style="flex:1;min-width:280px">
-        <h3 style="font-family:var(--font-head);font-size:1.6rem;margin-bottom:12px">THE AI EXPERIENCE</h3>
-        <p style="color:var(--blue);font-size:1rem;line-height:1.7;margin-bottom:20px;font-weight:600">שדרוג חווית לקוח ועובד מבוססת בינה מלאכותית</p>
-        <p style="color:var(--white60);font-size:.95rem;line-height:1.75;margin-bottom:28px">ארגונים רבים יודעים שבינה מלאכותית יכולה לשנות את אופן העבודה שלהם - אבל לא יודעים מאיפה להתחיל, ומה בדיוק כדאי לשנות. THE AI EXPERIENCE הוא שירות ייעוצי המתמקד בפתרונות מבוססי סוכנים (AI Agents) - הדור הבא של אוטומציה חכמה.</p>
-        <a href="ai-experience.html" class="card-btn" style="display:inline-block">לפרטים נוספים</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ══ LECTURE VIDEO ══ -->
-<section class="section section-alt" id="lecture-video">
-  <div class="container" style="text-align:center">
-    <p class="section-label reveal">רוצים לראות הרצאה שלי?</p>
-    <h2 class="section-title grad reveal">כנס איגוד השיווק</h2>
-    <div class="video-wrap reveal">
-      <video controls playsinline preload="metadata" style="width:100%;max-width:900px;border-radius:16px;border:1px solid rgba(57,126,255,.2);display:block;margin:0 auto">
-        <source src="igud ha shivuk.mp4" type="video/mp4">
-      </video>
     </div>
   </div>
 </section>
 
 <!-- ══ QUOTES ══ -->
-<section class="quotes">
+<section class="quotes-section" style="position:relative;overflow:hidden">
+  <!-- AI elements -->
+  <div class="ai-pattern" style="opacity:.05">
+    <svg style="right:1%;top:5%;width:110px;height:110px" viewBox="0 0 110 110" stroke="#1E3CFF" stroke-width="1.5" fill="none">
+      <circle cx="55" cy="55" r="35"/><circle cx="55" cy="55" r="20"/><circle cx="55" cy="55" r="6"/>
+      <line x1="55" y1="20" x2="55" y2="5"/><line x1="55" y1="90" x2="55" y2="105"/>
+      <line x1="20" y1="55" x2="5" y2="55"/><line x1="90" y1="55" x2="105" y2="55"/>
+    </svg>
+    <svg style="left:2%;bottom:8%;width:80px;height:80px" viewBox="0 0 80 80" stroke="#FF5A1F" stroke-width="1.2" fill="none">
+      <path d="M40,10 L65,60 L15,60 Z"/>
+    </svg>
+    <svg style="left:45%;top:5%;width:60px;height:60px" viewBox="0 0 60 60" stroke="#9B8EC4" stroke-width="1.2" fill="none">
+      <rect x="8" y="8" width="44" height="44" rx="8"/>
+      <path d="M20,30 L28,38 L40,22"/>
+    </svg>
+  </div>
+  <!-- Sparkles -->
+  <span class="spark sp-orange" style="top:10%;left:5%;font-size:1.1rem;color:var(--orange)">✦</span>
+  <span class="spark sp-purple" style="top:15%;right:6%;font-size:.8rem;animation-delay:1s">✦</span>
+  <span class="spark sp-green" style="bottom:15%;left:8%;font-size:.9rem;animation-delay:1.8s">✦</span>
 
-  
-  <div class="quotes-inner">
+  <div class="dot-grid-tl"></div>
+  <div class="dot-grid-br" style="opacity:.5"></div>
+  <span class="spark sp-blue"  style="top:30px;left:8%;font-size:1rem;animation-delay:.4s">✦</span>
+  <span class="spark sp-pink"  style="top:50px;left:15%;font-size:.6rem;animation-delay:1.3s">✦</span>
+  <span class="spark sp-green" style="top:35px;right:7%;font-size:.8rem;animation-delay:.9s">✦</span>
+  <span class="spark sp-orange"style="bottom:40px;right:12%;font-size:.7rem;animation-delay:2s">✦</span>
+  <!-- גלים מעל הסקשן -->
+  <div style="position:absolute;top:0;left:0;right:0;line-height:0;z-index:0;pointer-events:none">
+    <svg viewBox="0 0 1440 55" fill="none" preserveAspectRatio="none" style="display:block;width:100%;transform:scaleY(-1)">
+      <path d="M0 28 C360 55 720 0 1080 38 C1260 52 1380 12 1440 28 L1440 55 L0 55 Z" fill="#F9C5D8" opacity=".5"/>
+      <path d="M0 38 C400 60 800 18 1200 48 C1330 58 1400 36 1440 40 L1440 55 L0 55 Z" fill="#A8D5B8" opacity=".4"/>
+      <path d="M0 46 C300 60 700 36 1100 52 C1290 60 1400 48 1440 50 L1440 55 L0 55 Z" fill="#A8C5DA" opacity=".35"/>
+    </svg>
+  </div>
+  <div style="text-align:center;margin-bottom:14px;position:relative;z-index:2;margin-top:30px">
+    <span class="section-label reveal">ביקורות</span>
+  </div>
+  <h2 class="quotes-heading reveal">מה היה להם להגיד?</h2>
+  <p class="quotes-sub reveal" style="font-size:1.3rem;font-weight:500">מה אמרו לקוחות, מנהלים ומארגנים</p>
+  <div class="quotes-grid">
     <div class="quote-card reveal">
       <p class="quote-text">ההרצאות מעניינות, חכמות, מלאות אנרגיה ופותחות את הראש. ההרצאות והליווי של אריאלה מוכיחים את עצמם הלכה למעשה ביישום בתוכניות עבודה, בהקניית כלי חדשנות ובתוצאות העסקיות. אתם חייבים את זה לארגון שלכם.</p>
       <p class="quote-author">דנה שרון</p>
@@ -645,72 +783,60 @@ footer p{color:var(--white60);font-size:.85rem}
 </section>
 
 <!-- ══ ABOUT ══ -->
-<section class="section" id="about"
-  >
-  <div class="deco-oval do-pink" style="width:90px;height:45px;bottom:12%;left:-25px;animation:drift4 8s ease-in-out infinite 1s"></div><div class="deco-oval
- do-mint do-blur" style="width:170px;height:80px;top:8%;right:-45px;animation:drift2 10s ease-in-out infinite 6s"></div>
-  <div class="deco-oval do-pink" style="width:90px;height:45px;bottom:12%;left:-25px;animation:drift4 8s ease-in-out infinite 1s"></div
-  >
-  <div class="container" style="position:relative;z-index:2">
-    <h2 class="section-title grad reveal">מי אני</h2>
-    <div style="display:flex;gap:clamp(30px,5vw,80px);align-items:center;flex-wrap:wrap;margin-top:40px">
-
-      <!-- Character illustration -->
-      <div class="reveal" style="flex:0 0 clamp(240px,30vw,360px);display:flex;justify-content:center;position:relative">
-        <!-- Glow behind character -->
-        <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:90%;height:60%;background:radial-gradient(ellipse at bottom,rgba(242,85,32,.25),rgba(43,107,255,.2) 60%,transparent 80%);filter:blur(30px);border-radius:50%;z-index:0"></div>
-                <span style="position:absolute;top:20px;right:10px;color:var(--orange);font-size:.9rem;opacity:.5;animation:twinkle 2.5s ease-in-out infinite;z-index:5">✦</span>
-        <span style="position:absolute;top:60px;left:5px;color:var(--pink);font-size:.6rem;opacity:.4;animation:twinkle 3s ease-in-out infinite 1s;z-index:5">✦</span>
-        <img
-          src="ariella.jpg"
-          alt="אריאלה דניאלי"
-          style="width:100%;height:auto;object-fit:cover;border-radius:20px;position:relative;z-index:1;box-shadow:0 20px 50px rgba(0,0,0,.4)">
-      </div>
-
-      <!-- Text -->
-      <div style="flex:1;min-width:280px">
-        <p class="reveal" style="color:var(--white60);font-size:1.05rem;line-height:1.85;margin-bottom:16px;font-weight:300;text-align:justify">אריאלה דניאלי היא מרצה ויועצת ישראלית לחדשנות ובינה מלאכותית. היא מרצה בכנסים מובילים בישראל כולל ועידת גלובס לעסקים וכנס TheMarker, ועבדה עם למעלה מ-200 ארגונים ביניהם תנובה, שטראוס, יוניליוור, EY, בנק הפועלים, בנק לאומי ודיסני+.</p>
-        <p class="reveal" style="color:var(--white60);font-size:1.05rem;line-height:1.85;margin-bottom:16px;font-weight:300;text-align:justify">יועצת ומרצה לחדשנות עם למעלה מ-25 שנות ניסיון באסטרטגיה, שיווק וניהול דיגיטל בחברות מובילות. מרצה בתחום החדשנות, בינה מלאכותית ומיתוג אישי בארגונים, אוניברסיטאות וכנסים.</p>
-        <p class="reveal" style="color:var(--white60);font-size:1.05rem;line-height:1.85;font-weight:300;text-align:justify">ההרצאות שלי משלבות תוכן עדכני, אנרגיה גבוהה וכלים מעשיים. מאות ארגונים כבר בחרו ללמוד, להתרגש ולצאת לדרך עם תובנות חדשות.</p>
-      </div>
-
+<section class="section" id="about" style="background:transparent;position:relative;overflow:hidden;padding-top:40px">
+  <span class="spark sp-purple"style="top:30px;left:5%;font-size:1rem;animation-delay:.6s">✦</span>
+  <span class="spark sp-orange"style="top:55px;left:10%;font-size:.6rem;animation-delay:1.5s">✦</span>
+  <span class="spark sp-blue"  style="bottom:40px;right:5%;font-size:.8rem;animation-delay:1s">✦</span>
+  <!-- curve line -->
+  <svg class="curve-line" viewBox="0 0 200 180" fill="none" stroke="rgba(155,142,196,.2)" stroke-width="1.5">
+    <path d="M200,0 Q120,80 200,160"/>
+    <path d="M200,20 Q140,90 200,180"/>
+  </svg>
+  <div class="dot-grid-br"></div>
+  <div class="container">
+    <div style="text-align:center;margin-bottom:24px">
+      <span class="section-label reveal">אודות</span>
+      <h2 class="section-title reveal" style="margin-top:12px">מי אני</h2>
     </div>
-  </div>
-</section>
-
-<!-- ══ FAQ ══ -->
-<section class="section section-alt" id="faq">
-  <div class="container" style="max-width:800px">
-    <p class="section-label reveal">שאלות נפוצות</p>
-    <h2 class="section-title grad reveal">כל מה שרציתם לדעת</h2>
-    <div class="reveal" style="margin-top:40px;display:flex;flex-direction:column;gap:16px">
-      <details>
-        <summary>מה הנושאים שאני מרצה עליהם? <span class="faq-icon">+</span></summary>
-        <p class="faq-answer">בינה מלאכותית (AI), חדשנות ארגונית, חווית לקוח, מגמות ועתיד, Longevity וכלכלת אריכות ימים, ומיתוג אישי.</p>
-      </details>
-      <details>
-        <summary>האם ניתן להזמין הרצאה לכנס חיצוני? <span class="faq-icon">+</span></summary>
-        <p class="faq-answer">כן. אריאלה מרצה בכנסים, ימי עיון, כנסי לקוחות ואירועי חברה - ומתאימה כל הרצאה לקהל ולמטרות האירוע.</p>
-      </details>
-      <details>
-        <summary>האם ניתן להתאים את ההרצאה לנושא ספציפי של הארגון? <span class="faq-icon">+</span></summary>
-        <p class="faq-answer">כן. ניתן להתאים את ההרצאה לקהל, לתחום ולמטרות האירוע - כולל דוגמאות מהסקטור הרלוונטי ומסרים שמתחברים לאתגרים הספציפיים של הארגון.</p>
-      </details>
-      <details>
-        <summary>מה זה THE AI EXPERIENCE? <span class="faq-icon">+</span></summary>
-        <p class="faq-answer">שירות ייעוצי שמסייע לארגונים לשלב סוכני AI (AI Agents) בתהליכי העבודה ובחווית הלקוח. אנחנו מזהות היכן AI יכול להחליף עבודה ידנית, לשפר את השירות וליצור ערך עסקי מדיד.</p>
-      </details>
+    <div class="about-wrap">
+      <div class="about-photo reveal">
+        <img src="ariella.jpg" alt="אריאלה דניאלי"
+          onerror="this.src='ariella-about.png'">
+      </div>
+      <div style="flex:1;min-width:280px">
+        <p class="reveal" style="color:var(--text60);font-size:1.1rem;line-height:1.85;margin-bottom:16px">אריאלה דניאלי היא מרצה ויועצת ישראלית לחדשנות ובינה מלאכותית. היא מרצה בכנסים מובילים בישראל כולל ועידת גלובס לעסקים וכנס TheMarker, ועבדה עם למעלה מ-200 ארגונים ביניהם תנובה, שטראוס, יוניליוור, EY, בנק הפועלים ודיסני+.</p>
+        <p class="reveal" style="color:var(--text60);font-size:1.1rem;line-height:1.85;margin-bottom:28px">ההרצאות שלי משלבות תוכן עדכני, אנרגיה גבוהה וכלים מעשיים. מאות ארגונים כבר בחרו ללמוד, להתרגש ולצאת לדרך עם תובנות חדשות.</p>
+        <a href="https://wa.me/972523124326" class="btn-main reveal">📞 בואו נדבר</a>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ══ CONTACT ══ -->
-<section class="section" id="contact">
+<section class="contact-section"  id="contact">
+  <!-- Sparkles -->
+  <span class="spark sp-blue"  style="top:15%;left:10%;font-size:1rem">✦</span>
+  <span class="spark sp-purple"style="bottom:20%;right:8%;font-size:.8rem;animation-delay:1.3s">✦</span>
+  <!-- Wave top -->
+  <svg style="position:absolute;top:0;left:0;right:0;width:100%;pointer-events:none" viewBox="0 0 1440 60" fill="none" preserveAspectRatio="none">
+    <path d="M0 30 C360 60 720 0 1080 40 C1260 55 1380 15 1440 30 L1440 0 L0 0 Z" fill="white" opacity=".6"/>
+  </svg>
 
-  <div class="contact-wrap">
-    <h2 class="section-title grad reveal">בואו נדבר</h2>
-    <p class="reveal">רוצים לשמוע עוד? להזמין הרצאה? סדנה? דוח חדשנות? אשמח לשמוע מכם.</p>
-    <a href="https://wa.me/972523124326" class="btn-wa reveal" style="margin:0 auto 20px;display:inline-flex">
+  <div class="dot-grid-tl" style="opacity:.6"></div>
+  <span class="spark sp-blue"  style="top:30px;left:6%;font-size:1rem;animation-delay:.3s">✦</span>
+  <span class="spark sp-green" style="top:55px;left:12%;font-size:.7rem;animation-delay:1.2s">✦</span>
+  <span class="spark sp-pink"  style="bottom:50px;right:7%;font-size:.8rem;animation-delay:1.7s">✦</span>
+  <span class="spark sp-purple"style="top:40px;right:12%;font-size:.6rem;animation-delay:.8s">✦</span>
+  <!-- AI connection dots -->
+  <svg class="deco-icon" style="bottom:30px;right:25px;width:70px;height:70px;opacity:.12" viewBox="0 0 70 70" fill="none" stroke="#1E3CFF" stroke-width="1.5">
+    <circle cx="15" cy="35" r="5"/><circle cx="35" cy="15" r="5"/><circle cx="55" cy="35" r="5"/><circle cx="35" cy="55" r="5"/>
+    <line x1="20" y1="35" x2="30" y2="35"/><line x1="35" y1="20" x2="35" y2="30"/><line x1="40" y1="35" x2="50" y2="35"/><line x1="35" y1="40" x2="35" y2="50"/>
+  </svg>
+  <div class="container" style="position:relative;z-index:2">
+    <span class="section-label reveal">צור קשר</span>
+    <h2 class="section-title reveal">בואו נדבר</h2>
+    <p class="reveal">רוצים להזמין הרצאה? סדנה? ייעוץ? אשמח לשמוע מכם.</p>
+    <a href="https://wa.me/972523124326" class="btn-main reveal btn-wa-green" style="margin:0 auto 24px;display:inline-flex;font-size:1.2rem;padding:18px 44px">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
       שלחו הודעה בוואטסאפ
     </a>
@@ -731,39 +857,38 @@ footer p{color:var(--white60);font-size:.85rem}
   </div>
 </section>
 
-
 <!-- ══ FOOTER ══ -->
 <footer>
   <p>&copy; 2026 אריאלה דניאלי. כל הזכויות שמורות.</p>
   <div class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </div>
 </footer>
 
 <!-- WhatsApp float -->
-<a href="https://wa.me/972523124326" target="_blank" style="position:fixed;bottom:28px;left:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+<a href="https://wa.me/972523124326" target="_blank"
+  style="position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .3s"
+  onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
   <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg>
 </a>
 
-<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-
 <script>
-
-// ── Nav scroll ──
+function skipIntro(){
+  const el=document.getElementById('videoIntro');
+  el.style.opacity='0';setTimeout(()=>el.style.display='none',800);
+}
+const vid=document.getElementById('introVid');
+if(vid){
+  vid.addEventListener('ended',skipIntro);
+  vid.addEventListener('error',skipIntro);
+}
+setTimeout(skipIntro,15000);
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>60),{passive:true});
-
-// ── Mobile menu ──
-const burger=document.getElementById('burger'),mm=document.getElementById('mobileMenu');
-burger.addEventListener('click',()=>{burger.classList.toggle('open');mm.classList.toggle('open');document.body.style.overflow=mm.classList.contains('open')?'hidden':''});
-function closeMobile(){burger.classList.remove('open');mm.classList.remove('open');document.body.style.overflow=''}
-
-// ── Scroll reveal ──
 const reveals=document.querySelectorAll('.reveal');
-reveals.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight+100)el.classList.add('visible')});
-const ro=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ro.unobserve(el.target)}}),{threshold:.05,rootMargin:'0px 0px 50px 0px'});
+reveals.forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight+80)el.classList.add('visible')});
+const ro=new IntersectionObserver(e=>e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ro.unobserve(el.target)}}),{threshold:.06,rootMargin:'0px 0px 60px 0px'});
 reveals.forEach(el=>{if(!el.classList.contains('visible'))ro.observe(el)});
-setTimeout(()=>reveals.forEach(el=>el.classList.add('visible')),3000);
 </script>
 </body>
 </html>
