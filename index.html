@@ -88,15 +88,15 @@ img{max-width:100%;display:block}
 .ai-pattern svg{position:absolute}
 
 /* ── VIDEO BANNER ── */
-.video-banner{width:100%;margin-top:var(--nav-h);line-height:0;overflow:hidden;max-height:70vh}
+.video-banner{width:100vw;margin-top:var(--nav-h);line-height:0;overflow:hidden;max-height:70vh;margin-left:calc(50% - 50vw)}
 .video-banner video{width:100%;max-height:70vh;object-fit:cover;object-position:center top;display:block}
 
 /* ── LOGO MARQUEE ── */
-.logo-track-wrap{overflow:hidden;position:relative;padding:0}
+.logo-track-wrap{overflow:hidden;position:relative;padding:0;direction:ltr}
 .logo-track-wrap::before,.logo-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:50px;z-index:2;pointer-events:none}
 .logo-track-wrap::before{right:0;background:linear-gradient(to left,var(--pink-mid),transparent)}
 .logo-track-wrap::after{left:0;background:linear-gradient(to right,var(--pink-mid),transparent)}
-.logo-track{display:flex;gap:24px;animation:marquee 38s linear infinite;width:max-content;align-items:center;direction:ltr}
+.logo-track{display:flex;gap:24px;animation:marquee 30s linear infinite;width:max-content;align-items:center;direction:ltr}
 .logo-track:hover{animation-play-state:paused}
 @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
@@ -274,7 +274,7 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
 /* ════════════════════════════
    SECTION COMMON
 ════════════════════════════ */
-.section{padding:clamp(36px,5vw,64px) clamp(20px,6vw,80px);position:relative}
+.section{padding:clamp(28px,3.5vw,46px) clamp(20px,6vw,80px);position:relative}
 .container{max-width:1200px;margin:0 auto}
 .section-label{
   display:inline-block;
@@ -291,7 +291,7 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
 }
 .section-sub{text-align:center;
   font-size:clamp(1rem,1.6vw,1.2rem);
-  color:var(--text60);max-width:640px;margin-bottom:52px;
+  color:var(--text60);max-width:640px;margin-bottom:28px;
   font-weight:400;line-height:1.7;
 }
 .section-sub.center{text-align:center;margin-right:auto;margin-left:auto}
@@ -399,7 +399,7 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
   font-weight:900;color:var(--text);
   text-align:center!important;margin-bottom:12px;width:100%;
 ;line-height:1.2}
-.quotes-sub{text-align:center;color:var(--text60);font-size:1.1rem;margin-bottom:52px}
+.quotes-sub{text-align:center;color:var(--text60);font-size:1.1rem;margin-bottom:28px}
 .quotes-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;align-items:stretch}
 .quote-card{
   background:var(--pink-bg);
@@ -591,7 +591,7 @@ footer p{color:var(--text40);font-size:.85rem}
     <circle cx="30" cy="22" r="12"/><path d="M24,34 Q22,42 25,44 L35,44 Q38,42 36,34"/><line x1="27" y1="48" x2="33" y2="48"/><line x1="28" y1="52" x2="32" y2="52"/>
   </svg>
   <div class="container">
-    <div style="text-align:center;margin-bottom:52px">
+    <div style="text-align:center;margin-bottom:26px">
       <span class="section-label reveal">הרצאות</span>
       <h2 class="section-title reveal">כל הרצאה מותאמת<br>לקהל ולמטרות שלכם</h2>
     </div>
@@ -679,7 +679,7 @@ footer p{color:var(--text40);font-size:.85rem}
     <circle cx="24" cy="26" r="2.5"/><circle cx="36" cy="26" r="2.5"/><circle cx="30" cy="24" r="2"/>
   </svg>
   <div class="container">
-    <div style="text-align:center;margin-bottom:52px">
+    <div style="text-align:center;margin-bottom:26px">
       <span class="section-label reveal">סדנאות</span>
       <h2 class="section-title reveal">סדנאות שמשלבות<br>פרקטיקה עם חוויה</h2>
     </div>
