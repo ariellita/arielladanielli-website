@@ -40,7 +40,46 @@ html{scroll-behavior:smooth;overflow-x:hidden}body{font-family:var(--font);backg
 .audience-icon{display:none}.audience-item h4{font-weight:800;margin-bottom:10px;color:var(--mint);font-size:1.2rem}.audience-item p{color:var(--white60);font-size:.85rem;line-height:1.5}
 footer{text-align:center;padding:40px 20px;border-top:1px solid var(--white08);color:var(--white60);font-size:.85rem}
 .stagger{opacity:0;transform:translateY(40px);animation:staggerIn .9s cubic-bezier(.22,1,.36,1) forwards}.stagger:nth-child(1){animation-delay:.2s}.stagger:nth-child(2){animation-delay:.45s}.stagger:nth-child(3){animation-delay:.7s}.stagger:nth-child(4){animation-delay:.95s}@keyframes staggerIn{to{opacity:1;transform:translateY(0)}}
-.back-top{position:fixed;bottom:24px;left:24px;width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--white08);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100}.back-top:hover{background:var(--orange)}
+.back-top{position:fixed;bottom:24px;left:24px;width:44px;height:44px;border-radius:50%;background:var(--bg-card);border:1px solid var(--white08);display:flex;align-items:center;justify-content:contain;cursor:pointer;z-index:100}.back-top:hover{background:var(--orange)}
+
+/* ══ PINK DESIGN UPDATE ══ */
+.nav{background:rgba(255,240,245,.95)!important;border-bottom:1px solid rgba(232,160,190,.2)!important}
+.nav.scrolled{background:rgba(255,220,236,.97)!important}
+.nav ul a,.nav-links a{color:rgba(30,60,255,.65)!important}
+.nav ul a:hover,.nav-links a:hover{color:#FF5A1F!important}
+body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(rgba(155,142,196,.12) 1.5px,transparent 1.5px);background-size:28px 28px;pointer-events:none;z-index:-1}
+:root{--bg:#FFF0F5!important;--bg-card:rgba(255,255,255,.75)!important;--bg-card2:rgba(255,230,242,.5)!important;--mint:#7DC5A0!important;--lavender:#9B8EC4!important;--pink-mid:#FDDDE8!important}
+body{background:linear-gradient(160deg,#fff8fb 0%,#fde8f0 60%,#f8e0ee 100%)!important;min-height:100vh}
+.hero{background:linear-gradient(160deg,#FFF0F5 0%,#FDDDE8 100%)!important}
+.hero-grid{background-image:radial-gradient(rgba(155,142,196,.2) 1.5px,transparent 1.5px)!important}
+.hero-glow,.hero-glow2{display:none!important}
+.hero-title{color:#1E3CFF!important;-webkit-text-fill-color:#1E3CFF!important}
+.hero-sub{color:rgba(30,60,255,.6)!important}
+.hero-badge{background:rgba(255,90,31,.1)!important;border-color:rgba(255,90,31,.2)!important;color:#FF5A1F!important}
+.section{background:#FFF0F5!important}
+.content-section{background:rgba(255,220,236,.3)!important}
+.content-card{background:rgba(255,255,255,.7)!important;border-color:rgba(232,160,190,.3)!important}
+.content-card::before{background:linear-gradient(90deg,#FF5A1F,#9B8EC4)!important}
+.content-card h3{color:#9B8EC4!important}
+.content-card p,.content-card ul li{color:rgba(30,60,255,.65)!important}
+.content-card ul li::before{background:#FF5A1F!important}
+.part-card{background:rgba(255,255,255,.7)!important;border-color:rgba(232,160,190,.3)!important}
+.part-card h3{color:#9B8EC4!important}
+.part-card p{color:rgba(30,60,255,.65)!important}
+.part-num{color:#FF5A1F!important}
+.audience-item{background:rgba(255,255,255,.7)!important;border-color:rgba(232,160,190,.3)!important}
+.audience-item h4{color:#9B8EC4!important}
+.audience-item:hover{border-color:rgba(255,90,31,.3)!important}
+.section-title{color:#FF5A1F!important;-webkit-text-fill-color:#FF5A1F!important}
+.quote-card{background:#FFF0F5!important;border-color:rgba(232,160,190,.3)!important}
+.quote-text{color:rgba(30,60,255,.8)!important}
+.quote-card::before{color:#FF5A1F!important}
+.btn-wa{background:#25D366!important}
+.btn-outline{background:#FF5A1F!important;color:white!important;border:none!important}
+.btn-outline:hover{background:#d94010!important}
+footer{background:#FDDDE8!important;color:#FF5A1F!important;border-top:1.5px solid rgba(232,160,190,.2)!important}
+footer p{color:#FF5A1F!important}
+.footer-social a{color:#FF5A1F!important}
 </style>
 </head>
 <body>
@@ -53,7 +92,7 @@ footer{text-align:center;padding:40px 20px;border-top:1px solid var(--white08);c
     <li><a href="index.html#contact">צור קשר</a></li>
   </ul>
   <a href="index.html" style="margin-left:0;margin-right:auto;display:flex;align-items:center">
-    <img src="logo-white.png" alt="Ariella Danielli" style="width:160px;height:160px;display:inline-block;object-fit:contain;flex-shrink:0;max-width:none;margin-top:-44px;margin-bottom:-44px">
+    <img src="logo-ariella.png" alt="Ariella Danielli" style="mix-blend-mode:multiply;width:160px;height:160px;display:inline-block;object-fit:contain;flex-shrink:0;max-width:none;margin-top:-44px;margin-bottom:-44px">
   </a>
 </nav>
 
