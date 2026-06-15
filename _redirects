@@ -1,3 +1,6 @@
+# Redirect www to non-www (permanent fix for duplicate canonical)
+https://www.arielladanielli.com/* https://arielladanielli.com/:splat 301
+
 # Redirect old Wix/ddit URLs to homepage
 /blog /  301
 /blog/* /  301
