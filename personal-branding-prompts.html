@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הפרומפטים לוובינר מיתוג אישי | אריאלה דניאלי</title>
+  <meta name="description" content="הפרומפטים לבניית מיתוג אישי בעידן ה-AI — וובינר אריאלה דניאלי ושרון מס">
+  <link rel="canonical" href="https://arielladanielli.com/personal-branding-prompts">
+  <!-- GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H2924HK4W"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-1H2924HK4W');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@700;800;900&family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ══════════════════════════════════
+       TOKENS
+    ══════════════════════════════════ */
+    :root {
+      --cream:   #FFF9F2;
+      --cream-2: #FFF3E8;
+      --ink:     #172044;
+      --orange:  #FF5A1F;
+      --blue:    #1A2BFF;
+      --green:   #00D68F;
+      --pink:    #FFC1D9;
+      --purple:  #B89CFF;
+      --line:    rgba(23,32,68,.10);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      font-family: 'Heebo', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      direction: rtl;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Rubik', sans-serif; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ══════════════════════════════════
+       NAVBAR
+    ══════════════════════════════════ */
+    .navbar {
+      position: fixed;
+      inset-inline: 0;
+      top: 0;
+      z-index: 200;
+      padding: 1.4rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background .35s, box-shadow .35s, padding .35s;
+    }
+    .navbar.scrolled {
+      background: rgba(23,32,68,.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 2px 28px rgba(0,0,0,.22);
+      padding: 0.9rem 2.5rem;
+    }
+    .nav-logo {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 900;
+      font-size: .95rem;
+      line-height: 1.3;
+      color: #fff;
+    }
+    .nav-logo em { color: var(--orange); font-style: normal; }
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: rgba(255,255,255,.65);
+      font-size: .88rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-back:hover { color: #fff; }
+    .nav-back svg { width: 16px; height: 16px; }
+    @media (max-width: 640px) { .navbar { padding: 1rem 1.25rem; } .navbar.scrolled { padding: .8rem 1.25rem; } }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    .hero {
+      background: var(--ink);
+      padding: 9rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Subtle dot grid */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,193,217,.12) 1.5px, transparent 1.5px);
+      background-size: 28px 28px;
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.75);
+      font-size: .82rem;
+      font-weight: 500;
+      padding: .45rem 1.3rem;
+      border-radius: 999px;
+      margin-bottom: 2rem;
+      letter-spacing: .04em;
+    }
+    .hero-badge span {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .hero h1 {
+      font-weight: 900;
+      font-size: clamp(2.6rem, 7vw, 5.2rem);
+      line-height: 1.08;
+      margin-bottom: 1.4rem;
+    }
+    .hero h1 .l1 { color: var(--orange); display: block; }
+    .hero h1 .l2 { color: #fff; display: block; }
+    .hero-sub {
+      color: rgba(255,255,255,.62);
+      font-size: clamp(.95rem, 2vw, 1.12rem);
+      max-width: 560px;
+      margin: 0 auto 2.4rem;
+      line-height: 1.85;
+    }
+    .hero-tip {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      background: rgba(0,214,143,.1);
+      border: 1px solid rgba(0,214,143,.25);
+      color: var(--green);
+      font-size: .88rem;
+      font-weight: 500;
+      padding: .55rem 1.4rem;
+      border-radius: 12px;
+    }
+    .hero-tip svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+    /* ══════════════════════════════════
+       STICKY CATEGORY NAV
+    ══════════════════════════════════ */
+    .cat-strip {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cat-strip a {
+      display: block;
+      padding: 1rem 1.6rem;
+      font-family: 'Heebo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(23,32,68,.5);
+      border-bottom: 2.5px solid transparent;
+      white-space: nowrap;
+      transition: color .2s, border-color .2s;
+    }
+    .cat-strip a:hover { color: var(--ink); }
+    .cat-strip a.active { color: var(--orange); border-bottom-color: var(--orange); }
+
+    /* ══════════════════════════════════
+       SECTIONS
+    ══════════════════════════════════ */
+    .pb-section {
+      padding: 72px 2rem;
+      max-width: 860px;
+      margin-inline: auto;
+    }
+    .pb-section + .pb-section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border: 1px solid rgba(255,90,31,.25);
+      background: rgba(255,90,31,.06);
+      border-radius: 999px;
+      padding: .35rem 1.1rem;
+      margin-bottom: 1.4rem;
+    }
+    .pb-title {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: .6rem;
+      line-height: 1.2;
+    }
+    .pb-desc {
+      font-size: 15.5px;
+      color: rgba(23,32,68,.58);
+      margin-bottom: 2.8rem;
+      line-height: 1.75;
+      max-width: 540px;
+    }
+
+    /* ══════════════════════════════════
+       PROMPT CARDS
+    ══════════════════════════════════ */
+    .cards { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 2rem 2rem 2rem 2rem;
+      transition: box-shadow .25s, border-color .25s;
+    }
+    .card:hover {
+      box-shadow: 0 6px 32px rgba(23,32,68,.07);
+      border-color: rgba(255,90,31,.2);
+    }
+
+    /* Card header */
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1rem;
+    }
+    .card-num {
+      font-family: 'Rubik', sans-serif;
+      font-size: .76rem;
+      font-weight: 700;
+      color: rgba(23,32,68,.3);
+      letter-spacing: .08em;
+    }
+    .card-badge {
+      font-size: .76rem;
+      font-weight: 600;
+      color: var(--orange);
+      background: rgba(255,90,31,.08);
+      border-radius: 8px;
+      padding: .25rem .75rem;
+    }
+    .card-title {
+      font-size: 1.12rem;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+    .card-summary {
+      font-size: 14px;
+      color: rgba(23,32,68,.55);
+      line-height: 1.7;
+      margin-bottom: 1.4rem;
+    }
+
+    /* Prompt text box */
+    .prompt-box {
+      position: relative;
+      background: var(--cream-2);
+      border-radius: 12px;
+      padding: 1.35rem 1.35rem 1.35rem 3.2rem;
+    }
+    .prompt-text {
+      font-family: 'Heebo', sans-serif;
+      font-size: 14.5px;
+      line-height: 1.95;
+      color: #1a1a2e;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    /* Bracket highlights */
+    .fill {
+      color: #c04000;
+      font-weight: 700;
+      background: rgba(255,90,31,.12);
+      border-radius: 5px;
+      padding: 1px 5px;
+    }
+
+    /* Copy button */
+    .copy-btn {
+      position: absolute;
+      inset-inline-end: 10px;
+      top: 10px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid rgba(23,32,68,.12);
+      border-radius: 10px;
+      cursor: pointer;
+      color: rgba(23,32,68,.35);
+      transition: all .18s;
+      flex-shrink: 0;
+    }
+    .copy-btn svg { width: 15px; height: 15px; pointer-events: none; }
+    .copy-btn:hover {
+      border-color: var(--orange);
+      color: var(--orange);
+      background: rgba(255,90,31,.06);
+    }
+    .copy-btn.copied {
+      border-color: var(--green);
+      color: var(--green);
+      background: rgba(0,214,143,.08);
+    }
+
+    /* Notes */
+    .notes {
+      margin-top: 1rem;
+      border-inline-start: 3px solid var(--orange);
+      background: rgba(255,90,31,.05);
+      border-radius: 0 10px 10px 0;
+      padding: .9rem 1rem .9rem .9rem;
+    }
+    .notes-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: .5rem;
+    }
+    .notes-text {
+      font-size: 13.5px;
+      color: rgba(23,32,68,.65);
+      line-height: 1.72;
+      white-space: pre-wrap;
+    }
+
+    /* ══════════════════════════════════
+       FOOTER
+    ══════════════════════════════════ */
+    .footer {
+      background: var(--ink);
+      padding: 2.4rem 2rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+    .footer-logo {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .footer-logo em { color: var(--orange); font-style: normal; }
+    .footer p { color: rgba(255,255,255,.3); font-size: .82rem; }
+
+    /* ══════════════════════════════════
+       SCROLL ANIMATIONS
+    ══════════════════════════════════ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+
+    /* ══════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════ */
+    @media (max-width: 640px) {
+      .pb-section { padding: 48px 1.25rem; }
+      .card { padding: 1.4rem 1.1rem; }
+      .prompt-box { padding: 1rem 1rem 1rem 2.8rem; }
+      .cat-strip a { padding: .85rem 1.1rem; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">מיתוג אישי<br><em>בעידן ה-AI</em></div>
+    <a href="personal-branding.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      חזרה לסדנה
+    </a>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="hero-badge"><span></span>וובינר מיתוג אישי · אריאלה דניאלי ושרון מס</div>
+    <h1>
+      <span class="l1">הפרומפטים</span>
+      <span class="l2">שלכם</span>
+    </h1>
+    <p class="hero-sub">לפניכם הפרומפטים לבניית מיתוג אישי. מומלץ לעבוד לפי הסדר ורצוי על שיחה אחת. העתיקו כל פרומפט ומלאו בסוגריים את הפרטים שרלוונטים לכם.</p>
+    <div class="hero-tip">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      לחצו על אייקון ההעתקה בכל כרטיס
+    </div>
+  </section>
+
+  <!-- ═══ CATEGORY NAV ═══ -->
+  <nav class="cat-strip" id="catStrip">
+    <a href="#beginners" class="active">למתחילים מאפס</a>
+    <a href="#advanced">למי שיש מיתוג</a>
+    <a href="#agents">סוכנים</a>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — BEGINNERS
+  ═══════════════════════════════════════════ -->
+  <section class="pb-section" id="beginners">
+    <div class="section-tag">למתחילים מאפס</div>
+    <h2 class="pb-title fade-up">בניית תהליך מיתוג שלם</h2>
+    <p class="pb-desc fade-up d1">ארבעה שלבים לבניית מיתוג אישי מהבסיס — עובדים בשיחה אחת לפי הסדר.</p>
+
+    <div class="cards">
+
+      <!-- CARD 1 -->
+      <article class="card fade-up d1" id="prompt-1">
+        <div class="card-head">
+          <span class="card-num">01</span>
+          <span class="card-badge">שלב א׳</span>
+        </div>
+        <h3 class="card-title">מיתוג מהערך</h3>
+        <p class="card-summary">מציגים לכלוד מי אתם, מה אתם עושים ומה הערכים המרכזיים שלכם. התוצאה: טון וסטייל ברורים להעברת המסרים שלכם.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p1">קוראים לי (הכניסו את השם), במקצועי אני (הכניסו מה אתם עושים בעבודתכם), אתה יכול ללמוד ממני דרך האתר שלי (הכניסו את האתר שלכם במידה ויש)
+אני רוצה לבנות את המיתוג האישי שלי ברשתות כך שאוכל לייצר הצעת ערך מאוד ברורה, בולטת ושונה מהתחרות שלי. אני רוצה להתחיל בחלק של הערכים. אני יכולה לומר על עצמי שהערך המוביל שלי הוא (להכניס את הערכים שלכם), תוכל לייצר לי את הטון וסטייל של הדרך שבה אני צריכה להעביר את המסרים שלי</div>
+        </div>
+      </article>
+
+      <!-- CARD 2 -->
+      <article class="card fade-up d2" id="prompt-2">
+        <div class="card-head">
+          <span class="card-num">02</span>
+          <span class="card-badge">שלב ב׳</span>
+        </div>
+        <h3 class="card-title">הסיפור שלכם</h3>
+        <p class="card-summary">מוסיפים את הסיפור האישי כדי לעשות את המיתוג עמוק ואנושי יותר — הכלוד ישלב אותו בכתיבת התוכן.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p2">אני רוצה להוסיף את הסיפור שלי כך שתוכל לעבות ולשלב את הסיפור שלי גם בכתיבת התוכן שיציג עוד נקודת מבט של האישיות שלי ושישרת אותי מקצועית. אני (כאן להכניס את הסיפור שלכם). איך אתה משלב את הסיפור שלי כחלק מהמיתוג האישי שלי. אנא תן לי את המלצתך</div>
+        </div>
+      </article>
+
+      <!-- CARD 3 -->
+      <article class="card fade-up d3" id="prompt-3">
+        <div class="card-head">
+          <span class="card-num">03</span>
+          <span class="card-badge">שלב ג׳</span>
+        </div>
+        <h3 class="card-title">פוסט ראשון בשפה החדשה</h3>
+        <p class="card-summary">מבקשים מהכלוד לכתוב פוסט לדוגמה בשפת המיתוג שנבנתה, כולל מילות SEO ו-GEO.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p3">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p3">אני רוצה שתכין לי פוסט בשפה החדשה לפייסבוק/לינדקאין/אינסטגרם על הקייס הזה (להכניס לינק לכתבה מסוימת)
+אנא הוסף מילות SEO ו GEO כדי שאעלה בחיפוש הרלוונטי לעולמות התוכן שלי</div>
+        </div>
+      </article>
+
+      <!-- CARD 4 -->
+      <article class="card fade-up d1" id="prompt-4">
+        <div class="card-head">
+          <span class="card-num">04</span>
+          <span class="card-badge">שלב ד׳</span>
+        </div>
+        <h3 class="card-title">מוצרים ושירותים</h3>
+        <p class="card-summary">בשלב הזה הכלוד כבר מכיר אתכם לעומק ויכול להציע רעיונות למוצרים ושירותים שמתאימים למיתוג שלכם.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p4">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p4">עכשיו שאתה מכיר אותי, את הערך שלי ואת הסיפור שלי ואת העבודה שלי. אשמח שתביא לי סדרת של רעיונות למוצרים ושירותים שיתאימו למיתוג האישי שלי. תכין לי טבלה עם הרעיון, הסבר עליו, החיבור למיתוג האישי, ומה נדרש ממני</div>
+        </div>
+      </article>
+
+      <!-- CARD 5 -->
+      <article class="card fade-up d2" id="prompt-5">
+        <div class="card-head">
+          <span class="card-num">05</span>
+          <span class="card-badge">שלב ה׳</span>
+        </div>
+        <h3 class="card-title">שפה ויזואלית ודף מותג</h3>
+        <p class="card-summary">מעלים תמונות השראה ומקבלים דף מותג ויזואלי מלא — צבעוניות, טיפוגרפיה, לוגו, אייקונים וסגנון צילום.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p5">צרי לי דף מותג ויזואלי מלא על בסיס תמונת ההשראה שהועלתה.
+תרגמי את התמונה לשפת מותג שלמה, הכוללת:
+צבעוניות, טיפוגרפיה, כיוון ללוגו, מערכת אייקונים, טקסטורות, סגנון צילום, אלמנטים גרפיים
+ומילות מפתח רגשיות שמגדירות את המותג.
+המטרה היא לא להעתיק את תמונת ההשראה, אלא לחלץ ממנה את ה־DNA הוויזואלי והרגשי שלה, ולהפוך אותו לדף מותג נקי, ברור ומעוצב.</div>
+        </div>
+        <div class="notes">
+          <div class="notes-label">הנחיות ותוספות מהקובץ</div>
+          <div class="notes-text">לפרומפט הזה הוסיפו את: מה שאתם עושים, את הבידול שלכם ו-2-3 תמונות להשראה שיוכל ללמוד את השפה שאליה אתם מכוונים. אם תרצו צבע ספציפי כתבו לו גם, או צרפו את הסקלה הצבעונית שאתם רוצים.
+לינק לסקלה צבעונית ב-Pinterest — חפשו: branding colors palette</div>
+        </div>
+      </article>
+
+    </div><!-- /cards -->
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — ADVANCED
+  ═══════════════════════════════════════════ -->
+  <section class="pb-section" id="advanced">
+    <div class="section-tag">למי שכבר יש מיתוג</div>
+    <h2 class="pb-title fade-up">סקירה על מיתוג אישי קיים</h2>
+    <p class="pb-desc fade-up d1">יש לכם פרופיל פעיל? כאן תקבלו ניתוח מעמיק של מה עובד ומה לשפר.</p>
+
+    <div class="cards">
+
+      <!-- CARD 6 -->
+      <article class="card fade-up d1" id="prompt-6">
+        <div class="card-head">
+          <span class="card-num">06</span>
+          <span class="card-badge">אופציה א׳</span>
+        </div>
+        <h3 class="card-title">סקירת פרופיל מפוסטים קיימים</h3>
+        <p class="card-summary">מעלים קובץ עם פוסטים ומקבלים ניתוח מעמיק — מה עובד, מה לא, ואיזו חוקיות לבנות לכתיבה שלכם.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p6">אתה מומחה למיתוג אישי ברשתות החברתיות. אני (מקצוע), קהל המטרה שלי הוא (מי הקהל), המוצרים/שירותים אותם אני מוכרת (לפרט). המטרה שלי היא כיועצת שיווקית להיתפס ברשת כ (להוסיף את התפיסה שלכם - אוטוריטה בחדשנות, כזאת שמנגישה מידע, גורמת לאנשים לחשוב, מעוררת עניין). אני מעלה לך קובץ עם הפוסטים הנבחרים שלי מפייסבוק. אני רוצה שתעבור עליהם ותעשה ניתוח של מה עובד/לא עובד ותבנה לי חוקיות של מה עליי לעשות בכל פעם שאני כותבת פוסט כדי שאבנה לעצמי שפה ברורה, מזוהה עם הערכים שלי (להוסיף ערכים – אנרגיה, תשוקה, הומור) שתעזור לי לייצר בידול ובולטות.</div>
+        </div>
+        <div class="notes">
+          <div class="notes-label">הנחיות ותוספות מהקובץ</div>
+          <div class="notes-text">ראשית יש להכין קובץ עם פוסטים שלכם לדוגמה — ראו הדרכה בוידאו.</div>
+        </div>
+      </article>
+
+      <!-- CARD 7 -->
+      <article class="card fade-up d2" id="prompt-7">
+        <div class="card-head">
+          <span class="card-num">07</span>
+          <span class="card-badge">אופציה ב׳</span>
+        </div>
+        <h3 class="card-title">סקירת פרופיל דרך Claude Chrome</h3>
+        <p class="card-summary">גרסת Chrome — נכנסים לפרופיל הסושיאל ישירות בדפדפן, לוחצים על האייקון של Claude ומריצים את הפרומפט על הפרופיל החי.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p7">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p7">אתה מומחה למיתוג אישי ברשתות החברתיות. אני (מקצוע), קהל המטרה שלי הוא (מי הקהל), המוצרים/שירותים אותם אני מוכרת (לפרט). אני רוצה שתעשה סקירה מקצועית על הפרופיל שלי. המטרה שלי היא להיות אוטוריטה בתחום (לציין תחום), כזאת ש (לרשום מה הייתי רוצים להעביר – מעוררת עניין, מלמדת, מעבירה ידע, גורמת לאנשים לחשוב). לאור זאת אשמח שתראה לי היכן הפערים נמצאים. מה לא חזק אצלי ודורש טיפול, מה עובד מצויין ויש לשמר, ומה חסר לי שעליי לעשות. הצג את המידע בטבלה מסודרת</div>
+        </div>
+        <div class="notes">
+          <div class="notes-label">הנחיות ותוספות מהקובץ</div>
+          <div class="notes-text">יש להכנס בכרום ללשונית של הפרופיל בסושיאל שלכם (לינקדאין/פייסבוק/אינסטגרם) ואז ללחוץ על האייקון של קלוד בכרום ולרשום בחלונית שנפתחת את הפרומפט.</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — AGENTS
+  ═══════════════════════════════════════════ -->
+  <section class="pb-section" id="agents">
+    <div class="section-tag">סוכנים</div>
+    <h2 class="pb-title fade-up">סוכני תוכן אוטומטיים</h2>
+    <p class="pb-desc fade-up d1">פרומפטים לסוכנים שעובדים בשבילכם — מחפשים תוכן ומייצרים פוסטים בסגנון שלכם.</p>
+
+    <div class="cards">
+
+      <!-- CARD 8 -->
+      <article class="card fade-up d1" id="prompt-8">
+        <div class="card-head">
+          <span class="card-num">08</span>
+          <span class="card-badge">סוכן מחקר</span>
+        </div>
+        <h3 class="card-title">סוכן מחקר תוכן יומי</h3>
+        <p class="card-summary">סוכן שסורק מקורות עולמיים מובילים ומחזיר דו"ח יומי מובנה בעברית עם חדשות, כלים וטרנדים בתחום שלכם.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p8">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p8">אתה סוכן מחקר יומי על (מלאו את החלק של תחום העניין שלכם). בכל יום תסרוק מקורות עולמיים מובילים בתחומי (מלאו את תחומי העניין שלכם) ותחזיר דו״ח יומי מובנה ומדויק בעברית. הדו״ח חייב להיות מוצג כטבלה אחת גדולה, עם שורות מסודרות לפי קטגוריות ברצף.
+הקטגוריות:
+בהנחה שיש קטגוריות רשמו לו. לדוג׳ – שימו את הקטגוריות שלכם
+1. חדשנות טכנולוגיות (כלים, פלטפורמות, השקות חדשות)
+2. חדשנות של מוצרים (מוצרים חדשים בעולם)
+3. חדשנות של שירותים (שירותים חדשים בעולם)
+
+בכל קטגוריה יש להביא 5 פריטים. כל פריט יוצג כשורה בטבלה ויכלול עמודות:
+קטגוריה (כדי לדעת לאיזה תחום שייך הפריט)
+מקור המידע (שם האתר/הרשת החברתית)
+כותרת קצרה בעברית
+פסקה של 2–3 משפטים בעברית, בשפה פשוטה וברורה
+לינק ישיר למקור המקורי
+משפט מסכם עם "מה זה אומר עבורך" – תובנה פרקטית שמיועדת עבור (פה תכניסו את קהל המטרה שלכם)
+
+חוקים ברורים:
+להביא אך ורק פריטים מה-24 שעות האחרונות. אם אין מספיק, ניתן להרחיב עד 7 ימים אחורה ולציין במפורש "עד 7 ימים".
+לא להמציא מידע. חובה לבדוק כל דוגמה שהיא אמיתית, מבוססת וכוללת נתונים.
+כל דוגמה חייבת לכלול קישור אמיתי למקור
+שמות מקצועיים (כמו שמות של כלים, טכנולוגיות, פלטפורמות) אפשר להשאיר באנגלית.
+מקורות עיקריים: (שים לב, יש להביא עוד מקורות מעבר לאתרים שציינתי)
+פה תכניסו רפרנסים לאתרים שאתם רוצים שיסרוק
+יש להעניק משקל שווה לכל הקטגוריות – טכנולוגיה, מוצרים, שירותים, שיווק, פרסום, מותגים ורשתות.
+כל שורות הטבלה יוצגו לפי סדר הקטגוריות ברצף, כך שכל קטגוריה מופיעה ברצף של 5 פריטים.
+הקהל המרכזי הוא (כאן מלאו מה המטרה שלכם – לדוגמא להגיע לקהל של מנהלות משאבי אנוש, אחראיות על העשרת ידע בחברות)
+עליך לשמור על טון מקצועי, תובנתי, אך קל לעיכול וברור. הדגש הוא על דיוק, פרקטיות והשראה.</div>
+        </div>
+      </article>
+
+      <!-- CARD 9 -->
+      <article class="card fade-up d2" id="prompt-9">
+        <div class="card-head">
+          <span class="card-num">09</span>
+          <span class="card-badge">סוכן פוסטים</span>
+        </div>
+        <h3 class="card-title">סוכן כתיבת פוסטים לרשתות</h3>
+        <p class="card-summary">שולחים לינק לכתבה ומקבלים שלושה פוסטים מותאמים לפייסבוק, לינקדאין ואינסטגרם — בסגנון הכתיבה שלכם.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p9">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p9">אתה סוכן תוכן אישי עבור אריאלה דניאלי – (כאן תגדירו את התפקיד שלכם)
+התפקיד שלך:
+בכל פעם שאני מביאה לך לינק לכתבה, אתה צריך לקרוא את הכתבה, להבין את הרעיון המרכזי שלה, וליצור עבורי פוסטים מותאמים לפייסבוק, לינקדאין ואינסטגרם, בשפה התקשורתית שלי.
+סגנון הכתיבה שלי:
+(פה תכניסו את סגנון הכתיבה שלכם. אפשרות נוספת להוסיף לו קובץ של פוסטים לדוגמה)
+- מקצועי, חד, ברור ונגיש
+- לא שיווקי מדי ולא מתאמץ
+- כתיבה בגובה העיניים, אבל עם עומק אסטרטגי
+- שילוב בין סיכום חכם של הכתבה לבין נקודת מבט אישית ומקצועית
+- טון של (תרשמו לו את הטון שתרצו לדוגמה – של מרצה לחדשנות, של מומחית במיתוג אישי)
+- כתיבה שמעניינת (פה לציין את קהלי המטרה שלכם- למשל מנהלות משאבי אנוש, מנהל/ת שיווק בארגונים)
+
+חשוב:
+אל תעתיק את הכתבה. תסכם, תפרש ותייצר ערך חדש.
+אל תמציא נתונים שלא מופיעים בכתבה.
+אם יש נתון מספרי - ציין שהוא לפי הכתבה.
+אם הלינק לא נפתח או שאין לך מספיק מידע - בקש ממני להדביק את הטקסט או תקציר הכתבה.
+אל תשתמש בשפה מוגזמת כמו ״מהפכה מטורפת״, ״כולם חייבים לדעת״ או ״זה ישנה את העולם״ אלא אם זה באמת מוצדק.
+אל תכתוב בסגנון גנרי של AI. תכתוב כאילו אני כתבתי את זה.
+
+מבנה העבודה שלך:
+1. קודם כל נתח את הכתבה:
+- מה הנושא המרכזי?
+- למה זה מעניין עכשיו?
+- למי זה רלוונטי?
+- מה החידוש או השינוי שמסתתר מאחורי הכתבה?
+- איך זה מתחבר לעולמות שלי: חדשנות, שיווק, AI, דיגיטל, חוויית לקוח, קהילות, תוכן, טרנדים, מותגים ועתיד העבודה?
+
+2. צור 3 פוסטים נפרדים:
+
+פוסט לפייסבוק:
+- טון אישי יותר, נגיש, מעורר מחשבה
+- פתיחה חזקה שמחברת לחיים, לעסקים או לשיווק
+- סיכום קצר של הכתבה
+- 3-5 תובנות מרכזיות
+- חיבור למה זה אומר עבור מותגים, מנהלים או אנשי שיווק
+- שאלה לדיון בסוף
+- 5 האשטגים רלוונטיים לפייסבוק
+
+פוסט ללינקדאין:
+- טון מקצועי, אסטרטגי ועסקי יותר
+- פתיחה עם תובנה חדה או אמירה שמייצרת עניין
+- סיכום קצר של הכתבה
+- 3-5 תובנות עסקיות או שיווקיות
+- הסבר מה מנהלים, אנשי שיווק, חדשנות או דיגיטל צריכים ללמוד מזה
+- שילוב מילות מפתח שמתאימות ל-SEO ול-GEO
+- שאלה מקצועית לדיון בסוף
+- 5 האשטגים רלוונטיים ללינקדאין
+
+פוסט לאינסטגרם:
+- קצר יותר, חד, קל לקריאה
+- מתאים גם כקפצ׳ן לפוסט או קרוסלה
+- פתיחה מסקרנת
+- סיכום קצר מאוד של הכתבה
+- 3-5 תובנות קצרות
+- משפט מסכם עם עמדה או מחשבה
+- שאלה קצרה לקהל
+- 5 האשטגים רלוונטיים לאינסטגרם
+
+בכל פוסט שלב באופן טבעי מילות מפתח שמתאימות לעולמות התוכן שלי:
+(פה תכניסו את מילות המפתח לעולמות התוכן שלכם- למשל חדשנות שיווקית, בינה מלאכותית, AI, שיווק דיגיטלי, טרנדים, חוויית לקוח)
+חשוב להתאים את מילות המפתח גם ל-GEO
+כתוב כך שהפוסט יהיה ברור גם למנועי חיפוש מבוססי AI ולמנועי תשובה.
+כלול ניסוחים שמסבירים את ההקשר:
+- מה הטרנד
+- למה הוא חשוב
+- למי הוא רלוונטי
+- איך הוא משפיע על שיווק, חדשנות, מותגים וחוויית לקוח
+- מה אפשר ללמוד ממנו ברמה פרקטית
+
+מבנה הפלט הסופי:
+כותרת פנימית: ״פוסט לפייסבוק״ ואז הפוסט המלא.
+בסוף: האשטגים: #... #... #... #... #...
+כותרת פנימית: ״פוסט ללינקדאין״ ואז הפוסט המלא.
+בסוף: האשטגים: #... #... #... #... #...
+כותרת פנימית: ״פוסט לאינסטגרם״ ואז הפוסט המלא.
+בסוף: האשטגים: #... #... #... #... #...
+
+לפני שאתה מסיים, בדוק:
+- האם כל פוסט שונה ולא נראה כמו העתק של אותו טקסט?
+- האם הטון מתאים לפלטפורמה?
+- האם יש 3-5 תובנות?
+- האם יש שאלה לדיון?
+- האם יש 5 האשטגים לכל פלטפורמה?
+- האם אין המצאות או נתונים לא מבוססים?
+- האם הפוסט נשמע כמו (השם שלכם) ולא כמו טקסט גנרי של AI
+
+כאשר אני שולחת לך לינק, תתחיל מיד לעבוד לפי המבנה הזה.</div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-logo">מיתוג אישי <em>בעידן ה-AI</em></div>
+    <p>אריאלה דניאלי ושרון מס · arielladanielli.com</p>
+  </footer>
+
+  <script>
+    /* ─── Navbar scroll ──────────────────────── */
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function() {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ─── Store original text BEFORE highlighting ───────── */
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      var el = document.getElementById(btn.getAttribute('data-pid'));
+      if (el) btn.setAttribute('data-text', el.textContent);
+    });
+
+    /* ─── Highlight brackets ─────────────────── */
+    document.querySelectorAll('.prompt-text').forEach(function(el) {
+      el.innerHTML = el.innerHTML.replace(/(\([^)]*\))/g, '<span class="fill">$1</span>');
+    });
+
+    /* ─── Copy buttons ───────────────────────── */
+    var ICON_COPY  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    var ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+
+    function execCopy(text) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      try { document.execCommand('copy'); } catch(e) {}
+      document.body.removeChild(ta);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var text = btn.getAttribute('data-text') || '';
+        if (!text) return;
+
+        function showCopied() {
+          btn.innerHTML = ICON_CHECK;
+          btn.classList.add('copied');
+          setTimeout(function() { btn.innerHTML = ICON_COPY; btn.classList.remove('copied'); }, 2000);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(showCopied).catch(function() {
+            execCopy(text);
+            showCopied();
+          });
+        } else {
+          execCopy(text);
+          showCopied();
+        }
+      });
+    });
+
+    /* ─── Category nav active on scroll ─────── */
+    var sections = ['beginners','advanced','agents'].map(function(id){ return document.getElementById(id); });
+    var links    = document.querySelectorAll('.cat-strip a');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          links.forEach(function(a){ a.classList.remove('active'); });
+          var lnk = document.querySelector('.cat-strip a[href="#'+e.target.id+'"]');
+          if (lnk) lnk.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-25% 0px -65% 0px' });
+    sections.forEach(function(s){ if(s) io.observe(s); });
+
+    /* ─── Scroll animations ──────────────────── */
+    var anim = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-up').forEach(function(el){ anim.observe(el); });
+    setTimeout(function(){ document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('in'); }); }, 800);
+  </script>
+</body>
+</html>
