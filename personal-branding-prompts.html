@@ -169,8 +169,10 @@
       -webkit-overflow-scrolling: touch;
     }
     .cat-strip a {
-      display: block;
-      padding: 1rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      padding: .7rem 1.4rem;
       font-family: 'Heebo', sans-serif;
       font-size: 14px;
       font-weight: 600;
@@ -179,8 +181,17 @@
       white-space: nowrap;
       transition: color .2s, border-color .2s;
     }
+    .cat-strip a img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+      opacity: .6;
+      transition: opacity .2s;
+    }
     .cat-strip a:hover { color: var(--ink); }
+    .cat-strip a:hover img { opacity: 1; }
     .cat-strip a.active { color: var(--orange); border-bottom-color: var(--orange); }
+    .cat-strip a.active img { opacity: 1; }
 
     /* ══════════════════════════════════
        SECTIONS
@@ -502,9 +513,9 @@
 
   <!-- ═══ CATEGORY NAV ═══ -->
   <nav class="cat-strip" id="catStrip">
-    <a href="#content" class="active">✏️ כתיבת תוכן</a>
-    <a href="#agents">🤖 בניית סוכנים</a>
-    <a href="#visual">🖼️ שפה ויזואלית</a>
+    <a href="#content" class="active"><img src="icon-content.jpeg" alt=""> כתיבת תוכן</a>
+    <a href="#agents"><img src="icon-agents.jpeg" alt=""> בניית סוכנים</a>
+    <a href="#visual"><img src="icon-visual.jpeg" alt=""> שפה ויזואלית</a>
   </nav>
 
   <!-- ═══════════════════════════════════════════
