@@ -194,6 +194,87 @@
       border-top: 1px solid var(--line);
     }
 
+    /* Section header with icon */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.4rem;
+      margin-bottom: 2.8rem;
+    }
+    .section-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .section-icon svg { width: 26px; height: 26px; }
+    .icon-content  { background: rgba(255,90,31,.1);  color: var(--orange); }
+    .icon-agents   { background: rgba(26,43,255,.1);  color: var(--blue); }
+    .icon-visual   { background: rgba(255,193,217,.35); color: #d0457a; }
+
+    /* Flow card */
+    .flow-card {
+      border-color: rgba(26,43,255,.15);
+      background: linear-gradient(135deg, #f7f8ff 0%, #fff9f2 100%);
+    }
+    .flow-inner {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.2rem;
+    }
+    .flow-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: rgba(26,43,255,.1);
+      color: var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .flow-icon svg { width: 22px; height: 22px; }
+    .flow-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: .4rem;
+    }
+    .flow-title {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: .5rem;
+    }
+    .flow-desc {
+      font-size: 14px;
+      color: rgba(23,32,68,.58);
+      line-height: 1.7;
+      margin-bottom: 1.1rem;
+    }
+    .flow-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--blue);
+      color: #fff;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      padding: .55rem 1.3rem;
+      border-radius: 50px;
+      transition: opacity .2s, transform .2s;
+    }
+    .flow-btn:hover { opacity: .88; transform: translateY(-1px); }
+
+    @media (max-width: 480px) {
+      .section-header { flex-direction: column; gap: .8rem; }
+      .flow-inner { flex-direction: column; }
+    }
+
     .section-tag {
       display: inline-flex;
       align-items: center;
@@ -423,18 +504,25 @@
 
   <!-- ═══ CATEGORY NAV ═══ -->
   <nav class="cat-strip" id="catStrip">
-    <a href="#beginners" class="active">למתחילים מאפס</a>
-    <a href="#advanced">למי שיש מיתוג</a>
-    <a href="#agents">סוכנים</a>
+    <a href="#content" class="active">✏️ כתיבת תוכן</a>
+    <a href="#agents">🤖 בניית סוכנים</a>
+    <a href="#visual">🖼️ שפה ויזואלית</a>
   </nav>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 1 — BEGINNERS
+       SECTION 1 — CONTENT WRITING
   ═══════════════════════════════════════════ -->
-  <section class="pb-section" id="beginners">
-    <div class="section-tag">למתחילים מאפס</div>
-    <h2 class="pb-title fade-up">בניית תהליך מיתוג שלם</h2>
-    <p class="pb-desc fade-up d1">ארבעה שלבים לבניית מיתוג אישי מהבסיס — עובדים בשיחה אחת לפי הסדר.</p>
+  <section class="pb-section" id="content">
+    <div class="section-header fade-up">
+      <div class="section-icon icon-content">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div>
+        <div class="section-tag">כתיבת תוכן</div>
+        <h2 class="pb-title">פרומפטים לכתיבת תוכן ומיתוג</h2>
+        <p class="pb-desc">בניית קול מיתוגי, כתיבת פוסטים וסקירת פרופיל קיים — עובדים בשיחה אחת לפי הסדר.</p>
+      </div>
+    </div>
 
     <div class="cards">
 
@@ -504,49 +592,11 @@
         </div>
       </article>
 
-      <!-- CARD 5 -->
-      <article class="card fade-up d2" id="prompt-5">
+      <!-- CARD 5 — profile review A -->
+      <article class="card fade-up d2" id="prompt-6">
         <div class="card-head">
           <span class="card-num">05</span>
-          <span class="card-badge">שלב ה׳</span>
-        </div>
-        <h3 class="card-title">שפה ויזואלית ודף מותג</h3>
-        <p class="card-summary">מעלים תמונות השראה ומקבלים דף מותג ויזואלי מלא — צבעוניות, טיפוגרפיה, לוגו, אייקונים וסגנון צילום.</p>
-        <div class="prompt-box">
-          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p5">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          </button>
-          <div class="prompt-text" id="p5">צרי לי דף מותג ויזואלי מלא על בסיס תמונת ההשראה שהועלתה.
-תרגמי את התמונה לשפת מותג שלמה, הכוללת:
-צבעוניות, טיפוגרפיה, כיוון ללוגו, מערכת אייקונים, טקסטורות, סגנון צילום, אלמנטים גרפיים
-ומילות מפתח רגשיות שמגדירות את המותג.
-המטרה היא לא להעתיק את תמונת ההשראה, אלא לחלץ ממנה את ה־DNA הוויזואלי והרגשי שלה, ולהפוך אותו לדף מותג נקי, ברור ומעוצב.</div>
-        </div>
-        <div class="notes">
-          <div class="notes-label">הנחיות ותוספות מהקובץ</div>
-          <div class="notes-text">לפרומפט הזה הוסיפו את: מה שאתם עושים, את הבידול שלכם ו-2-3 תמונות להשראה שיוכל ללמוד את השפה שאליה אתם מכוונים. אם תרצו צבע ספציפי כתבו לו גם, או צרפו את הסקלה הצבעונית שאתם רוצים.
-לינק לסקלה צבעונית ב-Pinterest — חפשו: branding colors palette</div>
-        </div>
-      </article>
-
-    </div><!-- /cards -->
-  </section>
-
-  <!-- ═══════════════════════════════════════════
-       SECTION 2 — ADVANCED
-  ═══════════════════════════════════════════ -->
-  <section class="pb-section" id="advanced">
-    <div class="section-tag">למי שכבר יש מיתוג</div>
-    <h2 class="pb-title fade-up">סקירה על מיתוג אישי קיים</h2>
-    <p class="pb-desc fade-up d1">יש לכם פרופיל פעיל? כאן תקבלו ניתוח מעמיק של מה עובד ומה לשפר.</p>
-
-    <div class="cards">
-
-      <!-- CARD 6 -->
-      <article class="card fade-up d1" id="prompt-6">
-        <div class="card-head">
-          <span class="card-num">06</span>
-          <span class="card-badge">אופציה א׳</span>
+          <span class="card-badge">סקירת פרופיל א׳</span>
         </div>
         <h3 class="card-title">סקירת פרופיל מפוסטים קיימים</h3>
         <p class="card-summary">מעלים קובץ עם פוסטים ומקבלים ניתוח מעמיק — מה עובד, מה לא, ואיזו חוקיות לבנות לכתיבה שלכם.</p>
@@ -562,11 +612,11 @@
         </div>
       </article>
 
-      <!-- CARD 7 -->
-      <article class="card fade-up d2" id="prompt-7">
+      <!-- CARD 6 — profile review B -->
+      <article class="card fade-up d3" id="prompt-7">
         <div class="card-head">
-          <span class="card-num">07</span>
-          <span class="card-badge">אופציה ב׳</span>
+          <span class="card-num">06</span>
+          <span class="card-badge">סקירת פרופיל ב׳</span>
         </div>
         <h3 class="card-title">סקירת פרופיל דרך Claude Chrome</h3>
         <p class="card-summary">גרסת Chrome — נכנסים לפרופיל הסושיאל ישירות בדפדפן, לוחצים על האייקון של Claude ומריצים את הפרומפט על הפרופיל החי.</p>
@@ -582,23 +632,30 @@
         </div>
       </article>
 
-    </div>
+    </div><!-- /cards -->
   </section>
 
   <!-- ═══════════════════════════════════════════
-       SECTION 3 — AGENTS
+       SECTION 2 — AGENTS
   ═══════════════════════════════════════════ -->
   <section class="pb-section" id="agents">
-    <div class="section-tag">סוכנים</div>
-    <h2 class="pb-title fade-up">סוכני תוכן אוטומטיים</h2>
-    <p class="pb-desc fade-up d1">פרומפטים לסוכנים שעובדים בשבילכם — מחפשים תוכן ומייצרים פוסטים בסגנון שלכם.</p>
+    <div class="section-header fade-up">
+      <div class="section-icon icon-agents">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><circle cx="8.5" cy="9" r="1.5"/><circle cx="15.5" cy="9" r="1.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+      </div>
+      <div>
+        <div class="section-tag">בניית סוכנים</div>
+        <h2 class="pb-title">סוכני תוכן אוטומטיים</h2>
+        <p class="pb-desc">פרומפטים לסוכנים שעובדים בשבילכם — מחפשים תוכן ומייצרים פוסטים בסגנון שלכם.</p>
+      </div>
+    </div>
 
     <div class="cards">
 
-      <!-- CARD 8 -->
+      <!-- CARD 7 — daily research agent -->
       <article class="card fade-up d1" id="prompt-8">
         <div class="card-head">
-          <span class="card-num">08</span>
+          <span class="card-num">07</span>
           <span class="card-badge">סוכן מחקר</span>
         </div>
         <h3 class="card-title">סוכן מחקר תוכן יומי</h3>
@@ -636,10 +693,10 @@
         </div>
       </article>
 
-      <!-- CARD 9 -->
+      <!-- CARD 8 — posts agent -->
       <article class="card fade-up d2" id="prompt-9">
         <div class="card-head">
-          <span class="card-num">09</span>
+          <span class="card-num">08</span>
           <span class="card-badge">סוכן פוסטים</span>
         </div>
         <h3 class="card-title">סוכן כתיבת פוסטים לרשתות</h3>
@@ -742,6 +799,69 @@
     </div>
   </section>
 
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — VISUAL LANGUAGE
+  ═══════════════════════════════════════════ -->
+  <section class="pb-section" id="visual">
+    <div class="section-header fade-up">
+      <div class="section-icon icon-visual">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <div>
+        <div class="section-tag">בניית שפה ויזואלית</div>
+        <h2 class="pb-title">שפה ויזואלית ודף מותג</h2>
+        <p class="pb-desc">מעלים תמונות השראה ומקבלים דף מותג ויזואלי מלא — צבעוניות, טיפוגרפיה, לוגו, אייקונים וסגנון צילום.</p>
+      </div>
+    </div>
+
+    <div class="cards">
+
+      <!-- CARD 9 — visual brand -->
+      <article class="card fade-up d1" id="prompt-5">
+        <div class="card-head">
+          <span class="card-num">09</span>
+          <span class="card-badge">שפה ויזואלית</span>
+        </div>
+        <h3 class="card-title">פרומפט לדף מותג ויזואלי</h3>
+        <p class="card-summary">מעלים תמונת השראה וקבלים מ-Claude דף מותג שלם עם DNA ויזואלי — צבעים, פונטים, לוגו, אייקונים, סגנון צילום ומילות מפתח רגשיות.</p>
+        <div class="prompt-box">
+          <button class="copy-btn" aria-label="העתק פרומפט" data-pid="p5">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          </button>
+          <div class="prompt-text" id="p5">צרי לי דף מותג ויזואלי מלא על בסיס תמונת ההשראה שהועלתה.
+תרגמי את התמונה לשפת מותג שלמה, הכוללת:
+צבעוניות, טיפוגרפיה, כיוון ללוגו, מערכת אייקונים, טקסטורות, סגנון צילום, אלמנטים גרפיים
+ומילות מפתח רגשיות שמגדירות את המותג.
+המטרה היא לא להעתיק את תמונת ההשראה, אלא לחלץ ממנה את ה־DNA הוויזואלי והרגשי שלה, ולהפוך אותו לדף מותג נקי, ברור ומעוצב.</div>
+        </div>
+        <div class="notes">
+          <div class="notes-label">הנחיות ותוספות מהקובץ</div>
+          <div class="notes-text">לפרומפט הזה הוסיפו את: מה שאתם עושים, את הבידול שלכם ו-2-3 תמונות להשראה שיוכל ללמוד את השפה שאליה אתם מכוונים. אם תרצו צבע ספציפי כתבו לו גם, או צרפו את הסקלה הצבעונית שאתם רוצים.
+לינק לסקלה צבעונית ב-Pinterest — חפשו: branding colors palette</div>
+        </div>
+      </article>
+
+      <!-- GOOGLE FLOW CARD -->
+      <article class="card flow-card fade-up d2">
+        <div class="flow-inner">
+          <div class="flow-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <div class="flow-body">
+            <div class="flow-label">כלי נוסף ליצירת תוכן ויזואלי</div>
+            <h3 class="flow-title">Google Flow — יצירת וידאו ב-AI</h3>
+            <p class="flow-desc">לאחר שבניתם את דף המותג הויזואלי שלכם, תוכלו להשתמש ב-Google Flow ליצירת סרטוני וידאו בשפה הויזואלית של המותג.</p>
+            <a href="https://labs.google/fx/iw/tools/flow" target="_blank" rel="noopener" class="flow-btn">
+              פתחו את Google Flow
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
   <!-- ═══ FOOTER ═══ -->
   <footer class="footer">
     <div class="footer-logo">מיתוג אישי <em>בעידן ה-AI</em></div>
@@ -805,7 +925,7 @@
     });
 
     /* ─── Category nav active on scroll ─────── */
-    var sections = ['beginners','advanced','agents'].map(function(id){ return document.getElementById(id); });
+    var sections = ['content','agents','visual'].map(function(id){ return document.getElementById(id); });
     var links    = document.querySelectorAll('.cat-strip a');
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
