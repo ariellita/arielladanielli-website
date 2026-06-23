@@ -202,19 +202,17 @@
       margin-bottom: 2.8rem;
     }
     .section-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 72px;
+      height: 72px;
       flex-shrink: 0;
       margin-top: 2px;
     }
-    .section-icon svg { width: 26px; height: 26px; }
-    .icon-content  { background: rgba(255,90,31,.1);  color: var(--orange); }
-    .icon-agents   { background: rgba(26,43,255,.1);  color: var(--blue); }
-    .icon-visual   { background: rgba(255,193,217,.35); color: #d0457a; }
+    .section-icon img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      display: block;
+    }
 
     /* Flow card */
     .flow-card {
@@ -514,8 +512,8 @@
   ═══════════════════════════════════════════ -->
   <section class="pb-section" id="content">
     <div class="section-header fade-up">
-      <div class="section-icon icon-content">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      <div class="section-icon">
+        <img src="icon-content.jpeg" alt="כתיבת תוכן">
       </div>
       <div>
         <div class="section-tag">כתיבת תוכן</div>
@@ -640,8 +638,8 @@
   ═══════════════════════════════════════════ -->
   <section class="pb-section" id="agents">
     <div class="section-header fade-up">
-      <div class="section-icon icon-agents">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="4"/><circle cx="8.5" cy="9" r="1.5"/><circle cx="15.5" cy="9" r="1.5"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
+      <div class="section-icon">
+        <img src="icon-agents.jpeg" alt="בניית סוכנים">
       </div>
       <div>
         <div class="section-tag">בניית סוכנים</div>
@@ -804,8 +802,8 @@
   ═══════════════════════════════════════════ -->
   <section class="pb-section" id="visual">
     <div class="section-header fade-up">
-      <div class="section-icon icon-visual">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="section-icon">
+        <img src="icon-visual.jpeg" alt="שפה ויזואלית">
       </div>
       <div>
         <div class="section-tag">בניית שפה ויזואלית</div>
