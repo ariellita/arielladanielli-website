@@ -731,6 +731,80 @@ footer p{color:var(--text40);font-size:.85rem}
   </div>
 </section>
 
+<!-- ══ WEBINAR BANNER ══ -->
+<section class="webinar-section">
+  <div class="webinar-inner">
+    <div class="webinar-img-wrap">
+      <img src="webinar-banner.jpg" alt="וובינר מיתוג אישי עם אריאלה דניאלי ושרון מס" class="webinar-img">
+      <div class="webinar-overlay">
+        <a href="https://arielladanielli.com/personal-branding" class="webinar-btn">לפרטים ורכישה</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.webinar-section{
+  background:var(--pink-mid);
+  padding:clamp(32px,5vw,60px) clamp(20px,6vw,80px);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.webinar-inner{
+  max-width:860px;
+  width:100%;
+}
+.webinar-img-wrap{
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 12px 48px rgba(255,90,31,.2);
+}
+.webinar-img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+.webinar-overlay{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  padding:clamp(16px,3vw,32px);
+  background:linear-gradient(0deg,rgba(0,0,0,.55) 0%,transparent 100%);
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
+.webinar-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--orange);
+  color:#fff;
+  font-family:var(--font-head);
+  font-weight:700;
+  font-size:clamp(1rem,2.5vw,1.25rem);
+  padding:clamp(12px,2vw,18px) clamp(28px,4vw,52px);
+  border-radius:100px;
+  letter-spacing:.03em;
+  transition:transform .2s,box-shadow .2s;
+  text-align:center;
+  white-space:nowrap;
+}
+.webinar-btn:hover{
+  transform:scale(1.06);
+  box-shadow:0 8px 32px rgba(255,90,31,.5);
+}
+@media(max-width:600px){
+  .webinar-section{padding:24px 14px}
+  .webinar-img-wrap{border-radius:16px}
+  .webinar-overlay{padding:12px 14px}
+  .webinar-btn{font-size:.95rem;padding:12px 28px;white-space:normal;text-align:center;line-height:1.3}
+}
+</style>
+
 <!-- ══ QUOTES ══ -->
 <section class="quotes-section" style="position:relative;overflow:hidden">
   <!-- AI elements -->
