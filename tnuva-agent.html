@@ -6,9 +6,6 @@
   <title>סוכן AI לקמפיין תנובה | אריאלה דניאלי</title>
   <meta name="description" content="מלא את השאלון — קבל המלצת קמפיין מותאמת אישית לפי המותג, הקהל, והמטרה שלך">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     /* ─── Tokens ─── */
@@ -31,7 +28,7 @@
     body {
       background: var(--cream);
       color: var(--dark);
-      font-family: 'Rubik', sans-serif;
+      font-family: 'Calibri', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -77,7 +74,7 @@
     .header-pill {
       background: white;
       color: var(--red);
-      font-family: 'Rubik', sans-serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -127,7 +124,7 @@
     }
 
     .hero-h1 {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: clamp(52px, 6.5vw, 88px);
       font-weight: 900;
       line-height: 0.95;
@@ -141,7 +138,7 @@
     }
 
     .hero-lead {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: clamp(17px, 2vw, 22px);
       font-weight: 400;
       line-height: 1.6;
@@ -168,32 +165,17 @@
       font-size: 11px;
     }
 
-    /* truck side */
+    /* color art side */
     .hero-visual {
       position: relative;
       overflow: hidden;
-      background: #2C1A08;
+      background: var(--cream);
     }
 
-    .hero-visual img {
+    .tnuva-art-svg {
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center;
-      filter: sepia(55%) contrast(1.15) brightness(0.88);
-      transform: scale(1.04);
-      transition: transform 8s ease;
-    }
-
-    .hero-visual:hover img { transform: scale(1.0); }
-
-    /* faded edge toward text */
-    .hero-visual::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(246,237,216,0.18) 0%, transparent 40%);
-      z-index: 1;
+      display: block;
     }
 
     /* stamp overlay */
@@ -203,7 +185,7 @@
       right: 28px;
       border: 3px solid rgba(255,255,255,0.7);
       color: white;
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 11px;
       letter-spacing: 0.12em;
       text-align: center;
@@ -241,7 +223,7 @@
     }
 
     .intro-title {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: clamp(26px, 3.5vw, 38px);
       font-weight: 700;
       color: var(--dark);
@@ -291,7 +273,7 @@
     }
 
     .sec-num {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 11px;
       font-weight: 900;
       color: var(--gold);
@@ -301,7 +283,7 @@
     }
 
     .sec-title {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 24px;
       font-weight: 700;
       color: var(--dark);
@@ -342,7 +324,7 @@
       background: var(--cream);
       border: 2px solid var(--cream-dark);
       padding: 12px 16px;
-      font-family: 'Rubik', sans-serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 15px;
       color: var(--dark);
       outline: none;
@@ -450,7 +432,7 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .loader-text {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 20px;
       color: var(--gold);
       animation: pulse 1.4s ease-in-out infinite;
@@ -475,7 +457,7 @@
     }
 
     .results-title {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 32px;
       font-weight: 900;
       color: var(--red);
@@ -511,14 +493,14 @@
     }
 
     .alt-num {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 28px;
       font-weight: 900;
       opacity: .7;
     }
 
     .alt-title {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 16px;
       font-weight: 700;
       letter-spacing: 0.04em;
@@ -548,7 +530,7 @@
     }
 
     .template-name {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 18px;
       font-weight: 900;
       color: var(--dark);
@@ -571,7 +553,7 @@
     }
 
     .alt-body h3 {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 16px;
       font-weight: 700;
       color: var(--red);
@@ -612,7 +594,7 @@
       color: white;
       border: 3px solid var(--dark);
       box-shadow: 5px 5px 0 var(--dark);
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 18px;
       font-weight: 900;
       padding: 14px 40px;
@@ -645,7 +627,7 @@
       background: transparent;
       color: var(--red);
       border: 2px solid var(--red);
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 15px;
       font-weight: 700;
       padding: 10px 24px;
@@ -664,7 +646,7 @@
       text-align: center;
       padding: 32px;
       color: var(--gold);
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 16px;
     }
 
@@ -707,7 +689,7 @@
       color: white;
       border: 3px solid var(--dark);
       box-shadow: 6px 6px 0 var(--dark);
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 24px;
       font-weight: 900;
       padding: 18px 72px;
@@ -767,7 +749,7 @@
     }
 
     .success-h {
-      font-family: 'Frank Ruhl Libre', serif;
+      font-family: 'Calibri', sans-serif;
       font-size: 36px;
       font-weight: 900;
       color: var(--red);
@@ -877,10 +859,35 @@
   </div>
 
   <div class="hero-visual">
-    <img src="tnuva-truck.png" alt="משאית תנובה וינטאג׳">
-    <div class="stamp">
-      מרבה<br>בריאות
-    </div>
+    <svg class="tnuva-art-svg" viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <!-- Three color bands -->
+      <rect x="0"   y="0" width="185" height="460" fill="#CC2218"/>
+      <rect x="190" y="0" width="180" height="460" fill="#174090"/>
+      <rect x="375" y="0" width="185" height="460" fill="#1A7A3A"/>
+      <!-- Cream dividers -->
+      <rect x="185" y="0" width="5"   height="460" fill="#F6EDD8"/>
+      <rect x="370" y="0" width="5"   height="460" fill="#F6EDD8"/>
+      <!-- Subtle cross-lines for vintage texture -->
+      <line x1="40"  y1="130" x2="145" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <line x1="40"  y1="330" x2="145" y2="330" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <line x1="415" y1="130" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <line x1="415" y1="330" x2="520" y2="330" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+      <!-- Central badge -->
+      <circle cx="280" cy="230" r="140" fill="#F6EDD8"/>
+      <circle cx="280" cy="230" r="133" fill="none" stroke="#CC2218"  stroke-width="4"/>
+      <circle cx="280" cy="230" r="125" fill="none" stroke="#174090"  stroke-width="2.5"/>
+      <circle cx="280" cy="230" r="118" fill="none" stroke="#1A7A3A"  stroke-width="2"/>
+      <!-- Stars top -->
+      <text x="280" y="156" text-anchor="middle" font-size="12" fill="#B8891A" font-family="Calibri, sans-serif" letter-spacing="16">✦ ✦ ✦</text>
+      <!-- Brand name -->
+      <text x="280" y="228" text-anchor="middle" font-family="Calibri, sans-serif" font-size="62" font-weight="700" fill="#CC2218">תנובה</text>
+      <!-- Tagline -->
+      <text x="280" y="262" text-anchor="middle" font-family="Calibri, sans-serif" font-size="16" fill="#174090" letter-spacing="4">מרבה בריאות</text>
+      <!-- Year -->
+      <text x="280" y="289" text-anchor="middle" font-family="Calibri, sans-serif" font-size="12" fill="#1A7A3A" letter-spacing="8">— 1926 —</text>
+      <!-- Stars bottom -->
+      <text x="280" y="314" text-anchor="middle" font-size="11" fill="#B8891A" font-family="Calibri, sans-serif" letter-spacing="14">✦ ✦ ✦</text>
+    </svg>
   </div>
 </section>
 
@@ -1081,7 +1088,8 @@
   /* ── Extract template name + description from alt text ── */
   function extractTemplate(body) {
     const nameMatch = body.match(/\*\*התבנית:\*\*\s*(.+)/);
-    const descMatch = body.match(/\*\*מה התבנית אומרת:\*\*\s*(.+)/);
+    const descMatch = body.match(/\*\*למה זו התבנית:\*\*\s*(.+)/) ||
+                      body.match(/\*\*מה התבנית אומרת:\*\*\s*(.+)/);
     return {
       name: nameMatch ? nameMatch[1].trim() : '',
       desc: descMatch ? descMatch[1].trim() : '',
@@ -1092,6 +1100,7 @@
   function stripTemplateMeta(body) {
     return body
       .replace(/\*\*התבנית:\*\*.*\n?/g, '')
+      .replace(/\*\*למה זו התבנית:\*\*.*\n?/g, '')
       .replace(/\*\*מה התבנית אומרת:\*\*.*\n?/g, '')
       .replace(/^---\s*$/gm, '')
       .trim();
