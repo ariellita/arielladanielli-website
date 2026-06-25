@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
   };
 
   try {
-    const { brand, product, goal, audience, success } = await request.json();
+    const { brand, product, goal, audience, success, collabTypes } = await request.json();
 
     if (!brand || !goal || !audience || !success) {
       return new Response(JSON.stringify({ error: 'חסרים שדות חובה' }), {
@@ -22,8 +22,11 @@ export async function onRequestPost(context) {
       });
     }
 
-    const productLine = product ? `מוצר / טעם ספציפי: ${product}` : 'ברמת המותג הכללי (לא מוצר ספציפי)';
-    const goalsLine   = Array.isArray(goal) ? goal.join(', ') : goal;
+    const productLine   = product ? `מוצר / טעם ספציפי: ${product}` : 'ברמת המותג הכללי (לא מוצר ספציפי)';
+    const goalsLine     = Array.isArray(goal) ? goal.join(', ') : goal;
+    const collabLine    = (collabTypes && collabTypes.length)
+      ? `סוגי שת"פ מועדפים: ${collabTypes.join(', ')}`
+      : 'סוג שת"פ: לא נבחר — בחר בחופשיות מתוך 9 התבניות';
 
     const prompt = `אתה מנהל קריאייטיב בכיר בסוכנות פרסום מובילה. התפקיד שלך: לייצר רעיונות לשיתופי פעולה עבור מותגי תנובה — רעיונות שמנהלי שיווק בכירים ישמחו לראות.
 
@@ -35,6 +38,7 @@ ${productLine}
 מטרת המהלך: ${goalsLine}
 קהל יעד: ${audience}
 מה ייחשב להצלחה: ${success}
+${collabLine}
 
 ━━━━━━━━━━━━━━━━━
 9 תבניות שת"פ — כל רעיון על תבנית אחרת
@@ -53,6 +57,7 @@ ${productLine}
 כללי ברזל
 ━━━━━━━━━━━━━━━━━
 • החזר בדיוק 3 רעיונות שונים לחלוטין זה מזה — תבנית שונה, שותף שונה, זירה שונה, מנגנון שונה
+• אם נבחרו סוגי שת"פ ספציפיים — השתמש בהם. אם נבחר רק אחד, צור 3 רעיונות שכולם מאותה תבנית אבל שונים בשותף ובמנגנון. אם נבחרו כמה — חלק ביניהם. אם לא נבחר כלום — בחר חופשית.
 • אל תחזור על אותו שותף, אותו סקטור, או אותו מנגנון בין הרעיונות
 • שותפים: מותגים ישראלים מוכרים או מותגים גלובליים שפועלים בישראל — חופשי לבחור כל שותף שמתאים לרעיון
 • כל שם רעיון — עברי, קצר, קולע — ללא אנגלית מיותרת

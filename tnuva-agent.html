@@ -243,6 +243,13 @@
       gap: 10px;
     }
 
+    /* ─── Collab type picker (3 cols) ─── */
+    .collab-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
     .goal-check { display: none; }
 
     .goal-tile {
@@ -536,6 +543,7 @@
       .submit-zone  { padding: 32px 24px; }
       .row2         { grid-template-columns: 1fr; }
       .goals-grid   { grid-template-columns: repeat(3,1fr); }
+      .collab-grid  { grid-template-columns: repeat(3,1fr); }
       .btn-submit   { padding: 16px 40px; font-size: 20px; }
       .site-header  { padding: 16px 24px; }
       .page-title   { padding: 36px 20px 28px; }
@@ -571,18 +579,12 @@
 </header>
 
 <section class="page-title">
-  <h1 class="main-title">The Tnuva experience</h1>
-  <p class="main-sub">סוכן בינה מלאכותית לרעיונות יצירתיים</p>
+  <h1 class="main-title">Tnuva Coolaboragent</h1>
+  <p class="main-sub">הסוכן לשת״פים יצירתיים</p>
 </section>
 
 <!-- ══ BODY ══ -->
 <main class="page-body">
-
-  <div class="intro-block">
-    <span class="intro-ornament">— ✦ ✦ ✦ —</span>
-    <h2 class="intro-title">מלאו את הפרטים — תוך שתי דקות</h2>
-    <p class="intro-sub">ארבעה שדות. ממלאים, לוחצים — הסוכן עובד.</p>
-  </div>
 
   <div class="form-card" id="formCard">
 
@@ -683,10 +685,75 @@
         </div>
       </div>
 
-      <!-- ④ הצלחה -->
+      <!-- ④ סוג שת"פ -->
       <div class="form-section">
         <div class="section-label">
           <span class="sec-num">שלב ד׳</span>
+          <span class="sec-title">סוג השת״פ</span>
+        </div>
+        <p class="sec-hint">בחרו פורמט אחד או יותר — הסוכן יבנה רעיונות לפיהם. לא בחרתם? הסוכן יחליט בעצמו.</p>
+
+        <div class="collab-grid">
+          <input type="checkbox" name="collab_type" id="ct-1" value="פלטפורמה לשת״פ" class="goal-check">
+          <label for="ct-1" class="goal-tile">
+            <span class="tile-icon">🔄</span>
+            <span class="tile-text">פלטפורמה לשת״פ</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-2" value="הרחבת מוצר" class="goal-check">
+          <label for="ct-2" class="goal-tile">
+            <span class="tile-icon">📦</span>
+            <span class="tile-text">הרחבת מוצר</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-3" value="מוצרים משלימים" class="goal-check">
+          <label for="ct-3" class="goal-tile">
+            <span class="tile-icon">🤝</span>
+            <span class="tile-text">מוצרים משלימים</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-4" value="מוצר חדש" class="goal-check">
+          <label for="ct-4" class="goal-tile">
+            <span class="tile-icon">💡</span>
+            <span class="tile-text">מוצר חדש</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-5" value="סינרגיה" class="goal-check">
+          <label for="ct-5" class="goal-tile">
+            <span class="tile-icon">⚡</span>
+            <span class="tile-text">סינרגיה</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-6" value="פלטפורמת מדיה" class="goal-check">
+          <label for="ct-6" class="goal-tile">
+            <span class="tile-icon">📱</span>
+            <span class="tile-text">פלטפורמת מדיה</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-7" value="אירוע שחוזר" class="goal-check">
+          <label for="ct-7" class="goal-tile">
+            <span class="tile-icon">📅</span>
+            <span class="tile-text">אירוע שחוזר</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-8" value="החלפות" class="goal-check">
+          <label for="ct-8" class="goal-tile">
+            <span class="tile-icon">🔀</span>
+            <span class="tile-text">החלפות</span>
+          </label>
+
+          <input type="checkbox" name="collab_type" id="ct-9" value="הפרעה" class="goal-check">
+          <label for="ct-9" class="goal-tile">
+            <span class="tile-icon">💥</span>
+            <span class="tile-text">הפרעה</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ⑤ הצלחה -->
+      <div class="form-section">
+        <div class="section-label">
+          <span class="sec-num">שלב ה׳</span>
           <span class="sec-title">מה ייחשב להצלחה</span>
         </div>
         <p class="sec-hint">מה ייחשב להצלחה עבורכם?</p>
@@ -838,11 +905,12 @@
   /* ── Submit ── */
   document.getElementById('submitBtn').addEventListener('click', async function () {
     const form     = document.getElementById('tnuvaForm');
-    const brand    = form.querySelector('[name="brand"]').value;
-    const goals    = [...form.querySelectorAll('[name="goal"]:checked')].map(el => el.value);
-    const audience = form.querySelector('[name="audience"]').value.trim();
-    const success  = form.querySelector('[name="success"]').value.trim();
-    const product  = form.querySelector('[name="product"]').value.trim();
+    const brand       = form.querySelector('[name="brand"]').value;
+    const goals       = [...form.querySelectorAll('[name="goal"]:checked')].map(el => el.value);
+    const audience    = form.querySelector('[name="audience"]').value.trim();
+    const success     = form.querySelector('[name="success"]').value.trim();
+    const product     = form.querySelector('[name="product"]').value.trim();
+    const collabTypes = [...form.querySelectorAll('[name="collab_type"]:checked')].map(el => el.value);
 
     if (!brand)    { alert('אנא בחרו מותג'); form.querySelector('[name="brand"]').focus(); return; }
     if (!goals.length) { alert('אנא בחרו לפחות מטרה אחת'); return; }
@@ -911,7 +979,7 @@ Wolt כבר שם בבוקר של ה-${audience} ו-${brand} כבר שם בבוק
 1. Wolt ישראל — 1.5 מיליון משתמשים, תשתית subscription קיימת, קהל עירוני שמדויק ל-${audience}
 2. טיב-טעם / שופרסל אונליין — הפצה ישירה לבית בלי לבנות תשתית חדשה, עם מאגר לקוחות קיים`;
 
-    _formState = { brand, product, goals, audience, success };
+    _formState = { brand, product, goals, audience, success, collabTypes };
     renderAlternatives(demoText);
     document.getElementById('resultsWrap').classList.add('show');
     window.scrollTo({ top: document.getElementById('resultsWrap').offsetTop - 20, behavior: 'smooth' });
