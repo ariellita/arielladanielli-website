@@ -524,31 +524,79 @@
       letter-spacing: 0.04em;
     }
 
+    /* ─── Template badge ─── */
+    .template-band {
+      background: var(--cream);
+      border-bottom: 2px solid var(--cream-dark);
+      padding: 14px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .template-tag {
+      background: var(--gold);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .template-name {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1.2;
+    }
+
+    .template-desc {
+      font-size: 13px;
+      color: var(--gold);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
     .alt-body {
       padding: 28px;
       font-size: 15px;
-      line-height: 1.75;
+      line-height: 1.8;
       color: var(--dark);
       direction: rtl;
     }
 
     .alt-body h3 {
       font-family: 'Frank Ruhl Libre', serif;
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 700;
       color: var(--red);
-      margin: 20px 0 6px;
-      padding-bottom: 4px;
+      margin: 24px 0 8px;
+      padding-bottom: 5px;
       border-bottom: 1px dashed var(--cream-dark);
     }
 
     .alt-body h3:first-child { margin-top: 0; }
 
-    .alt-body p  { margin-bottom: 8px; }
-    .alt-body ul { padding-right: 20px; margin-bottom: 8px; }
-    .alt-body li { margin-bottom: 4px; }
+    .alt-body p  { margin-bottom: 10px; }
+    .alt-body ul { padding-right: 20px; margin-bottom: 10px; }
+    .alt-body li { margin-bottom: 6px; }
 
     .alt-body strong { color: var(--dark); font-weight: 700; }
+
+    .analogy-box {
+      background: var(--cream);
+      border-right: 4px solid var(--blue);
+      padding: 10px 16px;
+      margin: 10px 0;
+      font-size: 14px;
+      color: var(--blue);
+      font-style: italic;
+    }
 
     .btn-restart {
       display: block;
@@ -926,48 +974,85 @@
 <script>
   /* ── Simple markdown → HTML ── */
   function mdToHtml(text) {
-    return text
-      .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+    let html = text
       .replace(/^### (.+)$/gm, '<h3>$1</h3>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^- (.+)$/gm,   '<li>$1</li>')
-      .replace(/(<li>.*<\/li>)/gs, (m) => `<ul>${m}</ul>`)
-      .replace(/^(?!<[hul]).+$/gm, (line) => line.trim() ? `<p>${line}</p>` : '')
-      .replace(/---+/g, '<hr>')
+      .replace(/(<li>[^]*?<\/li>(\n|$))+/g, m => `<ul>${m}</ul>`)
+      .replace(/^---+$/gm, '')
+      .replace(/^(?!<[hul])(.+)$/gm, line => line.trim() ? `<p>${line}</p>` : '')
       .trim();
+
+    // Style אנלוגיה עולמית as a callout box
+    html = html.replace(
+      /<strong>אנלוגיה עולמית:<\/strong>\s*<\/p>\s*<p>(.+?)<\/p>/,
+      '<strong>אנלוגיה עולמית:</strong></p><div class="analogy-box">🌍 $1</div>'
+    );
+
+    return html;
   }
 
-  /* ── Parse the 3 alternatives out of the response ── */
+  /* ── Parse the 3 alternatives ── */
   function parseAlternatives(text) {
-    const parts = text.split(/(?=## חלופה [א-ת])/);
+    const parts = text.split(/(?=^## חלופה)/m);
     return parts.filter(p => p.trim().startsWith('## חלופה'));
+  }
+
+  /* ── Extract template name + description from alt text ── */
+  function extractTemplate(body) {
+    const nameMatch = body.match(/\*\*התבנית:\*\*\s*(.+)/);
+    const descMatch = body.match(/\*\*מה התבנית אומרת:\*\*\s*(.+)/);
+    return {
+      name: nameMatch ? nameMatch[1].trim() : '',
+      desc: descMatch ? descMatch[1].trim() : '',
+    };
+  }
+
+  /* ── Strip template lines from body (already shown in badge) ── */
+  function stripTemplateMeta(body) {
+    return body
+      .replace(/\*\*התבנית:\*\*.*\n?/g, '')
+      .replace(/\*\*מה התבנית אומרת:\*\*.*\n?/g, '')
+      .replace(/^---\s*$/gm, '')
+      .trim();
   }
 
   const LABELS = ['א׳', 'ב׳', 'ג׳'];
   const COLORS = ['var(--blue)', '#1A6E4A', 'var(--red-deep)'];
 
   function renderAlternatives(text) {
-    const alts    = parseAlternatives(text);
+    const alts = parseAlternatives(text);
     const container = document.getElementById('altCards');
     container.innerHTML = '';
-
-    // If parsing fails, show the whole thing as one card
     const items = alts.length >= 2 ? alts : [text];
 
     items.forEach((alt, i) => {
       const lines     = alt.split('\n');
-      const firstLine = lines[0].replace(/^## /, '');
-      const body      = lines.slice(1).join('\n');
+      const heading   = lines[0].replace(/^## /, '').replace(/\|.*/, '').trim();
+      const rawBody   = lines.slice(1).join('\n');
+
+      const { name, desc } = extractTemplate(rawBody);
+      const cleanBody = stripTemplateMeta(rawBody);
 
       const card = document.createElement('div');
       card.className = 'alt-card';
 
+      const templateBand = name ? `
+        <div class="template-band">
+          <span class="template-tag">תבנית</span>
+          <div>
+            <div class="template-name">${name}</div>
+            ${desc ? `<div class="template-desc">${desc}</div>` : ''}
+          </div>
+        </div>` : '';
+
       card.innerHTML = `
         <div class="alt-header" style="background:${COLORS[i] || COLORS[0]}">
           <span class="alt-num">${LABELS[i] || (i+1)}</span>
-          <span class="alt-title">${firstLine}</span>
+          <span class="alt-title">${heading}</span>
         </div>
-        <div class="alt-body">${mdToHtml(body)}</div>
+        ${templateBand}
+        <div class="alt-body">${mdToHtml(cleanBody)}</div>
       `;
       container.appendChild(card);
     });
@@ -1007,84 +1092,101 @@
     document.getElementById('loadingZone').classList.remove('show');
     document.getElementById('formCard').style.display = 'none';
 
-    const demoText = `## חלופה א׳ | פורמט: מוצר חדש
+    const demoText = `## חלופה א׳
+
+**התבנית:** מוצר חדש
+**מה התבנית אומרת:** שני מותגים יוצרים מוצר שלישי שלא היה קיים בלי החיבור ביניהם — "איך לא חשבו על זה קודם"
 
 **הרעיון:**
 שם המהלך: "${brand} × ריצה — Pack & Run"
-מה קורה בפועל: ${brand} ו-New Balance ישראל מייצרים קו מוצרים משותף — מארז ריצה שכולל יוגורט ${brand} בפורמט to-go + צמיד GPS מיוחד. הקנייה במארז מזכה באפליקציית אימונים מותאמת עם מתכוני התאוששות.
+מה קורה בפועל: ${brand} ו-New Balance ישראל מייצרים מארז ריצה משותף — יוגורט ${brand} בפורמט to-go (100 מ"ל, מכסה עם קש) בצבעי הקולאב, בתוך שקית ריצה ממותגת של New Balance. המארז נמכר בחנויות New Balance, בנקודות המכירה של ${brand} ובאתר שניהם. בכל מארז קוד QR שפותח אפליקציית ריצה מותאמת עם תוכנית 8 שבועות + מתכוני התאוששות.
+
+**מסע הצרכן:** הצרכן רואה את המארז בחנות הספורט — שני מותגים שהוא מכיר בקונטקסט שלא ציפה. פותח קוד QR, נרשם לאפליקציה, מתחיל לרוץ. שבועיים אחרי — חוזר לקנות את יוגורט ה-recovery, הפעם במדף הרגיל.
+
+**אנלוגיה עולמית:** Nike x Headspace — אפליקציית מדיטציה ריצה משותפת שנוצרה כ-run mode ייעודי, שהפכה לתכונה קבועה ב-Nike Run Club.
 
 **שותפים אפשריים:**
-1. New Balance ישראל — מותג ספורט עם קהל ${audience} זהה, ערכי בריאות משולבים, ועדיין ללא שת"פ מזון מקומי
-2. אדידס ישראל — נוכחות חזקה בקהל הצעיר, מועדון ריצה פעיל, הפצה בחנויות ספורט שמשלימות את נקודות המכירה
+1. New Balance ישראל — מותג ספורט עם קהל ${audience} זהה, ערכי בריאות משולבים, ועדיין ללא שת"פ מזון מקומי — נקודת כניסה טבעית
+2. אדידס ישראל — נוכחות חזקה בקהל הצעיר, מועדון ריצה פעיל עם 40,000 חברים, הפצה בחנויות שמשלימות את נקודות המכירה של ${brand}
 
 **מה משיגים:**
-- תנובה / המותג: נוכחות בנקודות מכירה חדשות (חנויות ספורט), אסוציאציה עם ספורט ובריאות
-- השותף: מוצר קונסומביל שמביא לקוחות לחנות שוב ושוב, תוכן שיווקי אמיתי
-- הצרכן: פתרון מלא לאחרי אימון — לא צריך לחשוב, הכל כבר ביחד
+- תנובה / המותג: נוכחות בנקודות מכירה חדשות לחלוטין (חנויות ספורט), אסוציאציה אמינה עם ספורט ובריאות — לא רק דרך פרסומת
+- השותף: מוצר קונסומביל שמביא לקוחות לחנות שוב ושוב, תוכן שיווקי אורגני, הרחבה לקטגוריית תזונה
+- הצרכן: פתרון מלא לאחרי אימון — הכל ביחד, פחות החלטות, יותר חוויה
 
 **איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: יוגורט + נעליים — שני עולמות שמעולם לא נפגשו, אבל הגיון הצריכה מחברם בדיוק
-- ✅ יוצר שיחה כי: ה"Pack & Run" הוא עצמו סיפור — תמונה, סרטון, UGC
-- ✅ יש בו היגיון פנימי כי: שניהם מתכנסים סביב רגע אחד — אחרי האימון
+- ✅ לא בנאלי כי: יוגורט בחנות ספורט — חיבור שמעולם לא קרה בישראל, אבל הגיון הצריכה מדויק
+- ✅ יוצר שיחה כי: הצילום של המארז ברשתות הוא בעצמו תוכן — "קניתי יופלה בחנות ספורט"
+- ✅ יש בו היגיון פנימי כי: שניהם מתכנסים סביב רגע אחד ומוגדר — אחרי האימון
 
 **מה נדרש:**
-- מוצרי / לוגיסטי: אריזת to-go חדשה, מדבקה משותפת, ייצור מוגבל לשלב א׳
-- שיווקי / תקשורתי: קמפיין דיגיטל, נוכחות בתחרויות ריצה, משפיענים מעולם ה-running
-- זמן וסדר גודל: 4-6 חודשי פיתוח, השקה בעונת ריצה — מרץ-אפריל
+- מוצרי / לוגיסטי: אריזת to-go חדשה (100 מ"ל + קש), שקית ריצה ממותגת, ייצור מוגבל 50,000 יחידות לפיילוט
+- שיווקי / תקשורתי: קמפיין דיגיטל משותף, נוכחות בתחרויות ריצה (מרתון ת"א, TLV Run), משפיענים מעולם ה-running
+- זמן וסדר גודל: 5-6 חודשי פיתוח ואישורים, השקה מרץ-אפריל (עונת ריצה), קנה מידה מלא בסתיו
 
----
+## חלופה ב׳
 
-## חלופה ב׳ | פורמט: פלטפורמת מדיה
+**התבנית:** פלטפורמת מדיה
+**מה התבנית אומרת:** שת"פ שחי בתוך אפליקציה, פלטפורמה, או חוויה דיגיטלית — ולא רק בפרסומת
 
 **הרעיון:**
 שם המהלך: "Good Morning by ${brand}"
-מה קורה בפועל: שת"פ עם אפליקציית Wolt — הפעלת "ארוחת בוקר של אלוף" כ-subscription שבועי: ${brand} מגיע בבוקר עם קרטון מיוחד. בתוך האפליקציה, כל רכישה פותחת מתכון בוקר שיצרו שפים ישראלים מוכרים.
+מה קורה בפועל: שת"פ עם Wolt — הפעלת "ארוחת בוקר של אלוף" כ-subscription שבועי בתוך האפליקציה. כל יום ראשון בבוקר, קרטון ${brand} מיוחד מגיע עם מתכון בוקר של שף ישראלי מוכר (בעיצוב כרטיס קטן בתוך הקרטון). האריזה שונה כל עונה — קיץ / חורף / חגים. בתוך ה-Wolt, בחירת ה-bundle פותחת תוכן בלעדי: "ארוחת הבוקר של [שף]".
+
+**מסע הצרכן:** הצרכן רואה ב-Wolt את הבאנר "Good Morning by ${brand}" — לוחץ מסקרנות, מנוי ב-2 קליקים. ביום ראשון הראשון מגיע הקרטון עם כרטיס המתכון — מצלם ומעלה לאינסטגרם. חבר רואה, שואל "מה זה" — מחזור הרכישה מתחיל.
+
+**אנלוגיה עולמית:** Peloton × Spotify — שת"פ שחי בתוך פלטפורמת האימון, הפך playlist עצמאי לחלק מחוויית הרכישה.
 
 **שותפים אפשריים:**
-1. Wolt ישראל — תשתית הפצה קיימת, קהל עירוני בדיוק כמו ${audience}, נסיון עם subscription boxes
-2. Pepper (מזון בריאות ישראלי) — שותפות תוכן: Pepper מספקת מתכונים, ${brand} מספק את החומרים
+1. Wolt ישראל — 1.5M משתמשים פעילים, תשתית subscription קיימת, קהל עירוני 20-40 זהה ל-${audience}, כבר ניסו bundle boxes עם מותגים
+2. Pepper (תזונה בריאה ישראלית) — שותפות תוכן: Pepper מספקת מתכונים ושפים, ${brand} מספק את הרכיב המרכזי — כל צד מביא קהל אחר
 
 **מה משיגים:**
-- תנובה / המותג: ריטנשן שבועי, נוכחות דיגיטלית, מסד נתוני לקוחות
-- השותף: תוכן מזין לאפליקציה, הגדלת AOV, שת"פ מותג שמעלה יוקרה
-- הצרכן: ארוחת בוקר מסודרת בלי מחשבה, תחושת "טיפול עצמי" קבוע
+- תנובה / המותג: ריטנשן שבועי מדיד, מסד נתוני לקוחות, נוכחות דיגיטלית לא-פרסומית
+- השותף: תוכן מזין לאפליקציה, הגדלת AOV (לקוח שמנוי קונה יותר), שת"פ מותג שמעלה תדמית
+- הצרכן: ארוחת בוקר מסודרת בלי מחשבה, תחושת "טיפול עצמי" שחוזר — ריטואל שבועי
 
 **איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: subscription יומי/שבועי עם מותג מזון הוא פורמט שכמעט לא קיים בישראל
-- ✅ יוצר שיחה כי: "הזמנת ${brand} לבוקר" היא הרגל חדש — אנשים ידברו על זה
-- ✅ יש בו היגיון פנימי כי: Wolt כבר שם בבוקר, ${brand} כבר בבוקר — החיבור טבעי
+- ✅ לא בנאלי כי: subscription שבועי של מוצר מזון בתוך delivery app — פורמט שלא קיים בישראל
+- ✅ יוצר שיחה כי: "הזמנתי ${brand} מ-Wolt לבוקר" הוא משפט שאנשים אומרים — לא "ראיתי פרסומת"
+- ✅ יש בו היגיון פנימי כי: Wolt כבר שם בבוקר של ה-${audience}, ${brand} כבר שם בבוקר — אפס חיכוך
 
 **מה נדרש:**
-- מוצרי / לוגיסטי: אריזות תקופתיות, תיאום לוגיסטי עם Wolt
-- שיווקי / תקשורתי: אינפלואנסרים בוקר, TikTok "morning routine", ניוזלטר שבועי
-- זמן וסדר גודל: 3 חודשי פיתוח, פיילוט תל אביב-גוש דן קודם
+- מוצרי / לוגיסטי: אריזות עונתיות עם כרטיסי מתכון, תיאום לוגיסטי עם Wolt (temperature control)
+- שיווקי / תקשורתי: 6 שפים × 1 מתכון לחודש, TikTok "morning routine", push notification מ-Wolt
+- זמן וסדר גודל: 3 חודשי פיתוח, פיילוט ת"א-גוש דן עם 5,000 נרשמים, scale לאומי אחרי חצי שנה
 
----
+## חלופה ג׳
 
-## חלופה ג׳ | פורמט: הפרעה
+**התבנית:** הפרעה
+**מה התבנית אומרת:** חיבור מפתיע ולא צפוי שיוצר תשומת לב כי הוא שובר את כל הציפיות מהמותג
 
 **הרעיון:**
-שם המהלך: "תנובה × סופרפארם — The Recovery Edit"
-מה קורה בפועל: ${brand} מציג קו מוצרים בקטגוריה שלא צפויה לה — מדפי הביוטי בסופרפארם. אריזות ${brand} מיוחדות בעיצוב skincare-inspired (לבן, מינימלי, קרם) מוצגות ליד מוצרי תזונה ויטמינים. ההודעה: מה שטוב לפנים — טוב מבפנים.
+שם המהלך: "${brand} × סופרפארם — Inner Beauty Edit"
+מה קורה בפועל: ${brand} פורץ למדפי הביוטי בסופרפארם. אריזות limited edition בעיצוב skincare — לבן, מינימלי, עם פונט serifי — מוצגות לא ליד יוגורטים אחרים, אלא ליד ויטמינים ותוספי תזונה לעור. על כל אריזה: "מה שטוב מבפנים, נראה מבחוץ." במדף: QR לתוכן "inner beauty" עם דיאטנית ישראלית מוכרת. זה לא "יוגורט בסופרפארם" — זה רדיפיניישן של הקטגוריה.
+
+**מסע הצרכן:** הצרכן עוברת במסלול הביוטי — רואה אריזה שנראית כמו קרם פנים עם לוגו ${brand}. עוצרת. צוחקת / מתפעלת. מצלמת. שולחת לחברה. קונה — גם כי מגניב וגם כי "בריאות מבפנים" נשמע נכון לה.
+
+**אנלוגיה עולמית:** Scrub Daddy × Reese's — מוצר ניקוי בצורת שוקולד, הופיע בקטגוריה לא צפויה ויצר ויראליות מיידית.
 
 **שותפים אפשריים:**
-1. סופרפארם — נוכחות בחנויות ביוטי, קהל ${audience} מדויק, המדפים שלהם הם המדיה
-2. Be — מותג ישראלי לאורח חיים בריא, אסתטיקה דומה, שת"פ תוכן טבעי
+1. סופרפארם — 300+ סניפים, קהל ${audience} מדויק, המדפים שלהם הם המדיה — ניסיון עם brand collabs בקוסמטיקה
+2. Iherb ישראל / "Be" (מותג אורח חיים בריא) — שותפות תוכן דיגיטלית: Be מספקת את ה"inner beauty" narrative, ${brand} מספקת את המוצר
 
 **מה משיגים:**
-- תנובה / המותג: נוכחות במדיה חדשה לחלוטין (מדפי ביוטי), קהל שלא מגיע דרך מדפי המזון
-- השותף: תוכן ויזואלי שמשדרג את המדפים, עניין תקשורתי
-- הצרכן: גילוי מחדש של מוצר מוכר דרך פריזמה חדשה
+- תנובה / המותג: נוכחות בנקודות מכירה חדשות, קהל שלא מגיע דרך מדפי המזון, PR אורגני מובטח
+- השותף: תוכן ויזואלי שמשדרג את המדפים, buzz שמושך תנועה לסניף, שיתוף בהכנסות limited edition
+- הצרכן: גילוי מחדש של מוצר מוכר מפריזמה חדשה — "לא ידעתי ש-${brand} זה גם לזה"
 
 **איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: מוצר חלב שמוצג במדפי הביוטי — זה מעולם לא נעשה בישראל
-- ✅ יוצר שיחה כי: הצילום בחנות הוא בעצמו תוכן ויראלי
-- ✅ יש בו היגיון פנימי כי: תזונה ויופי הם אותה שיחה — רק הפרדנו אותם
+- ✅ לא בנאלי כי: מוצר חלב במדף הביוטי — זה מעולם לא נעשה בישראל, ולא ביוגורטים בעולם
+- ✅ יוצר שיחה כי: הצילום של המדף הוא בעצמו תוכן ויראלי — "וואלה זה ${brand} בסופרפארם"
+- ✅ יש בו היגיון פנימי כי: תזונה ויופי הן אותה שיחה של ה-${audience} — רק הפרדנו אותן
 
 **מה נדרש:**
-- מוצרי / לוגיסטי: עיצוב אריזה limited edition, תיאום מדפים עם סופרפארם
-- שיווקי / תקשורתי: PR לאירוע ההשקה, UGC מהחנות, קמפיין "beauty from within"
-- זמן וסדר גודל: 2-3 חודשים, השקה ב-pop-up ב-3 סניפים מרכזיים`;
+- מוצרי / לוגיסטי: עיצוב אריזה limited edition (2-3 SKU), תיאום מדפים ב-20 סניפי anchor של סופרפארם
+- שיווקי / תקשורתי: PR לאירוע ההשקה, UGC מהחנות, קמפיין "beauty from within" עם 3 דיאטניות ידועות
+- זמן וסדר גודל: 2-3 חודשי פיתוח, pop-up ב-5 סניפים מרכזיים, scale ל-50 סניפים אחרי חודשיים`;
 
     renderAlternatives(demoText);
     document.getElementById('resultsWrap').classList.add('show');
