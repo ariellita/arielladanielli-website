@@ -14,7 +14,7 @@ export async function onRequestPost(context) {
   };
 
   try {
-    const { brand, product, goal, audience, success, collabTypes } = await request.json();
+    const { brand, product, goal, audience, success, collabTypes, avoid } = await request.json();
 
     if (!brand || !goal || !audience || !success) {
       return new Response(JSON.stringify({ error: 'חסרים שדות חובה' }), {
@@ -27,6 +27,9 @@ export async function onRequestPost(context) {
     const collabLine    = (collabTypes && collabTypes.length)
       ? `סוגי שת"פ מועדפים: ${collabTypes.join(', ')}`
       : 'סוג שת"פ: לא נבחר — בחר בחופשיות מתוך 9 התבניות';
+    const avoidLine     = (avoid && avoid.length)
+      ? `\n⛔ כבר הוצעו הרעיונות הבאים — אסור לחזור עליהם או על משהו דומה. תן רעיונות חדשים לגמרי, עם שותפים אחרים וזירות אחרות: ${avoid.join(' / ')}`
+      : '';
 
     const prompt = `אתה אחד מאנשי הקריאייטיב הגדולים בעולם. עבדת בסוכנויות כמו Droga5 ו-Wieden+Kennedy. זכית ב-Grand Prix בקאן. אתה יודע שרוב הרעיונות לשיתופי פעולה הם גנריים ומשעממים — ואתה מסרב לעשות אותם.
 
@@ -40,7 +43,7 @@ ${productLine}
 מטרה: ${goalsLine}
 קהל: ${audience}
 הצלחה תיראה כך: ${success}
-${collabLine}
+${collabLine}${avoidLine}
 
 ━━━━━━━━━━━━━━━━━
 9 תבניות שת"פ
@@ -125,6 +128,7 @@ ${collabLine}
       body: JSON.stringify({
         model: 'claude-opus-4-8',
         max_tokens: 3000,
+        temperature: 1,
         messages: [{ role: 'user', content: prompt }],
       }),
     });

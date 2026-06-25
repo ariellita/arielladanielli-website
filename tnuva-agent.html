@@ -922,12 +922,29 @@
     document.getElementById('loadingZone').classList.add('show');
     window.scrollTo({ top: document.getElementById('formCard').offsetTop - 20, behavior: 'smooth' });
 
-    await new Promise(r => setTimeout(r, 1800));
+    _formState = { brand, product, goals, audience, success, collabTypes };
+
+    // ── Call the real AI agent ──
+    let resultText;
+    try {
+      const res = await fetch('/api/tnuva-campaign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ brand, product, goal: goals, audience, success, collabTypes }),
+      });
+      if (!res.ok) throw new Error('API error ' + res.status);
+      const data = await res.json();
+      resultText = data.recommendation;
+      if (!resultText || !resultText.includes('## חלופה')) throw new Error('bad response');
+    } catch (err) {
+      console.error('Agent call failed, using demo fallback:', err);
+      resultText = null;
+    }
 
     document.getElementById('loadingZone').classList.remove('show');
     document.getElementById('formCard').style.display = 'none';
 
-    const demoText = `## חלופה א'
+    const demoText = resultText || `## חלופה א'
 
 **שם הרעיון:** ${brand} בבית הקפה
 **התבנית:** סינרגיה
@@ -978,7 +995,6 @@
 **שותפים אפשריים:**
 1. סטימצקי — הרשת הגדולה של ספרים בישראל, קהל הורים של ${audience}, נוכחות בכל עיר
 2. צ׳קלה — הוצאת ספרים לילדים, שת״פ שיוצר ספר שנתי מיוחד עם עיצוב ${brand}`;
-    _formState = { brand, product, goals, audience, success, collabTypes };
     renderAlternatives(demoText);
     document.getElementById('resultsWrap').classList.add('show');
     window.scrollTo({ top: document.getElementById('resultsWrap').offsetTop - 20, behavior: 'smooth' });
@@ -991,10 +1007,32 @@
     document.getElementById('moreLoading').classList.add('show');
     window.scrollTo({ top: document.getElementById('moreLoading').offsetTop - 40, behavior: 'smooth' });
 
-    await new Promise(r => setTimeout(r, 1800));
+    const used = getUsedCategories();
+    const fs = _formState || {};
 
-    const { brand = 'המותג', audience = 'הקהל' } = _formState || {};
-    const round2 = `## חלופה
+    // ── Call the real AI agent for fresh ideas ──
+    let round2 = null;
+    try {
+      const res = await fetch('/api/tnuva-campaign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          brand: fs.brand, product: fs.product, goal: fs.goals,
+          audience: fs.audience, success: fs.success, collabTypes: fs.collabTypes,
+          avoid: used,
+        }),
+      });
+      if (!res.ok) throw new Error('API error ' + res.status);
+      const data = await res.json();
+      round2 = data.recommendation;
+      if (!round2 || !round2.includes('## חלופה')) throw new Error('bad response');
+    } catch (err) {
+      console.error('More-ideas call failed, using demo fallback:', err);
+      round2 = null;
+    }
+
+    const { brand = 'המותג', audience = 'הקהל' } = fs;
+    round2 = round2 || `## חלופה
 
 **שם הרעיון:** הריטואל השבועי
 **התבנית:** אירוע חד-פעמי שחוזר
