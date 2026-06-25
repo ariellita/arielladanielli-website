@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>סוכן AI לקמפיין תנובה | אריאלה דניאלי</title>
+  <meta name="description" content="מלא את השאלון — קבל המלצת קמפיין מותאמת אישית לפי המותג, הקהל, והמטרה שלך">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Tokens ─── */
+    :root {
+      --cream:      #F6EDD8;
+      --cream-mid:  #ECDBB8;
+      --cream-dark: #D9C49A;
+      --red:        #CC2218;
+      --red-deep:   #A01510;
+      --blue:       #174090;
+      --blue-mid:   #1F5AAA;
+      --dark:       #1E1008;
+      --gold:       #B8891A;
+      --gold-light: #D4A835;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    /* ─── Body & grain ─── */
+    body {
+      background: var(--cream);
+      color: var(--dark);
+      font-family: 'Rubik', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    }
+
+    /* ─── Top racing stripe ─── */
+    .stripe-top {
+      height: 10px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--red)  0 44px,
+        var(--blue) 44px 88px
+      );
+    }
+
+    /* ─── Header ─── */
+    .site-header {
+      background: var(--red);
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 4px solid var(--gold);
+      position: relative;
+    }
+
+    .logo-wrap img {
+      height: 56px;
+      filter: brightness(0) invert(1);
+      display: block;
+    }
+
+    .header-pill {
+      background: white;
+      color: var(--red);
+      font-family: 'Rubik', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 6px 20px;
+      text-transform: uppercase;
+      border: 2px solid white;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 460px;
+      overflow: hidden;
+      border-bottom: 3px solid var(--dark);
+    }
+
+    .hero-copy {
+      padding: 56px 64px 56px 40px;
+      background: var(--cream);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    /* diagonal accent line */
+    .hero-copy::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 6px; height: 100%;
+      background: repeating-linear-gradient(
+        180deg,
+        var(--red)  0 22px,
+        transparent 22px 30px
+      );
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero-h1 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(52px, 6.5vw, 88px);
+      font-weight: 900;
+      line-height: 0.95;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .hero-h1 em {
+      font-style: normal;
+      color: var(--blue);
+    }
+
+    .hero-lead {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(17px, 2vw, 22px);
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--dark);
+      max-width: 400px;
+      margin-bottom: 32px;
+    }
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: white;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 9px 20px;
+      width: fit-content;
+    }
+
+    .ai-badge::before {
+      content: '✦';
+      color: var(--gold-light);
+      font-size: 11px;
+    }
+
+    /* truck side */
+    .hero-visual {
+      position: relative;
+      overflow: hidden;
+      background: #2C1A08;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: sepia(55%) contrast(1.15) brightness(0.88);
+      transform: scale(1.04);
+      transition: transform 8s ease;
+    }
+
+    .hero-visual:hover img { transform: scale(1.0); }
+
+    /* faded edge toward text */
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(246,237,216,0.18) 0%, transparent 40%);
+      z-index: 1;
+    }
+
+    /* stamp overlay */
+    .stamp {
+      position: absolute;
+      bottom: 28px;
+      right: 28px;
+      border: 3px solid rgba(255,255,255,0.7);
+      color: white;
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-align: center;
+      padding: 10px 14px;
+      z-index: 2;
+      text-transform: uppercase;
+      line-height: 1.5;
+    }
+
+    /* ─── Dashed divider ─── */
+    .dashed-rule {
+      height: 0;
+      border-top: 3px dashed var(--cream-dark);
+      margin: 0 40px;
+    }
+
+    /* ─── Main content ─── */
+    .page-body {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    .intro-block {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    .intro-ornament {
+      font-size: 22px;
+      color: var(--gold);
+      letter-spacing: 0.4em;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .intro-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+
+    .intro-sub {
+      font-size: 16px;
+      color: var(--gold);
+      line-height: 1.7;
+    }
+
+    /* ─── Form card ─── */
+    .form-card {
+      background: #fff;
+      border: 3px solid var(--dark);
+      box-shadow: 8px 8px 0 var(--red);
+      position: relative;
+    }
+
+    /* corner accents */
+    .form-card::before,
+    .form-card::after {
+      content: '✦';
+      position: absolute;
+      color: var(--red);
+      font-size: 16px;
+      top: -14px;
+    }
+    .form-card::before { right: 20px; }
+    .form-card::after  { left:  20px; }
+
+    /* ─── Form sections ─── */
+    .form-section {
+      padding: 40px 48px;
+      border-bottom: 2px dashed var(--cream-dark);
+      position: relative;
+    }
+
+    .form-section:last-of-type { border-bottom: none; }
+
+    .section-label {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .sec-num {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .sec-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .sec-hint {
+      font-size: 13px;
+      color: #8B6914;
+      margin-bottom: 20px;
+      padding-right: 2px;
+      line-height: 1.6;
+    }
+
+    /* ─── Field atoms ─── */
+    .row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .field label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--dark);
+      text-transform: uppercase;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      background: var(--cream);
+      border: 2px solid var(--cream-dark);
+      padding: 12px 16px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 15px;
+      color: var(--dark);
+      outline: none;
+      width: 100%;
+      direction: rtl;
+      transition: border-color .18s, box-shadow .18s;
+    }
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: #B09060;
+      font-weight: 300;
+      font-style: italic;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--red);
+      box-shadow: 4px 4px 0 rgba(204,34,24,0.18);
+    }
+
+    .field textarea { resize: vertical; min-height: 90px; }
+
+    .field select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%23CC2218' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+      padding-left: 40px;
+      cursor: pointer;
+    }
+
+    /* ─── Goal picker — vintage stamps ─── */
+    .goals-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .goal-check { display: none; }
+
+    .goal-tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 2px solid var(--cream-dark);
+      background: var(--cream);
+      padding: 16px 8px;
+      cursor: pointer;
+      transition: all .15s;
+      text-align: center;
+      user-select: none;
+      position: relative;
+    }
+
+    .goal-tile .tile-icon {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .goal-tile .tile-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .goal-tile:hover {
+      border-color: var(--red);
+      background: #FFF2EE;
+    }
+
+    .goal-check:checked + .goal-tile {
+      background: var(--red);
+      border-color: var(--red-deep);
+      box-shadow: 3px 3px 0 var(--red-deep);
+    }
+
+    .goal-check:checked + .goal-tile .tile-text,
+    .goal-check:checked + .goal-tile .tile-icon {
+      color: white;
+    }
+
+    /* ─── Loading state ─── */
+    .loading-zone {
+      display: none;
+      text-align: center;
+      padding: 56px 48px;
+    }
+
+    .loading-zone.show { display: block; }
+
+    .loader-spinner {
+      width: 56px;
+      height: 56px;
+      border: 4px solid var(--cream-dark);
+      border-top-color: var(--red);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      animation: spin .8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loader-text {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 20px;
+      color: var(--gold);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%,100% { opacity: .5; }
+      50%      { opacity: 1; }
+    }
+
+    /* ─── Results section ─── */
+    .results-wrap {
+      display: none;
+      margin-top: 40px;
+    }
+
+    .results-wrap.show { display: block; }
+
+    .results-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .results-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 6px;
+    }
+
+    .results-sub {
+      font-size: 14px;
+      color: var(--gold);
+      letter-spacing: 0.06em;
+    }
+
+    .alt-card {
+      background: white;
+      border: 3px solid var(--dark);
+      margin-bottom: 24px;
+      position: relative;
+      animation: fadeUp .5s ease forwards;
+      opacity: 0;
+    }
+
+    .alt-card:nth-child(2) { animation-delay: .1s; }
+    .alt-card:nth-child(3) { animation-delay: .2s; }
+
+    .alt-header {
+      background: var(--blue);
+      color: white;
+      padding: 14px 28px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      border-bottom: 3px solid var(--dark);
+    }
+
+    .alt-num {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 28px;
+      font-weight: 900;
+      opacity: .7;
+    }
+
+    .alt-title {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .alt-body {
+      padding: 28px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--dark);
+      direction: rtl;
+    }
+
+    .alt-body h3 {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--red);
+      margin: 20px 0 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px dashed var(--cream-dark);
+    }
+
+    .alt-body h3:first-child { margin-top: 0; }
+
+    .alt-body p  { margin-bottom: 8px; }
+    .alt-body ul { padding-right: 20px; margin-bottom: 8px; }
+    .alt-body li { margin-bottom: 4px; }
+
+    .alt-body strong { color: var(--dark); font-weight: 700; }
+
+    .btn-restart {
+      display: block;
+      width: fit-content;
+      margin: 32px auto 0;
+      background: transparent;
+      color: var(--red);
+      border: 2px solid var(--red);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 16px;
+      font-weight: 700;
+      padding: 10px 28px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .btn-restart:hover {
+      background: var(--red);
+      color: white;
+    }
+
+    /* ─── Submit zone ─── */
+    .submit-zone {
+      text-align: center;
+      padding: 44px 48px;
+      background: var(--cream);
+      border-top: 3px solid var(--dark);
+    }
+
+    .btn-submit {
+      background: var(--red);
+      color: white;
+      border: 3px solid var(--dark);
+      box-shadow: 6px 6px 0 var(--dark);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 24px;
+      font-weight: 900;
+      padding: 18px 72px;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: transform .12s, box-shadow .12s, background .12s;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-submit:hover {
+      background: var(--red-deep);
+      transform: translate(-2px,-2px);
+      box-shadow: 8px 8px 0 var(--dark);
+    }
+
+    .btn-submit:active {
+      transform: translate(3px,3px);
+      box-shadow: 3px 3px 0 var(--dark);
+    }
+
+    .btn-submit .arrow {
+      font-size: 20px;
+      transition: transform .18s;
+    }
+
+    .btn-submit:hover .arrow { transform: translateX(-6px); }
+
+    .submit-note {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── Success state ─── */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 72px 48px;
+    }
+
+    .success-panel.show { display: block; }
+
+    .success-mark {
+      width: 72px;
+      height: 72px;
+      border: 3px solid var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      color: var(--red);
+      margin: 0 auto 24px;
+    }
+
+    .success-h {
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .success-p {
+      font-size: 18px;
+      color: var(--dark);
+      line-height: 1.75;
+    }
+
+    /* ─── Bottom ornament ─── */
+    .page-ornament {
+      text-align: center;
+      margin: 40px 0 0;
+      font-size: 20px;
+      color: var(--cream-dark);
+      letter-spacing: 0.5em;
+    }
+
+    /* ─── Footer ─── */
+    .site-footer {
+      background: var(--dark);
+      color: rgba(246,237,216,0.6);
+      text-align: center;
+      padding: 22px 24px;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .site-footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .site-footer a:hover { text-decoration: underline; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-visual { height: 240px; }
+      .hero-copy { padding: 40px 28px 40px 36px; }
+      .form-section { padding: 28px 24px; }
+      .submit-zone { padding: 32px 24px; }
+      .row2 { grid-template-columns: 1fr; }
+      .goals-grid { grid-template-columns: repeat(3,1fr); }
+      .btn-submit { padding: 16px 40px; font-size: 20px; }
+      .site-header { padding: 16px 24px; }
+    }
+
+    @media (max-width: 420px) {
+      .goals-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ─── Entrance animations ─── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0);    }
+    }
+
+    .hero-copy > * {
+      opacity: 0;
+      animation: fadeUp .55s ease forwards;
+    }
+    .eyebrow        { animation-delay: .05s; }
+    .hero-h1        { animation-delay: .15s; }
+    .hero-lead      { animation-delay: .25s; }
+    .ai-badge       { animation-delay: .35s; }
+
+    .form-card {
+      opacity: 0;
+      animation: fadeUp .6s ease .4s forwards;
+    }
+  </style>
+</head>
+<body>
+
+<div class="stripe-top"></div>
+
+<header class="site-header">
+  <div class="logo-wrap">
+    <img src="tnuva-logo.png" alt="תנובה">
+  </div>
+  <div class="header-pill">סוכן AI לשיווק</div>
+</header>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow">כלי בינה מלאכותית לשיווק מותגי תנובה</p>
+    <h1 class="hero-h1">
+      הסוכן<br>
+      ש<em>חושב</em><br>
+      תנובה
+    </h1>
+    <p class="hero-lead">
+      מלאו את השאלון הקצר — הסוכן יבנה עבורכם המלצת קמפיין מפורטת,
+      מותאמת למותג, לקהל ולמטרה שלכם.
+    </p>
+    <div class="ai-badge">מופעל על ידי AI גנרטיבי</div>
+  </div>
+
+  <div class="hero-visual">
+    <img src="tnuva-truck.png" alt="משאית תנובה וינטאג׳">
+    <div class="stamp">
+      מרבה<br>בריאות
+    </div>
+  </div>
+</section>
+
+<!-- ══ BODY ══ -->
+<main class="page-body">
+
+  <div class="intro-block">
+    <span class="intro-ornament">— ✦ ✦ ✦ —</span>
+    <h2 class="intro-title">מלאו את הפרטים — תוך שתי דקות</h2>
+    <p class="intro-sub">ארבעה שדות. ממלאים, לוחצים — הסוכן עובד.</p>
+  </div>
+
+  <div class="form-card" id="formCard">
+
+    <form id="tnuvaForm" novalidate>
+
+      <!-- ① מותג -->
+      <div class="form-section">
+        <div class="section-label">
+          <span class="sec-num">שלב א׳</span>
+          <span class="sec-title">בחרו מותג</span>
+        </div>
+        <p class="sec-hint">בחרו מותג תנובה — ואם רלוונטי, פרטו מוצר או טעם ספציפי</p>
+
+        <div class="row2">
+          <div class="field">
+            <label>מותג *</label>
+            <select name="brand" required>
+              <option value="" disabled selected>בחר מותג...</option>
+              <option>קוטג׳</option>
+              <option>עמק</option>
+              <option>GO</option>
+              <option>נפוליאון</option>
+              <option>פיראוס</option>
+              <option>ALTERNATIVE</option>
+              <option>השף הלבן</option>
+              <option>COLLECTION</option>
+              <option>יופלה</option>
+              <option>סנפרוסט</option>
+              <option>מעדנות</option>
+              <option>טירת צבי</option>
+              <option>מאמא עוף</option>
+              <option>דגי תנובה</option>
+              <option>אוליביה</option>
+              <option>ניגרת</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>מוצר / טעם ספציפי <span style="font-weight:300;letter-spacing:0">(אופציונלי)</span></label>
+            <input type="text" name="product" placeholder="למשל: יופלה בננה-וניל">
+          </div>
+        </div>
+      </div>
+
+      <!-- ② מטרה -->
+      <div class="form-section">
+        <div class="section-label">
+          <span class="sec-num">שלב ב׳</span>
+          <span class="sec-title">מטרת המהלך</span>
+        </div>
+        <p class="sec-hint">מה הקמפיין צריך לעשות? בחרו אחת</p>
+
+        <div class="goals-grid">
+          <input type="checkbox" name="goal" id="g-sales"      value="מכירות — הגדלת נפח / נקודות מכירה חדשות"       class="goal-check">
+          <label for="g-sales" class="goal-tile">
+            <span class="tile-icon">💰</span>
+            <span class="tile-text">מכירות</span>
+          </label>
+
+          <input type="checkbox" name="goal" id="g-brand"      value="מיתוג — שינוי תפיסה / חיזוק אסוציאציות"        class="goal-check">
+          <label for="g-brand" class="goal-tile">
+            <span class="tile-icon">⭐</span>
+            <span class="tile-text">מיתוג</span>
+          </label>
+
+          <input type="checkbox" name="goal" id="g-awareness"  value="מודעות — להיכנס לשיחה / לייצר buzz"            class="goal-check">
+          <label for="g-awareness" class="goal-tile">
+            <span class="tile-icon">📢</span>
+            <span class="tile-text">מודעות</span>
+          </label>
+
+          <input type="checkbox" name="goal" id="g-experience" value="חווית מותג — חוויה פיזית / רגשית / ריטואל"     class="goal-check">
+          <label for="g-experience" class="goal-tile">
+            <span class="tile-icon">✨</span>
+            <span class="tile-text">חווית מותג</span>
+          </label>
+
+          <input type="checkbox" name="goal" id="g-trial"      value="התנסות — להביא צרכן חדש לנסות את המוצר לראשונה" class="goal-check">
+          <label for="g-trial" class="goal-tile">
+            <span class="tile-icon">🎯</span>
+            <span class="tile-text">התנסות</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- ③ קהל יעד -->
+      <div class="form-section">
+        <div class="section-label">
+          <span class="sec-num">שלב ג׳</span>
+          <span class="sec-title">קהל יעד</span>
+        </div>
+        <p class="sec-hint">תארו בקצרה: גברים 30–45 ספורטיביים · אמהות לילדים 6–12 · צעירות עירוניות 20–30</p>
+
+        <div class="field">
+          <label>תיאור הקהל *</label>
+          <input type="text" name="audience"
+            placeholder="למשל: אמהות לילדים בגיל בית ספר, עירוניות, מודעות לתזונה"
+            required>
+        </div>
+      </div>
+
+      <!-- ④ הצלחה -->
+      <div class="form-section">
+        <div class="section-label">
+          <span class="sec-num">שלב ד׳</span>
+          <span class="sec-title">מה ההצלחה נראית</span>
+        </div>
+        <p class="sec-hint">לא מדד — סיטואציה. מה קורה כשהמהלך הצליח?</p>
+
+        <div class="field">
+          <label>תאר/י את ההצלחה *</label>
+          <textarea name="success" required
+            placeholder="למשל: שאנשי ספורט יבחרו ב-GO באופן אקטיבי, לא כי אין אלטרנטיבה."></textarea>
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Submit -->
+    <div class="submit-zone" id="submitZone">
+      <button class="btn-submit" id="submitBtn" type="button">
+        הפעל את הסוכן
+        <span class="arrow">←</span>
+      </button>
+      <p class="submit-note">הסוכן יייצר 3 רעיונות לשיתופי פעולה — מותאמים למותג, לקהל ולמטרה שלכם</p>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading-zone" id="loadingZone">
+      <div class="loader-spinner"></div>
+      <p class="loader-text">הסוכן חושב תנובה...</p>
+    </div>
+
+  </div><!-- /form-card -->
+
+  <!-- Results -->
+  <div class="results-wrap" id="resultsWrap">
+    <div class="results-header">
+      <div class="results-title">3 רעיונות לשיתוף פעולה</div>
+      <p class="results-sub">מותאם אישית · מבוסס על הקלט שמסרתם</p>
+    </div>
+    <div id="altCards"></div>
+    <button class="btn-restart" id="restartBtn">← שאלון חדש</button>
+  </div>
+
+  <p class="page-ornament">✦ ✦ ✦</p>
+
+</main>
+
+<footer class="site-footer">
+  <span>נבנה על ידי</span>
+  <a href="https://arielladanielli.com" target="_blank" rel="noopener">אריאלה דניאלי</a>
+  <span>·</span>
+  <span>סוכני AI לשיווק ❤</span>
+</footer>
+
+<script>
+  /* ── Simple markdown → HTML ── */
+  function mdToHtml(text) {
+    return text
+      .replace(/^## (.+)$/gm,  '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/^- (.+)$/gm,   '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/gs, (m) => `<ul>${m}</ul>`)
+      .replace(/^(?!<[hul]).+$/gm, (line) => line.trim() ? `<p>${line}</p>` : '')
+      .replace(/---+/g, '<hr>')
+      .trim();
+  }
+
+  /* ── Parse the 3 alternatives out of the response ── */
+  function parseAlternatives(text) {
+    const parts = text.split(/(?=## חלופה [א-ת])/);
+    return parts.filter(p => p.trim().startsWith('## חלופה'));
+  }
+
+  const LABELS = ['א׳', 'ב׳', 'ג׳'];
+  const COLORS = ['var(--blue)', '#1A6E4A', 'var(--red-deep)'];
+
+  function renderAlternatives(text) {
+    const alts    = parseAlternatives(text);
+    const container = document.getElementById('altCards');
+    container.innerHTML = '';
+
+    // If parsing fails, show the whole thing as one card
+    const items = alts.length >= 2 ? alts : [text];
+
+    items.forEach((alt, i) => {
+      const lines     = alt.split('\n');
+      const firstLine = lines[0].replace(/^## /, '');
+      const body      = lines.slice(1).join('\n');
+
+      const card = document.createElement('div');
+      card.className = 'alt-card';
+
+      card.innerHTML = `
+        <div class="alt-header" style="background:${COLORS[i] || COLORS[0]}">
+          <span class="alt-num">${LABELS[i] || (i+1)}</span>
+          <span class="alt-title">${firstLine}</span>
+        </div>
+        <div class="alt-body">${mdToHtml(body)}</div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  /* ── Submit ── */
+  document.getElementById('submitBtn').addEventListener('click', async function () {
+    const form     = document.getElementById('tnuvaForm');
+    const brand    = form.querySelector('[name="brand"]').value;
+    const goals    = [...form.querySelectorAll('[name="goal"]:checked')].map(el => el.value);
+    const audience = form.querySelector('[name="audience"]').value.trim();
+    const success  = form.querySelector('[name="success"]').value.trim();
+    const product  = form.querySelector('[name="product"]').value.trim();
+
+    if (!brand) {
+      alert('אנא בחרו מותג'); form.querySelector('[name="brand"]').focus(); return;
+    }
+    if (!goals.length) {
+      alert('אנא בחרו לפחות מטרה אחת'); return;
+    }
+    if (!audience) {
+      alert('אנא תארו את קהל היעד'); form.querySelector('[name="audience"]').focus(); return;
+    }
+    if (!success) {
+      alert('אנא תארו כיצד נראית ההצלחה'); form.querySelector('[name="success"]').focus(); return;
+    }
+
+    // Show loading
+    document.getElementById('submitZone').style.display = 'none';
+    form.style.display = 'none';
+    document.getElementById('loadingZone').classList.add('show');
+    window.scrollTo({ top: document.getElementById('formCard').offsetTop - 20, behavior: 'smooth' });
+
+    // Simulate loading
+    await new Promise(r => setTimeout(r, 1800));
+
+    document.getElementById('loadingZone').classList.remove('show');
+    document.getElementById('formCard').style.display = 'none';
+
+    const demoText = `## חלופה א׳ | פורמט: מוצר חדש
+
+**הרעיון:**
+שם המהלך: "${brand} × ריצה — Pack & Run"
+מה קורה בפועל: ${brand} ו-New Balance ישראל מייצרים קו מוצרים משותף — מארז ריצה שכולל יוגורט ${brand} בפורמט to-go + צמיד GPS מיוחד. הקנייה במארז מזכה באפליקציית אימונים מותאמת עם מתכוני התאוששות.
+
+**שותפים אפשריים:**
+1. New Balance ישראל — מותג ספורט עם קהל ${audience} זהה, ערכי בריאות משולבים, ועדיין ללא שת"פ מזון מקומי
+2. אדידס ישראל — נוכחות חזקה בקהל הצעיר, מועדון ריצה פעיל, הפצה בחנויות ספורט שמשלימות את נקודות המכירה
+
+**מה משיגים:**
+- תנובה / המותג: נוכחות בנקודות מכירה חדשות (חנויות ספורט), אסוציאציה עם ספורט ובריאות
+- השותף: מוצר קונסומביל שמביא לקוחות לחנות שוב ושוב, תוכן שיווקי אמיתי
+- הצרכן: פתרון מלא לאחרי אימון — לא צריך לחשוב, הכל כבר ביחד
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: יוגורט + נעליים — שני עולמות שמעולם לא נפגשו, אבל הגיון הצריכה מחברם בדיוק
+- ✅ יוצר שיחה כי: ה"Pack & Run" הוא עצמו סיפור — תמונה, סרטון, UGC
+- ✅ יש בו היגיון פנימי כי: שניהם מתכנסים סביב רגע אחד — אחרי האימון
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: אריזת to-go חדשה, מדבקה משותפת, ייצור מוגבל לשלב א׳
+- שיווקי / תקשורתי: קמפיין דיגיטל, נוכחות בתחרויות ריצה, משפיענים מעולם ה-running
+- זמן וסדר גודל: 4-6 חודשי פיתוח, השקה בעונת ריצה — מרץ-אפריל
+
+---
+
+## חלופה ב׳ | פורמט: פלטפורמת מדיה
+
+**הרעיון:**
+שם המהלך: "Good Morning by ${brand}"
+מה קורה בפועל: שת"פ עם אפליקציית Wolt — הפעלת "ארוחת בוקר של אלוף" כ-subscription שבועי: ${brand} מגיע בבוקר עם קרטון מיוחד. בתוך האפליקציה, כל רכישה פותחת מתכון בוקר שיצרו שפים ישראלים מוכרים.
+
+**שותפים אפשריים:**
+1. Wolt ישראל — תשתית הפצה קיימת, קהל עירוני בדיוק כמו ${audience}, נסיון עם subscription boxes
+2. Pepper (מזון בריאות ישראלי) — שותפות תוכן: Pepper מספקת מתכונים, ${brand} מספק את החומרים
+
+**מה משיגים:**
+- תנובה / המותג: ריטנשן שבועי, נוכחות דיגיטלית, מסד נתוני לקוחות
+- השותף: תוכן מזין לאפליקציה, הגדלת AOV, שת"פ מותג שמעלה יוקרה
+- הצרכן: ארוחת בוקר מסודרת בלי מחשבה, תחושת "טיפול עצמי" קבוע
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: subscription יומי/שבועי עם מותג מזון הוא פורמט שכמעט לא קיים בישראל
+- ✅ יוצר שיחה כי: "הזמנת ${brand} לבוקר" היא הרגל חדש — אנשים ידברו על זה
+- ✅ יש בו היגיון פנימי כי: Wolt כבר שם בבוקר, ${brand} כבר בבוקר — החיבור טבעי
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: אריזות תקופתיות, תיאום לוגיסטי עם Wolt
+- שיווקי / תקשורתי: אינפלואנסרים בוקר, TikTok "morning routine", ניוזלטר שבועי
+- זמן וסדר גודל: 3 חודשי פיתוח, פיילוט תל אביב-גוש דן קודם
+
+---
+
+## חלופה ג׳ | פורמט: הפרעה
+
+**הרעיון:**
+שם המהלך: "תנובה × סופרפארם — The Recovery Edit"
+מה קורה בפועל: ${brand} מציג קו מוצרים בקטגוריה שלא צפויה לה — מדפי הביוטי בסופרפארם. אריזות ${brand} מיוחדות בעיצוב skincare-inspired (לבן, מינימלי, קרם) מוצגות ליד מוצרי תזונה ויטמינים. ההודעה: מה שטוב לפנים — טוב מבפנים.
+
+**שותפים אפשריים:**
+1. סופרפארם — נוכחות בחנויות ביוטי, קהל ${audience} מדויק, המדפים שלהם הם המדיה
+2. Be — מותג ישראלי לאורח חיים בריא, אסתטיקה דומה, שת"פ תוכן טבעי
+
+**מה משיגים:**
+- תנובה / המותג: נוכחות במדיה חדשה לחלוטין (מדפי ביוטי), קהל שלא מגיע דרך מדפי המזון
+- השותף: תוכן ויזואלי שמשדרג את המדפים, עניין תקשורתי
+- הצרכן: גילוי מחדש של מוצר מוכר דרך פריזמה חדשה
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: מוצר חלב שמוצג במדפי הביוטי — זה מעולם לא נעשה בישראל
+- ✅ יוצר שיחה כי: הצילום בחנות הוא בעצמו תוכן ויראלי
+- ✅ יש בו היגיון פנימי כי: תזונה ויופי הם אותה שיחה — רק הפרדנו אותם
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: עיצוב אריזה limited edition, תיאום מדפים עם סופרפארם
+- שיווקי / תקשורתי: PR לאירוע ההשקה, UGC מהחנות, קמפיין "beauty from within"
+- זמן וסדר גודל: 2-3 חודשים, השקה ב-pop-up ב-3 סניפים מרכזיים`;
+
+    renderAlternatives(demoText);
+    document.getElementById('resultsWrap').classList.add('show');
+    window.scrollTo({ top: document.getElementById('resultsWrap').offsetTop - 20, behavior: 'smooth' });
+  });
+
+  /* ── Restart ── */
+  document.getElementById('restartBtn').addEventListener('click', function () {
+    document.getElementById('resultsWrap').classList.remove('show');
+    document.getElementById('formCard').style.display = 'block';
+    document.getElementById('submitZone').style.display = 'block';
+    document.getElementById('tnuvaForm').style.display = 'block';
+    document.getElementById('tnuvaForm').reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
