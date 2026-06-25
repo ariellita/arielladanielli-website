@@ -126,7 +126,7 @@ ${collabLine}${avoidLine}
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        model: 'claude-opus-4-8',
+        model: 'claude-sonnet-4-5-20250929',
         max_tokens: 3000,
         temperature: 1,
         messages: [{ role: 'user', content: prompt }],
