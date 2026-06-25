@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>סוכן AI לקמפיין תנובה | אריאלה דניאלי</title>
-  <meta name="description" content="מלא את השאלון — קבל המלצת קמפיין מותאמת אישית לפי המותג, הקהל, והמטרה שלך">
-
+  <title>The Tnuva Experience | סוכן AI לרעיונות יצירתיים</title>
+  <meta name="description" content="סוכן בינה מלאכותית לרעיונות קריאייטיב לשיתופי פעולה עבור תנובה">
 
   <style>
     /* ─── Tokens ─── */
@@ -16,10 +15,10 @@
       --red:        #CC2218;
       --red-deep:   #A01510;
       --blue:       #174090;
-      --blue-mid:   #1F5AAA;
       --dark:       #1E1008;
       --gold:       #B8891A;
       --gold-light: #D4A835;
+      --green:      #1A7A3A;
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -39,167 +38,47 @@
       inset: 0;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.35;
+      opacity: 0.3;
       background-image:
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
     }
 
-    /* ─── Top racing stripe ─── */
-    .stripe-top {
-      height: 10px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--red)  0 44px,
-        var(--blue) 44px 88px
-      );
-    }
-
     /* ─── Header ─── */
     .site-header {
-      background: var(--red);
-      padding: 18px 48px;
+      background: white;
+      padding: 20px 48px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      border-bottom: 4px solid var(--gold);
-      position: relative;
+      justify-content: center;
+      border-bottom: 3px solid var(--red);
     }
 
     .logo-wrap img {
-      height: 56px;
-      filter: brightness(0) invert(1);
+      height: 60px;
       display: block;
     }
 
-    .header-pill {
-      background: white;
-      color: var(--red);
-      font-family: 'Calibri', sans-serif;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      padding: 6px 20px;
-      text-transform: uppercase;
-      border: 2px solid white;
-    }
-
-    /* ─── Hero ─── */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 460px;
-      overflow: hidden;
+    /* ─── Page title ─── */
+    .page-title {
+      text-align: center;
+      padding: 52px 24px 40px;
+      background: var(--cream);
       border-bottom: 3px solid var(--dark);
     }
 
-    .hero-copy {
-      padding: 56px 64px 56px 40px;
-      background: var(--cream);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-    }
-
-    /* diagonal accent line */
-    .hero-copy::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 6px; height: 100%;
-      background: repeating-linear-gradient(
-        180deg,
-        var(--red)  0 22px,
-        transparent 22px 30px
-      );
-    }
-
-    .eyebrow {
-      font-size: 11px;
+    .main-title {
+      font-family: 'Calibri', sans-serif;
+      font-size: clamp(36px, 5vw, 72px);
       font-weight: 700;
-      letter-spacing: 0.18em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-
-    .hero-h1 {
-      font-family: 'Calibri', sans-serif;
-      font-size: clamp(52px, 6.5vw, 88px);
-      font-weight: 900;
-      line-height: 0.95;
       color: var(--red);
-      margin-bottom: 20px;
+      line-height: 1.1;
+      margin-bottom: 14px;
     }
 
-    .hero-h1 em {
-      font-style: normal;
-      color: var(--blue);
-    }
-
-    .hero-lead {
-      font-family: 'Calibri', sans-serif;
-      font-size: clamp(17px, 2vw, 22px);
-      font-weight: 400;
-      line-height: 1.6;
+    .main-sub {
+      font-size: clamp(16px, 2vw, 20px);
       color: var(--dark);
-      max-width: 400px;
-      margin-bottom: 32px;
-    }
-
-    .ai-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--blue);
-      color: white;
-      font-size: 13px;
-      font-weight: 500;
-      padding: 9px 20px;
-      width: fit-content;
-    }
-
-    .ai-badge::before {
-      content: '✦';
-      color: var(--gold-light);
-      font-size: 11px;
-    }
-
-    /* color art side */
-    .hero-visual {
-      position: relative;
-      overflow: hidden;
-      background: var(--cream);
-    }
-
-    .tnuva-art-svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    /* stamp overlay */
-    .stamp {
-      position: absolute;
-      bottom: 28px;
-      right: 28px;
-      border: 3px solid rgba(255,255,255,0.7);
-      color: white;
-      font-family: 'Calibri', sans-serif;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-align: center;
-      padding: 10px 14px;
-      z-index: 2;
-      text-transform: uppercase;
-      line-height: 1.5;
-    }
-
-    /* ─── Dashed divider ─── */
-    .dashed-rule {
-      height: 0;
-      border-top: 3px dashed var(--cream-dark);
-      margin: 0 40px;
+      font-weight: 400;
     }
 
     /* ─── Main content ─── */
@@ -244,7 +123,6 @@
       position: relative;
     }
 
-    /* corner accents */
     .form-card::before,
     .form-card::after {
       content: '✦';
@@ -358,7 +236,7 @@
       cursor: pointer;
     }
 
-    /* ─── Goal picker — vintage stamps ─── */
+    /* ─── Goal picker ─── */
     .goals-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -380,24 +258,12 @@
       transition: all .15s;
       text-align: center;
       user-select: none;
-      position: relative;
     }
 
-    .goal-tile .tile-icon {
-      font-size: 22px;
-      line-height: 1;
-    }
+    .goal-tile .tile-icon { font-size: 22px; line-height: 1; }
+    .goal-tile .tile-text { font-size: 13px; font-weight: 500; color: var(--dark); }
 
-    .goal-tile .tile-text {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-
-    .goal-tile:hover {
-      border-color: var(--red);
-      background: #FFF2EE;
-    }
+    .goal-tile:hover { border-color: var(--red); background: #FFF2EE; }
 
     .goal-check:checked + .goal-tile {
       background: var(--red);
@@ -406,17 +272,10 @@
     }
 
     .goal-check:checked + .goal-tile .tile-text,
-    .goal-check:checked + .goal-tile .tile-icon {
-      color: white;
-    }
+    .goal-check:checked + .goal-tile .tile-icon { color: white; }
 
     /* ─── Loading state ─── */
-    .loading-zone {
-      display: none;
-      text-align: center;
-      padding: 56px 48px;
-    }
-
+    .loading-zone { display: none; text-align: center; padding: 56px 48px; }
     .loading-zone.show { display: block; }
 
     .loader-spinner {
@@ -438,23 +297,13 @@
       animation: pulse 1.4s ease-in-out infinite;
     }
 
-    @keyframes pulse {
-      0%,100% { opacity: .5; }
-      50%      { opacity: 1; }
-    }
+    @keyframes pulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
 
-    /* ─── Results section ─── */
-    .results-wrap {
-      display: none;
-      margin-top: 40px;
-    }
-
+    /* ─── Results ─── */
+    .results-wrap { display: none; margin-top: 40px; }
     .results-wrap.show { display: block; }
 
-    .results-header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+    .results-header { text-align: center; margin-bottom: 32px; }
 
     .results-title {
       font-family: 'Calibri', sans-serif;
@@ -464,17 +313,12 @@
       margin-bottom: 6px;
     }
 
-    .results-sub {
-      font-size: 14px;
-      color: var(--gold);
-      letter-spacing: 0.06em;
-    }
+    .results-sub { font-size: 14px; color: var(--gold); letter-spacing: 0.06em; }
 
     .alt-card {
       background: white;
       border: 3px solid var(--dark);
       margin-bottom: 24px;
-      position: relative;
       animation: fadeUp .5s ease forwards;
       opacity: 0;
     }
@@ -503,7 +347,6 @@
       font-family: 'Calibri', sans-serif;
       font-size: 16px;
       font-weight: 700;
-      letter-spacing: 0.04em;
     }
 
     /* ─── Template badge ─── */
@@ -563,22 +406,10 @@
     }
 
     .alt-body h3:first-child { margin-top: 0; }
-
     .alt-body p  { margin-bottom: 10px; }
     .alt-body ul { padding-right: 20px; margin-bottom: 10px; }
     .alt-body li { margin-bottom: 6px; }
-
     .alt-body strong { color: var(--dark); font-weight: 700; }
-
-    .analogy-box {
-      background: var(--cream);
-      border-right: 4px solid var(--blue);
-      padding: 10px 16px;
-      margin: 10px 0;
-      font-size: 14px;
-      color: var(--blue);
-      font-style: italic;
-    }
 
     .results-actions {
       display: flex;
@@ -605,23 +436,9 @@
       gap: 10px;
     }
 
-    .btn-more:hover {
-      background: #0F3070;
-      transform: translate(-2px,-2px);
-      box-shadow: 7px 7px 0 var(--dark);
-    }
-
-    .btn-more:active {
-      transform: translate(2px,2px);
-      box-shadow: 3px 3px 0 var(--dark);
-    }
-
-    .btn-more:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: 5px 5px 0 var(--dark);
-    }
+    .btn-more:hover { background: #0F3070; transform: translate(-2px,-2px); box-shadow: 7px 7px 0 var(--dark); }
+    .btn-more:active { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--dark); }
+    .btn-more:disabled { opacity: .5; cursor: not-allowed; transform: none; }
 
     .btn-restart {
       background: transparent;
@@ -634,29 +451,15 @@
       cursor: pointer;
       transition: all .15s;
     }
+    .btn-restart:hover { background: var(--red); color: white; }
 
-    .btn-restart:hover {
-      background: var(--red);
-      color: white;
-    }
-
-    /* ─── More ideas loading ─── */
-    .more-loading {
-      display: none;
-      text-align: center;
-      padding: 32px;
-      color: var(--gold);
-      font-family: 'Calibri', sans-serif;
-      font-size: 16px;
-    }
-
+    /* ─── More loading ─── */
+    .more-loading { display: none; text-align: center; padding: 32px; color: var(--gold); font-family: 'Calibri', sans-serif; font-size: 16px; }
     .more-loading.show { display: block; }
-
     .more-loading::before {
       content: '';
       display: inline-block;
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       border: 3px solid var(--cream-dark);
       border-top-color: var(--blue);
       border-radius: 50%;
@@ -701,75 +504,15 @@
       gap: 12px;
     }
 
-    .btn-submit:hover {
-      background: var(--red-deep);
-      transform: translate(-2px,-2px);
-      box-shadow: 8px 8px 0 var(--dark);
-    }
-
-    .btn-submit:active {
-      transform: translate(3px,3px);
-      box-shadow: 3px 3px 0 var(--dark);
-    }
-
-    .btn-submit .arrow {
-      font-size: 20px;
-      transition: transform .18s;
-    }
-
+    .btn-submit:hover { background: var(--red-deep); transform: translate(-2px,-2px); box-shadow: 8px 8px 0 var(--dark); }
+    .btn-submit:active { transform: translate(3px,3px); box-shadow: 3px 3px 0 var(--dark); }
+    .btn-submit .arrow { font-size: 20px; transition: transform .18s; }
     .btn-submit:hover .arrow { transform: translateX(-6px); }
 
-    .submit-note {
-      margin-top: 14px;
-      font-size: 12px;
-      color: var(--gold);
-      letter-spacing: 0.04em;
-    }
-
-    /* ─── Success state ─── */
-    .success-panel {
-      display: none;
-      text-align: center;
-      padding: 72px 48px;
-    }
-
-    .success-panel.show { display: block; }
-
-    .success-mark {
-      width: 72px;
-      height: 72px;
-      border: 3px solid var(--red);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      color: var(--red);
-      margin: 0 auto 24px;
-    }
-
-    .success-h {
-      font-family: 'Calibri', sans-serif;
-      font-size: 36px;
-      font-weight: 900;
-      color: var(--red);
-      margin-bottom: 12px;
-    }
-
-    .success-p {
-      font-size: 18px;
-      color: var(--dark);
-      line-height: 1.75;
-    }
+    .submit-note { margin-top: 14px; font-size: 12px; color: var(--gold); letter-spacing: 0.04em; }
 
     /* ─── Bottom ornament ─── */
-    .page-ornament {
-      text-align: center;
-      margin: 40px 0 0;
-      font-size: 20px;
-      color: var(--cream-dark);
-      letter-spacing: 0.5em;
-    }
+    .page-ornament { text-align: center; margin: 40px 0 0; font-size: 20px; color: var(--cream-dark); letter-spacing: 0.5em; }
 
     /* ─── Footer ─── */
     .site-footer {
@@ -784,111 +527,52 @@
       flex-wrap: wrap;
       gap: 6px;
     }
-
-    .site-footer a {
-      color: var(--gold-light);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
+    .site-footer a { color: var(--gold-light); text-decoration: none; font-weight: 500; }
     .site-footer a:hover { text-decoration: underline; }
 
     /* ─── Responsive ─── */
     @media (max-width: 720px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-visual { height: 240px; }
-      .hero-copy { padding: 40px 28px 40px 36px; }
       .form-section { padding: 28px 24px; }
-      .submit-zone { padding: 32px 24px; }
-      .row2 { grid-template-columns: 1fr; }
-      .goals-grid { grid-template-columns: repeat(3,1fr); }
-      .btn-submit { padding: 16px 40px; font-size: 20px; }
-      .site-header { padding: 16px 24px; }
+      .submit-zone  { padding: 32px 24px; }
+      .row2         { grid-template-columns: 1fr; }
+      .goals-grid   { grid-template-columns: repeat(3,1fr); }
+      .btn-submit   { padding: 16px 40px; font-size: 20px; }
+      .site-header  { padding: 16px 24px; }
+      .page-title   { padding: 36px 20px 28px; }
     }
 
     @media (max-width: 420px) {
       .goals-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    /* ─── Entrance animations ─── */
+    /* ─── Animations ─── */
     @keyframes fadeUp {
       from { opacity:0; transform:translateY(24px); }
-      to   { opacity:1; transform:translateY(0);    }
+      to   { opacity:1; transform:translateY(0); }
     }
 
-    .hero-copy > * {
+    .page-title {
       opacity: 0;
-      animation: fadeUp .55s ease forwards;
+      animation: fadeUp .5s ease .1s forwards;
     }
-    .eyebrow        { animation-delay: .05s; }
-    .hero-h1        { animation-delay: .15s; }
-    .hero-lead      { animation-delay: .25s; }
-    .ai-badge       { animation-delay: .35s; }
 
     .form-card {
       opacity: 0;
-      animation: fadeUp .6s ease .4s forwards;
+      animation: fadeUp .6s ease .3s forwards;
     }
   </style>
 </head>
 <body>
 
-<div class="stripe-top"></div>
-
 <header class="site-header">
   <div class="logo-wrap">
     <img src="tnuva-logo.png" alt="תנובה">
   </div>
-  <div class="header-pill">סוכן AI לשיווק</div>
 </header>
 
-<!-- ══ HERO ══ -->
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">כלי בינה מלאכותית לשיווק מותגי תנובה</p>
-    <h1 class="hero-h1">
-      הסוכן<br>
-      ש<em>חושב</em><br>
-      תנובה
-    </h1>
-    <p class="hero-lead">
-      מלאו את השאלון הקצר — הסוכן יבנה עבורכם המלצת קמפיין מפורטת,
-      מותאמת למותג, לקהל ולמטרה שלכם.
-    </p>
-    <div class="ai-badge">מופעל על ידי AI גנרטיבי</div>
-  </div>
-
-  <div class="hero-visual">
-    <svg class="tnuva-art-svg" viewBox="0 0 560 460" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-      <!-- Three color bands -->
-      <rect x="0"   y="0" width="185" height="460" fill="#CC2218"/>
-      <rect x="190" y="0" width="180" height="460" fill="#174090"/>
-      <rect x="375" y="0" width="185" height="460" fill="#1A7A3A"/>
-      <!-- Cream dividers -->
-      <rect x="185" y="0" width="5"   height="460" fill="#F6EDD8"/>
-      <rect x="370" y="0" width="5"   height="460" fill="#F6EDD8"/>
-      <!-- Subtle cross-lines for vintage texture -->
-      <line x1="40"  y1="130" x2="145" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-      <line x1="40"  y1="330" x2="145" y2="330" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-      <line x1="415" y1="130" x2="520" y2="130" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-      <line x1="415" y1="330" x2="520" y2="330" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-      <!-- Central badge -->
-      <circle cx="280" cy="230" r="140" fill="#F6EDD8"/>
-      <circle cx="280" cy="230" r="133" fill="none" stroke="#CC2218"  stroke-width="4"/>
-      <circle cx="280" cy="230" r="125" fill="none" stroke="#174090"  stroke-width="2.5"/>
-      <circle cx="280" cy="230" r="118" fill="none" stroke="#1A7A3A"  stroke-width="2"/>
-      <!-- Stars top -->
-      <text x="280" y="156" text-anchor="middle" font-size="12" fill="#B8891A" font-family="Calibri, sans-serif" letter-spacing="16">✦ ✦ ✦</text>
-      <!-- Brand name -->
-      <text x="280" y="228" text-anchor="middle" font-family="Calibri, sans-serif" font-size="62" font-weight="700" fill="#CC2218">תנובה</text>
-      <!-- Tagline -->
-      <text x="280" y="262" text-anchor="middle" font-family="Calibri, sans-serif" font-size="16" fill="#174090" letter-spacing="4">מרבה בריאות</text>
-      <!-- Year -->
-      <text x="280" y="289" text-anchor="middle" font-family="Calibri, sans-serif" font-size="12" fill="#1A7A3A" letter-spacing="8">— 1926 —</text>
-      <!-- Stars bottom -->
-      <text x="280" y="314" text-anchor="middle" font-size="11" fill="#B8891A" font-family="Calibri, sans-serif" letter-spacing="14">✦ ✦ ✦</text>
-    </svg>
-  </div>
+<section class="page-title">
+  <h1 class="main-title">The Tnuva experience</h1>
+  <p class="main-sub">סוכן בינה מלאכותית לרעיונות יצירתיים</p>
 </section>
 
 <!-- ══ BODY ══ -->
@@ -951,25 +635,25 @@
         <p class="sec-hint">מה הקמפיין צריך לעשות? בחרו אחת</p>
 
         <div class="goals-grid">
-          <input type="checkbox" name="goal" id="g-sales"      value="מכירות — הגדלת נפח / נקודות מכירה חדשות"       class="goal-check">
+          <input type="checkbox" name="goal" id="g-sales"      value="מכירות — הגדלת נפח / נקודות מכירה חדשות"        class="goal-check">
           <label for="g-sales" class="goal-tile">
             <span class="tile-icon">💰</span>
             <span class="tile-text">מכירות</span>
           </label>
 
-          <input type="checkbox" name="goal" id="g-brand"      value="מיתוג — שינוי תפיסה / חיזוק אסוציאציות"        class="goal-check">
+          <input type="checkbox" name="goal" id="g-brand"      value="מיתוג — שינוי תפיסה / חיזוק אסוציאציות"         class="goal-check">
           <label for="g-brand" class="goal-tile">
             <span class="tile-icon">⭐</span>
             <span class="tile-text">מיתוג</span>
           </label>
 
-          <input type="checkbox" name="goal" id="g-awareness"  value="מודעות — להיכנס לשיחה / לייצר buzz"            class="goal-check">
+          <input type="checkbox" name="goal" id="g-awareness"  value="מודעות — להיכנס לשיחה / לייצר buzz"             class="goal-check">
           <label for="g-awareness" class="goal-tile">
             <span class="tile-icon">📢</span>
             <span class="tile-text">מודעות</span>
           </label>
 
-          <input type="checkbox" name="goal" id="g-experience" value="חווית מותג — חוויה פיזית / רגשית / ריטואל"     class="goal-check">
+          <input type="checkbox" name="goal" id="g-experience" value="חווית מותג — חוויה פיזית / רגשית / ריטואל"      class="goal-check">
           <label for="g-experience" class="goal-tile">
             <span class="tile-icon">✨</span>
             <span class="tile-text">חווית מותג</span>
@@ -989,12 +673,12 @@
           <span class="sec-num">שלב ג׳</span>
           <span class="sec-title">קהל יעד</span>
         </div>
-        <p class="sec-hint">תארו בקצרה: גברים 30–45 ספורטיביים · אמהות לילדים 6–12 · צעירות עירוניות 20–30</p>
+        <p class="sec-hint">הסבירו ככל הניתן מיהו קהל היעד — ככל שתוסיפו יותר פרטים, כך הרעיונות יהיו מדויקים יותר</p>
 
         <div class="field">
           <label>תיאור הקהל *</label>
           <input type="text" name="audience"
-            placeholder="למשל: אמהות לילדים בגיל בית ספר, עירוניות, מודעות לתזונה"
+            placeholder="למשל: גברים 30-45 שמתאמנים 3+ בשבוע, מודעים לתזונה, גרים בעיר"
             required>
         </div>
       </div>
@@ -1003,14 +687,14 @@
       <div class="form-section">
         <div class="section-label">
           <span class="sec-num">שלב ד׳</span>
-          <span class="sec-title">מה ההצלחה נראית</span>
+          <span class="sec-title">מה ייחשב להצלחה</span>
         </div>
-        <p class="sec-hint">לא מדד — סיטואציה. מה קורה כשהמהלך הצליח?</p>
+        <p class="sec-hint">מה ייחשב להצלחה עבורכם?</p>
 
         <div class="field">
           <label>תאר/י את ההצלחה *</label>
           <textarea name="success" required
-            placeholder="למשל: שאנשי ספורט יבחרו ב-GO באופן אקטיבי, לא כי אין אלטרנטיבה."></textarea>
+            placeholder="למשל: שהשיח ברשתות על המותג יעלה, שבאפקטיביות הפרסום נראה התחזקות, שאנשים יורידו קופונים, גידול במכירות"></textarea>
         </div>
       </div>
 
@@ -1028,7 +712,7 @@
     <!-- Loading -->
     <div class="loading-zone" id="loadingZone">
       <div class="loader-spinner"></div>
-      <p class="loader-text">הסוכן חושב תנובה...</p>
+      <p class="loader-text">הסוכן חושב...</p>
     </div>
 
   </div><!-- /form-card -->
@@ -1059,46 +743,41 @@
 </footer>
 
 <script>
-  /* ── Simple markdown → HTML ── */
+  /* ── Markdown → HTML ── */
   function mdToHtml(text) {
-    let html = text
+    return text
       .replace(/^### (.+)$/gm, '<h3>$1</h3>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/^- (.+)$/gm,   '<li>$1</li>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
       .replace(/(<li>[^]*?<\/li>(\n|$))+/g, m => `<ul>${m}</ul>`)
       .replace(/^---+$/gm, '')
       .replace(/^(?!<[hul])(.+)$/gm, line => line.trim() ? `<p>${line}</p>` : '')
       .trim();
-
-    // Style אנלוגיה עולמית as a callout box
-    html = html.replace(
-      /<strong>אנלוגיה עולמית:<\/strong>\s*<\/p>\s*<p>(.+?)<\/p>/,
-      '<strong>אנלוגיה עולמית:</strong></p><div class="analogy-box">🌍 $1</div>'
-    );
-
-    return html;
   }
 
-  /* ── Parse the 3 alternatives ── */
+  /* ── Parse alternatives ── */
   function parseAlternatives(text) {
     const parts = text.split(/(?=^## חלופה)/m);
     return parts.filter(p => p.trim().startsWith('## חלופה'));
   }
 
-  /* ── Extract template name + description from alt text ── */
+  /* ── Extract template + idea name ── */
   function extractTemplate(body) {
-    const nameMatch = body.match(/\*\*התבנית:\*\*\s*(.+)/);
-    const descMatch = body.match(/\*\*למה זו התבנית:\*\*\s*(.+)/) ||
-                      body.match(/\*\*מה התבנית אומרת:\*\*\s*(.+)/);
+    const nameMatch     = body.match(/\*\*התבנית:\*\*\s*(.+)/);
+    const descMatch     = body.match(/\*\*למה זו התבנית:\*\*\s*(.+)/) ||
+                          body.match(/\*\*מה התבנית אומרת:\*\*\s*(.+)/);
+    const ideaNameMatch = body.match(/\*\*שם הרעיון:\*\*\s*(.+)/);
     return {
-      name: nameMatch ? nameMatch[1].trim() : '',
-      desc: descMatch ? descMatch[1].trim() : '',
+      name:     nameMatch     ? nameMatch[1].trim()     : '',
+      desc:     descMatch     ? descMatch[1].trim()     : '',
+      ideaName: ideaNameMatch ? ideaNameMatch[1].trim() : '',
     };
   }
 
-  /* ── Strip template lines from body (already shown in badge) ── */
+  /* ── Strip meta lines from body ── */
   function stripTemplateMeta(body) {
     return body
+      .replace(/\*\*שם הרעיון:\*\*.*\n?/g, '')
       .replace(/\*\*התבנית:\*\*.*\n?/g, '')
       .replace(/\*\*למה זו התבנית:\*\*.*\n?/g, '')
       .replace(/\*\*מה התבנית אומרת:\*\*.*\n?/g, '')
@@ -1118,13 +797,13 @@
     const LABELS = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳'];
 
     items.forEach((alt) => {
-      const idx       = globalCardCount++;
-      const lines     = alt.split('\n');
-      const heading   = lines[0].replace(/^## /, '').replace(/\|.*/, '').trim();
-      const rawBody   = lines.slice(1).join('\n');
+      const idx     = globalCardCount++;
+      const lines   = alt.split('\n');
+      const rawBody = lines.slice(1).join('\n');
 
-      const { name, desc } = extractTemplate(rawBody);
+      const { name, desc, ideaName } = extractTemplate(rawBody);
       const cleanBody = stripTemplateMeta(rawBody);
+      const heading   = ideaName || `רעיון ${LABELS[idx] || (idx + 1)}`;
 
       const card = document.createElement('div');
       card.className = 'alt-card';
@@ -1140,7 +819,7 @@
 
       card.innerHTML = `
         <div class="alt-header" style="background:${ALL_COLORS[idx % ALL_COLORS.length]}">
-          <span class="alt-num">${LABELS[idx] || (idx+1)}</span>
+          <span class="alt-num">${LABELS[idx] || (idx + 1)}</span>
           <span class="alt-title">${heading}</span>
         </div>
         ${templateBand}
@@ -1150,9 +829,7 @@
     });
   }
 
-  /* ── Track used categories + form state ── */
   let _formState = null;
-  let _usedCategories = [];
 
   function getUsedCategories() {
     return [...document.querySelectorAll('.template-name')].map(el => el.textContent.trim());
@@ -1167,26 +844,16 @@
     const success  = form.querySelector('[name="success"]').value.trim();
     const product  = form.querySelector('[name="product"]').value.trim();
 
-    if (!brand) {
-      alert('אנא בחרו מותג'); form.querySelector('[name="brand"]').focus(); return;
-    }
-    if (!goals.length) {
-      alert('אנא בחרו לפחות מטרה אחת'); return;
-    }
-    if (!audience) {
-      alert('אנא תארו את קהל היעד'); form.querySelector('[name="audience"]').focus(); return;
-    }
-    if (!success) {
-      alert('אנא תארו כיצד נראית ההצלחה'); form.querySelector('[name="success"]').focus(); return;
-    }
+    if (!brand)    { alert('אנא בחרו מותג'); form.querySelector('[name="brand"]').focus(); return; }
+    if (!goals.length) { alert('אנא בחרו לפחות מטרה אחת'); return; }
+    if (!audience) { alert('אנא תארו את קהל היעד'); form.querySelector('[name="audience"]').focus(); return; }
+    if (!success)  { alert('אנא תארו מה ייחשב להצלחה'); form.querySelector('[name="success"]').focus(); return; }
 
-    // Show loading
     document.getElementById('submitZone').style.display = 'none';
     form.style.display = 'none';
     document.getElementById('loadingZone').classList.add('show');
     window.scrollTo({ top: document.getElementById('formCard').offsetTop - 20, behavior: 'smooth' });
 
-    // Simulate loading
     await new Promise(r => setTimeout(r, 1800));
 
     document.getElementById('loadingZone').classList.remove('show');
@@ -1194,102 +861,59 @@
 
     const demoText = `## חלופה א׳
 
+**שם הרעיון:** ריצה, לא פרסומת
 **התבנית:** מוצר חדש
-**מה התבנית אומרת:** שני מותגים יוצרים מוצר שלישי שלא היה קיים בלי החיבור ביניהם — "איך לא חשבו על זה קודם"
+**למה זו התבנית:** שני מותגים יוצרים מוצר שלישי שלא היה קיים — החיבור ביניהם הוא ה-wow moment
 
 **הרעיון:**
-שם המהלך: "${brand} × ריצה — Pack & Run"
-מה קורה בפועל: ${brand} ו-New Balance ישראל מייצרים מארז ריצה משותף — יוגורט ${brand} בפורמט to-go (100 מ"ל, מכסה עם קש) בצבעי הקולאב, בתוך שקית ריצה ממותגת של New Balance. המארז נמכר בחנויות New Balance, בנקודות המכירה של ${brand} ובאתר שניהם. בכל מארז קוד QR שפותח אפליקציית ריצה מותאמת עם תוכנית 8 שבועות + מתכוני התאוששות.
+${brand} ו-New Balance ישראל מייצרים מארז ריצה משותף — ${brand} בפורמט to-go בצבעי הקולאב, בתוך שקית ריצה ממותגת. המארז נמכר בחנויות New Balance ובנקודות המכירה של ${brand}. לא פרסומת — מוצר.
 
-**מסע הצרכן:** הצרכן רואה את המארז בחנות הספורט — שני מותגים שהוא מכיר בקונטקסט שלא ציפה. פותח קוד QR, נרשם לאפליקציה, מתחיל לרוץ. שבועיים אחרי — חוזר לקנות את יוגורט ה-recovery, הפעם במדף הרגיל.
-
-**אנלוגיה עולמית:** Nike x Headspace — אפליקציית מדיטציה ריצה משותפת שנוצרה כ-run mode ייעודי, שהפכה לתכונה קבועה ב-Nike Run Club.
+**למה זה מעניין:**
+יוגורט בחנות ספורט — חיבור שמעולם לא קרה בישראל, אבל ההגיון מדויק לחלוטין. הצילום של המארז ברשתות הוא בעצמו תוכן — "קניתי ${brand} בחנות ספורט".
 
 **שותפים אפשריים:**
-1. New Balance ישראל — מותג ספורט עם קהל ${audience} זהה, ערכי בריאות משולבים, ועדיין ללא שת"פ מזון מקומי — נקודת כניסה טבעית
-2. אדידס ישראל — נוכחות חזקה בקהל הצעיר, מועדון ריצה פעיל עם 40,000 חברים, הפצה בחנויות שמשלימות את נקודות המכירה של ${brand}
+1. New Balance ישראל — קהל זהה ל-${audience}, ערכי בריאות משולבים, עדיין ללא שת"פ מזון מקומי
+2. אדידס ישראל — מועדון ריצה פעיל עם עשרות אלפי חברים, הפצה בחנויות שמשלימות את נקודות המכירה
 
-**מה משיגים:**
-- תנובה / המותג: נוכחות בנקודות מכירה חדשות לחלוטין (חנויות ספורט), אסוציאציה אמינה עם ספורט ובריאות — לא רק דרך פרסומת
-- השותף: מוצר קונסומביל שמביא לקוחות לחנות שוב ושוב, תוכן שיווקי אורגני, הרחבה לקטגוריית תזונה
-- הצרכן: פתרון מלא לאחרי אימון — הכל ביחד, פחות החלטות, יותר חוויה
-
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: יוגורט בחנות ספורט — חיבור שמעולם לא קרה בישראל, אבל הגיון הצריכה מדויק
-- ✅ יוצר שיחה כי: הצילום של המארז ברשתות הוא בעצמו תוכן — "קניתי יופלה בחנות ספורט"
-- ✅ יש בו היגיון פנימי כי: שניהם מתכנסים סביב רגע אחד ומוגדר — אחרי האימון
-
-**מה נדרש:**
-- מוצרי / לוגיסטי: אריזת to-go חדשה (100 מ"ל + קש), שקית ריצה ממותגת, ייצור מוגבל 50,000 יחידות לפיילוט
-- שיווקי / תקשורתי: קמפיין דיגיטל משותף, נוכחות בתחרויות ריצה (מרתון ת"א, TLV Run), משפיענים מעולם ה-running
-- זמן וסדר גודל: 5-6 חודשי פיתוח ואישורים, השקה מרץ-אפריל (עונת ריצה), קנה מידה מלא בסתיו
+**צעד נוסף:** קוד QR שפותח תוכנית אימון של 8 שבועות — ריטנשן דיגיטלי
 
 ## חלופה ב׳
 
+**שם הרעיון:** הבוקר של אלוף
 **התבנית:** פלטפורמת מדיה
-**מה התבנית אומרת:** שת"פ שחי בתוך אפליקציה, פלטפורמה, או חוויה דיגיטלית — ולא רק בפרסומת
+**למה זו התבנית:** השת"פ חי בתוך אפליקציה שהצרכן כבר משתמש בה — לא מחייב שינוי הרגלים
 
 **הרעיון:**
-שם המהלך: "Good Morning by ${brand}"
-מה קורה בפועל: שת"פ עם Wolt — הפעלת "ארוחת בוקר של אלוף" כ-subscription שבועי בתוך האפליקציה. כל יום ראשון בבוקר, קרטון ${brand} מיוחד מגיע עם מתכון בוקר של שף ישראלי מוכר (בעיצוב כרטיס קטן בתוך הקרטון). האריזה שונה כל עונה — קיץ / חורף / חגים. בתוך ה-Wolt, בחירת ה-bundle פותחת תוכן בלעדי: "ארוחת הבוקר של [שף]".
+${brand} ו-Wolt מפעילים subscription שבועי — כל יום ראשון מגיע קרטון ${brand} מיוחד עם כרטיס מתכון של שף ישראלי מוכר. האריזה שונה בכל עונה. הכל אוטומטי, ללא ניהול.
 
-**מסע הצרכן:** הצרכן רואה ב-Wolt את הבאנר "Good Morning by ${brand}" — לוחץ מסקרנות, מנוי ב-2 קליקים. ביום ראשון הראשון מגיע הקרטון עם כרטיס המתכון — מצלם ומעלה לאינסטגרם. חבר רואה, שואל "מה זה" — מחזור הרכישה מתחיל.
-
-**אנלוגיה עולמית:** Peloton × Spotify — שת"פ שחי בתוך פלטפורמת האימון, הפך playlist עצמאי לחלק מחוויית הרכישה.
+**למה זה מעניין:**
+Wolt כבר שם בבוקר של ה-${audience} ו-${brand} כבר שם בבוקר — אפס חיכוך. "הזמנתי ${brand} מ-Wolt" הוא משפט שאנשים אומרים — לא "ראיתי פרסומת".
 
 **שותפים אפשריים:**
-1. Wolt ישראל — 1.5M משתמשים פעילים, תשתית subscription קיימת, קהל עירוני 20-40 זהה ל-${audience}, כבר ניסו bundle boxes עם מותגים
-2. Pepper (תזונה בריאה ישראלית) — שותפות תוכן: Pepper מספקת מתכונים ושפים, ${brand} מספק את הרכיב המרכזי — כל צד מביא קהל אחר
+1. Wolt ישראל — מיליון וחצי משתמשים, תשתית subscription קיימת, קהל עירוני 20-40
+2. גט (Gett) — פלטפורמת משלוחים עסקית עם גישה לארגונים שמאכילים עובדים בבוקר
 
-**מה משיגים:**
-- תנובה / המותג: ריטנשן שבועי מדיד, מסד נתוני לקוחות, נוכחות דיגיטלית לא-פרסומית
-- השותף: תוכן מזין לאפליקציה, הגדלת AOV (לקוח שמנוי קונה יותר), שת"פ מותג שמעלה תדמית
-- הצרכן: ארוחת בוקר מסודרת בלי מחשבה, תחושת "טיפול עצמי" שחוזר — ריטואל שבועי
-
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: subscription שבועי של מוצר מזון בתוך delivery app — פורמט שלא קיים בישראל
-- ✅ יוצר שיחה כי: "הזמנתי ${brand} מ-Wolt לבוקר" הוא משפט שאנשים אומרים — לא "ראיתי פרסומת"
-- ✅ יש בו היגיון פנימי כי: Wolt כבר שם בבוקר של ה-${audience}, ${brand} כבר שם בבוקר — אפס חיכוך
-
-**מה נדרש:**
-- מוצרי / לוגיסטי: אריזות עונתיות עם כרטיסי מתכון, תיאום לוגיסטי עם Wolt (temperature control)
-- שיווקי / תקשורתי: 6 שפים × 1 מתכון לחודש, TikTok "morning routine", push notification מ-Wolt
-- זמן וסדר גודל: 3 חודשי פיתוח, פיילוט ת"א-גוש דן עם 5,000 נרשמים, scale לאומי אחרי חצי שנה
+**צעד נוסף:** שישה שפים ישראלים × מתכון אחד לחודש — תוכן מוכן לרשתות החברתיות
 
 ## חלופה ג׳
 
+**שם הרעיון:** ${brand} בסופרפארם
 **התבנית:** הפרעה
-**מה התבנית אומרת:** חיבור מפתיע ולא צפוי שיוצר תשומת לב כי הוא שובר את כל הציפיות מהמותג
+**למה זו התבנית:** חיבור מפתיע שיוצר תשומת לב כי הוא שובר כל ציפייה מהמותג
 
 **הרעיון:**
-שם המהלך: "${brand} × סופרפארם — Inner Beauty Edit"
-מה קורה בפועל: ${brand} פורץ למדפי הביוטי בסופרפארם. אריזות limited edition בעיצוב skincare — לבן, מינימלי, עם פונט serifי — מוצגות לא ליד יוגורטים אחרים, אלא ליד ויטמינים ותוספי תזונה לעור. על כל אריזה: "מה שטוב מבפנים, נראה מבחוץ." במדף: QR לתוכן "inner beauty" עם דיאטנית ישראלית מוכרת. זה לא "יוגורט בסופרפארם" — זה רדיפיניישן של הקטגוריה.
+${brand} פורץ למדפי הביוטי בסופרפארם — אריזות limited edition בעיצוב skincare מינימלי, מוצגות ליד ויטמינים ותוספי תזונה לעור. על כל אריזה: "מה שטוב מבפנים, נראה מבחוץ". לא יוגורט ליד יוגורטים — ${brand} בקטגוריה חדשה לחלוטין.
 
-**מסע הצרכן:** הצרכן עוברת במסלול הביוטי — רואה אריזה שנראית כמו קרם פנים עם לוגו ${brand}. עוצרת. צוחקת / מתפעלת. מצלמת. שולחת לחברה. קונה — גם כי מגניב וגם כי "בריאות מבפנים" נשמע נכון לה.
-
-**אנלוגיה עולמית:** Scrub Daddy × Reese's — מוצר ניקוי בצורת שוקולד, הופיע בקטגוריה לא צפויה ויצר ויראליות מיידית.
+**למה זה מעניין:**
+מוצר חלב במדף הביוטי — מעולם לא נעשה בישראל. הצילום של המדף הוא ויראלי מיידי. הלוגיקה ברורה: תזונה ויופי הן אותה שיחה — רק הפרדנו אותן.
 
 **שותפים אפשריים:**
-1. סופרפארם — 300+ סניפים, קהל ${audience} מדויק, המדפים שלהם הם המדיה — ניסיון עם brand collabs בקוסמטיקה
-2. Iherb ישראל / "Be" (מותג אורח חיים בריא) — שותפות תוכן דיגיטלית: Be מספקת את ה"inner beauty" narrative, ${brand} מספקת את המוצר
+1. סופרפארם — 300+ סניפים, קהל ${audience} מדויק, ניסיון עם brand collabs בקוסמטיקה
+2. Be — מותג אורח חיים בריא ישראלי, שותפות תוכן: Be מספקת את ה-narrative, ${brand} את המוצר
 
-**מה משיגים:**
-- תנובה / המותג: נוכחות בנקודות מכירה חדשות, קהל שלא מגיע דרך מדפי המזון, PR אורגני מובטח
-- השותף: תוכן ויזואלי שמשדרג את המדפים, buzz שמושך תנועה לסניף, שיתוף בהכנסות limited edition
-- הצרכן: גילוי מחדש של מוצר מוכר מפריזמה חדשה — "לא ידעתי ש-${brand} זה גם לזה"
-
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: מוצר חלב במדף הביוטי — זה מעולם לא נעשה בישראל, ולא ביוגורטים בעולם
-- ✅ יוצר שיחה כי: הצילום של המדף הוא בעצמו תוכן ויראלי — "וואלה זה ${brand} בסופרפארם"
-- ✅ יש בו היגיון פנימי כי: תזונה ויופי הן אותה שיחה של ה-${audience} — רק הפרדנו אותן
-
-**מה נדרש:**
-- מוצרי / לוגיסטי: עיצוב אריזה limited edition (2-3 SKU), תיאום מדפים ב-20 סניפי anchor של סופרפארם
-- שיווקי / תקשורתי: PR לאירוע ההשקה, UGC מהחנות, קמפיין "beauty from within" עם 3 דיאטניות ידועות
-- זמן וסדר גודל: 2-3 חודשי פיתוח, pop-up ב-5 סניפים מרכזיים, scale ל-50 סניפים אחרי חודשיים`;
+**צעד נוסף:** שפה ויזואלית "inner beauty" עם דיאטניות ישראליות מוכרות ל-TikTok וסטוריז`;
 
     _formState = { brand, product, goals, audience, success };
-
     renderAlternatives(demoText);
     document.getElementById('resultsWrap').classList.add('show');
     window.scrollTo({ top: document.getElementById('resultsWrap').offsetTop - 20, behavior: 'smooth' });
@@ -1302,106 +926,62 @@
     document.getElementById('moreLoading').classList.add('show');
     window.scrollTo({ top: document.getElementById('moreLoading').offsetTop - 40, behavior: 'smooth' });
 
-    const used = getUsedCategories();
-
     await new Promise(r => setTimeout(r, 1800));
 
-    const { brand, product, goals, audience, success } = _formState || {};
+    const { brand = 'המותג', audience = 'הקהל' } = _formState || {};
     const round2 = `## חלופה
 
+**שם הרעיון:** ריקברי בזירה חדשה
 **התבנית:** מוצרים משלימים
-**מה התבנית אומרת:** שני מותגים שמתחברים סביב אותו רגע שימוש — טבעי כל כך שהיה צריך לקרות
+**למה זו התבנית:** שני מותגים שמתחברים סביב אותו רגע שימוש — טבעי כל כך שהיה צריך לקרות
 
 **הרעיון:**
-שם המהלך: "${brand || 'המותג'} × אחרי האימון — The Recovery Duo"
-מה קורה בפועל: ${brand || 'המותג'} ו-Under Armour ישראל מייצרים "Recovery Bundle" — תיק ספורט קטן שמכיל קרטון ${brand || 'המותג'} + מגבון ספורט + שייקר. הבאנדל נמכר בחנויות Under Armour ובאתר ה-DTC של ${brand || 'המותג'}. אין מוצר חדש — רק הקונטקסט החדש שמגדיר את שניהם מחדש.
+${brand} ו-Under Armour ישראל מייצרים "Recovery Bundle" — תיק ספורט קטן עם קרטון ${brand} ומגבון ספורט ממותג. נמכר בחנויות Under Armour ובאתר ה-DTC. אין מוצר חדש — רק הקשר שמגדיר מחדש את שניהם.
 
-**מסע הצרכן:** הצרכן הולך לחנות הספורט לקנות מגבון — יוצא עם הבאנדל. הפעם הבאה שהוא מחפש ${brand || 'המותג'} בסופר — הוא כבר מחפש אותו בתודעה אחרת: "זה המוצר של אחרי האימון שלי."
-
-**אנלוגיה עולמית:** Nike x Hyperice Hyperboot — נעל ספורט עם מכשיר עיסוי מובנה, חיבור סביב אותו רגע — ריצה + התאוששות.
+**למה זה מעניין:**
+זה לא "יוגורט ספורטיבי" — זה שינוי נקודת המכירה בלבד, וזה מספיק כדי לשנות תפיסה. שני מוצרים שנצרכים באותו רגע בדיוק — לא צריך לפרש.
 
 **שותפים אפשריים:**
-1. Under Armour ישראל — מותג ספורט ביצועי, קהל גברים ונשים ספורטיביים 20-40, ערכי "צ'מפיון" שמתחברים לבריאות
-2. Decathlon ישראל — 14 סניפים, קהל רחב יותר, פחות פרמיום — שת"פ שיכול להגיע לקנה מידה מהיר יותר
+1. Under Armour ישראל — מותג ביצועי, קהל ${audience} ספורטיבי 20-40
+2. Decathlon ישראל — 14 סניפים, קהל רחב יותר, קנה מידה מהיר יותר
 
-**מה משיגים:**
-- תנובה / המותג: נוכחות בנקודת המכירה הכי רלוונטית לצריכה, אסוציאציית recovery שאין לה תחרות
-- השותף: מוצר קונסומביל שמייצר תנועה חוזרת לחנות, תוכן שיווקי אמיתי
-- הצרכן: פחות החלטות — הכל כבר מחכה לו בתיק אחד
-
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: זה לא "יוגורט ספורטיבי" — זה שינוי נקודת המכירה בלבד, וזה מספיק
-- ✅ יוצר שיחה כי: "קניתי ${brand || 'המותג'} בחנות ספורט" — משפט שאנשים אומרים
-- ✅ יש בו היגיון פנימי כי: שני מוצרים שנצרכים באותו רגע בדיוק — לא צריך לפרש
-
-**מה נדרש:**
-- מוצרי / לוגיסטי: עיצוב תיק ספורט קטן, אריזת 6 יחידות, תיאום הפצה עם Under Armour
-- שיווקי / תקשורתי: תוכן recovery, אינפלואנסרים fitness, נוכחות בתחרויות ריצה / קרוספיט
-- זמן וסדר גודל: 3-4 חודשים, פיילוט ב-5 חנויות, קנה מידה מלא אחרי אימות מכירות
+**צעד נוסף:** תוכן recovery ברשתות ונוכחות בתחרויות ריצה וקרוספיט
 
 ## חלופה
 
-**התבנית:** סינרגיה
-**מה התבנית אומרת:** שני מותגים חזקים נפגשים כך שכל אחד נותן לשני קהל חדש או משמעות חדשה
-
-**הרעיון:**
-שם המהלך: "${brand || 'המותג'} × הסלון — Flavor Lab"
-מה קורה בפועל: ${brand || 'המותג'} ו-Castro / Renuar מייצרים קולקציה capsule של בגדים בהשראת טעמי ${brand || 'המותג'}. חולצת "וניל קרמי", ג׳קט "תות שדה", כפפות "פיסטוק". אין לוגו על הבגד — רק צבע ושם הטעם. הקולקציה נמכרת בחנויות האופנה ובחנויות ${brand || 'המותג'} select. ה-PR כותב את עצמו.
-
-**מסע הצרכן:** הצרכן רואה פוסט ב-TikTok — "הם עשו בגד בצבע יופלה וניל". לוחץ, מגיע לחנות, קונה. שבוע אחרי קונה יופלה וניל ומצלם ליד הבגד — זה ה-loop.
-
-**אנלוגיה עולמית:** Fendi × Versace (Fendace) — שני מותגים חזקים שהחליפו שפה, כל אחד עיצב את הקולקציה של השני.
-
-**שותפים אפשריים:**
-1. Castro Fashion — מותג ישראלי מוביל, קהל ${audience || 'צעירים'} מדויק, ניסיון בקולבורציות קפסולה
-2. Renuar — אסתטיקה soft ומינימלית שמתאימה לצבעי ${brand || 'המותג'}, קהל נשים 20-35
-
-**מה משיגים:**
-- תנובה / המותג: כניסה לשיחת האופנה, PR חינמי מובטח, אסוציאציה "אייקוני" לצבעים ולטעמים
-- השותף: סיפור מותג שמדבר על ישראליות, תוכן ויראלי, קהל חדש לחנות
-- הצרכן: פריט אופנה שמספר סיפור — "זה צבע יופלה וניל"
-
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: בגד בצבע יוגורט — זה לא פרסומת, זה אמנות
-- ✅ יוצר שיחה כי: ה-TikTok כותב את עצמו — "איזה טעם אתה?"
-- ✅ יש בו היגיון פנימי כי: שניהם מדברים אל אותה אישה, אותו טעם, אותה שפה ויזואלית
-
-**מה נדרש:**
-- מוצרי / לוגיסטי: קולקציה של 5-8 פריטים, ייצור מוגבל, אריזה משותפת
-- שיווקי / תקשורתי: אירוע השקה, lookbook משותף, TikTok challenge "מה הטעם שלך"
-- זמן וסדר גודל: 4-5 חודשים, 2,000 יחידות לפיילוט, drop נוסף אם מצליח
-
-## חלופה
-
+**שם הרעיון:** הדרופ של הקיץ
 **התבנית:** אירוע חד-פעמי שחוזר
-**מה התבנית אומרת:** קולאב שנראה מוגבל, אבל הופך לריטואל עונתי שאנשים מחכים לו
+**למה זו התבנית:** קולאב שנראה מוגבל אבל הופך לריטואל שנתי שאנשים מחכים לו
 
 **הרעיון:**
-שם המהלך: "${brand || 'המותג'} × הקיץ — Summer Drop"
-מה קורה בפועל: כל קיץ, בתאריך קבוע (1 ביוני), ${brand || 'המותג'} מוציא טעם limited edition בשת"פ עם מותג חדש — שנה א׳: Surf בוגי בורד / שנה ב׳: Cameri תיאטרון / שנה ג׳: Waze GPS. האריזה ממותגת לשת"פ. בתוך הקרטון: QR לתוכן בלעדי. האירוע חוזר כל שנה — אבל השותף תמיד מפתיע.
+כל קיץ, ב-1 ביוני, ${brand} מוציא טעם limited edition בשת"פ עם מותג חדש — שנה א׳: Surf ישראל / שנה ב׳: YES / שנה ג׳: קסטרו. האריזה ממותגת לשת"פ. השותף תמיד מפתיע.
 
-**מסע הצרכן:** הצרכן שמע שיצא "יופלה קיץ חדש" — רץ לסופר לפני שנגמר. מוצא, מצלם, מעלה. שנה הבאה הוא כבר מחכה לזה — "מה השת"פ של השנה?"
-
-**אנלוגיה עולמית:** McDonald's × Monopoly — משחק שחוזר כל שנה, אנשים מחכים לו, זה ריטואל ולא אקשן.
+**למה זה מעניין:**
+אנשים מחכים ל"מה השנה?" — buzz שמייצר את עצמו מחדש כל קיץ. אי אפשר לשעמם כי השותף משתנה.
 
 **שותפים אפשריים:**
-1. YES / Hot — ספקיות תוכן עם קהל רחב, כל שנה עונה חדשה ותוכן חדש שמתחבר לטעם
-2. Surf ישראל (ציוד ים) — מותג קיץ מובהק, קהל ${audience || 'צעירים'}, השקה ב-1 ביוני מדויקת
+1. Surf ישראל (ציוד ים) — מותג קיץ מובהק, קהל ${audience}, השקה ב-1 ביוני מדויקת
+2. קסטרו — מותג ישראלי מוביל, קהל נשים 20-35, קולקציה בצבעי הטעם
 
-**מה משיגים:**
-- תנובה / המותג: ריטואל שנתי שמייצר buzz קבוע, קהל שחוזר כל קיץ, עקביות ללא שגרה
-- השותף: חשיפה לקהל ${brand || 'המותג'}, limited edition שמעלה ערך תדמיתי
-- הצרכן: ציפייה — "מה השנה?" — וסיפוק כשהוא מוצא
+**צעד נוסף:** pre-hype באפריל + TikTok reveal — הקמפיין כותב את עצמו
 
-**איך זה עומד בקריטריונים:**
-- ✅ לא בנאלי כי: השותף משתנה כל שנה — אי אפשר לשעמם
-- ✅ יוצר שיחה כי: "ראית מה יופלה עשתה השנה?" נאמר כל קיץ מחדש
-- ✅ יש בו היגיון פנימי כי: קיץ = טעמים + ריגוש + limited — הכל מתחבר
+## חלופה
 
-**מה נדרש:**
-- מוצרי / לוגיסטי: תהליך בחירת שת"פ שנתי (ינואר-פברואר), ייצור אריזה מיוחדת (מרץ-מאי), השקה ביוני
-- שיווקי / תקשורתי: קמפיין "הדרופ של הקיץ", pre-hype באפריל, TikTok reveal
-- זמן וסדר גודל: מחזור שנתי, 100,000 יחידות לפיילוט שנה א׳`;
+**שם הרעיון:** הטעם של האופנה
+**התבנית:** סינרגיה
+**למה זו התבנית:** שני מותגים חזקים נפגשים כך שכל אחד נותן לשני קהל חדש ומשמעות חדשה
+
+**הרעיון:**
+${brand} ורנואר / קסטרו מייצרים קולקציה capsule — בגדים בצבעי טעמי ${brand}: חולצת "וניל קרמי", ג׳קט "תות שדה". אין לוגו על הבגד — רק הצבע ושם הטעם. נמכר בחנויות האופנה ובחנויות ${brand} select.
+
+**למה זה מעניין:**
+"בגד בצבע יוגורט" — ה-TikTok כותב את עצמו. שניהם מדברים אל אותה אישה, אותו טעם, אותה שפה ויזואלית.
+
+**שותפים אפשריים:**
+1. רנואר — אסתטיקה soft שמתאימה לצבעי ${brand}, קהל נשים 20-35
+2. קסטרו Fashion — מותג ישראלי מוביל, ניסיון עם קולבורציות קפסולה
+
+**צעד נוסף:** lookbook משותף + TikTok challenge "מה הטעם שלך?"`;
 
     document.getElementById('moreLoading').classList.remove('show');
     btn.disabled = false;
