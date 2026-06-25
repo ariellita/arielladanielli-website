@@ -36,9 +36,12 @@ async function handleTnuvaCampaign(req, res) {
   req.on('data', chunk => body += chunk);
   req.on('end', async () => {
     try {
-      const { brand, product, goal, audience, success } = JSON.parse(body);
-      const productLine = product || 'ברמת המותג הכללי';
-      const goalsLine   = Array.isArray(goal) ? goal.join(', ') : goal;
+      const { brand, product, goal, audience, success, usedCategories = [] } = JSON.parse(body);
+      const productLine   = product || 'ברמת המותג הכללי';
+      const goalsLine     = Array.isArray(goal) ? goal.join(', ') : goal;
+      const excludeLine   = usedCategories.length
+        ? `\nקטגוריות שכבר נוצרו — אל תחזור עליהן:\n${usedCategories.map(c => `• ${c}`).join('\n')}\n`
+        : '';
 
       const prompt = `אתה מומחה בין-לאומי בשיתופי פעולה בין מותגים (brand collaborations) עם עומק בשוק הישראלי.
 תפקידך: לייצר 3 חלופות שת"פ מקוריות ומעשיות עבור מותג תנובה, בהתאם לקלט שהתקבל.
@@ -65,7 +68,7 @@ async function handleTnuvaCampaign(req, res) {
 8. החלפות — מותג אחד מאמץ את השם, השפה או הקטגוריה של מותג אחר
 9. הפרעה — חיבור מפתיע ולא צפוי שיוצר תשומת לב כי הוא שובר ציפייה
 
-━━━━━━━━━━━━━━━━━
+${excludeLine}━━━━━━━━━━━━━━━━━
 כללי ברזל
 ━━━━━━━━━━━━━━━━━
 • 3 חלופות — כל אחת קטגוריה אחרת מהרשימה למעלה

@@ -598,17 +598,57 @@
       font-style: italic;
     }
 
+    .results-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn-more {
+      background: var(--blue);
+      color: white;
+      border: 3px solid var(--dark);
+      box-shadow: 5px 5px 0 var(--dark);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 18px;
+      font-weight: 900;
+      padding: 14px 40px;
+      cursor: pointer;
+      transition: transform .12s, box-shadow .12s, background .12s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-more:hover {
+      background: #0F3070;
+      transform: translate(-2px,-2px);
+      box-shadow: 7px 7px 0 var(--dark);
+    }
+
+    .btn-more:active {
+      transform: translate(2px,2px);
+      box-shadow: 3px 3px 0 var(--dark);
+    }
+
+    .btn-more:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: 5px 5px 0 var(--dark);
+    }
+
     .btn-restart {
-      display: block;
-      width: fit-content;
-      margin: 32px auto 0;
       background: transparent;
       color: var(--red);
       border: 2px solid var(--red);
       font-family: 'Frank Ruhl Libre', serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
-      padding: 10px 28px;
+      padding: 10px 24px;
       cursor: pointer;
       transition: all .15s;
     }
@@ -616,6 +656,42 @@
     .btn-restart:hover {
       background: var(--red);
       color: white;
+    }
+
+    /* ─── More ideas loading ─── */
+    .more-loading {
+      display: none;
+      text-align: center;
+      padding: 32px;
+      color: var(--gold);
+      font-family: 'Frank Ruhl Libre', serif;
+      font-size: 16px;
+    }
+
+    .more-loading.show { display: block; }
+
+    .more-loading::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--cream-dark);
+      border-top-color: var(--blue);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+
+    /* ─── Round divider ─── */
+    .round-divider {
+      text-align: center;
+      padding: 20px 0 8px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
     }
 
     /* ─── Submit zone ─── */
@@ -957,7 +1033,11 @@
       <p class="results-sub">מותאם אישית · מבוסס על הקלט שמסרתם</p>
     </div>
     <div id="altCards"></div>
-    <button class="btn-restart" id="restartBtn">← שאלון חדש</button>
+    <div class="more-loading" id="moreLoading">מייצר עוד רעיונות...</div>
+    <div class="results-actions">
+      <button class="btn-more" id="moreBtn">✦ תביא עוד רעיונות</button>
+      <button class="btn-restart" id="restartBtn">← שאלון חדש</button>
+    </div>
   </div>
 
   <p class="page-ornament">✦ ✦ ✦</p>
@@ -1017,16 +1097,19 @@
       .trim();
   }
 
-  const LABELS = ['א׳', 'ב׳', 'ג׳'];
-  const COLORS = ['var(--blue)', '#1A6E4A', 'var(--red-deep)'];
+  const ALL_COLORS = ['var(--blue)', '#1A6E4A', 'var(--red-deep)', '#5B2D8E', '#B8891A', '#1A7070'];
+  let globalCardCount = 0;
 
-  function renderAlternatives(text) {
+  function renderAlternatives(text, append = false) {
     const alts = parseAlternatives(text);
     const container = document.getElementById('altCards');
-    container.innerHTML = '';
+    if (!append) { container.innerHTML = ''; globalCardCount = 0; }
     const items = alts.length >= 2 ? alts : [text];
 
-    items.forEach((alt, i) => {
+    const LABELS = ['א׳','ב׳','ג׳','ד׳','ה׳','ו׳','ז׳','ח׳','ט׳'];
+
+    items.forEach((alt) => {
+      const idx       = globalCardCount++;
       const lines     = alt.split('\n');
       const heading   = lines[0].replace(/^## /, '').replace(/\|.*/, '').trim();
       const rawBody   = lines.slice(1).join('\n');
@@ -1047,8 +1130,8 @@
         </div>` : '';
 
       card.innerHTML = `
-        <div class="alt-header" style="background:${COLORS[i] || COLORS[0]}">
-          <span class="alt-num">${LABELS[i] || (i+1)}</span>
+        <div class="alt-header" style="background:${ALL_COLORS[idx % ALL_COLORS.length]}">
+          <span class="alt-num">${LABELS[idx] || (idx+1)}</span>
           <span class="alt-title">${heading}</span>
         </div>
         ${templateBand}
@@ -1056,6 +1139,14 @@
       `;
       container.appendChild(card);
     });
+  }
+
+  /* ── Track used categories + form state ── */
+  let _formState = null;
+  let _usedCategories = [];
+
+  function getUsedCategories() {
+    return [...document.querySelectorAll('.template-name')].map(el => el.textContent.trim());
   }
 
   /* ── Submit ── */
@@ -1188,9 +1279,131 @@
 - שיווקי / תקשורתי: PR לאירוע ההשקה, UGC מהחנות, קמפיין "beauty from within" עם 3 דיאטניות ידועות
 - זמן וסדר גודל: 2-3 חודשי פיתוח, pop-up ב-5 סניפים מרכזיים, scale ל-50 סניפים אחרי חודשיים`;
 
+    _formState = { brand, product, goals, audience, success };
+
     renderAlternatives(demoText);
     document.getElementById('resultsWrap').classList.add('show');
     window.scrollTo({ top: document.getElementById('resultsWrap').offsetTop - 20, behavior: 'smooth' });
+  });
+
+  /* ── More ideas ── */
+  document.getElementById('moreBtn').addEventListener('click', async function () {
+    const btn = this;
+    btn.disabled = true;
+    document.getElementById('moreLoading').classList.add('show');
+    window.scrollTo({ top: document.getElementById('moreLoading').offsetTop - 40, behavior: 'smooth' });
+
+    const used = getUsedCategories();
+
+    await new Promise(r => setTimeout(r, 1800));
+
+    const { brand, product, goals, audience, success } = _formState || {};
+    const round2 = `## חלופה
+
+**התבנית:** מוצרים משלימים
+**מה התבנית אומרת:** שני מותגים שמתחברים סביב אותו רגע שימוש — טבעי כל כך שהיה צריך לקרות
+
+**הרעיון:**
+שם המהלך: "${brand || 'המותג'} × אחרי האימון — The Recovery Duo"
+מה קורה בפועל: ${brand || 'המותג'} ו-Under Armour ישראל מייצרים "Recovery Bundle" — תיק ספורט קטן שמכיל קרטון ${brand || 'המותג'} + מגבון ספורט + שייקר. הבאנדל נמכר בחנויות Under Armour ובאתר ה-DTC של ${brand || 'המותג'}. אין מוצר חדש — רק הקונטקסט החדש שמגדיר את שניהם מחדש.
+
+**מסע הצרכן:** הצרכן הולך לחנות הספורט לקנות מגבון — יוצא עם הבאנדל. הפעם הבאה שהוא מחפש ${brand || 'המותג'} בסופר — הוא כבר מחפש אותו בתודעה אחרת: "זה המוצר של אחרי האימון שלי."
+
+**אנלוגיה עולמית:** Nike x Hyperice Hyperboot — נעל ספורט עם מכשיר עיסוי מובנה, חיבור סביב אותו רגע — ריצה + התאוששות.
+
+**שותפים אפשריים:**
+1. Under Armour ישראל — מותג ספורט ביצועי, קהל גברים ונשים ספורטיביים 20-40, ערכי "צ'מפיון" שמתחברים לבריאות
+2. Decathlon ישראל — 14 סניפים, קהל רחב יותר, פחות פרמיום — שת"פ שיכול להגיע לקנה מידה מהיר יותר
+
+**מה משיגים:**
+- תנובה / המותג: נוכחות בנקודת המכירה הכי רלוונטית לצריכה, אסוציאציית recovery שאין לה תחרות
+- השותף: מוצר קונסומביל שמייצר תנועה חוזרת לחנות, תוכן שיווקי אמיתי
+- הצרכן: פחות החלטות — הכל כבר מחכה לו בתיק אחד
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: זה לא "יוגורט ספורטיבי" — זה שינוי נקודת המכירה בלבד, וזה מספיק
+- ✅ יוצר שיחה כי: "קניתי ${brand || 'המותג'} בחנות ספורט" — משפט שאנשים אומרים
+- ✅ יש בו היגיון פנימי כי: שני מוצרים שנצרכים באותו רגע בדיוק — לא צריך לפרש
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: עיצוב תיק ספורט קטן, אריזת 6 יחידות, תיאום הפצה עם Under Armour
+- שיווקי / תקשורתי: תוכן recovery, אינפלואנסרים fitness, נוכחות בתחרויות ריצה / קרוספיט
+- זמן וסדר גודל: 3-4 חודשים, פיילוט ב-5 חנויות, קנה מידה מלא אחרי אימות מכירות
+
+## חלופה
+
+**התבנית:** סינרגיה
+**מה התבנית אומרת:** שני מותגים חזקים נפגשים כך שכל אחד נותן לשני קהל חדש או משמעות חדשה
+
+**הרעיון:**
+שם המהלך: "${brand || 'המותג'} × הסלון — Flavor Lab"
+מה קורה בפועל: ${brand || 'המותג'} ו-Castro / Renuar מייצרים קולקציה capsule של בגדים בהשראת טעמי ${brand || 'המותג'}. חולצת "וניל קרמי", ג׳קט "תות שדה", כפפות "פיסטוק". אין לוגו על הבגד — רק צבע ושם הטעם. הקולקציה נמכרת בחנויות האופנה ובחנויות ${brand || 'המותג'} select. ה-PR כותב את עצמו.
+
+**מסע הצרכן:** הצרכן רואה פוסט ב-TikTok — "הם עשו בגד בצבע יופלה וניל". לוחץ, מגיע לחנות, קונה. שבוע אחרי קונה יופלה וניל ומצלם ליד הבגד — זה ה-loop.
+
+**אנלוגיה עולמית:** Fendi × Versace (Fendace) — שני מותגים חזקים שהחליפו שפה, כל אחד עיצב את הקולקציה של השני.
+
+**שותפים אפשריים:**
+1. Castro Fashion — מותג ישראלי מוביל, קהל ${audience || 'צעירים'} מדויק, ניסיון בקולבורציות קפסולה
+2. Renuar — אסתטיקה soft ומינימלית שמתאימה לצבעי ${brand || 'המותג'}, קהל נשים 20-35
+
+**מה משיגים:**
+- תנובה / המותג: כניסה לשיחת האופנה, PR חינמי מובטח, אסוציאציה "אייקוני" לצבעים ולטעמים
+- השותף: סיפור מותג שמדבר על ישראליות, תוכן ויראלי, קהל חדש לחנות
+- הצרכן: פריט אופנה שמספר סיפור — "זה צבע יופלה וניל"
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: בגד בצבע יוגורט — זה לא פרסומת, זה אמנות
+- ✅ יוצר שיחה כי: ה-TikTok כותב את עצמו — "איזה טעם אתה?"
+- ✅ יש בו היגיון פנימי כי: שניהם מדברים אל אותה אישה, אותו טעם, אותה שפה ויזואלית
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: קולקציה של 5-8 פריטים, ייצור מוגבל, אריזה משותפת
+- שיווקי / תקשורתי: אירוע השקה, lookbook משותף, TikTok challenge "מה הטעם שלך"
+- זמן וסדר גודל: 4-5 חודשים, 2,000 יחידות לפיילוט, drop נוסף אם מצליח
+
+## חלופה
+
+**התבנית:** אירוע חד-פעמי שחוזר
+**מה התבנית אומרת:** קולאב שנראה מוגבל, אבל הופך לריטואל עונתי שאנשים מחכים לו
+
+**הרעיון:**
+שם המהלך: "${brand || 'המותג'} × הקיץ — Summer Drop"
+מה קורה בפועל: כל קיץ, בתאריך קבוע (1 ביוני), ${brand || 'המותג'} מוציא טעם limited edition בשת"פ עם מותג חדש — שנה א׳: Surf בוגי בורד / שנה ב׳: Cameri תיאטרון / שנה ג׳: Waze GPS. האריזה ממותגת לשת"פ. בתוך הקרטון: QR לתוכן בלעדי. האירוע חוזר כל שנה — אבל השותף תמיד מפתיע.
+
+**מסע הצרכן:** הצרכן שמע שיצא "יופלה קיץ חדש" — רץ לסופר לפני שנגמר. מוצא, מצלם, מעלה. שנה הבאה הוא כבר מחכה לזה — "מה השת"פ של השנה?"
+
+**אנלוגיה עולמית:** McDonald's × Monopoly — משחק שחוזר כל שנה, אנשים מחכים לו, זה ריטואל ולא אקשן.
+
+**שותפים אפשריים:**
+1. YES / Hot — ספקיות תוכן עם קהל רחב, כל שנה עונה חדשה ותוכן חדש שמתחבר לטעם
+2. Surf ישראל (ציוד ים) — מותג קיץ מובהק, קהל ${audience || 'צעירים'}, השקה ב-1 ביוני מדויקת
+
+**מה משיגים:**
+- תנובה / המותג: ריטואל שנתי שמייצר buzz קבוע, קהל שחוזר כל קיץ, עקביות ללא שגרה
+- השותף: חשיפה לקהל ${brand || 'המותג'}, limited edition שמעלה ערך תדמיתי
+- הצרכן: ציפייה — "מה השנה?" — וסיפוק כשהוא מוצא
+
+**איך זה עומד בקריטריונים:**
+- ✅ לא בנאלי כי: השותף משתנה כל שנה — אי אפשר לשעמם
+- ✅ יוצר שיחה כי: "ראית מה יופלה עשתה השנה?" נאמר כל קיץ מחדש
+- ✅ יש בו היגיון פנימי כי: קיץ = טעמים + ריגוש + limited — הכל מתחבר
+
+**מה נדרש:**
+- מוצרי / לוגיסטי: תהליך בחירת שת"פ שנתי (ינואר-פברואר), ייצור אריזה מיוחדת (מרץ-מאי), השקה ביוני
+- שיווקי / תקשורתי: קמפיין "הדרופ של הקיץ", pre-hype באפריל, TikTok reveal
+- זמן וסדר גודל: מחזור שנתי, 100,000 יחידות לפיילוט שנה א׳`;
+
+    document.getElementById('moreLoading').classList.remove('show');
+    btn.disabled = false;
+
+    const divider = document.createElement('div');
+    divider.className = 'round-divider';
+    divider.textContent = `✦ סיבוב ${Math.ceil(globalCardCount / 3) + 1} — עוד רעיונות ✦`;
+    document.getElementById('altCards').appendChild(divider);
+
+    renderAlternatives(round2, true);
+    window.scrollTo({ top: divider.offsetTop - 20, behavior: 'smooth' });
   });
 
   /* ── Restart ── */
@@ -1200,6 +1413,8 @@
     document.getElementById('submitZone').style.display = 'block';
     document.getElementById('tnuvaForm').style.display = 'block';
     document.getElementById('tnuvaForm').reset();
+    globalCardCount = 0;
+    _formState = null;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 </script>
