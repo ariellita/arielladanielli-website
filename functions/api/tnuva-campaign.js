@@ -136,7 +136,10 @@ ${collabLine}${avoidLine}
     if (!response.ok) {
       const err = await response.text();
       console.error('Anthropic error:', err);
-      return new Response(JSON.stringify({ error: 'שגיאה בחיבור לסוכן AI', upstream_status: response.status, upstream_body: err }), {
+      const lowCredit = err.includes('credit balance');
+      return new Response(JSON.stringify({
+        error: lowCredit ? 'אזל מאזן הקרדיט בחשבון ה-Anthropic' : 'שגיאה בחיבור לסוכן AI',
+      }), {
         status: 502, headers: corsHeaders,
       });
     }
