@@ -136,7 +136,7 @@ ${collabLine}${avoidLine}
     if (!response.ok) {
       const err = await response.text();
       console.error('Anthropic error:', err);
-      return new Response(JSON.stringify({ error: 'שגיאה בחיבור לסוכן AI' }), {
+      return new Response(JSON.stringify({ error: 'שגיאה בחיבור לסוכן AI', upstream_status: response.status, upstream_body: err }), {
         status: 502, headers: corsHeaders,
       });
     }
