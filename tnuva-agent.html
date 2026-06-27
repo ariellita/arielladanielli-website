@@ -899,7 +899,8 @@
   let _formState = null;
 
   function getUsedCategories() {
-    return [...document.querySelectorAll('.template-name')].map(el => el.textContent.trim());
+    // שמות הרעיונות שכבר הוצגו — כדי שב"עוד רעיונות" לא יחזרו (בלי לחסום את התבנית שנבחרה)
+    return [...document.querySelectorAll('.alt-title')].map(el => el.textContent.trim());
   }
 
   /* ── Submit ── */
