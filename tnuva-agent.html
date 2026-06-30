@@ -6,6 +6,15 @@
   <title>The Tnuva Experience | סוכן AI לרעיונות יצירתיים</title>
   <meta name="description" content="סוכן בינה מלאכותית לרעיונות קריאייטיב לשיתופי פעולה עבור תנובה">
 
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1H2924HK4W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1H2924HK4W', { page_title: 'tnuva-agent', page_path: '/tnuva-agent' });
+  </script>
+
   <style>
     /* ─── Tokens ─── */
     :root {
@@ -903,6 +912,30 @@
     return [...document.querySelectorAll('.alt-title')].map(el => el.textContent.trim());
   }
 
+  /* ── Analytics helpers ── */
+  function track(eventName, params) {
+    if (typeof gtag === 'function') gtag('event', eventName, params || {});
+  }
+
+  /* ── Track brand selection ── */
+  document.querySelector('[name="brand"]').addEventListener('change', function () {
+    track('brand_selected', { brand: this.value });
+  });
+
+  /* ── Track goal selection ── */
+  document.querySelectorAll('[name="goal"]').forEach(function(el) {
+    el.addEventListener('change', function() {
+      if (this.checked) track('goal_selected', { goal: this.value });
+    });
+  });
+
+  /* ── Track collab type selection ── */
+  document.querySelectorAll('[name="collab_type"]').forEach(function(el) {
+    el.addEventListener('change', function() {
+      if (this.checked) track('collab_type_selected', { collab_type: this.value });
+    });
+  });
+
   /* ── Submit ── */
   document.getElementById('submitBtn').addEventListener('click', async function () {
     const form     = document.getElementById('tnuvaForm');
@@ -917,6 +950,12 @@
     if (!goals.length) { alert('אנא בחרו לפחות מטרה אחת'); return; }
     if (!audience) { alert('אנא תארו את קהל היעד'); form.querySelector('[name="audience"]').focus(); return; }
     if (!success)  { alert('אנא תארו מה ייחשב להצלחה'); form.querySelector('[name="success"]').focus(); return; }
+
+    track('agent_submit', {
+      brand: brand,
+      goals: goals.join(', '),
+      collab_types: collabTypes.join(', ') || 'לא נבחר',
+    });
 
     document.getElementById('submitZone').style.display = 'none';
     form.style.display = 'none';
@@ -939,6 +978,7 @@
       if (!resultText || !resultText.includes('## חלופה')) throw new Error('bad response');
     } catch (err) {
       console.error('Agent call failed, using demo fallback:', err);
+      track('agent_error', { brand: brand, error: String(err) });
       resultText = null;
     }
 
@@ -951,6 +991,8 @@
       alert('הסוכן אינו זמין כרגע. ייתכן שאזל מאזן הקרדיט בחשבון ה-Anthropic — יש להוסיף קרדיט ב-console.anthropic.com. נסו שוב בעוד רגע.');
       return;
     }
+
+    track('agent_results_shown', { brand: brand, round: 1 });
 
     document.getElementById('formCard').style.display = 'none';
     renderAlternatives(resultText);
@@ -967,6 +1009,9 @@
 
     const used = getUsedCategories();
     const fs = _formState || {};
+    const round = Math.ceil(globalCardCount / 3) + 1;
+
+    track('more_ideas_clicked', { brand: fs.brand, round: round });
 
     // ── Call the real AI agent for fresh ideas ──
     let round2 = null;
@@ -986,6 +1031,7 @@
       if (!round2 || !round2.includes('## חלופה')) throw new Error('bad response');
     } catch (err) {
       console.error('More-ideas call failed:', err);
+      track('agent_error', { brand: fs.brand, error: String(err), context: 'more_ideas' });
       round2 = null;
     }
 
@@ -996,6 +1042,8 @@
       alert('הסוכן אינו זמין כרגע. ייתכן שאזל מאזן הקרדיט בחשבון ה-Anthropic. נסו שוב בעוד רגע.');
       return;
     }
+
+    track('agent_results_shown', { brand: fs.brand, round: round });
 
     const divider = document.createElement('div');
     divider.className = 'round-divider';
@@ -1008,6 +1056,7 @@
 
   /* ── Restart ── */
   document.getElementById('restartBtn').addEventListener('click', function () {
+    track('restart_clicked', { brand: (_formState || {}).brand });
     document.getElementById('resultsWrap').classList.remove('show');
     document.getElementById('formCard').style.display = 'block';
     document.getElementById('submitZone').style.display = 'block';
