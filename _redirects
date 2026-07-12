@@ -11,4 +11,8 @@ https://www.arielladanielli.com/* https://arielladanielli.com/:splat 301
 /צור-קשר /contact.html  301
 /ייעוץ /consulting.html  301
 
+# הרצאת 2026 הוחלפה בהרצאת קהילת מותג
+/lecture-trends-2026 /lecture-brand-community.html 301
+/lecture-trends-2026.html /lecture-brand-community.html 301
+
 # Catch-all removed — גרם ל-redirect loop
