@@ -50,7 +50,7 @@ h1 .grad{background:linear-gradient(95deg,#FF5A1F,#FF7A45 45%,#E8A0BE);-webkit-b
 @media(max-width:1100px){.hero-char{display:none}}
 
 /* ── כרטיסים ── */
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(18px,2.4vw,28px);padding-bottom:clamp(40px,6vw,72px)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:clamp(18px,2.4vw,28px);padding-bottom:clamp(40px,6vw,72px)}
 .card{position:relative;background:rgba(255,255,255,.78);backdrop-filter:blur(10px);border:1px solid rgba(232,160,190,.42);border-radius:26px;padding:clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px;box-shadow:0 8px 30px rgba(155,142,196,.13);transition:transform .3s,box-shadow .3s}
 .card:hover{transform:translateY(-6px);box-shadow:0 18px 46px rgba(155,142,196,.24)}
 .card-num{font-family:var(--font-head);font-weight:900;font-size:2.4rem;line-height:1;color:rgba(255,90,31,.22)}
@@ -129,6 +129,20 @@ footer a{color:var(--orange);font-weight:800}
 
     <article class="card">
       <span class="card-num">02</span>
+      <div class="thumb"><img src="assets/summary/slide-001.jpg" alt="" loading="lazy"></div>
+      <h2>תקציר המגמות</h2>
+      <p>כל תשע המגמות של 2027 על שקף אחד — מבט מהיר לפני שצוללים לתוכנית.</p>
+      <span class="tag view">לצפייה בלבד</span>
+      <div class="btns">
+        <button class="btn btn-main" onclick="openViewer('summary')">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          צפייה בתקציר
+        </button>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="card-num">03</span>
       <div class="thumb"><img src="assets/spill/slide-001.jpg" alt="" loading="lazy"></div>
       <h2>תרגיל Spill Over</h2>
       <p>תבנית התרגיל — מגמה אחת, השלכות רוחב, והמהלך שהיא מייצרת אצלכם.</p>
@@ -145,7 +159,7 @@ footer a{color:var(--orange);font-weight:800}
     </article>
 
     <article class="card">
-      <span class="card-num">03</span>
+      <span class="card-num">04</span>
       <div class="thumb"><img src="assets/questions/slide-001.jpg" alt="" loading="lazy"></div>
       <h2>שאלות מנחות</h2>
       <p>השאלות שמלוות אתכם בבניית תוכנית העבודה — לדיון בצוות ולעבודה עצמית.</p>
@@ -194,6 +208,7 @@ footer a{color:var(--orange);font-weight:800}
 <script>
 const DECKS = {
   trends:    {title:'מצגת מגמות 2027',   dir:'assets/trends/',    count:96},
+  summary:   {title:'תקציר המגמות',      dir:'assets/summary/',   count:1},
   spill:     {title:'תרגיל Spill Over',  dir:'assets/spill/',     count:3},
   questions: {title:'שאלות מנחות',       dir:'assets/questions/', count:8}
 };
@@ -228,6 +243,12 @@ function render(){
   j.value = idx + 1; j.max = d.count;
   document.getElementById('vPrev').disabled = idx === 0;
   document.getElementById('vNext').disabled = idx === d.count - 1;
+  // מצגת בת שקף אחד — בלי חיצים ובלי תיבת קפיצה
+  const single = d.count === 1;
+  document.getElementById('vPrev').style.display = single ? 'none' : '';
+  document.getElementById('vNext').style.display = single ? 'none' : '';
+  j.style.display = single ? 'none' : '';
+  document.querySelector('.v-note').style.visibility = single ? 'hidden' : '';
   // טעינה מוקדמת של השקופית הבאה
   if(idx + 1 < d.count){ const p = new Image(); p.src = src(cur, idx+1); }
 }
