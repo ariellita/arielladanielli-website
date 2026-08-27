@@ -46,8 +46,26 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 h1{font-family:var(--font-head);font-weight:900;font-size:clamp(1.85rem,5.2vw,3.6rem);line-height:1.18;letter-spacing:-.5px}
 h1 .grad{background:linear-gradient(95deg,#FF5A1F,#FF7A45 45%,#E8A0BE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .sub{margin-top:16px;font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:600;color:var(--text60)}
-.hero-char{position:absolute;bottom:-10px;left:calc(50% - 620px);width:clamp(150px,17vw,230px);opacity:.95;pointer-events:none;filter:drop-shadow(0 14px 30px rgba(155,142,196,.3))}
-@media(max-width:1100px){.hero-char{display:none}}
+.hero-inner{display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,54px)}
+.hero-text{flex:1 1 auto;min-width:0}
+.hero-char{flex:0 0 auto;width:clamp(150px,16vw,230px);pointer-events:none;
+  filter:drop-shadow(0 14px 30px rgba(155,142,196,.3));
+  transform-origin:50% 100%;
+  animation:dance 2.6s ease-in-out infinite}
+/* ריקוד: קפיצה קלה + נדנוד לצדדים */
+@keyframes dance{
+  0%   {transform:translateY(0)     rotate(-4deg) scale(1)}
+  20%  {transform:translateY(-16px) rotate(2deg)  scale(1.02)}
+  40%  {transform:translateY(0)     rotate(4deg)  scale(1)}
+  60%  {transform:translateY(-16px) rotate(-2deg) scale(1.02)}
+  80%  {transform:translateY(0)     rotate(-4deg) scale(1)}
+  100% {transform:translateY(0)     rotate(-4deg) scale(1)}
+}
+@media(max-width:900px){
+  .hero-inner{flex-direction:column;gap:18px}
+  .hero-char{width:clamp(120px,32vw,175px)}
+}
+@media(prefers-reduced-motion:reduce){.hero-char{animation:none}}
 
 /* ── כרטיסים ── */
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:clamp(18px,2.4vw,28px);padding-bottom:clamp(40px,6vw,72px)}
@@ -105,10 +123,14 @@ footer a{color:var(--orange);font-weight:800}
   </div>
 
   <header class="hero">
-    <img class="hero-char" src="assets/character.png" alt="" aria-hidden="true">
-    <span class="eyebrow">איגוד השיווק הישראלי · 2027</span>
-    <h1>ברוכים הבאים לסדנת<br><span class="grad">חשיבה יצירתית לתוכניות עבודה 2027</span></h1>
-    <p class="sub">הנה החומרים לשימושכם</p>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow">איגוד השיווק הישראלי · 2027</span>
+        <h1>ברוכים הבאים לסדנת<br><span class="grad">חשיבה יצירתית לתוכניות עבודה 2027</span></h1>
+        <p class="sub">הנה החומרים לשימושכם</p>
+      </div>
+      <img class="hero-char" src="assets/character.png" alt="" aria-hidden="true">
+    </div>
   </header>
 
   <main class="cards">
