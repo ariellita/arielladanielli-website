@@ -38,7 +38,6 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 /* ── לוגואים ── */
 .logobar{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0 6px}
 .logobar img{height:clamp(52px,7vw,84px);width:auto;object-fit:contain}
-.logo-x{font-family:var(--font-head);font-weight:800;font-size:clamp(1rem,2vw,1.4rem);color:var(--text40)}
 
 /* ── HERO ── */
 .hero{position:relative;padding:clamp(26px,5vw,54px) 0 clamp(30px,5vw,60px);text-align:center}
@@ -46,8 +45,9 @@ body::before{content:'';position:fixed;inset:0;background-image:radial-gradient(
 h1{font-family:var(--font-head);font-weight:900;font-size:clamp(1.85rem,5.2vw,3.6rem);line-height:1.18;letter-spacing:-.5px}
 h1 .grad{background:linear-gradient(95deg,#FF5A1F,#FF7A45 45%,#E8A0BE);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .sub{margin-top:16px;font-size:clamp(1.05rem,2.2vw,1.5rem);font-weight:600;color:var(--text60)}
-.hero-inner{display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,54px)}
+.hero-inner{display:flex;align-items:center;justify-content:center;gap:clamp(10px,1.6vw,24px)}
 .hero-text{flex:1 1 auto;min-width:0}
+.hero-spacer{flex:0 0 auto;width:clamp(150px,16vw,230px)}
 .hero-char{flex:0 0 auto;width:clamp(150px,16vw,230px);pointer-events:none;
   filter:drop-shadow(0 14px 30px rgba(155,142,196,.3));
   transform-origin:50% 100%;
@@ -63,6 +63,7 @@ h1 .grad{background:linear-gradient(95deg,#FF5A1F,#FF7A45 45%,#E8A0BE);-webkit-b
 }
 @media(max-width:900px){
   .hero-inner{flex-direction:column;gap:18px}
+  .hero-spacer{display:none}
   .hero-char{width:clamp(120px,32vw,175px)}
 }
 @media(prefers-reduced-motion:reduce){.hero-char{animation:none}}
@@ -117,13 +118,13 @@ footer a{color:var(--orange);font-weight:800}
   <div class="logobar">
     <img src="assets/logo-igud.png" alt="איגוד השיווק הישראלי"
       onerror="this.outerHTML='<span style=\'font-family:var(--font-head);font-weight:900;color:var(--text60)\'>איגוד השיווק</span>'">
-    <span class="logo-x">×</span>
     <img src="assets/logo-ariella.png" alt="אריאלה דניאלי"
       onerror="this.outerHTML='<span style=\'font-family:var(--font-head);font-weight:900;color:var(--orange)\'>Ariella Danielli</span>'">
   </div>
 
   <header class="hero">
     <div class="hero-inner">
+      <div class="hero-spacer" aria-hidden="true"></div>
       <div class="hero-text">
         <h1>ברוכים הבאים לסדנת<br><span class="grad">חשיבה יצירתית לתוכניות עבודה 2027</span></h1>
         <p class="sub">הנה החומרים לשימושכם</p>
