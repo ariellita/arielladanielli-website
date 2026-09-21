@@ -382,7 +382,9 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
 .card-title{
   font-family:var(--font-head);font-size:1.5rem;
   font-weight:800;color:var(--text);margin-bottom:10px;
+  line-height:1.35;min-height:4.05rem;
 }
+@media(max-width:600px){.card-title{min-height:0}}
 .card-desc{font-size:1.3rem;color:var(--text60);line-height:1.7;flex:1;margin-bottom:18px}
 .card-btn{
   display:inline-block;
