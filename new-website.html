@@ -177,13 +177,17 @@ footer{text-align:center;justify-content:center;flex-direction:column;align-item
 .burger{display:none;flex-direction:column;gap:5px;cursor:pointer}
 .burger span{width:26px;height:2px;background:var(--text);transition:.3s}
 @media(max-width:768px){
-  .nav-links,.nav-cta-wrap,.nav-social{display:none}
+  .nav-links,.nav-cta-wrap{display:none}
+  .nav-social{display:flex;order:-2;gap:8px;margin:0 auto}
+  .nav-social a{width:28px;height:28px}
+  .nav-social svg{width:15px;height:15px}
+  .nav-logo img{height:64px!important}
   .burger{display:flex}
   .nav.nav-open{height:auto;flex-wrap:wrap;padding-bottom:16px;max-height:100vh;overflow-y:auto}
-  .nav .burger,.nav .nav-logo{order:-1}
+  .nav .burger{order:-3}
+  .nav .nav-logo{order:-1;margin-right:0!important}
   .nav.nav-open .nav-links{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:8px 0}
   .nav.nav-open .nav-cta-wrap{display:block;width:100%;text-align:center;padding-bottom:8px}
-  .nav.nav-open .nav-social{display:flex;width:100%;justify-content:center;padding-bottom:10px}
   .quotes-grid{grid-template-columns:1fr!important}
   .section,.section-alt,.quotes-section{padding:28px 16px!important}
   .proof{padding:20px 0!important}
