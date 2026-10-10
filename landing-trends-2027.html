@@ -56,6 +56,10 @@ strong{color:var(--blue);font-weight:800}
 .btn{display:inline-flex;align-items:center;gap:10px;background:var(--wa);color:#fff;padding:15px 34px;border-radius:10px;font-weight:800;font-size:1.1rem;font-family:var(--font);border:none;cursor:pointer;transition:transform .25s,box-shadow .25s;box-shadow:0 6px 20px rgba(11,127,63,.3)}
 .btn:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 10px 30px rgba(11,127,63,.4)}
 .btn:active{transform:scale(.97)}
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:45%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);pointer-events:none}
+.btn:hover::after,.btn:focus-visible::after{animation:shine .75s ease-out}
+@keyframes shine{to{left:130%}}
 .btn svg{width:20px;height:20px;flex-shrink:0}
 
 .wrap{max-width:980px;margin:0 auto;padding:0 clamp(18px,5vw,40px)}
@@ -137,8 +141,6 @@ details p{padding:0 22px 20px}
 .wa-float:hover{transform:scale(1.1)}
 .wa-float svg{width:30px;height:30px}
 
-#confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:200}
-
 .js .reveal{opacity:0;transform:translateY(36px);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
 .js .reveal.visible{opacity:1;transform:none}
 
@@ -162,6 +164,7 @@ details p{padding:0 22px 20px}
   .js .reveal{opacity:1;transform:none;transition:none}
   .pointer{animation:none}
   .btn,.q,.wa-float{transition:none}
+  .btn:hover::after,.btn:focus-visible::after{animation:none}
 }
 </style>
 </head>
@@ -346,7 +349,6 @@ details p{padding:0 22px 20px}
 <footer class="site-footer"><p>&copy; 2026 אריאלה דניאלי. כל הזכויות שמורות.</p><p><a href="https://arielladanielli.com/accessibility.html">הצהרת נגישות</a><a href="https://arielladanielli.com/privacy.html">מדיניות פרטיות</a></p></footer>
 
 <a href="https://wa.me/972523124326?text=%D7%94%D7%99%D7%99%20%D7%90%D7%A8%D7%99%D7%90%D7%9C%D7%94%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A2%D7%9C%20%D7%94%D7%94%D7%A8%D7%A6%D7%90%D7%94%20%D7%9E%D7%92%D7%9E%D7%95%D7%AA%202027" class="wa-float js-contact" aria-label="שלחו הודעה ב-WhatsApp"><svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.11.546 4.093 1.504 5.818L0 24l6.335-1.66A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.82a9.8 9.8 0 01-5.006-1.37l-.36-.213-3.722.976.993-3.63-.235-.374A9.81 9.81 0 012.18 12C2.18 6.58 6.58 2.18 12 2.18S21.82 6.58 21.82 12 17.42 21.82 12 21.82z"/></svg></a>
-<canvas id="confetti" aria-hidden="true"></canvas>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie_light.min.js"></script>
 <script>
@@ -374,44 +376,6 @@ details p{padding:0 22px 20px}
     entries.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
   }, {threshold: .12, rootMargin: '0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
-
-  // קונפטי בצבעי המותג
-  var canvas = document.getElementById('confetti'), ctx = canvas.getContext('2d');
-  var colors = ['#2B6BFF', '#FF5A1F', '#00D68F', '#FFC1D9', '#B89CFF'];
-  var bits = [], running = false;
-  function fit(){ var d = window.devicePixelRatio || 1; canvas.width = innerWidth * d; canvas.height = innerHeight * d; ctx.setTransform(d, 0, 0, d, 0, 0); }
-  function burst(x, y){
-    fit();
-    for (var i = 0; i < 110; i++) {
-      var a = Math.random() * Math.PI * 2, v = 5 + Math.random() * 11;
-      bits.push({x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 7, w: 6 + Math.random() * 7, h: 4 + Math.random() * 5,
-        r: Math.random() * 6.3, vr: (Math.random() - .5) * .5, c: colors[i % colors.length], life: 1, round: i % 4 === 0});
-    }
-    if (!running) { running = true; requestAnimationFrame(tick); }
-  }
-  function tick(){
-    ctx.clearRect(0, 0, innerWidth, innerHeight);
-    bits = bits.filter(function(b){ return b.life > 0 && b.y < innerHeight + 30; });
-    bits.forEach(function(b){
-      b.vx *= .985; b.vy = b.vy * .985 + .42; b.x += b.vx; b.y += b.vy; b.r += b.vr; b.life -= .011;
-      ctx.save(); ctx.translate(b.x, b.y); ctx.rotate(b.r); ctx.globalAlpha = Math.min(1, b.life * 2.5); ctx.fillStyle = b.c;
-      if (b.round) { ctx.beginPath(); ctx.arc(0, 0, b.h, 0, 6.3); ctx.fill(); } else { ctx.fillRect(-b.w / 2, -b.h / 2, b.w, b.h); }
-      ctx.restore();
-    });
-    if (bits.length) requestAnimationFrame(tick); else { running = false; ctx.clearRect(0, 0, innerWidth, innerHeight); }
-  }
-  window.confettiBurst = burst;
-
-  // כל כפתורי יצירת הקשר: קונפטי, ואז מעבר ל-WhatsApp
-  document.querySelectorAll('.js-contact').forEach(function(link){
-    link.addEventListener('click', function(e){
-      if (calm || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      e.preventDefault();
-      var r = link.getBoundingClientRect();
-      burst(r.left + r.width / 2, r.top + r.height / 2);
-      setTimeout(function(){ window.location.href = link.href; }, 800);
-    });
-  });
 })();
 </script>
 </body>
