@@ -137,7 +137,7 @@ footer a{color:var(--orange);font-weight:800}
 
     <article class="card">
       <span class="card-num">01</span>
-      <div class="thumb"><img src="assets/trends/slide-001.jpg" alt="" loading="lazy"></div>
+      <div class="thumb"><img src="assets/trends/slide-001.jpg?v=2" alt="" loading="lazy"></div>
       <h2>מצגת מגמות 2027</h2>
       <p>המגמות שיעצבו את השנה הקרובה — הבסיס לחשיבה על תוכנית העבודה שלכם.</p>
       <span class="tag view">לצפייה בלבד</span>
@@ -151,9 +151,9 @@ footer a{color:var(--orange);font-weight:800}
 
     <article class="card">
       <span class="card-num">02</span>
-      <div class="thumb"><img src="assets/summary/slide-001.jpg" alt="" loading="lazy"></div>
+      <div class="thumb"><img src="assets/summary/slide-001.jpg?v=2" alt="" loading="lazy"></div>
       <h2>תקציר המגמות</h2>
-      <p>כל תשע המגמות של 2027 על שקף אחד — מבט מהיר לפני שצוללים לתוכנית.</p>
+      <p>כל עשר המגמות של 2027 על שקף אחד — מבט מהיר לפני שצוללים לתוכנית.</p>
       <span class="tag view">לצפייה בלבד</span>
       <div class="btns">
         <button class="btn btn-main" onclick="openViewer('summary')">
@@ -229,7 +229,7 @@ footer a{color:var(--orange);font-weight:800}
 
 <script>
 const DECKS = {
-  trends:    {title:'מצגת מגמות 2027',   dir:'assets/trends/',    count:96},
+  trends:    {title:'מצגת מגמות 2027',   dir:'assets/trends/',    count:82},
   summary:   {title:'תקציר המגמות',      dir:'assets/summary/',   count:1},
   spill:     {title:'תרגיל Spill Over',  dir:'assets/spill/',     count:3},
   questions: {title:'שאלות מנחות',       dir:'assets/questions/', count:8}
@@ -237,7 +237,7 @@ const DECKS = {
 let cur = null, idx = 0;
 
 const pad = n => String(n).padStart(3,'0');
-const src = (k,i) => DECKS[k].dir + 'slide-' + pad(i+1) + '.jpg';
+const src = (k,i) => DECKS[k].dir + 'slide-' + pad(i+1) + '.jpg?v=2';
 
 function openViewer(key){
   cur = key; idx = 0;
