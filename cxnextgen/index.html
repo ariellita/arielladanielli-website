@@ -235,5 +235,54 @@ img{ display:block; max-width:100%; }
   els.forEach(function(e){ io.observe(e); });
 })();
 </script>
+<script>
+(function(){
+  /* ── CLICK TRACKING ── */
+  var map = [
+    ['.cta',                         'cta',     'hero_cta_dברו_איתנו'],
+    ['a[href="https://wa.me/972523124326"]', 'contact', 'whatsapp_ariella'],
+    ['a[href="tel:+972523124326"]',   'contact', 'phone_ariella'],
+    ['a[href="tel:+972529401861"]',   'contact', 'phone_omer'],
+    ['a[href="mailto:ariellita@gmail.com"]','contact','email_ariella'],
+    ['a[href="mailto:omer@gutsandglory.co.il"]','contact','email_omer'],
+    ['a[href="https://arielladanielli.com"]','nav','website_ariella'],
+    ['a[href="https://gutsandglory.co.il"]', 'nav','website_omer']
+  ];
+  map.forEach(function(m){
+    document.querySelectorAll(m[0]).forEach(function(el){
+      el.addEventListener('click', function(){
+        gtag('event','click',{event_category:m[1],event_label:m[2],page_location:window.location.href});
+      });
+    });
+  });
+
+  /* ── TIME ON PAGE ── */
+  var milestones = [30,60,120,300];
+  var fired = {};
+  var start = Date.now();
+  setInterval(function(){
+    var sec = Math.round((Date.now()-start)/1000);
+    milestones.forEach(function(t){
+      if(!fired[t] && sec>=t){
+        fired[t]=true;
+        gtag('event','time_on_page',{event_category:'engagement',event_label:t+'s',value:t,page_location:window.location.href});
+      }
+    });
+  },5000);
+
+  /* ── SCROLL DEPTH ── */
+  var depths = [25,50,75,100];
+  var scrollFired = {};
+  window.addEventListener('scroll',function(){
+    var pct = Math.round((window.scrollY/(document.body.scrollHeight-window.innerHeight))*100);
+    depths.forEach(function(d){
+      if(!scrollFired[d] && pct>=d){
+        scrollFired[d]=true;
+        gtag('event','scroll_depth',{event_category:'engagement',event_label:d+'%',value:d,page_location:window.location.href});
+      }
+    });
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
