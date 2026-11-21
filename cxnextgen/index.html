@@ -108,6 +108,16 @@ img{ display:block; max-width:100%; }
 .wa:hover{ transform:scale(1.08); }
 .wa:active{ transform:scale(.95); }
 
+/* למי זה מתאים */
+.fit{ padding:clamp(36px,5vw,64px) 0; }
+.fit h2{ font-weight:900; font-size:clamp(26px,3.2vw,38px); margin-bottom:32px; }
+.fit-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+.fit-item h3{ font-weight:900; font-size:19px; line-height:1.35; margin-bottom:10px; }
+.fit-item:nth-child(1) h3{ color:var(--blue); }
+.fit-item:nth-child(2) h3{ color:var(--orange); }
+.fit-item:nth-child(3) h3{ color:#0d7a44; }
+.fit-item p{ font-size:16px; line-height:1.7; }
+
 /* reveal */
 .rv{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
 .rv.on{ opacity:1; transform:none; }
@@ -118,7 +128,7 @@ img{ display:block; max-width:100%; }
   .hero .wrap{ grid-template-columns:1fr; min-height:0; gap:0; }
   .copy{ padding-bottom:10px; }
   .duo{ height:clamp(360px,100vw,460px); }
-  .pair,.bios,.ccs{ grid-template-columns:1fr; gap:16px; }
+  .pair,.bios,.ccs,.fit-list{ grid-template-columns:1fr; gap:16px; }
   .about .wrap{ grid-template-columns:1fr; gap:12px; }
   .cta{ width:100%; justify-content:center; }
   .why .shape{ display:none; }
@@ -170,11 +180,29 @@ img{ display:block; max-width:100%; }
     </div>
   </section>
 
+  <section class="wrap fit">
+    <h2 class="rv">למי זה מתאים</h2>
+    <div class="fit-list">
+      <div class="fit-item rv">
+        <h3>רוצים לשדרג את החוויה הקיימת ולקחת אותה לרמה הבאה</h3>
+        <p>בין אם מדובר בהכנסת ממד טכנולוגי, שילוב בינה מלאכותית, או הוספת רגש לחוויה שכבר קיימת.</p>
+      </div>
+      <div class="fit-item rv">
+        <h3>משקיעים בחוויית לקוח, אבל התוצאות לא מספקות</h3>
+        <p>המשוב שחוזר מהלקוחות אינו משביע רצון ונדרשת חשיבה מחדש על בניית התהליך הנכון.</p>
+      </div>
+      <div class="fit-item rv">
+        <h3>מעוניינים בחוויית לקוח אבל לא יודעים מאיפה להתחיל</h3>
+        <p>אתם זקוקים לעזרה בבניית המסע מהתחלה ועד סופו.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="about">
     <div class="c"></div>
     <div class="wrap">
       <h2>קצת עלינו</h2>
-      <p>שנינו חיים ונושמים את עולמות החדשנות וחוויית הלקוח. אנו מגיעים מארגונים גדולים בהם מילאנו מגוון תפקידים בעולמות החדשנות, הטכנולוגיה והשיווק הדיגיטלי והיום אנחנו עובדים עם ארגונים גדולים ויודעים להוריד חדשנות לפרקטיקה.</p>
+      <p>שנינו חיים ונושמים את עולמות החדשנות וחוויית הלקוח ויודעים להביא את הדוגמאות הכי רלוונטיות לכל סקטור וארגון. אנו מגיעים עם הרבה ניסיון של עבודה בארגונים גדולים, שנינו מילאנו מגוון תפקידים בעולמות החדשנות, הטכנולוגיה והשיווק הדיגיטלי והיום אנחנו עובדים עם ארגונים גדולים ויודעים להוריד חדשנות לפרקטיקה.</p>
     </div>
   </section>
 
