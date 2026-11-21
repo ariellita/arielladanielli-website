@@ -111,12 +111,18 @@ img{ display:block; max-width:100%; }
 /* למי זה מתאים */
 .fit{ padding:clamp(36px,5vw,64px) 0; }
 .fit h2{ font-weight:900; font-size:clamp(26px,3.2vw,38px); margin-bottom:32px; }
-.fit-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
-.fit-item h3{ font-weight:900; font-size:19px; line-height:1.35; margin-bottom:10px; }
-.fit-item:nth-child(1) h3{ color:var(--blue); }
-.fit-item:nth-child(2) h3{ color:var(--orange); }
-.fit-item:nth-child(3) h3{ color:#0d7a44; }
-.fit-item p{ font-size:16px; line-height:1.7; }
+.fit-list{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.fit-item{ border-radius:22px; padding:28px 24px; position:relative; overflow:hidden; }
+.fit-item:nth-child(1){ background:#fffbe8; }
+.fit-item:nth-child(2){ background:#fff0f7; }
+.fit-item:nth-child(3){ background:#eff3ff; }
+.fit-blob{ position:absolute; left:-24px; bottom:-24px; width:130px; height:130px; border-radius:60% 40% 70% 30% / 50% 60% 40% 50%; pointer-events:none; }
+.fit-item:nth-child(1) .fit-blob{ background:var(--yellow); opacity:.55; }
+.fit-item:nth-child(2) .fit-blob{ background:var(--pink); opacity:.7; }
+.fit-item:nth-child(3) .fit-blob{ background:#a8bdfa; opacity:.6; }
+.fit-item .in{ position:relative; }
+.fit-item h3{ font-weight:900; font-size:18px; line-height:1.35; margin-bottom:10px; color:var(--ink); }
+.fit-item p{ font-size:15.5px; line-height:1.7; color:#2a2f45; }
 
 /* reveal */
 .rv{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1); }
@@ -184,16 +190,25 @@ img{ display:block; max-width:100%; }
     <h2 class="rv">למי זה מתאים</h2>
     <div class="fit-list">
       <div class="fit-item rv">
-        <h3>רוצים לשדרג את החוויה הקיימת ולקחת אותה לרמה הבאה</h3>
-        <p>בין אם מדובר בהכנסת ממד טכנולוגי, שילוב בינה מלאכותית, או הוספת רגש לחוויה שכבר קיימת.</p>
+        <div class="fit-blob"></div>
+        <div class="in">
+          <h3>רוצים לשדרג את החוויה הקיימת ולקחת אותה לרמה הבאה</h3>
+          <p>בין אם מדובר בהכנסת ממד טכנולוגי, שילוב בינה מלאכותית, או הוספת רגש לחוויה שכבר קיימת.</p>
+        </div>
       </div>
       <div class="fit-item rv">
-        <h3>משקיעים בחוויית לקוח, אבל התוצאות לא מספקות</h3>
-        <p>המשוב שחוזר מהלקוחות אינו משביע רצון ונדרשת חשיבה מחדש על בניית התהליך הנכון.</p>
+        <div class="fit-blob"></div>
+        <div class="in">
+          <h3>משקיעים בחוויית לקוח, אבל התוצאות לא מספקות</h3>
+          <p>המשוב שחוזר מהלקוחות אינו משביע רצון ונדרשת חשיבה מחדש על בניית התהליך הנכון.</p>
+        </div>
       </div>
       <div class="fit-item rv">
-        <h3>מעוניינים בחוויית לקוח אבל לא יודעים מאיפה להתחיל</h3>
-        <p>אתם זקוקים לעזרה בבניית המסע מהתחלה ועד סופו.</p>
+        <div class="fit-blob"></div>
+        <div class="in">
+          <h3>מעוניינים בחוויית לקוח אבל לא יודעים מאיפה להתחיל</h3>
+          <p>אתם זקוקים לעזרה בבניית המסע מהתחלה ועד סופו.</p>
+        </div>
       </div>
     </div>
   </section>
